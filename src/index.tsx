@@ -1,4 +1,3 @@
-import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import {BrowserRouter} from 'react-router-dom';
 import WebApp from '@twa-dev/sdk'
@@ -7,10 +6,10 @@ import './index.css'
 
 WebApp.ready();
 
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </StrictMode>,
-)
+const app = (
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>
+);
+
+createRoot(document.getElementById('root')!).render(app)
