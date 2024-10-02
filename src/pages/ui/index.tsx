@@ -4,7 +4,7 @@ import { Button } from "../../shared/ui"
 export const UI = () => {
 	return (
 		<div>
-			<NavLink to='/telegram-mini-apps/' >To Main page -&gt;</NavLink>
+			<NavLink to='/' >To Main page -&gt;</NavLink>
 			<Button active>Button 1</Button>
 		</div>
 	)

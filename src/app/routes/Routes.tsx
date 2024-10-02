@@ -7,12 +7,12 @@ export const Routes = () => {
   return (
       <Switch>
         <Route
-          path='/telegram-mini-apps/ui'
+          path='/ui'
           element={<UI />}
         />
 
         <Route
-          path='/telegram-mini-apps/'
+          path='/'
           element={<Main />}
         />
       </Switch>

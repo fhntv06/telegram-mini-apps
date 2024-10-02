@@ -17,7 +17,7 @@ export const Main = () => {
     return (
       <div>
         <div>
-          <NavLink to='/telegram-mini-apps/ui' >To UI page -&gt;</NavLink>
+          <NavLink to='/ui' >To UI page -&gt;</NavLink>
           <a href='https://vitejs.dev' target='_blank'>
             <img src={viteLogo} className={cx('logo', 'vite')} alt='Vite logo' />
           </a>
