@@ -6,7 +6,7 @@ import basicSsl from '@vitejs/plugin-basic-ssl';
 export default defineConfig({
   plugins: [react(), basicSsl()],
   build: {
-    outDir: './docs'
+    outDir: './build'
   },
-  base: './'
+  base: '/telegram-mini-apps/'
 })
