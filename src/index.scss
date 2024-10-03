@@ -1,0 +1,60 @@
+@import './shared/assets/styles/basics.scss';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  color: $white;
+}
+
+body {
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  max-width: 576px;
+}
+
+h1 {
+  font-size: $h1-size;
+  line-height: 1;
+  font-weight: 600;
+
+  &.h1-reg {
+    font-weight: 400;
+  }
+}
+
+h2 {
+  font-size: $h2-size;
+  font-weight: 500;
+  line-height: 16px;
+}
+
+p {
+  font-size: $p-size;
+  font-weight: 600;
+
+  &.p-reg {
+    font-weight: 400;
+  }
+
+  &.p-small {
+    font-size: $p-small-size;
+    line-height: 16px;
+    font-weight: 600;
+
+    &.p-reg {
+      font-weight: 400;
+    }
+  }
+
+  &.p-x-small {
+    font-size: $p-x-small-size;
+    line-height: 12px;
+    font-weight: 500;
+  }
+}

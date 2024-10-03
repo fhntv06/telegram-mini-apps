@@ -1,0 +1,13 @@
+// миксин для бордеров
+
+@mixin border($size: 'small') {
+	@if $size == 'small' {
+		border-radius: 6px;
+	} @else if $size == 'medium' {
+		border-radius: 12px;
+	} @else if $size == 'large' {
+		border-radius: 24px;
+	} @else {
+		@error "Неверный параметр размера границы. Допустимые значения: small, medium, large.";
+	}
+}
