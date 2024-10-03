@@ -1,7 +1,9 @@
 import { Account, ConnectAdditionalRequest, TonProofItemReplySuccess } from "@tonconnect/ui-react";
 
-export class BackednAuth {
+export class BackendAuth {
     private readonly baseURL = 'https://demo.tonconnect.dev';
+    static generatePayload: any;
+    static checkProof: any;
 
     async generatePayload(): Promise<ConnectAdditionalRequest | undefined> {
         try {

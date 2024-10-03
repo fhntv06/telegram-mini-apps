@@ -1,7 +1,7 @@
 import {useContext, useEffect, useRef} from "react";
-import {BackendTokenContext} from "./BackendTokenContext";
+import {BackendTokenContext} from "../app/store/BackendTokenContext";
 import {useIsConnectionRestored, useTonConnectUI, useTonWallet} from "@tonconnect/ui-react";
-import {backendAuth} from "./backend-auth";
+import {BackendAuth} from "../app/auth/backend-auth";
 
 const localStorageKey = 'my-dapp-auth-token';
 const payloadTTLMS = 1000 * 60 * 20;
@@ -27,7 +27,7 @@ export function useBackendAuth() {
             const refreshPayload = async () => {
                 tonConnectUI.setConnectRequestParameters({ state: 'loading' });
 
-                const value = await backendAuth.generatePayload();
+                const value = await BackendAuth.generatePayload();
                 if (!value) {
                     tonConnectUI.setConnectRequestParameters(null);
                 } else {
@@ -47,7 +47,7 @@ export function useBackendAuth() {
         }
 
         if (wallet.connectItems?.tonProof && !('error' in wallet.connectItems.tonProof)) {
-            backendAuth.checkProof(wallet.connectItems.tonProof.proof, wallet.account).then(result => {
+            BackendAuth.checkProof(wallet.connectItems.tonProof.proof, wallet.account).then((result: string | null) => {
                 if (result) {
                     setToken(result);
                     localStorage.setItem(localStorageKey, result);
