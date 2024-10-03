@@ -1,0 +1,1 @@
+export { TonConnect } from './TonConnect';

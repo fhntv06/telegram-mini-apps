@@ -1,35 +1,33 @@
 import clns from "classnames/bind";
 
 import styles from './Button.module.scss';
-import { PropsWithChildren, useState } from 'react';
+import { PropsWithChildren } from 'react';
 
 interface IProps extends PropsWithChildren {
+	disabled?: boolean,
+	onClick?: () => void,
 	active ? : boolean
 }
 
 const cx = clns.bind(styles);
 
 export const Button = ({
+	disabled,
+	onClick,
 	active = false,
 	children
 }: IProps) => {
-	const [click, setClick] = useState<boolean>(false);
-
-	const handlerClick = () => {
-		setClick((prev:boolean) => !prev);
-	}
-
 	return (
 		<button
-			onClick={handlerClick}
+			onClick={onClick}
 			className={
 				cx(
 					{ 
-						'click': click,
 						active
 					}
 				)
 			}
+			disabled={disabled}
 		>
 			{children}
 		</button>
