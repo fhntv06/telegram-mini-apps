@@ -1,4 +1,4 @@
 export interface IRounds {
-  id: number,
+  id?: number,
   status: boolean
 }
