@@ -1,0 +1,32 @@
+@import '../../shared/assets/styles/basics.scss';
+
+.footer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	row-gap: $offset12;
+	padding: $offset16;
+
+	&__header,
+	&__main,
+	&__footer {
+		width: 100%;
+	}
+}
+.footer__header {
+	display: flex;
+	justify-content: space-between;
+}
+.footer__header__time-wins {
+	display: flex;
+
+	svg {
+		margin-right: $offset4;
+	}
+}
+.footer__header__rounds {
+	display: flex;
+	justify-content: flex-end;
+	row-gap: $offset4;
+	margin-top: $offset4;
+}

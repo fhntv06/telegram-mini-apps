@@ -1,0 +1,1 @@
+export { MainFooter } from './MainFooter';
