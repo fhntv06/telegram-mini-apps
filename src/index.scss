@@ -4,21 +4,20 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
 
-:root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   color: $white;
 }
-
 body {
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  max-width: 576px;
+  width: 100dvw;
+  height: 100dvh;
 }
-
-h1 {
+#root {
+  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+}
+h1, .h1 {
   font-size: $h1-size;
   line-height: 1;
   font-weight: 600;
@@ -27,15 +26,14 @@ h1 {
     font-weight: 400;
   }
 }
-
-h2 {
+h2, .h2 {
   font-size: $h2-size;
   font-weight: 500;
   line-height: 16px;
 }
-
-p {
+p, .p {
   font-size: $p-size;
+  line-height: 1.5;
   font-weight: 600;
 
   &.p-reg {
@@ -57,4 +55,12 @@ p {
     line-height: 12px;
     font-weight: 500;
   }
+}
+h1, h2, p, .h1, .h2, .p, a, button {
+  color: $white;
+}
+button {
+  outline: none;
+  border: none;
+  cursor: pointer;
 }
