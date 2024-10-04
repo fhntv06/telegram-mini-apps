@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom'
-import { Button } from "../../shared/ui"
+import { Button } from "../../shared"
 
 export const UI = () => {
 	return (
