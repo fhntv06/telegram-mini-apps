@@ -3,6 +3,7 @@
 .panel {
     display: flex;
     justify-content: space-between;
+    column-gap: $offset16;
     background-color: $dark-gray;
     padding: $offset12;
     @include border('large');
@@ -10,10 +11,12 @@
 .panel__data {
     display: flex;
     flex-direction: column;
+    width: 100%;
 }
 .panel__data__players {
     display: flex;
     justify-content: space-between;
+    margin-bottom: $offset12;
 }
 .players__total {
     display: flex;
@@ -27,12 +30,21 @@
     }
 }
 .panel__data__persons {
+    position: relative;
     display: flex;
+    width: 100%;
 }
 .panel__persons__count {
+    z-index: 10;
+    position: absolute;
+    top: 0;
+    right: -2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     height: 32px;
     width: 32px;
-    border: 2px solid $dark-gray;
+    background-color: $white;
     border-radius: 50%;
     color: $black;
 }
