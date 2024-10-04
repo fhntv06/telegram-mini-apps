@@ -1,3 +1,7 @@
 export { App } from './App'
 export { Root } from './Root'
 export { ErrorBoundary } from './ErrorBoundary'
+export { MainHeader } from './MainHeader'
+export { Graf } from './Graf'
+export { MainFooter } from './MainFooter'
+export { BetPanel } from './BetPanel'
