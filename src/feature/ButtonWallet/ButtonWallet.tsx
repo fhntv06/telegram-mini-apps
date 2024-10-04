@@ -2,6 +2,8 @@ import { Button } from '../../shared'
 import classNames from 'classnames/bind'
 import styles from './ButtonWallet.module.scss'
 
+import { formatNumber } from '../../shared/utils'
+
 const cx = classNames.bind(styles)
 
 interface Props {
@@ -11,7 +13,7 @@ interface Props {
 export const ButtonWallet = ({
     onClick,
 }: Props) => {
-    const text = '100 000 000';
+    const tons = 100000000
 
 	return (
 		<Button
@@ -22,7 +24,7 @@ export const ButtonWallet = ({
 			sizeIcons='medium'
 			onClick={onClick}
 		>
-			{text}
+			{formatNumber(tons)}
 		</Button>
 	)
 }
