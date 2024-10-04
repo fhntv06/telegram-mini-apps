@@ -1,17 +1,30 @@
-import clns from "classnames/bind";
+import { PropsWithChildren } from 'react';
+import classnames from "classnames/bind";
+import { IconType, IconNames } from '../Icon/types';
+import { ButtonTypes } from './types';
+import { Icon } from '../';
 
 import styles from './Button.module.scss';
-import { PropsWithChildren } from 'react';
 
 interface IProps extends PropsWithChildren {
+	sizeIcons?: IconType
+	className?: string,
+	type?: ButtonTypes
+	iconLeftName?: IconNames,
+	iconRigthName?: IconNames
 	disabled?: boolean,
 	onClick?: () => void,
 	active ? : boolean
 }
 
-const cx = clns.bind(styles);
+const cx = classnames.bind(styles);
 
 export const Button = ({
+	sizeIcons,
+	className,
+	type = 'gray' as ButtonTypes,
+	iconLeftName,
+	iconRigthName,
 	disabled,
 	onClick,
 	active = false,
@@ -22,14 +35,15 @@ export const Button = ({
 			onClick={onClick}
 			className={
 				cx(
-					{ 
-						active
-					}
+					className,
+					type
 				)
 			}
 			disabled={disabled}
 		>
+			{iconLeftName && <Icon name={iconLeftName} size={sizeIcons} />}
 			{children}
+			{iconRigthName && <Icon name={iconRigthName} size={sizeIcons} />}
 		</button>
 	)
 }

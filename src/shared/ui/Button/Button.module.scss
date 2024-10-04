@@ -1,7 +1,31 @@
-.active {
-    background-color: aqua;
+@import '../../assets/styles/basics.scss';
 
-    &.click {
-        background-color: red;
-    }
+.gray {
+	width: fit-content;
+	padding: $offset12;
+	background-color: $dark-gray;
+	font-size: $p-small-size;
+	line-height: 16px;
+	font-weight: 400;
+}
+.bet {
+	padding: $offset18;
+
+	.up {
+		background-color: $green100;
+	}
+	.down {
+		background-color: $red100;
+	}
+}
+
+.gray, .bet {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	column-gap: 4px;
+	@include border('medium');
+}
+.iconRigth {
+	margin-left: $offset4;
 }
