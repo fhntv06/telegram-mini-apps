@@ -1,0 +1,18 @@
+.icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	
+	.small {
+		height: 12px;
+		width: 12px;
+	}
+	.medium {
+		height: 16px;
+		width: 16px;
+	}
+	.big {
+		height: 24px;
+		width: 24px;
+	}
+}
