@@ -1,0 +1,38 @@
+@import '../../shared/assets/styles/basics.scss';
+
+.panel {
+    display: flex;
+    justify-content: space-between;
+    background-color: $dark-gray;
+    padding: $offset12;
+    @include border('large');
+}
+.panel__data {
+    display: flex;
+    flex-direction: column;
+}
+.panel__data__players {
+    display: flex;
+    justify-content: space-between;
+}
+.players__total {
+    display: flex;
+    column-gap: $offset4;
+
+    &.up {
+        color: $green100;
+    }
+    &.down {
+        color: $red100;
+    }
+}
+.panel__data__persons {
+    display: flex;
+}
+.panel__persons__count {
+    height: 32px;
+    width: 32px;
+    border: 2px solid $dark-gray;
+    border-radius: 50%;
+    color: $black;
+}
