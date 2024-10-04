@@ -1,20 +1,16 @@
-import { NavLink } from 'react-router-dom'
-import { Button } from '../../shared/ui'
+import classNames from 'classnames/bind'
+import styles from './Main.module.scss'
+
+import { MainHeader, MainFooter, Graf } from '../../widgets'
+
+const cx = classNames.bind(styles)
 
 export const Main = () => {
     return (
-      <div>
-        <h1>Vite + React</h1>
-        <ul>
-          <li>
-            <NavLink to='/ton-connect' >To Ton Connect -&gt;</NavLink>
-          </li>
-          <li>
-            <NavLink to='/ui' >To UI page -&gt;</NavLink>
-          </li>
-        </ul>
-        
-        <Button active>Example button active component</Button>
-      </div>
+      <main className={cx('main')}>
+        <MainHeader />
+        <Graf />
+        <MainFooter />
+      </main>
     )
 }
