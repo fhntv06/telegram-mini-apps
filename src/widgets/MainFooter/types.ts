@@ -5,6 +5,6 @@ export interface IMainFooter {
   dataUp: IDataPanel
   dataDown: IDataPanel,
   rounds: IRounds[],
-  liveLayers: number,
+  livePlayers: number,
   allTimeWins: number,
 }

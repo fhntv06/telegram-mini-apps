@@ -1,7 +1,7 @@
 export { App } from './App'
 export { BetPanel } from './BetPanel'
 export { ErrorBoundary } from './ErrorBoundary'
-export { Graf } from './Graf'
+export { Chart } from './Chart'
 export { MainFooter } from './MainFooter'
 export { MainHeader } from './MainHeader'
 export { PanelButtonsBet } from './PanelButtonsBet'

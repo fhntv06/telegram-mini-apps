@@ -13,14 +13,14 @@ interface Props {
 }
 
 export const MainFooter = ({ data }: Props) => {
-	const { dataUp, dataDown, liveLayers, allTimeWins } = data;
+	const { dataUp, dataDown, livePlayers, allTimeWins } = data;
 
 	return (
 		<footer className={cx('footer')}>
 			<header className={cx('footer__header')}>
 				<div>
 					<h2>LIVE PLAYERS</h2>
-					<p>{formatNumber(liveLayers)}</p>
+					<p>{formatNumber(livePlayers)}</p>
 				</div>
 				<div>
 					<h2>ALL TIME WINS</h2>
@@ -32,7 +32,7 @@ export const MainFooter = ({ data }: Props) => {
 				<div>
 					<h2>LAST 3 ROUNDS</h2>
 					<div className={cx('footer__header__rounds')}>
-						{data.rounds.slice(0, 3).map(({ status }) => (<Rounds status={status} />))}
+						{data.rounds.slice(0, 3).map(({ id, status }) => (<Rounds key={id} status={status} />))}
 					</div>
 				</div>
 			</header>

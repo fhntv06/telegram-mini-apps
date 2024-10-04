@@ -1,5 +1,5 @@
 import {useContext, useEffect, useRef} from "react";
-import {BackendTokenContext} from "../app/store/BackendTokenContext";
+import { BackendTokenContext } from '../app/contexts';
 import {useIsConnectionRestored, useTonConnectUI, useTonWallet} from "@tonconnect/ui-react";
 import {BackendAuth} from "../app/auth/backend-auth";
 
