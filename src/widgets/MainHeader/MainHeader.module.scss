@@ -1,0 +1,15 @@
+@import '../../shared/assets/styles/basics.scss';
+
+.header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	column-gap: $offset8;
+	padding: 0 $offset16;
+}
+.header__button {
+	display: flex;
+	align-items: center;
+	column-gap: $offset8;
+	margin-right: $offset8;
+}
