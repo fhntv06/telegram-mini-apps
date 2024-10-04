@@ -1,0 +1,14 @@
+@import '../../shared/assets/styles/basics.scss';
+
+.button-placebet {
+	width: 160px;
+	flex-shrink: 0;
+	text-transform: uppercase;
+
+	&.up {
+		background-color: $green100;
+	}
+	&.down {
+		background-color: $red100;
+	}
+}
