@@ -1,0 +1,731 @@
+{
+    "info": {
+        "_postman_id": "7e64b323-cd0f-4d82-aff2-f5dc3ed6d040",
+        "name": "REFERRAL BE",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+        "_exporter_id": "36473723",
+        "_collection_link": "https://fomo33.postman.co/workspace/FOMO-Workspace~40fb2730-afc1-4ccb-87a5-1081278c0854/collection/36473723-7e64b323-cd0f-4d82-aff2-f5dc3ed6d040?action=share&source=collection_link&creator=36473723"
+    },
+    "item": [
+        {
+            "name": "add_tx",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"txs\" : [\n    {\n    \"sender_address\" : \"0x100\",\n    \"amount\" : \"10\",\n    \"hash\": \"0x123\"\n    },\n    {\n    \"sender_address\" : \"0x100\",\n    \"amount\" : \"10\",\n    \"hash\": \"0x123\"\n    }\n]\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{baseUrl}}/api/add_tx",
+                    "host": [
+                        "{{baseUrl}}"
+                    ],
+                    "path": [
+                        "api",
+                        "add_tx"
+                    ]
+                }
+            },
+            "response": [
+                {
+                    "name": "add_tx",
+                    "originalRequest": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"txs\" : [\n    {\n    \"sender_address\" : \"0x100\",\n    \"amount\" : \"10\",\n    \"hash\": \"0x123\"\n    },\n    {\n    \"sender_address\" : \"0x100\",\n    \"amount\" : \"10\",\n    \"hash\": \"0x123\"\n    }\n]\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/admin/add_tx",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "admin",
+                                "add_tx"
+                            ]
+                        }
+                    },
+                    "status": "Created",
+                    "code": 201,
+                    "_postman_previewlanguage": "json",
+                    "header": [
+                        {
+                            "key": "X-Powered-By",
+                            "value": "Express"
+                        },
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json; charset=utf-8"
+                        },
+                        {
+                            "key": "Content-Length",
+                            "value": "219"
+                        },
+                        {
+                            "key": "Vary",
+                            "value": "Accept-Encoding"
+                        },
+                        {
+                            "key": "Date",
+                            "value": "Fri, 21 Jun 2024 15:45:46 GMT"
+                        },
+                        {
+                            "key": "Connection",
+                            "value": "keep-alive"
+                        },
+                        {
+                            "key": "Keep-Alive",
+                            "value": "timeout=5"
+                        }
+                    ],
+                    "cookie": [],
+                    "body": "{\n    \"success\": true,\n    \"data\": [\n        {\n            \"sender_address\": \"0x100\",\n            \"amount\": \"10\",\n            \"hash\": \"0x123\",\n            \"_id\": \"6675a02a0908d99b59c88877\",\n            \"__v\": 0\n        },\n        {\n            \"sender_address\": \"0x100\",\n            \"amount\": \"10\",\n            \"hash\": \"0x123\",\n            \"_id\": \"6675a02a0908d99b59c88879\",\n            \"__v\": 0\n        }\n    ]\n}"
+                }
+            ]
+        },
+        {
+            "name": "signup",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"wallet_address\" : \"0x1\",\n    \"email\" : \"123@gmail.com\",\n    \"password\": \"0x1\"\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{baseUrl}}/signup",
+                    "host": [
+                        "{{baseUrl}}"
+                    ],
+                    "path": [
+                        "signup"
+                    ]
+                }
+            },
+            "response": [
+                {
+                    "name": "signup",
+                    "originalRequest": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"wallet_address\" : \"0x2\",\n    \"email\" : \"123@gmail.com\",\n    \"password\": \"0x123\",\n    \"referred_by_wallet_address\" : \"0x1\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/signup",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "signup"
+                            ]
+                        }
+                    },
+                    "status": "Created",
+                    "code": 201,
+                    "_postman_previewlanguage": "json",
+                    "header": [
+                        {
+                            "key": "X-Powered-By",
+                            "value": "Express"
+                        },
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json; charset=utf-8"
+                        },
+                        {
+                            "key": "Content-Length",
+                            "value": "317"
+                        },
+                        {
+                            "key": "Vary",
+                            "value": "Accept-Encoding"
+                        },
+                        {
+                            "key": "Date",
+                            "value": "Thu, 20 Jun 2024 16:12:14 GMT"
+                        },
+                        {
+                            "key": "Connection",
+                            "value": "keep-alive"
+                        },
+                        {
+                            "key": "Keep-Alive",
+                            "value": "timeout=5"
+                        }
+                    ],
+                    "cookie": [],
+                    "body": "{\n    \"success\": true,\n    \"data\": {\n        \"_id\": \"667454deac6a97cba2833da3\",\n        \"wallet_address\": \"0x2\",\n        \"email\": \"123@gmail.com\",\n        \"referred_by\": \"667454cfac6a97cba2833d9e\",\n        \"earnings_percent\": 30,\n        \"is_approved\": false,\n        \"is_banned\": false,\n        \"referees\": [],\n        \"links\": [],\n        \"createdAt\": \"2024-06-20T16:12:14.102Z\",\n        \"updatedAt\": \"2024-06-20T16:12:14.102Z\",\n        \"__v\": 0\n    }\n}"
+                }
+            ]
+        },
+        {
+            "name": "signin",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"wallet_address\" : \"0x1\",\n    \"email\" : \"123@gmail.com\",\n    \"password\": \"0x1\"\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{baseUrl}}/signin",
+                    "host": [
+                        "{{baseUrl}}"
+                    ],
+                    "path": [
+                        "signin"
+                    ]
+                }
+            },
+            "response": [
+                {
+                    "name": "signin",
+                    "originalRequest": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"wallet_address\" : \"0x1\",\n    \"email\" : \"123@gmail.com\",\n    \"password\": \"0x1\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/signin",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "signin"
+                            ]
+                        }
+                    },
+                    "status": "Created",
+                    "code": 201,
+                    "_postman_previewlanguage": "json",
+                    "header": [
+                        {
+                            "key": "X-Powered-By",
+                            "value": "Express"
+                        },
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json; charset=utf-8"
+                        },
+                        {
+                            "key": "Content-Length",
+                            "value": "469"
+                        },
+                        {
+                            "key": "Vary",
+                            "value": "Accept-Encoding"
+                        },
+                        {
+                            "key": "Date",
+                            "value": "Thu, 20 Jun 2024 16:48:10 GMT"
+                        },
+                        {
+                            "key": "Connection",
+                            "value": "keep-alive"
+                        },
+                        {
+                            "key": "Keep-Alive",
+                            "value": "timeout=5"
+                        }
+                    ],
+                    "cookie": [],
+                    "body": "{\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NzQ1NGNmYWM2YTk3Y2JhMjgzM2Q5ZSIsImlhdCI6MTcxODkwMjA5MCwiZXhwIjoxNzUwNDU5NjkwfQ.vSleu8eT0aFZ7UOhKJTm6or4-ckcGos3ax85v7ksgTY\",\n    \"data\": {\n        \"_id\": \"667454cfac6a97cba2833d9e\",\n        \"wallet_address\": \"0x1\",\n        \"email\": \"123@gmail.com\",\n        \"earnings_percent\": 30,\n        \"is_approved\": false,\n        \"is_banned\": false,\n        \"referees\": [\n            \"667454cfac6a97cba2833d9e\"\n        ],\n        \"links\": [],\n        \"createdAt\": \"2024-06-20T16:11:59.541Z\",\n        \"updatedAt\": \"2024-06-20T16:14:13.539Z\",\n        \"__v\": 0\n    }\n}"
+                }
+            ]
+        },
+        {
+            "name": "create invite link",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"handle\" : \"testHandle\"\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{baseUrl}}/api/create_invite_link",
+                    "host": [
+                        "{{baseUrl}}"
+                    ],
+                    "path": [
+                        "api",
+                        "create_invite_link"
+                    ]
+                }
+            },
+            "response": [
+                {
+                    "name": "create_link",
+                    "originalRequest": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"handle\" : \"test3\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/create_invite_link",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "create_invite_link"
+                            ]
+                        }
+                    },
+                    "status": "Created",
+                    "code": 201,
+                    "_postman_previewlanguage": "json",
+                    "header": [
+                        {
+                            "key": "X-Powered-By",
+                            "value": "Express"
+                        },
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json; charset=utf-8"
+                        },
+                        {
+                            "key": "Content-Length",
+                            "value": "217"
+                        },
+                        {
+                            "key": "Vary",
+                            "value": "Accept-Encoding"
+                        },
+                        {
+                            "key": "Date",
+                            "value": "Thu, 20 Jun 2024 17:35:31 GMT"
+                        },
+                        {
+                            "key": "Connection",
+                            "value": "keep-alive"
+                        },
+                        {
+                            "key": "Keep-Alive",
+                            "value": "timeout=5"
+                        }
+                    ],
+                    "cookie": [],
+                    "body": "{\n    \"success\": true,\n    \"data\": {\n        \"handle\": \"test3\",\n        \"invitees\": [],\n        \"created_by\": [\n            \"667454cfac6a97cba2833d9e\"\n        ],\n        \"_id\": \"6674686318e7fa0f3de1c36a\",\n        \"createdAt\": \"2024-06-20T17:35:31.528Z\",\n        \"updatedAt\": \"2024-06-20T17:35:31.528Z\",\n        \"__v\": 0\n    }\n}"
+                }
+            ]
+        },
+        {
+            "name": "add link invitee",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"handle\" : \"testHandle\",\n    \"invitee_address\" : \"0x123\"\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{baseUrl}}/api/add_link_invitee",
+                    "host": [
+                        "{{baseUrl}}"
+                    ],
+                    "path": [
+                        "api",
+                        "add_link_invitee"
+                    ]
+                }
+            },
+            "response": [
+                {
+                    "name": "link invitee",
+                    "originalRequest": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"handle\" : \"test2\",\n    \"invitee_address\" : \"0x02\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/add_link_invitee",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "add_link_invitee"
+                            ]
+                        }
+                    },
+                    "status": "OK",
+                    "code": 200,
+                    "_postman_previewlanguage": "json",
+                    "header": [
+                        {
+                            "key": "X-Powered-By",
+                            "value": "Express"
+                        },
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json; charset=utf-8"
+                        },
+                        {
+                            "key": "Content-Length",
+                            "value": "223"
+                        },
+                        {
+                            "key": "Vary",
+                            "value": "Accept-Encoding"
+                        },
+                        {
+                            "key": "Date",
+                            "value": "Thu, 20 Jun 2024 16:51:00 GMT"
+                        },
+                        {
+                            "key": "Connection",
+                            "value": "keep-alive"
+                        },
+                        {
+                            "key": "Keep-Alive",
+                            "value": "timeout=5"
+                        }
+                    ],
+                    "cookie": [],
+                    "body": "{\n    \"success\": true,\n    \"data\": {\n        \"_id\": \"66745dea1c95918a55d8c6e2\",\n        \"handle\": \"test2\",\n        \"invitees\": [\n            \"0x02\"\n        ],\n        \"created_by\": [\n            \"667454cfac6a97cba2833d9e\"\n        ],\n        \"createdAt\": \"2024-06-20T16:50:50.858Z\",\n        \"updatedAt\": \"2024-06-20T16:51:00.652Z\",\n        \"__v\": 1\n    }\n}"
+                }
+            ]
+        },
+        {
+            "name": "delete invite link",
+            "request": {
+                "method": "DELETE",
+                "header": [],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"handle\" : \"testHandle\"\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{baseUrl}}/api/delete_invite_link",
+                    "host": [
+                        "{{baseUrl}}"
+                    ],
+                    "path": [
+                        "api",
+                        "delete_invite_link"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "get earnings",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{baseUrl}}/api/get_earnings",
+                    "host": [
+                        "{{baseUrl}}"
+                    ],
+                    "path": [
+                        "api",
+                        "get_earnings"
+                    ]
+                }
+            },
+            "response": [
+                {
+                    "name": "earnings",
+                    "originalRequest": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/get_earnings",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "get_earnings"
+                            ]
+                        }
+                    },
+                    "status": "OK",
+                    "code": 200,
+                    "_postman_previewlanguage": "json",
+                    "header": [
+                        {
+                            "key": "X-Powered-By",
+                            "value": "Express"
+                        },
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json; charset=utf-8"
+                        },
+                        {
+                            "key": "Content-Length",
+                            "value": "548"
+                        },
+                        {
+                            "key": "Vary",
+                            "value": "Accept-Encoding"
+                        },
+                        {
+                            "key": "Date",
+                            "value": "Thu, 20 Jun 2024 17:06:38 GMT"
+                        },
+                        {
+                            "key": "Connection",
+                            "value": "keep-alive"
+                        },
+                        {
+                            "key": "Keep-Alive",
+                            "value": "timeout=5"
+                        }
+                    ],
+                    "cookie": [],
+                    "body": "{\n    \"success\": true,\n    \"earnings\": {\n        \"total\": 50,\n        \"direct\": 30,\n        \"referees\": 20\n    },\n    \"links\": [\n        {\n            \"link_id\": \"66745dea1c95918a55d8c6e2\",\n            \"handle\": \"test2\",\n            \"txs\": [\n                {\n                    \"_id\": \"66745dfb1c95918a55d8c6e9\",\n                    \"sender_address\": \"0x02\",\n                    \"amount\": \"100\",\n                    \"hash\": \"0x123\",\n                    \"__v\": 0\n                }\n            ]\n        }\n    ],\n    \"referees\": [\n        {\n            \"wallet_address\": \"0x2\",\n            \"links\": [\n                {\n                    \"link_id\": \"66745555ac6a97cba2833db2\",\n                    \"handle\": \"testHandle\",\n                    \"txs\": [\n                        {\n                            \"_id\": \"66745578ac6a97cba2833db9\",\n                            \"sender_address\": \"0x000\",\n                            \"amount\": \"10\",\n                            \"hash\": \"0x123\",\n                            \"__v\": 0\n                        },\n                        {\n                            \"_id\": \"6674567ed4b11ea5c0bc2e9f\",\n                            \"sender_address\": \"0x000\",\n                            \"amount\": \"90\",\n                            \"hash\": \"0x123\",\n                            \"__v\": 0\n                        }\n                    ]\n                }\n            ]\n        }\n    ]\n}"
+                }
+            ]
+        },
+        {
+            "name": "view profile",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{baseUrl}}/api/view_profile",
+                    "host": [
+                        "{{baseUrl}}"
+                    ],
+                    "path": [
+                        "api",
+                        "view_profile"
+                    ]
+                }
+            },
+            "response": [
+                {
+                    "name": "view profile",
+                    "originalRequest": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/view_profile",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "view_profile"
+                            ]
+                        }
+                    },
+                    "status": "OK",
+                    "code": 200,
+                    "_postman_previewlanguage": "json",
+                    "header": [
+                        {
+                            "key": "X-Powered-By",
+                            "value": "Express"
+                        },
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json; charset=utf-8"
+                        },
+                        {
+                            "key": "Content-Length",
+                            "value": "298"
+                        },
+                        {
+                            "key": "Vary",
+                            "value": "Accept-Encoding"
+                        },
+                        {
+                            "key": "Date",
+                            "value": "Thu, 20 Jun 2024 17:34:27 GMT"
+                        },
+                        {
+                            "key": "Connection",
+                            "value": "keep-alive"
+                        },
+                        {
+                            "key": "Keep-Alive",
+                            "value": "timeout=5"
+                        }
+                    ],
+                    "cookie": [],
+                    "body": "{\n    \"success\": true,\n    \"profile\": {\n        \"wallet_address\": \"0x1\",\n        \"email\": \"123@gmail.com\",\n        \"referred_by\": null,\n        \"earnings_percent\": 30,\n        \"is_approved\": false,\n        \"is_banned\": false,\n        \"referees\": [\n            {\n                \"wallet_address\": \"0x2\",\n                \"email\": \"123@gmail.com\"\n            }\n        ],\n        \"links\": [\n            {\n                \"link_id\": \"66745dea1c95918a55d8c6e2\",\n                \"handle\": \"test2\",\n                \"created_by\": {}\n            }\n        ]\n    }\n}"
+                }
+            ]
+        },
+        {
+            "name": "request payout",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                    "raw": "{{baseUrl}}/api/request_payout",
+                    "host": [
+                        "{{baseUrl}}"
+                    ],
+                    "path": [
+                        "api",
+                        "request_payout"
+                    ]
+                }
+            },
+            "response": [
+                {
+                    "name": "payout created",
+                    "originalRequest": {
+                        "method": "POST",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/request_payout",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "request_payout"
+                            ]
+                        }
+                    },
+                    "status": "OK",
+                    "code": 200,
+                    "_postman_previewlanguage": "json",
+                    "header": [
+                        {
+                            "key": "X-Powered-By",
+                            "value": "Express"
+                        },
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json; charset=utf-8"
+                        },
+                        {
+                            "key": "Content-Length",
+                            "value": "69"
+                        },
+                        {
+                            "key": "Vary",
+                            "value": "Accept-Encoding"
+                        },
+                        {
+                            "key": "Date",
+                            "value": "Thu, 20 Jun 2024 17:33:55 GMT"
+                        },
+                        {
+                            "key": "Connection",
+                            "value": "keep-alive"
+                        },
+                        {
+                            "key": "Keep-Alive",
+                            "value": "timeout=5"
+                        }
+                    ],
+                    "cookie": [],
+                    "body": "{\n    \"success\": true,\n    \"message\": \"Payout request created\",\n    \"payoutAmount\": 50\n}"
+                }
+            ]
+        }
+    ],
+    "auth": {
+        "type": "bearer",
+        "bearer": [
+            {
+                "key": "token",
+                "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NzQ1NGNmYWM2YTk3Y2JhMjgzM2Q5ZSIsImlhdCI6MTcxODkwMjA5MCwiZXhwIjoxNzUwNDU5NjkwfQ.vSleu8eT0aFZ7UOhKJTm6or4-ckcGos3ax85v7ksgTY",
+                "type": "string"
+            }
+        ]
+    },
+    "event": [
+        {
+            "listen": "prerequest",
+            "script": {
+                "type": "text/javascript",
+                "packages": {},
+                "exec": [
+                    ""
+                ]
+            }
+        },
+        {
+            "listen": "test",
+            "script": {
+                "type": "text/javascript",
+                "packages": {},
+                "exec": [
+                    ""
+                ]
+            }
+        }
+    ],
+    "variable": [
+        {
+            "key": "baseUrl",
+            "value": "http://localhost:4000",
+            "type": "string"
+        }
+    ]
+}
