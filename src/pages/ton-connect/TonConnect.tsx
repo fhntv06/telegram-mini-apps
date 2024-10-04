@@ -11,7 +11,7 @@ import clns from 'classnames/bind'
 import type { FC } from 'react'
 import { useState } from 'react'
 
-import { Button } from '../../shared/ui'
+import { Button } from '../../shared'
 
 import styles from './TonConnect.module.scss'
 
