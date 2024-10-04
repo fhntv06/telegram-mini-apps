@@ -1,0 +1,12 @@
+@import '../../assets/styles/basics.scss';
+
+.rounds {
+	width: 20px;
+	padding: $offset4;
+	background-color: $red100;
+	@include border('small');
+
+	&.active {
+		background-color: $green100;
+	}
+}
