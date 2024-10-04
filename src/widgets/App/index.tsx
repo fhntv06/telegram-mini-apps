@@ -1,5 +1,4 @@
 import WebApp from '@twa-dev/sdk'
-import { AppRoot } from '@telegram-apps/telegram-ui'
 import { type FC, useEffect } from 'react'
 import {
   Navigate,
@@ -37,16 +36,11 @@ function BackButtonManipulator() {
 }
 
 export const App: FC = () => (
-  <AppRoot
-    appearance={WebApp.colorScheme}
-    platform={['macos', 'ios'].includes(WebApp.platform) ? 'ios' : 'base'}
-  >
-    <BrowserRouter>
-      <BackButtonManipulator/>
-      <Routes>
-        {routes.map((route) => <Route key={route.path} {...route} />)}
-        <Route path='*' element={<Navigate to='/'/>}/>
-      </Routes>
-    </BrowserRouter>
-  </AppRoot>
+  <BrowserRouter>
+    <BackButtonManipulator/>
+    <Routes>
+      {routes.map((route) => <Route key={route.path} {...route} />)}
+      <Route path='*' element={<Navigate to='/'/>}/>
+    </Routes>
+  </BrowserRouter>
 );
