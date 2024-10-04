@@ -1,8 +1,10 @@
 import classNames from 'classnames/bind'
 import styles from './MainFooter.module.scss'
-import { BetPanel } from '../../widgets'
+import { BetPanel, PanelButtonsBet } from '../../widgets'
 import { Icon, Rounds } from '../../shared'
 import { IMainFooter } from './types'
+
+import { formatNumber } from '../../shared/utils'
 
 const cx = classNames.bind(styles)
 
@@ -11,23 +13,20 @@ interface Props {
 }
 
 export const MainFooter = ({ data }: Props) => {
-	const liveLayers = 1000
-	const allTimeWins = 1000000
-
-	const { dataUp, dataDown } = data;
+	const { dataUp, dataDown, liveLayers, allTimeWins } = data;
 
 	return (
 		<footer className={cx('footer')}>
 			<header className={cx('footer__header')}>
 				<div>
 					<h2>LIVE PLAYERS</h2>
-					<p>{liveLayers}</p>
+					<p>{formatNumber(liveLayers)}</p>
 				</div>
 				<div>
 					<h2>ALL TIME WINS</h2>
 					<p className={cx('footer__header__time-wins')}>
 						<Icon name='ton' />
-						{allTimeWins}
+						{formatNumber(allTimeWins)}
 					</p>
 				</div>
 				<div>
@@ -41,8 +40,8 @@ export const MainFooter = ({ data }: Props) => {
 				<BetPanel data={dataUp} />
 				<BetPanel data={dataDown} type='down' />
 			</main>
-			<footer className={cx('footer__footer')}>
-
+			<footer className={cx('footer__bets')}>
+				<PanelButtonsBet />
 			</footer>
 		</footer>
 	)

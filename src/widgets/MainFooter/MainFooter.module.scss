@@ -27,6 +27,17 @@
 .footer__header__rounds {
 	display: flex;
 	justify-content: flex-end;
-	row-gap: $offset4;
+	column-gap: $offset4;
 	margin-top: $offset4;
+}
+.footer__main {
+	display: flex;
+	flex-direction: column;
+	row-gap: $offset8;
+}
+.footer__bets {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	column-gap: $offset8;
 }

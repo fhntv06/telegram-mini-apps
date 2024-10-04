@@ -1,8 +1,10 @@
 import { IRounds } from '../../shared/types'
 import { IDataPanel } from '../types'
 
-export interface IMainFooter extends IDataPanel {
+export interface IMainFooter {
   dataUp: IDataPanel
   dataDown: IDataPanel,
-  rounds: IRounds[]
+  rounds: IRounds[],
+  liveLayers: number,
+  allTimeWins: number,
 }
