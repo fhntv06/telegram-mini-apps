@@ -1,13 +1,9 @@
 @import '../../shared/assets/styles/basics.scss';
 
-.button-bet {
-	width: 100%;
-	text-transform: uppercase;
+.button {
+  flex-grow: 1;
 
-	&.up {
-		background-color: $green100;
-	}
-	&.down {
-		background-color: $red100;
-	}
+  &.active {
+    background-color: $coins-ton;
+  }
 }

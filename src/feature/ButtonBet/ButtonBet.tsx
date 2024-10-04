@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Button } from '../../shared'
 import classNames from 'classnames/bind'
 import styles from './ButtonBet.module.scss'
@@ -5,15 +6,19 @@ import styles from './ButtonBet.module.scss'
 const cx = classNames.bind(styles)
 
 interface Props {
-	onClick: () => void,
-	type?: 'up' | 'down'
+	bet: number,
+	className?: string,
+	onClick: () => void
 }
 
 export const ButtonBet = ({
+	bet,
+	className,
 	onClick,
-	type = 'up',
 }: Props) => {
-	return (
-		<Button type='bet' className={cx('button-bet', type, 'p')} onClick={onClick}>GO {type}</Button>
-	)
+	const handlerBet = ()=> {
+		onClick()
+	}
+
+	return (<Button className={cx('button', 'p', className)} type='gray' onClick={handlerBet}>{bet}</Button>)
 }
