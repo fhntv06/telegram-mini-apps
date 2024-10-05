@@ -1,2 +1,3 @@
 export { BackendTokenContext } from './BackendTokenContext'
-export { GameSocketContext } from './GameSocketContext'
+export { PriceHistoryContext } from './PriceHistoryContext'
+export { GameStatusContext } from './GameStatusContext'
