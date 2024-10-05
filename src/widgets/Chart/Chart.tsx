@@ -20,6 +20,7 @@ import {
 } from './utils';
 import { useChartData } from '../../hooks';
 import { PriceHistoryContext, GameStatusContext } from '../../app/contexts'
+import { ChartPanel } from '../'
 
 import classNames from 'classnames/bind'
 import styles from './Chart.module.scss'
@@ -67,6 +68,9 @@ export const Chart = () => {
   useEffect(updateData, [lastPrice]);
 
 	return (
-		<div className={cx('chart')}>{<LineChart data={chartData} lockValue={lockValue} />}</div>
+		<div className={cx('chart')}>
+      <ChartPanel />
+      <LineChart data={chartData} lockValue={lockValue} />
+    </div>
 	)
 }
