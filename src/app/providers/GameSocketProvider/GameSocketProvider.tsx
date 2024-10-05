@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react'
-import { GameSocketContext } from '../contexts'
-import { urlWebSocket } from '../config'
-
+import { PriceHistoryContext, GameStatusContext } from '../../contexts'
+import { urlWebSocket } from '../../config'
+import { initialData } from '../../constants';
+import { IPriceInfo, IGameStatus } from '../types'
 const gameSocket = new WebSocket(urlWebSocket);
 
 export const GameSocketProvider = ({ children }: { children: React.ReactNode } ) => {
-  const [gameHistory, setGameHistory] = useState<any[]>([]);
+  const [priceHistory, setPriceHistory] = useState<IPriceInfo[]>([initialData.PriceInfo]);
+  const [gameStatus, setGameStatus] = useState<IGameStatus>(initialData);
 
   useEffect(() => {
     gameSocket.onopen = () => {
@@ -22,23 +24,32 @@ export const GameSocketProvider = ({ children }: { children: React.ReactNode } )
       setTimeout(window.location.reload, 5000);
     };
     gameSocket.onmessage = (event) => {
-      const res = JSON.parse(event.data);
+      const { Data, MessageType } = JSON.parse(event.data);
 
       // TODO: распилить данные на store
       
-      setGameHistory(res)
 
-      console.log('res ', res);
+      switch (MessageType) {
+        case 'PriceHistory':
+          setPriceHistory(Data)
+          break;
+        case 'GameStatus':
+          setGameStatus(Data)
+          break;
+      }
     };
     gameSocket.onerror = (event) => {
       console.log("game socket error: ", event);
     };
   }, []);
 
+
   return (
-    <GameSocketContext.Provider value={gameHistory}>
-      {children}
-    </GameSocketContext.Provider>
+    <PriceHistoryContext.Provider value={priceHistory}>
+      <GameStatusContext.Provider value={gameStatus}>
+        {children}
+      </GameStatusContext.Provider>
+    </PriceHistoryContext.Provider>
   );
 
 }
