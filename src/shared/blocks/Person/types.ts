@@ -1,4 +1,5 @@
 export interface IPerson {
-  name: string,
-  img: string
+  wallet: string,
+  img: string,
+  bet: number,
 }
