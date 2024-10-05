@@ -2,12 +2,13 @@ import type {
   ChartOptions,
   ChartTypeRegistry,
   PluginOptionsByType,
+  Point
 } from "chart.js";
 import { _DeepPartialObject } from "chart.js/dist/types/utils";
 
 export function getOptions(
   lockValue: number | null,
-  lastPrice: number,
+  lastPrice: number | Point | null,
   startPrice: number
 ): ChartOptions {
   return {
@@ -48,14 +49,14 @@ export function getOptions(
         display: true,
         position: "right",
         grace: "0%",
-        suggestedMax: (ctx) => {
+        suggestedMax: (ctx: any) => {
           const dataset = ctx.chart.data.datasets[0].data;
           const max = Math.max(
             ...(dataset.slice(0, dataset.length - 21) as number[])
           );
           return max + 10;
         },
-        suggestedMin: (ctx) => {
+        suggestedMin: (ctx: any) => {
           const dataset = ctx.chart.data.datasets[0].data;
           const min = Math.min(
             ...(dataset.slice(0, dataset.length - 21) as number[])

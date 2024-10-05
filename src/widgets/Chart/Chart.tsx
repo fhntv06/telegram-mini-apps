@@ -1,4 +1,4 @@
-import { useContext, useRef, useEffect } from 'react';
+import { useRef, useEffect, useContext } from 'react';
 import {
   CategoryScale,
   Chart as ChartJS,
@@ -9,6 +9,7 @@ import {
   PointElement,
   Title,
   Tooltip,
+  ChartData,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import {
@@ -16,9 +17,9 @@ import {
 	getOptions,
 	showTooltip,
 	startTooltip,
-	// Info
 } from './utils';
 import { useChartData } from '../../hooks';
+import { PriceHistoryContext, GameStatusContext } from '../../app/contexts'
 
 import classNames from 'classnames/bind'
 import styles from './Chart.module.scss'
@@ -37,28 +38,35 @@ ChartJS.register(
   Legend
 );
 
-export const Chart = () => {
+const LineChart = ({ data, lockValue }:{ data: ChartData<'line'>, lockValue: number | null }) => {
 	const chartRef = useRef<any>(null);
-  const { chartData, lockValue, lastPrice, updateData } = useChartData();
 
-  const options = getOptions(
+  const options: any = getOptions(
     lockValue,
-    chartData.datasets[0].data[89],
+    data.datasets[0].data[89],
     0
   );
+
+  return (
+    <Line
+      ref={chartRef}
+      className='z-10'
+      options={options}
+      plugins={[showTooltip, startTooltip]}
+      data={data}
+    />
+  )
+}
+
+export const Chart = () => {
+  const priceHistory = useContext<any>(PriceHistoryContext) // из store
+  const gameStatus = useContext<any>(GameStatusContext) // из store
+
+  const { chartData, lockValue, lastPrice, updateData } = useChartData(priceHistory, gameStatus);
 
   useEffect(updateData, [lastPrice]);
 
 	return (
-		<div className={cx('chart')}>
-			{/* <Info /> */}
-      <Line
-        ref={chartRef}
-        className='z-10'
-        options={options}
-        plugins={[showTooltip, startTooltip]}
-        data={chartData}
-      />
-		</div>
+		<div className={cx('chart')}>{<LineChart data={chartData} lockValue={lockValue} />}</div>
 	)
 }

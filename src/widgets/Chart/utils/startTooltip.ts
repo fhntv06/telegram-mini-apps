@@ -25,7 +25,7 @@ export const startTooltip: Plugin<"line"> = {
     const minValueY = chart.scales.y.getPixelForValue(minValue);
     const maxValueY = chart.scales.y.getPixelForValue(maxValue);
 
-    let y = minValueY - procent * (minValueY - maxValueY) ?? 0;
+    let y = minValueY - procent * (minValueY - maxValueY);
     y = isNaN(y) ? 0 : y;
 
     const widthTooltip = 110;
