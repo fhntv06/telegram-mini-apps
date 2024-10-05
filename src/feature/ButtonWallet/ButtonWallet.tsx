@@ -13,7 +13,7 @@ interface Props {
 export const ButtonWallet = ({
     onClick,
 }: Props) => {
-    const tons = 100000000
+	const tons = 23
 
 	return (
 		<Button
