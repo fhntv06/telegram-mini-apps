@@ -1,6 +1,5 @@
-import { useState, useEffect, useContext, useCallback } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { ChartData } from 'chart.js'
-import { GameSocketContext } from '../app/contexts'
 
 const maxChartPoints = 110
 
@@ -17,10 +16,8 @@ const createInitialData = (history: any) => ({
   ],
 })
 
-export const useChartData = () => {
-  const gameHistory = useContext<any>(GameSocketContext) // из store
-
-  const lastPrice = 0 // gameHistory.Data.PriceInfo.lastPrice
+export const useChartData = (priceHistory: any, gameStatus: any) => {
+  const lastPrice = gameStatus.PriceInfo.lastPrice;
   
   const [chartData, setChartData] = useState<ChartData<'line'>>(
     createInitialData([])
@@ -28,10 +25,10 @@ export const useChartData = () => {
   const [lockValue, setLockValue] = useState<number | null>(null);
 
   useEffect(() => {
-    if (gameHistory) {
-      setChartData(createInitialData(gameHistory));
+    if (priceHistory) {
+      setChartData(createInitialData(priceHistory));
     }
-  }, [gameHistory])
+  }, [priceHistory])
 
   useEffect(() => {
     if (lastPrice && chartData.datasets[0].data.length) {
