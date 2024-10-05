@@ -1,0 +1,31 @@
+@import '../../shared/assets/styles/basics.scss';
+
+.panel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 70px;
+  padding: $offset12 $offset16;
+}
+.panel__bet-type {
+  display: flex;
+  flex-direction: column;
+
+  &.down {
+    align-items: flex-end;
+  }
+  &.time {
+    text-align: center;
+  }
+}
+.panel__bet-procent {
+  &.up {
+    color: $green100;
+  }
+  &.down {
+    color: $red100;
+  }
+}
