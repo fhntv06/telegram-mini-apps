@@ -3,7 +3,7 @@ import styles from './BetPanel.module.scss'
 import { ButtonPlaceBet } from '../../feature'
 import { IDataPanel } from './types'
 import { Icon, Person } from '../../shared'
-
+import { formatIntTonNumber } from '../../shared/utils'
 const cx = classNames.bind(styles)
 
 interface Props {
@@ -30,11 +30,11 @@ export const BetPanel = ({ data, type = 'up' }: Props) => {
 					</p>
 					<p className={cx('players__total', 'p p-small', type)}>
 						<Icon name='ton' />
-						{tonTotal}
+						{formatIntTonNumber(tonTotal)}
 					</p>
 				</div>
 				<div className={cx('panel__data__persons')}>
-					{persons.slice(0, 5).map((person, index) => (<Person key={person.name + index} data={person} />))}
+					{persons.slice(0, 5).map((person) => (<Person key={person.wallet} data={person} />))}
 					{count > 0 && <p className={cx('panel__persons__count')}>{`+${count}`}</p>}
 				</div>
 			</div>
