@@ -23,7 +23,7 @@ const dataFooter = {
     persons: [
       {
         wallet: 'John',
-        img: 'https://yt3.googleusercontent.com/C3TOxGJhmHe2hhfaiKh7hJJZkEzbYDjCk7mIlXVcW1Aq6GWbko7wfmeWLFa9BqZSgtVgJ4bI6yw=s900-c-k-c0x00ffffff-no-rj,
+        img: 'https://yt3.googleusercontent.com/C3TOxGJhmHe2hhfaiKh7hJJZkEzbYDjCk7mIlXVcW1Aq6GWbko7wfmeWLFa9BqZSgtVgJ4bI6yw=s900-c-k-c0x00ffffff-no-rj',
         bet: 1000000000 * 5
       }
     ],
