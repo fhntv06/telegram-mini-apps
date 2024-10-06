@@ -4,6 +4,7 @@ import type {
   PluginOptionsByType,
   Point
 } from "chart.js";
+// @ts-ignore
 import { _DeepPartialObject } from "chart.js/dist/types/utils";
 
 const colors = {

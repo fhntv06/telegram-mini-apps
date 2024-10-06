@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { Button } from '../../shared'
 import classNames from 'classnames/bind'
 import styles from './ButtonBet.module.scss'

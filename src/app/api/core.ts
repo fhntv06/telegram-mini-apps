@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { getStorage } from '../../utils/localStorage';
+import { getStorage } from '../../shared/utils/localStorage';
 
 interface Headers {
   'Content-Type': string,

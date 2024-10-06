@@ -27,7 +27,6 @@ export const Button = ({
 	iconRigthName,
 	disabled,
 	onClick,
-	active = false,
 	children
 }: IProps) => {
 	return (

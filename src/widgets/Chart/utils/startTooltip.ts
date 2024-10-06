@@ -2,7 +2,7 @@ import { type Plugin } from "chart.js";
 
 export const startTooltip: Plugin<"line"> = {
   id: "startTooltip",
-  afterDraw: (chart, args, options) => {
+  afterDraw: (chart, _args, options) => {
     if (
       options.startPrice === 0 ||
       options.startPrice === null ||

@@ -13,7 +13,7 @@ const chartOptions = {
 }
 
 const createInitialData = (history: any) => ({
-  labels: history?.map((el: any) => ''),
+  labels: history?.map(() => ''),
   datasets: [
     {
       data: history?.map((el: any) => el.lastPrice / 10000),
@@ -47,7 +47,7 @@ export const useChartData = (priceHistory: any, gameStatus: any) => {
   const updateData = useCallback(() => {
     setChartData((prevData: any) => {
       const data = prevData.datasets[0].data
-      const labels = prevData.labels
+      // const labels = prevData.labels
 
       if (data.length === 100) {
         data.splice(
@@ -74,12 +74,12 @@ export const useChartData = (priceHistory: any, gameStatus: any) => {
           null,
           null
         );
-        labels.push('', '', '', '', '', '', '', '', '', '');
+        // labels.push('', '', '', '', '', '', '', '', '', '');
       }
 
       if (data.length > maxChartPoints - 1) data.shift()
-      if (labels.length > maxChartPoints - 1) labels.shift()
-      labels.push('')
+      // if (labels.length > maxChartPoints - 1) labels.shift()
+      // labels.push('')
 
       if (lastPrice) data.splice(89, 0, lastPrice)
 
@@ -88,7 +88,8 @@ export const useChartData = (priceHistory: any, gameStatus: any) => {
       }
 
       return {
-        labels,
+        ...prevData,
+        // labels,
         datasets: [
           {
             data,
@@ -100,8 +101,8 @@ export const useChartData = (priceHistory: any, gameStatus: any) => {
               }
             },
           //   ...chartOptions,
-            fill: function (ctx) {
-              console.log(ctx)
+            fill: function (_ctx) {
+              // console.log(ctx)
               return (
                   {
                     target: lastPrice,

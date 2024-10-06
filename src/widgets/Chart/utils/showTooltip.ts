@@ -2,7 +2,7 @@ import { type Plugin } from "chart.js";
 
 export const showTooltip: Plugin<"line"> = {
   id: "showTooltip",
-  afterDraw: (chart, args, options) => {
+  afterDraw: (chart, _args, options) => {
     const { ctx } = chart;
     ctx.save();
 

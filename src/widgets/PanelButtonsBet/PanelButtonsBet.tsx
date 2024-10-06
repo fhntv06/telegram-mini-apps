@@ -1,10 +1,5 @@
 import { useState } from 'react'
-import classNames from 'classnames/bind'
 import { ButtonBet } from '../../feature'
-
-import styles from './PanelButtonsBet.module.scss'
-
-const cx = classNames.bind(styles)
 
 const arBets = [0.5, 1, 2, 5, 10]
 

@@ -2,7 +2,7 @@ import { type Plugin } from "chart.js";
 
 export const backgroundSplitPlugin: Plugin<"line"> = {
   id: "backgroundSplit",
-  beforeDraw: (chart, args, options) => {
+  beforeDraw: (chart, _args, options) => {
     let y = 0;
 
     const ctx = chart.ctx;
@@ -64,7 +64,6 @@ export const backgroundSplitPlugin: Plugin<"line"> = {
       x: number,
       y: number,
       width: number,
-      height: number,
       fillColor: string
     ) => {
       ctx.setLineDash([4, 4]); // Устанавливаем стиль линии как пунктирную
@@ -99,6 +98,6 @@ export const backgroundSplitPlugin: Plugin<"line"> = {
     drawRoundedRect(chartArea.left, y, chartArea.right, chartArea.bottom + 50, gradientRed);
 
     // Линия по середине
-    createDashLine(chartArea.left, y, chartArea.right, chartArea.bottom + 50, '#FFFFFF3D')
+    createDashLine(chartArea.left, y, chartArea.right, '#FFFFFF3D')
   },
 };

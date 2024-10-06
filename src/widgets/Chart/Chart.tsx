@@ -1,4 +1,4 @@
-import { useRef, useEffect, useContext, useState } from 'react';
+import { useRef, useContext } from 'react';
 import {
   CategoryScale,
   Chart as ChartJS,
@@ -67,13 +67,7 @@ const LineChart = ({ data, lockValue }: ILineChartProps) => {
 export const Chart = () => {
   const priceHistory = useContext<any>(PriceHistoryContext) // из store
   const gameStatus = useContext<any>(GameStatusContext) // из store
-
-  const {
-    chartData,
-    lockValue,
-    lastPrice,
-    updateData
-  } = useChartData(priceHistory, gameStatus);
+  const { chartData, lockValue } = useChartData(priceHistory, gameStatus);
 
 	return (
 		<div className={cx('chart')}>
