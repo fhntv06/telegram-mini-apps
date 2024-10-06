@@ -35,7 +35,7 @@ export const BetPanel = ({ data, type = 'up' }: Props) => {
 				</div>
 				<div className={cx('panel__data__persons')}>
 					{persons.slice(0, 5).map((person) => (<Person key={person.wallet} data={person} />))}
-					{count > 0 && <p className={cx('panel__persons__count')}>{`+${count}`}</p>}
+					{count > 0 && <p className={cx('panel__persons__count')}><span>{`+${count}`}</span></p>}
 				</div>
 			</div>
 			<ButtonPlaceBet type={type} onClick={handlerBet} />

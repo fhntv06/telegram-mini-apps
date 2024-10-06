@@ -36,16 +36,38 @@
     width: 100%;
 }
 .panel__persons__count {
-    z-index: 10;
-    position: absolute;
-    top: 0;
-    right: -2px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 32px;
-    width: 32px;
-    background-color: $white;
-    border-radius: 50%;
-    color: $black;
+	z-index: 10;
+	position: absolute;
+	top: 0;
+	right: -2px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 32px;
+	width: 32px;
+	border-radius: 50%;
+
+	span {
+		z-index: 3;
+		position: relative;
+		color: $black;
+	}
+
+	&::before {
+		background-color: $dark-gray;
+		transform: translateX(-2px);
+	}
+	&::after {
+		background-color: $white;
+	}
+	&::after,
+	&::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		border-radius: 50%;
+	}
 }
