@@ -9,7 +9,7 @@ import {
   useNavigate,
 } from 'react-router-dom'
 
-import { routes } from '../../app/routes/routes'
+import { routes } from '../../app/routes'
 
 function BackButtonManipulator() {
   const location = useLocation();
