@@ -59,6 +59,25 @@ export const backgroundSplitPlugin: Plugin<"line"> = {
       ctx.fill();
     };
 
+    // Dashed line
+    const createDashLine = (
+      x: number,
+      y: number,
+      width: number,
+      height: number,
+      fillColor: string
+    ) => {
+      console.log(x, y, width, height);
+
+      ctx.setLineDash([4, 4]); // Устанавливаем стиль линии как пунктирную
+      ctx.beginPath(); // Начинаем новый путь
+      ctx.strokeStyle = fillColor;
+      ctx.moveTo(x, y); // Перемещаемся к начальной точке
+      ctx.lineTo(x + width, y); // Рисуем линию до конечной точки
+      ctx.stroke();
+      ctx.fill();
+    }
+
     y = isNaN(y) ? 0 : y;
 
     // верхний градент зеленого цвета
@@ -79,13 +98,9 @@ export const backgroundSplitPlugin: Plugin<"line"> = {
     gradientRed.addColorStop(0.8, "rgba(253, 45, 57, 0.1)");
     gradientRed.addColorStop(1, "rgba(253, 45, 57, 0)");
 
-    drawRoundedRect( chartArea.left, y, chartArea.right, chartArea.bottom + 50, gradientRed);
+    drawRoundedRect(chartArea.left, y, chartArea.right, chartArea.bottom + 50, gradientRed);
 
-    // Линиия по середине
-    const gradient3 = ctx.createLinearGradient(0, 0, chartArea.right, 0);
-    // const imgGradient = ctx.createPattern()
-    // gradient3.addColorStop(0, "rgba(153, 148, 28, 0)");
-    gradient3.addColorStop(0.24, "#FFFFFF");
-    drawRoundedRect(chartArea.left, y, chartArea.right, 2, gradient3);
+    // Линия по середине
+    createDashLine(chartArea.left, y, chartArea.right, chartArea.bottom + 50, '#FFFFFF3D')
   },
 };
