@@ -2,7 +2,8 @@ import { useState, useEffect, useCallback } from 'react'
 import { ChartData } from 'chart.js'
 
 const maxChartPoints = 110
-
+const numberLastPoint = 89
+const offsetLastPoint = 11
 const chartOptions = {
   // borderWidth: 2,
   // borderColor: '#28DA64',
@@ -47,12 +48,11 @@ export const useChartData = (priceHistory: any, gameStatus: any) => {
   const updateData = useCallback(() => {
     setChartData((prevData: any) => {
       const data = prevData.datasets[0].data
-      // const labels = prevData.labels
 
       if (data.length === 100) {
         data.splice(
-          89,
-          11,
+          numberLastPoint,
+          offsetLastPoint,
           null,
           null,
           null,
@@ -74,14 +74,11 @@ export const useChartData = (priceHistory: any, gameStatus: any) => {
           null,
           null
         );
-        // labels.push('', '', '', '', '', '', '', '', '', '');
       }
 
       if (data.length > maxChartPoints - 1) data.shift()
-      // if (labels.length > maxChartPoints - 1) labels.shift()
-      // labels.push('')
 
-      if (lastPrice) data.splice(89, 0, lastPrice)
+      if (lastPrice) data.splice(numberLastPoint, 0, lastPrice)
 
       const changeColorSegments = (ctx: any) => {
         return (ctx.p0.raw < lastPrice && ctx.p1.raw < lastPrice) ? '#FD2D39' : '#34D269';
@@ -89,7 +86,6 @@ export const useChartData = (priceHistory: any, gameStatus: any) => {
 
       return {
         ...prevData,
-        // labels,
         datasets: [
           {
             data,
@@ -97,25 +93,14 @@ export const useChartData = (priceHistory: any, gameStatus: any) => {
               if (context.raw === 0) {
                 return 3;
               } else {
-                return context.dataIndex === 89 ? 5 : 0;
+                return context.dataIndex === numberLastPoint ? 5 : 0;
               }
-            },
-          //   ...chartOptions,
-            fill: function (_ctx) {
-              // console.log(ctx)
-              return (
-                  {
-                    target: lastPrice,
-                    above: '#34D269',   // Area will be red above the origin
-                    below: '#FD2D39'    // And blue below the origin
-                  }
-              )
             },
             segment: {
               borderColor: changeColorSegments,
             },
             spanGaps: true,
-            // backgroundColor: '#34D269',
+            ...chartOptions,
           }
         ],
       }
