@@ -1,7 +1,7 @@
 @import '../../shared/assets/styles/basics.scss';
 
 .button {
-  flex-grow: 1;
+  flex: 1;
 
   &.active {
     background-color: $coins-ton;
