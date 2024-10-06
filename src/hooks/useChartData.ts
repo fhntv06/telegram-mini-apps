@@ -3,24 +3,30 @@ import { ChartData } from 'chart.js'
 
 const maxChartPoints = 110
 
+const chartOptions = {
+  borderWidth: 2,
+  borderColor: '#28DA64',
+  pointStyle: 'circle',
+  pointBackgroundColor: '#fff',
+  fill: 'start',
+  backgroundColor: '#34D26947',
+}
+
 const createInitialData = (history: any) => ({
   labels: history?.map((el: any) => ''),
   datasets: [
     {
-      fill: true,
-      label: 'BTC Price',
       data: history?.map((el: any) => el.lastPrice / 10000),
-      borderColor: '#fff',
-      backgroundColor: 'transparent',
+      ...chartOptions,
     },
   ],
 })
 
 export const useChartData = (priceHistory: any, gameStatus: any) => {
-  const lastPrice = gameStatus.PriceInfo.lastPrice;
+  const lastPrice = gameStatus.PriceInfo.lastPrice / 10000;
   
   const [chartData, setChartData] = useState<ChartData<'line'>>(
-    createInitialData([])
+    createInitialData(priceHistory)
   );
   const [lockValue, setLockValue] = useState<number | null>(null);
 
@@ -32,7 +38,7 @@ export const useChartData = (priceHistory: any, gameStatus: any) => {
 
   useEffect(() => {
     if (lastPrice && chartData.datasets[0].data.length) {
-      setLockValue(lastPrice / 10000)
+      setLockValue(lastPrice)
     }
   }, [lastPrice]);
 
@@ -73,25 +79,21 @@ export const useChartData = (priceHistory: any, gameStatus: any) => {
       if (labels.length > maxChartPoints - 1) labels.shift()
       labels.push('')
 
-      if (lastPrice) data.splice(89, 0, lastPrice / 10000)
+      if (lastPrice) data.splice(89, 0, lastPrice)
 
       return {
-        ...prevData,
-        labels: labels,
+        labels,
         datasets: [
           {
-            ...prevData.datasets[0],
-            data: data,
-            borderColor: 'rgba(255, 247, 46, 1)',
-            pointStyle: 'circle',
+            data,
             pointRadius: function (context) {
               if (context.raw === 0) {
                 return 3;
               } else {
-                return context.dataIndex === 89 ? 3 : 0;
+                return context.dataIndex === 89 ? 5 : 0;
               }
             },
-            pointBackgroundColor: 'rgba(255, 247, 46, 1)',
+            ...chartOptions,
           },
         ],
       }
