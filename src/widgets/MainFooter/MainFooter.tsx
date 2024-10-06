@@ -22,9 +22,9 @@ export const MainFooter = ({ data }: Props) => {
 					<h2>LIVE PLAYERS</h2>
 					<p>{formatNumber(livePlayers)}</p>
 				</div>
-				<div>
+				<div className={cx('footer__header__time-wins')}>
 					<h2>ALL TIME WINS</h2>
-					<p className={cx('footer__header__time-wins')}>
+					<p>
 						<Icon name='ton' />
 						{formatNumber(allTimeWins)}
 					</p>
