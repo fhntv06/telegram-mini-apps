@@ -4,21 +4,13 @@ import { ChartData } from 'chart.js'
 const maxChartPoints = 110
 const numberLastPoint = 89
 const offsetLastPoint = 11
-const chartOptions = {
-  // borderWidth: 2,
-  // borderColor: '#28DA64',
-  // pointStyle: 'circle',
-  // pointBackgroundColor: '#fff',
-  // fill: 'start',
-  // backgroundColor: '#34D26947',
-}
+const arrayDataSplice = new Array(maxChartPoints - numberLastPoint - 1).fill(null)
 
 const createInitialData = (history: any) => ({
   labels: history?.map(() => ''),
   datasets: [
     {
-      data: history?.map((el: any) => el.lastPrice / 10000),
-      ...chartOptions,
+      data: history?.map((el: any) => el && el.lastPrice / 10000),
     },
   ],
 })
@@ -53,26 +45,7 @@ export const useChartData = (priceHistory: any, gameStatus: any) => {
         data.splice(
           numberLastPoint,
           offsetLastPoint,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null
+          ...arrayDataSplice
         );
       }
 
@@ -100,7 +73,6 @@ export const useChartData = (priceHistory: any, gameStatus: any) => {
               borderColor: changeColorSegments,
             },
             spanGaps: true,
-            ...chartOptions,
           }
         ],
       }
