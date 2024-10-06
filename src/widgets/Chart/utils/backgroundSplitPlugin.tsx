@@ -67,8 +67,6 @@ export const backgroundSplitPlugin: Plugin<"line"> = {
       height: number,
       fillColor: string
     ) => {
-      console.log(x, y, width, height);
-
       ctx.setLineDash([4, 4]); // Устанавливаем стиль линии как пунктирную
       ctx.beginPath(); // Начинаем новый путь
       ctx.strokeStyle = fillColor;

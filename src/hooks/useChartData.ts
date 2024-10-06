@@ -4,12 +4,12 @@ import { ChartData } from 'chart.js'
 const maxChartPoints = 110
 
 const chartOptions = {
-  borderWidth: 2,
-  borderColor: '#28DA64',
-  pointStyle: 'circle',
-  pointBackgroundColor: '#fff',
-  fill: 'start',
-  backgroundColor: '#34D26947',
+  // borderWidth: 2,
+  // borderColor: '#28DA64',
+  // pointStyle: 'circle',
+  // pointBackgroundColor: '#fff',
+  // fill: 'start',
+  // backgroundColor: '#34D26947',
 }
 
 const createInitialData = (history: any) => ({
@@ -40,6 +40,8 @@ export const useChartData = (priceHistory: any, gameStatus: any) => {
     if (lastPrice && chartData.datasets[0].data.length) {
       setLockValue(lastPrice)
     }
+
+    updateData()
   }, [lastPrice]);
 
   const updateData = useCallback(() => {
@@ -81,6 +83,10 @@ export const useChartData = (priceHistory: any, gameStatus: any) => {
 
       if (lastPrice) data.splice(89, 0, lastPrice)
 
+      const changeColorSegments = (ctx: any) => {
+        return (ctx.p0.raw < lastPrice && ctx.p1.raw < lastPrice) ? '#FD2D39' : '#34D269';
+      }
+
       return {
         labels,
         datasets: [
@@ -93,8 +99,23 @@ export const useChartData = (priceHistory: any, gameStatus: any) => {
                 return context.dataIndex === 89 ? 5 : 0;
               }
             },
-            ...chartOptions,
-          },
+          //   ...chartOptions,
+            fill: function (ctx) {
+              console.log(ctx)
+              return (
+                  {
+                    target: lastPrice,
+                    above: '#34D269',   // Area will be red above the origin
+                    below: '#FD2D39'    // And blue below the origin
+                  }
+              )
+            },
+            segment: {
+              borderColor: changeColorSegments,
+            },
+            spanGaps: true,
+            // backgroundColor: '#34D269',
+          }
         ],
       }
     })
