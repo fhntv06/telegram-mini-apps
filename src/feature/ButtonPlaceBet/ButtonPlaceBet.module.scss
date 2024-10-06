@@ -1,8 +1,10 @@
 @import '../../shared/assets/styles/basics.scss';
 
 .button-placebet {
-	width: 160px;
 	flex-shrink: 0;
+	flex-grow: 1;
+	min-width: 120px;
+	max-width: 160px;
 	text-transform: uppercase;
 
 	&.up {
