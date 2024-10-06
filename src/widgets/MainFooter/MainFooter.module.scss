@@ -19,7 +19,12 @@
 }
 .footer__header__time-wins {
 	display: flex;
+	flex-direction: column;
+	align-items: center;
 
+	p {
+		display: flex;
+	}
 	svg {
 		margin-right: $offset4;
 	}
