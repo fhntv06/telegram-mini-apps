@@ -60,32 +60,32 @@ export const backgroundSplitPlugin: Plugin<"line"> = {
     };
 
     y = isNaN(y) ? 0 : y;
-    const gradient = ctx.createLinearGradient(0, 0, 0, isNaN(y) ? 0 : y - 1);
-    gradient.addColorStop(0, "rgba(145, 255, 93, 0)");
-    gradient.addColorStop(0.2, "rgba(145, 255, 93, 0.05)");
-    gradient.addColorStop(0.5, "rgba(145, 255, 93, 0.14)");
-    gradient.addColorStop(1, "rgba(145, 255, 93, 0.5)");
 
-    drawRoundedRect(chartArea.left, 0, chartArea.right, y, gradient);
+    // верхний градент зеленого цвета
+    const gradientGreen = ctx.createLinearGradient(0, 0, 0, isNaN(y) ? 0 : y - 1);
+    gradientGreen.addColorStop(0, "rgba(52, 210, 105, 0)");
+    gradientGreen.addColorStop(0.2, "rgba(52, 210, 105, 0.1)");
+    gradientGreen.addColorStop(0.5, "rgba(52, 210, 105, 0.15)");
+    gradientGreen.addColorStop(0.8, "rgba(52, 210, 105, 0.2)");
+    gradientGreen.addColorStop(1, "rgba(52, 210, 105, 0.28)");
 
-    const gradient2 = ctx.createLinearGradient(0, y + 1, 0, chartArea.bottom);
-    gradient2.addColorStop(0, "rgba(255, 50, 50, 0.5)");
-    gradient2.addColorStop(0.5, "rgba(255, 50, 50, 0.15)");
-    gradient2.addColorStop(0.8, "rgba(255, 50, 50, 0.05)");
-    gradient2.addColorStop(1, "rgba(255, 50, 50, 0.01)");
+    drawRoundedRect(chartArea.left, 0, chartArea.right, y, gradientGreen);
 
-    drawRoundedRect(
-      chartArea.left,
-      y,
-      chartArea.right,
-      chartArea.bottom + 50,
-      gradient2
-    );
+    // нижний градент красного цвета
+    const gradientRed = ctx.createLinearGradient(0, y + 1, 0, chartArea.bottom);
+    gradientRed.addColorStop(0, "rgba(253, 45, 57, 0.28)");
+    gradientRed.addColorStop(0.2, "rgba(253, 45, 57, 0.2)");
+    gradientRed.addColorStop(0.5, "rgba(253, 45, 57, 0.15)");
+    gradientRed.addColorStop(0.8, "rgba(253, 45, 57, 0.1)");
+    gradientRed.addColorStop(1, "rgba(253, 45, 57, 0)");
+
+    drawRoundedRect( chartArea.left, y, chartArea.right, chartArea.bottom + 50, gradientRed);
 
     // Линиия по середине
     const gradient3 = ctx.createLinearGradient(0, 0, chartArea.right, 0);
-    gradient3.addColorStop(0, "rgba(153, 148, 28, 0)");
-    gradient3.addColorStop(0.5, "rgba(255, 247, 46, 1)");
-    drawRoundedRect(chartArea.left, y - 1, chartArea.right, 2, gradient3);
+    // const imgGradient = ctx.createPattern()
+    // gradient3.addColorStop(0, "rgba(153, 148, 28, 0)");
+    gradient3.addColorStop(0.24, "#FFFFFF");
+    drawRoundedRect(chartArea.left, y, chartArea.right, 2, gradient3);
   },
 };
