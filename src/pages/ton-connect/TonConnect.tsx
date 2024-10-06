@@ -71,6 +71,8 @@ export const TonConnect: FC = () => {
     textButton = 'Connect Wallet'
   }
 
+  console.log('isConnectionRestored ', isConnectionRestored);
+
   return !wallet ? (
     <header className={cx('header')}>
       <h3>To display the data related to the TON Connect, it is required to connect your wallet</h3>

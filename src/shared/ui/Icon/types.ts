@@ -8,6 +8,7 @@ export type IconNames =
     | 'arrow-up'
     | 'arrow-down'
     | 'persons'
+    | 'wallet'
 
     export type IconType = 
     | 'small'
