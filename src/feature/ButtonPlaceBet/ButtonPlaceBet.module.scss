@@ -4,13 +4,22 @@
 	flex-shrink: 0;
 	flex-grow: 1;
 	min-width: 120px;
-	max-width: 160px;
+	flex-basis: 50%;
 	text-transform: uppercase;
 
+	&.disabled {
+		color: $light-gray;
+	}
 	&.up {
 		background-color: $green100;
+
+		&.disabled {
+			background-color: $dark-green;
+		}
 	}
 	&.down {
-		background-color: $red100;
+		&.disabled {
+			background-color: $dark-red;
+		}
 	}
 }
