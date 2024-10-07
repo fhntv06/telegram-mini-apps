@@ -11,33 +11,53 @@ interface Props {
 	type?: 'up' | 'down'
 }
 
+const titleResultPanel = {
+	up: 'UP WINNER',
+	down: 'DOWN WINNER'
+}
+
 export const BetPanel = ({ data, type = 'up' }: Props) => {
 	const handlerBet = () => {
 		console.log('Bet is ', type)
 	}
 
-	const { persons, tonTotal } = data;
+	const completedRound = true
 
-	const count = persons.length - 5
+	const { personsImg, betPool } = data;
+
+	const count = personsImg.length - 5
 
 	return (
 		<div className={cx('panel')}>
-			<div className={cx('panel__data')}>
-				<div className={cx('panel__data__players')}>
-					<p className={cx('players__total', 'p p-small')}>
-						<Icon name='persons' />
-						{persons.length}
-					</p>
-					<p className={cx('players__total', 'p p-small', type)}>
-						<Icon name='ton' />
-						{formatIntTonNumber(tonTotal)}
-					</p>
-				</div>
-				<div className={cx('panel__data__persons')}>
-					{persons.slice(0, 5).map((person) => (<Person key={person.wallet} data={person} />))}
-					{count > 0 && <p className={cx('panel__persons__count')}><span>{`+${count}`}</span></p>}
-				</div>
-			</div>
+			{
+				completedRound ? (
+					<div className={cx('panel__result')}>
+							<p className={cx('panel__result__title')}>{titleResultPanel[type]}</p>
+							<p className={cx('panel__result__text')}>
+								<Icon name='ton' />
+								{betPool}
+							</p>
+					</div>
+				) : (
+					<div className={cx('panel__data')}>
+						<div className={cx('panel__data__players')}>
+							<p className={cx('players__total', 'p p-small')}>
+								<Icon name='persons' />
+								{personsImg.length}
+							</p>
+							<p className={cx('players__total', 'p p-small', type)}>
+								<Icon name='ton' />
+								{formatIntTonNumber(betPool)}
+							</p>
+						</div>
+						<div className={cx('panel__data__persons')}>
+							{personsImg.slice(0, 5).map((img) => (<Person key={img} img={img} />))}
+							{count > 0 && <p className={cx('panel__persons__count')}><span>{`+${count}`}</span></p>}
+						</div>
+					</div>
+				)
+			}
+
 			<ButtonPlaceBet type={type} onClick={handlerBet} />
 		</div>
 	)

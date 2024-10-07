@@ -5,7 +5,7 @@
   "type": "module",
   "homepage": "https://fhntv06.github.io/telegram-mini-apps",
   "scripts": {
-    "deploy": "gh-pages -d dist",
+    "deploy": "gh-pages -d build",
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
@@ -14,8 +14,8 @@
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.7",
     "@telegram-apps/telegram-ui": "^2.1.8",
-    "@tonconnect/ui-react": "^2.0.9",
     "@ton/ton": "^15.0.0",
+    "@tonconnect/ui-react": "^2.0.9",
     "@twa-dev/sdk": "^7.10.1",
     "@vitejs/plugin-basic-ssl": "^1.1.0",
     "chart.js": "^4.4.4",
@@ -31,6 +31,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",
+    "@types/node": "^22.7.4",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.1",

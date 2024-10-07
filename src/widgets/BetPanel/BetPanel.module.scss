@@ -1,39 +1,45 @@
 @import '../../shared/assets/styles/basics.scss';
 
 .panel {
-    display: flex;
-    justify-content: space-between;
-    column-gap: $offset16;
-    background-color: $dark-gray;
-    padding: $offset12;
-    @include border('large');
+	display: flex;
+	justify-content: space-between;
+	column-gap: $offset16;
+	background-color: $dark-gray;
+	padding: $offset12;
+	@include border('large');
+}
+.panel__result {
+	width: 100%;
+	height: 100%;
+	@include border('large');
+	border: 2px solid $green100;
 }
 .panel__data {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    max-width: 160px;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	max-width: 160px;
 }
 .panel__data__players {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: $offset12;
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: $offset12;
 }
 .players__total {
-    display: flex;
-    column-gap: $offset4;
+	display: flex;
+	column-gap: $offset4;
 
-    &.up {
-        color: $green100;
-    }
-    &.down {
-        color: $red100;
-    }
+	&.up {
+			color: $green100;
+	}
+	&.down {
+			color: $red100;
+	}
 }
 .panel__data__persons {
-    position: relative;
-    display: flex;
-    width: 100%;
+	position: relative;
+	display: flex;
+	width: 100%;
 }
 .panel__persons__count {
 	z-index: 10;

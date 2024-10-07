@@ -3,21 +3,19 @@ import styles from './MainFooter.module.scss'
 import { BetPanel, PanelButtonsBet } from '../../widgets'
 import { ButtonConnectWallet } from '../../feature'
 import { Icon, Rounds } from '../../shared'
-import { IMainFooter } from './types'
-
+import { GameStatusContext } from '../../app/contexts'
 import { useIsConnectionRestored, useTonWallet } from '@tonconnect/ui-react'
 
 import { formatNumber } from '../../shared/utils'
-import { useEffect } from 'react'
+import { useContext, useEffect } from 'react'
 
 const cx = classNames.bind(styles)
 
-interface Props {
-	data: IMainFooter
-}
+export const MainFooter = () => {
+	const { upPoolData, downPoolData, livePlayers, allTimeWins } = useContext(GameStatusContext);
 
-export const MainFooter = ({ data }: Props) => {
-	const { dataUp, dataDown, livePlayers, allTimeWins } = data;
+	console.log({ upPoolData, downPoolData, livePlayers, allTimeWins })
+
   const isConnectionRestored = useIsConnectionRestored()
   const wallet = useTonWallet()
 
@@ -58,13 +56,13 @@ export const MainFooter = ({ data }: Props) => {
 				<div>
 					<h2>LAST 3 ROUNDS</h2>
 					<div className={cx('footer__header__rounds')}>
-						{data.rounds.slice(0, 3).map(({ id, status }) => (<Rounds key={id} status={status} />))}
+						{data.last3GamesRes.slice(0, 3).map(({  }) => (<Rounds key={id} status={status} />))}
 					</div>
 				</div>
 			</header>
 			<main className={cx('footer__main')}>
-				<BetPanel data={dataUp} />
-				<BetPanel data={dataDown} type='down' />
+				<BetPanel data={upPoolData} />
+				<BetPanel data={downPoolData} type='down' />
 			</main>
 			<footer className={cx('footer__bets')}>
 				{

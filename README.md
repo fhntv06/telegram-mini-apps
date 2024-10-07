@@ -3,53 +3,89 @@
 
 <hr>
 
-# React + TypeScript + Vite
+### Структура
+#### Header
+- Кнопка переключения режима
+- Кнопка подключения ТОН
+- Бургер меню
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+#### Body
+- Header
+  -   Надпись: up wins
+  -   Надпись: Game in process + таймер
+  -   Надпись: down wins
+- Body
+  -   График
 
-Currently, two official plugins are available:
+#### Footer
+- Header
+  -   Данные Live players
+  -   Данные All Time wins
+  -   Данные Last 3 rounds
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Body
+  -   Панель ставок Go Up 
+  -   Панель ставок Go Down 
 
-## Expanding the ESLint configuration
+- Footer
+  -   Кнопки ставок 
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
 
-- Configure the top-level `parserOptions` property like this:
+#### Компоненты:
+1) Кнопки
+  1.1) Bet
+  1.2) Средняя
+  1.3) Маленькая
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+2) Модалку
+3) График
+4) Заголовки
+5) Подписи: иконка с цифрой
+6) Иконки людей
+7) Иконка-счетчик
+8) Rounds
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+#### Статус компонентов
+##### На верстке:
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+##### Реализованные:
+
+<hr>
+
+#### План:
+
+1) Настройка глобальных переменных - 1 час - Выполнено!
+  1.1) Цвета
+  1.2) Шрифты
+  1.3) Отступы
+  1.4) Бордер (миксин)
+
+2) Вестка компонентов - 4 час - Частично выполнено!
+3) Сборка главной страницы - 4 час - Частично выполнено!
+4) Подключение API - 8 час
+
+Итого: 1 + 4 + 4 + 8 = 15 часов
+
+<hr>
+
+# План на 07.09
+2)
+  подключение к кошельку ???
+  записывать данные о пользователе в store
+
+2.1) нужен компонент таймера????
+2.2) поправить разделение цветов на графике чтобы былопо 50%
+
+3) модалка
+4) контекст? (стор!) с языками
+5) верстка надстройки на панели для up / down winners / lose 
+
+12.01 - для кнопки
+23.000
+
+
+# closeWithBot
+- ставка минимальная для бота 0.5 тона
+
+- 
