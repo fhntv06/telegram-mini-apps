@@ -1,10 +1,8 @@
 import { useState, useEffect } from 'react'
-// import { useDispatch } from 'react-redux';
 import { PriceHistoryContext, GameStatusContext } from '../../contexts'
 import { urlWebSocket } from '../../config'
-import { initialData } from '../../constants';
+import { initialDataGameStatus, initialDataPriseHistory } from '../../constants';
 import { IGameStatus } from '../types'
-// import {setUser} from '../../store/slices/userSlice';
 import { getPriceHistory } from '../../api';
 
 const gameSocket = new WebSocket(urlWebSocket);
@@ -12,11 +10,13 @@ const gameSocket = new WebSocket(urlWebSocket);
 console.log(gameSocket);
 
 export const GameSocketProvider = ({ children }: { children: React.ReactNode } ) => {
-  const [priceHistory, setPriceHistory] = useState<number[]>([]);
-  const [gameStatus, setGameStatus] = useState<IGameStatus>(initialData);
+  const [priceHistory, setPriceHistory] = useState<number[]>(initialDataPriseHistory);
+  const [gameStatus, setGameStatus] = useState<IGameStatus>(initialDataGameStatus);
   // const dispatch = useDispatch();
 
   useEffect(() => {
+    console.log('initial priceHistory ', priceHistory)
+
     // TODO: запрос за priceHistory
     getPriceHistory().then(async (res) => {
       console.log('res getPriceHistory: ', res);

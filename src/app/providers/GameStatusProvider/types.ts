@@ -1,4 +1,4 @@
-// import { IPriceInfo } from '../GameSocketProvider/types'
+import { IRoundsType } from '../../../shared/types'
 
 export interface IGameStatus {
 	upPoolData: {
@@ -20,7 +20,7 @@ export interface IGameStatus {
 	 *  1 - up
 	 *  2 - refund
 	 */
-	last3GamesRes: number[],
+	last3GamesRes: IRoundsType[],
 	livePlayers: number;
 	allTimeWins: string;
 	winPercent: {

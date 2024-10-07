@@ -1,3 +1,3 @@
-export interface IPriceInfo {
+export interface IPriseHistory {
 	lastPrice: number,
 }
