@@ -10,14 +10,14 @@ const createInitialData = (history: any) => ({
   labels: history?.map(() => ''),
   datasets: [
     {
-      data: history?.map((el: any) => el / 10000),
+      data: history?.map((el: any) => el),
     },
   ],
 })
 
 export const useChartData = (priceHistory: any, gameStatus: any) => {
-  const lastPrice = gameStatus.btcPrice / 10000;
-  
+  const lastPrice = gameStatus.btcPrice;
+
   const [chartData, setChartData] = useState<ChartData<'line'>>(
     createInitialData(priceHistory)
   );
