@@ -5,20 +5,61 @@
 	justify-content: space-between;
 	column-gap: $offset16;
 	background-color: $dark-gray;
+	height: 84px;
 	padding: $offset12;
 	@include border('large');
+
+	&.up {
+		border-color: $green100;
+	}
+	&.down {
+		border-color: $red100;
+	}
 }
 .panel__result {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-content: center;
+	justify-content: center;
 	width: 100%;
 	height: 100%;
 	@include border('large');
-	border: 2px solid $green100;
+	border: 2px solid;
+
+	&:after {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: 100%;
+		width: 100%;
+		backdrop-filter: blur(16px)
+	}
+	h1 {
+		display: flex;
+		justify-content: center;
+		column-gap: $offset8;
+	}
+	p,
+	h1 {
+		text-align: center;
+	}
+	&.up h1,
+	&.up p {
+		color: $green100;
+	}
+	&.down h1,
+	&.down p {
+		color: $red100;
+	}
 }
 .panel__data {
 	display: flex;
 	flex-direction: column;
 	width: 100%;
-	max-width: 160px;
+	//max-width: 160px;
+	flex-basis: 50%;
 }
 .panel__data__players {
 	display: flex;
