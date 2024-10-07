@@ -9,8 +9,9 @@ export type IconNames =
     | 'arrow-down'
     | 'persons'
     | 'wallet'
+    | 'arrow-refund'
 
-    export type IconType = 
+    export type IconType =
     | 'small'
     | 'medium'
     | 'big'
