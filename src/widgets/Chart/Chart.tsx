@@ -24,6 +24,7 @@ import { ChartPanel } from '../'
 
 import classNames from 'classnames/bind'
 import styles from './Chart.module.scss'
+import { countPointsChart } from '../../app/constants'
 
 const cx = classNames.bind(styles)
 
@@ -49,7 +50,7 @@ const LineChart = ({ data, lockValue }: ILineChartProps) => {
 
   const options: any = getOptions(
     lockValue, // baseValue - center value
-    data.datasets[0].data[89],
+    data.datasets[0].data[countPointsChart],
     0
   );
 

@@ -1,6 +1,4 @@
-import { IPerson } from '../../shared/types'
-
 export interface IDataPanel {
-  playersImg: IPerson[]
+  playersImg: string[]
   betPool: number
 }
