@@ -2,9 +2,9 @@ import { IRounds } from '../../shared/types'
 import { IDataPanel } from '../types'
 
 export interface IMainFooter {
-  dataUp: IDataPanel
-  dataDown: IDataPanel,
-  rounds: IRounds[],
+  upPoolData: IDataPanel
+  downPoolData: IDataPanel,
+  last3GamesRes: IRounds[],
   livePlayers: number,
   allTimeWins: number,
 }
