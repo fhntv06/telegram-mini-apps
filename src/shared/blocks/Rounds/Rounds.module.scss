@@ -3,10 +3,15 @@
 .rounds {
 	width: 20px;
 	padding: $offset4;
-	background-color: $red100;
 	@include border('small');
 
-	&.active {
+	&.up {
 		background-color: $green100;
+	}
+	&.down {
+		background-color: $red100;
+	}
+	&.refund {
+		background-color: yellow;
 	}
 }

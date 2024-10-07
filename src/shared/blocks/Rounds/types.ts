@@ -1,3 +1,4 @@
 export interface IRounds {
-  countType: number
+  countType: IRoundsType
 }
+export type IRoundsType = 0 | 1 | 2

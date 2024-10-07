@@ -5,10 +5,25 @@ import { IRounds } from './types'
 
 const cx = classNames.bind(styles)
 
-export const Rounds = ({ status = false }: IRounds) => {
+const countTypeClasses = [
+	{
+		nameIcon: 'arrow-up',
+		className: 'up'
+	},
+	{
+		nameIcon: 'arrow-down',
+		className: 'down'
+	},
+	{
+		nameIcon: 'arrow-refund',
+		className: 'refund'
+	}
+]
+
+export const Rounds = ({ countType }: IRounds) => {
 	return (
-		<div className={cx('rounds', { 'active': status })}>
-			<Icon name={status ? 'arrow-up' : 'arrow-down'} size='small' />
+		<div className={cx('rounds', countTypeClasses[countType].className)}>
+			<Icon name={countTypeClasses[countType].nameIcon} size='small' />
 		</div>
 	)
 }
