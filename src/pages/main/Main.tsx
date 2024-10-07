@@ -1,3 +1,5 @@
+import { Provider } from 'react-redux';
+import store from '../../app/store';
 import classNames from 'classnames/bind'
 
 import { MainHeader, MainFooter, Chart } from '../../widgets'
@@ -10,12 +12,14 @@ const cx = classNames.bind(styles)
 
 export const Main = () => {
   return (
-    <GameSocketProvider>
-      <main className={cx('main')}>
-        <MainHeader />
-        {/* <Chart /> */}
-        <MainFooter />
-      </main>
-    </GameSocketProvider>
+    <Provider store={store}>
+      <GameSocketProvider>
+        <main className={cx('main')}>
+          <MainHeader />
+           <Chart />
+          <MainFooter />
+        </main>
+      </GameSocketProvider>
+    </Provider>
   )
 }
