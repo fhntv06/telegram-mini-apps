@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { IUser } from '../interfaces/user';
+import { IUser } from './types.ts';
 
 const initialState: IUser = {
     wallet: '',
