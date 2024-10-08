@@ -18,6 +18,8 @@
 		}
 	}
 	&.down {
+		background-color: $red100;
+
 		&.disabled {
 			background-color: $dark-red;
 		}

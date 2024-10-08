@@ -3,6 +3,7 @@ import { Button } from '../../shared'
 import classNames from 'classnames/bind'
 import styles from './ButtonPlaceBet.module.scss'
 import { useTransaction } from '../../hooks';
+import {getAddressContract} from "../../app/api/game";
 
 const cx = classNames.bind(styles)
 
@@ -15,26 +16,40 @@ export const ButtonPlaceBet = ({
 	onClick,
 	type = 'up',
 }: Props) => {
-	const { bet } = useSelector((state: any) => state.bets);
+	const { bet } = useSelector((state: any) => state.bets)
+	const { wallet } = useSelector((state: any) => state.user)
 	const { txInProcess, sendTransaction } = useTransaction(bet)
 
-	const handlerPlaceBet = () => {
+	const handlerPlaceBet = async () => {
+		console.log({
+			bet,
+			wallet
+		})
+
+		const address = await getAddressContract()
+			.then(res => res)
+
+		console.log(address)
+
 		if (!bet) {
 			alert('Выберите ставку!')
+		} else if (!wallet) {
+			alert('Подключите кошелек!')
 		} else {
 			sendTransaction()
 			onClick()
 		}
 	}
 
-	const textButton = txInProcess ? 'Loading ...' : `GO ${type}`;
+	const disabled = !bet
+	const textButton = txInProcess ? 'Loading ...' : `GO ${type}`
 
 	return (
 		<Button
 			type='bet'
 			className={cx('button-placebet', type, 'p', { 'disabled': !bet })}
 			onClick={handlerPlaceBet}
-			disabled={bet}
+			disabled={disabled}
 		>
 			{textButton}
 		</Button>

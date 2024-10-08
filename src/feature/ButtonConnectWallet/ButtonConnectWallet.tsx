@@ -1,8 +1,3 @@
-import {
-  useTonWallet,
-  useTonAddress,
-} from '@tonconnect/ui-react'
-
 import { Button } from '../../shared'
 import classNames from 'classnames/bind'
 import styles from './ButtonConnectWallet.module.scss'
@@ -16,15 +11,9 @@ interface Props {
 export const ButtonConnectWallet = ({
 	onClick,
 }: Props) => {
-  const wallet = useTonWallet();
-  const address = useTonAddress();
-
   const handlerConnectWallet = async () => {
 		onClick()
   }
-
-  console.log('wallet ', wallet)
-  console.log('address ', address)
 
   return (
 		<Button
@@ -34,7 +23,7 @@ export const ButtonConnectWallet = ({
 			sizeIcons='big'
 			onClick={handlerConnectWallet}
 		>
-			Сonnect wallet
+			Connect wallet
 		</Button>
 	)
 }
