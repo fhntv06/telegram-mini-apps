@@ -1,1 +1,1 @@
-export const url = `${import.meta.env.REACT_APP_API_URL_GAME}`;
+export const url = `${import.meta.env.VITE_API_URL_GAME}`;
