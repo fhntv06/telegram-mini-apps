@@ -33,7 +33,7 @@ export const MainHeader = () => {
 	const handlerModalAuth = () => {
 		openModalAuth()
 		console.log('show modal');
-		
+
 		setTimeout(closeModalAuth, 1000);
 	}
 

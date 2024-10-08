@@ -9,9 +9,9 @@ import { IRoundsType } from '../../shared/types'
 import { GameStatusContext } from '../../app/contexts'
 import { useTonWallet } from '@tonconnect/ui-react'
 
-import { formatNumber } from '../../shared/utils'
+import { formatNumber, setStorage } from '../../shared/utils'
 
-import { setUser } from '../../app/store/slices/userSlice'
+import { setUser } from '../../app/store/slices/user/userSlice.ts'
 
 const cx = classNames.bind(styles)
 
@@ -21,8 +21,6 @@ export const MainFooter = () => {
 	const dispatch = useDispatch()
 	const { upPoolData, downPoolData, last3GamesRes, livePlayers, allTimeWins } = useContext(GameStatusContext);
 
-	console.log({ upPoolData, downPoolData, last3GamesRes, livePlayers, allTimeWins })
-
   const wallet = useTonWallet()
 
 	const handlerConnectWallet = () => {
@@ -31,6 +29,9 @@ export const MainFooter = () => {
 
 	useEffect(() => {
 		if (wallet) {
+			alert(`Your address: ${wallet.account.address}`)
+
+			setStorage('address', wallet.account.address)
 			dispatch(
 				setUser({
 					wallet,
@@ -45,8 +46,6 @@ export const MainFooter = () => {
 			)
 		}
 	}, [wallet])
-
-	console.log("wallet: ", wallet)
 
 	return (
 		<footer className={cx('footer')}>

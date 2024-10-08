@@ -1,10 +1,11 @@
-import { useId } from 'react'
+import { useContext } from 'react'
 import classNames from 'classnames/bind'
 import styles from './BetPanel.module.scss'
 import { ButtonPlaceBet } from '../../feature'
 import { IDataPanel } from './types'
 import {Icon, Person } from '../../shared'
-import {formatIntTonNumber, formatNumber} from '../../shared/utils'
+import { formatIntTonNumber } from '../../shared/utils'
+import { GameStatusContext } from "../../app/contexts";
 const cx = classNames.bind(styles)
 
 interface Props {
@@ -17,14 +18,16 @@ const titleResultPanel = {
 	down: 'DOWN WINNER'
 }
 
-const IsPerson = (img: string) => <Person key={useId()} img={img} />
+const IsPerson = (img: string) => <Person key={Date.now() + img} img={img} />
 
 export const BetPanel = ({ data, type = 'up' }: Props) => {
+	const { gamePhase } = useContext(GameStatusContext);
+
 	const handlerBet = () => {
 		console.log('Bet is ', type)
 	}
 
-	const completedRound = false
+	const completedRound = gamePhase === 3
 	const { playersImg, betPool } = data;
 	const count = playersImg.length - 5
 
@@ -37,7 +40,7 @@ export const BetPanel = ({ data, type = 'up' }: Props) => {
 							<p>{titleResultPanel[type]}</p>
 							<h1 className={cx('panel__result__text')}>
 								<Icon name='ton' size='big'/>
-								{formatNumber(betPool)}
+								{formatIntTonNumber(betPool)}
 							</h1>
 						</>
 					) : (

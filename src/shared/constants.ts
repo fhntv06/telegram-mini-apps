@@ -1,4 +1,4 @@
-import { IGameStatus } from './providers/types';
+import { IGameStatus } from '../app/providers/types.ts';
 
 
 export const countPointsChart = 100
@@ -28,7 +28,7 @@ export const initialDataGameStatus: IGameStatus = {
 	totalBets : 1010,
 	btcPrice: 56000,
 	startBtcPrice: 55000,
-	gamePhase: 1,
+	gamePhase: 0,
 	phaseTimeUntil: Date.now() + 45,
 	gameResult: 0,
 	last3GamesRes: [1,2,0],
@@ -48,3 +48,4 @@ export const initialDataPriseHistory: number[] = ((min = 62000, max = 65000) => 
 
 	return array;
 })();
+export const arBets = [0.5, 1, 2, 5, 10]

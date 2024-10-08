@@ -1,26 +1,26 @@
 import {
   useTonWallet,
-  useTonAddress,
   useTonConnectUI,
   ActionConfiguration,
   SendTransactionRequest
 } from '@tonconnect/ui-react'
 import { useState } from 'react'
+import { getAddressContract } from '../app/api/game'
 
-interface ITransaction {
-  amount: number
-}
-
-export const useTransaction = (data: ITransaction) => {
-  const { amount } = data;
-
+export const useTransaction = (amount: number) => {
   const wallet = useTonWallet()
-  const address = useTonAddress()
   const [tonConnectUI] = useTonConnectUI()
   const [txInProcess, setTxInProcess] = useState<boolean>(false)
 
   const sendTransaction = async () => {
     console.log('SendTransaction run!')
+    alert('SendTransaction run!')
+
+    const address = await getAddressContract()
+      .then(res => res)
+
+    alert(`SendTransaction wallet is ${JSON.stringify(wallet, null, 2)}`)
+    alert(`SendTransaction wallet is ${address}`)
 
     if (!wallet) tonConnectUI.connectWallet()
     else {

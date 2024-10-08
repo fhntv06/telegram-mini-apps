@@ -24,7 +24,7 @@ import { ChartPanel } from '../'
 
 import classNames from 'classnames/bind'
 import styles from './Chart.module.scss'
-import { countPointsChart } from '../../app/constants'
+import { countPointsChart } from '../../shared/constants.ts'
 
 const cx = classNames.bind(styles)
 

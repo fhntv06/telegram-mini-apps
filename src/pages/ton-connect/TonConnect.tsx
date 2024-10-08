@@ -18,7 +18,7 @@ import styles from './TonConnect.module.scss'
 const cx = clns.bind(styles);
 
 export const TonConnect: FC = () => {
-  const [txInProcess, setTxInProcess] = useState<boolean>(false) 
+  const [txInProcess, setTxInProcess] = useState<boolean>(false)
 
   const isConnectionRestored = useIsConnectionRestored()
   const [tonConnectUI] = useTonConnectUI();
