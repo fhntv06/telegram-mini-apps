@@ -1,4 +1,6 @@
 // import WebApp from '@twa-dev/sdk';
+
+// import { beginCell } from "@ton/core";
 import {
   TonConnectButton,
   useTonWallet,
@@ -18,6 +20,7 @@ import styles from './TonConnect.module.scss'
 const cx = clns.bind(styles);
 
 export const TonConnect: FC = () => {
+  // @ts-ignore
   const [txInProcess, setTxInProcess] = useState<boolean>(false)
 
   const isConnectionRestored = useIsConnectionRestored()
@@ -35,8 +38,9 @@ export const TonConnect: FC = () => {
     validUntil: Date.now() + 5 * 60 * 1000, // 5 minutes
     messages: [
       {
-        address: "0QCuVcyJu4IypRhIVBTYHCx7eEbf4T7tEBopqR5dn-aP_Dh7",
-        amount: "20000000", // Toncoin in nanotons
+        address: "EQB-bjIC4WX9Al-yKbmnHcRgy4wZBac4aXtRB4a1OrRnxbO7",
+        amount: "500000000", // Toncoin in nanotons
+        payload: import.meta.env.VITE_DOWN_TRANSACTION
       },
     ],
   };
@@ -108,7 +112,6 @@ export const TonConnect: FC = () => {
         )
       }
       <Button
-        disabled={isConnectionRestored || txInProcess}
         onClick={handlerSendTransaction}
       >
         {textButton}
