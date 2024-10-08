@@ -1,25 +1,26 @@
-import { useContext, useEffect, useId } from 'react'
-import { useDispatch } from 'react-redux'
+import {
+	// useContext,
+	useEffect
+} from 'react'
+import {useDispatch, useSelector} from 'react-redux'
 import classNames from 'classnames/bind'
 import styles from './MainFooter.module.scss'
 import { BetPanel, PanelButtonsBet } from '../../widgets'
 import { ButtonConnectWallet } from '../../feature'
 import { Icon, Rounds } from '../../shared'
 import { IRoundsType } from '../../shared/types'
-import { GameStatusContext } from '../../app/contexts'
+// import { GameStatusContext } from '../../app/contexts'
 import { useTonWallet } from '@tonconnect/ui-react'
 
 import { formatNumber, setStorage } from '../../shared/utils'
 
-import { setUser } from '../../app/store/slices/user/userSlice.ts'
+import { setUser } from '../../app/store/slices/user'
 
 const cx = classNames.bind(styles)
 
-const IsRound = (countType: IRoundsType) => <Rounds key={useId()} countType={countType} />
-
 export const MainFooter = () => {
 	const dispatch = useDispatch()
-	const { upPoolData, downPoolData, last3GamesRes, livePlayers, allTimeWins } = useContext(GameStatusContext);
+	const { upPoolData, downPoolData, last3GamesRes, livePlayers, allTimeWins } = useSelector((state: any) => state.gameStatus) // useContext(GameStatusContext);
 
   const wallet = useTonWallet()
 
@@ -64,7 +65,7 @@ export const MainFooter = () => {
 				<div>
 					<h2>LAST 3 ROUNDS</h2>
 					<div className={cx('footer__header__rounds')}>
-						{last3GamesRes.map((countType: IRoundsType) => IsRound(countType))}
+						{last3GamesRes.map((countType: IRoundsType, index: number) => <Rounds key={`${countType}_${index}`} countType={countType} />)}
 					</div>
 				</div>
 			</header>

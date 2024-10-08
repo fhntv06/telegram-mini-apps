@@ -1,2 +1,3 @@
-export { userReducer } from './user/userSlice.ts';
-export { betsReducer } from './bets/betsSlice.ts';
+export { userReducer } from './user';
+export { betsReducer } from './bets';
+export { gameStatusReducer } from './game';

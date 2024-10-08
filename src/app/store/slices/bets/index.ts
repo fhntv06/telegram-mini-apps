@@ -4,7 +4,7 @@ const initialState: { bet: number } = {
     bet: 0
 }
 
-const betsSlice = createSlice({
+const index = createSlice({
     name: 'bets',
     initialState,
     reducers: {
@@ -14,5 +14,5 @@ const betsSlice = createSlice({
     }
 });
 
-export const { setBet } = betsSlice.actions;
-export const betsReducer = betsSlice.reducer;
+export const { setBet } = index.actions;
+export const betsReducer = index.reducer;

@@ -12,7 +12,7 @@ const initialState: IUser = {
     platform: '',
 }
 
-const userSlice = createSlice({
+const index = createSlice({
     name: 'user',
     initialState,
     reducers: {
@@ -39,5 +39,5 @@ const userSlice = createSlice({
     }
 });
 
-export const { setUser, removeUser } = userSlice.actions;
-export const userReducer = userSlice.reducer
+export const { setUser, removeUser } = index.actions;
+export const userReducer = index.reducer

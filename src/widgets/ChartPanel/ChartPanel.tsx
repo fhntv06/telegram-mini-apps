@@ -1,9 +1,10 @@
-import { useContext } from 'react'
+// import { useContext } from 'react'
 import classNames from 'classnames/bind'
-import { GameStatusContext } from '../../app/contexts'
+// import { GameStatusContext } from '../../app/contexts'
 import { differenceInSeconds } from '../../shared/utils'
 
 import styles from './ChartPanel.module.scss'
+import {useSelector} from "react-redux";
 
 const cx = classNames.bind(styles)
 
@@ -11,7 +12,7 @@ export const ChartPanel = () => {
   const {
     phaseTimeUntil,
     winPercent: { downPercent, upPercent }
-  } = useContext(GameStatusContext);
+  } = useSelector((state: any) => state.gameStatus) //useContext(GameStatusContext);
 
   return (
     <div className={cx('panel')}>

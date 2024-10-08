@@ -3,7 +3,6 @@ import { Button } from '../../shared'
 import classNames from 'classnames/bind'
 import styles from './ButtonPlaceBet.module.scss'
 import { useTransaction } from '../../hooks';
-import {getAddressContract} from "../../app/api/game";
 
 const cx = classNames.bind(styles)
 
@@ -25,11 +24,6 @@ export const ButtonPlaceBet = ({
 			bet,
 			wallet
 		})
-
-		const address = await getAddressContract()
-			.then(res => res)
-
-		console.log(address)
 
 		if (!bet) {
 			alert('Выберите ставку!')

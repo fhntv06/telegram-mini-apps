@@ -22,11 +22,12 @@ export interface IGameStatus {
 	 */
 	last3GamesRes: IRoundsType[],
 	livePlayers: number;
-	allTimeWins: string;
+	allTimeWins: number;
 	winPercent: {
 		downPercent : number,
 		upPercent : number,
-	}
+	},
+	priceHistory?: number[]
 }
 
 // export interface IGameStatus {

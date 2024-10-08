@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react'
 import { ChartData } from 'chart.js'
+import { useSelector } from 'react-redux'
 
 const maxChartPoints = 110
 const numberLastPoint = 89
@@ -15,8 +16,13 @@ const createInitialData = (history: any) => ({
   ],
 })
 
-export const useChartData = (priceHistory: any, gameStatus: any) => {
-  const lastPrice = gameStatus.btcPrice;
+export const useChartData = (
+  // priceHistory: any,
+  // gameStatus: any
+) => {
+  const { btcPrice, priceHistory } = useSelector((state: any) => state.gameStatus)
+
+  const lastPrice = btcPrice // gameStatus.btcPrice;
 
   const [chartData, setChartData] = useState<ChartData<'line'>>(
     createInitialData(priceHistory)

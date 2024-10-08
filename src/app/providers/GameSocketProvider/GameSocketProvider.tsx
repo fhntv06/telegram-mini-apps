@@ -1,31 +1,36 @@
-import { useState, useEffect } from 'react'
-import { PriceHistoryContext, GameStatusContext } from '../../contexts'
-import { initialDataGameStatus, initialDataPriseHistory } from '../../../shared/constants.ts';
-import { IGameStatus } from '../types'
+import {
+  useState,
+  useEffect
+} from 'react'
+import {
+  PriceHistoryContext,
+  // GameStatusContext
+} from '../../contexts'
+import {
+//   initialDataGameStatus,
+  initialDataPriseHistory
+} from '../../../shared/constants.ts';
+// import { IGameStatus } from '../types'
 import { getPriceHistory } from '../../api';
+import { useDispatch } from 'react-redux'
+import { setGameStatus } from '../../store/slices/game'
 
 const urlSocket = `${import.meta.env.VITE_SOCKET_PROTOCOL}://${import.meta.env.VITE_DOMAIN}:${import.meta.env.VITE_PORT}`
 const gameSocket = new WebSocket(urlSocket);
 
-console.log(gameSocket);
-
 export const GameSocketProvider = ({ children }: { children: React.ReactNode } ) => {
-  const [priceHistory, setPriceHistory] = useState<number[]>(initialDataPriseHistory);
-  const [gameStatus, setGameStatus] = useState<IGameStatus>(initialDataGameStatus);
+  const [priceHistory, _] = useState<number[]>(initialDataPriseHistory);
+  // const [gameStatus, setGameStatus] = useState<IGameStatus>(initialDataGameStatus);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log('initial priceHistory ', priceHistory)
-
     // TODO: запрос за priceHistory
     getPriceHistory()
       .then(async (res) => {
-        console.log('res getPriceHistory: ', res);
+        console.log('res getPriceHistory: ', res.data);
 
-        const pricesArray = await res.data.json();
-
-        console.log('pricesArray getPriceHistory: ', pricesArray);
-
-        setPriceHistory(pricesArray)
+        // setPriceHistory(res.data)
       })
       .catch((error) => {
         console.log('Error in getPriceHistory: ', error);
@@ -46,7 +51,7 @@ export const GameSocketProvider = ({ children }: { children: React.ReactNode } )
     };
 
     gameSocket.onmessage = (event) => {
-      console.log('GameSocket onmessage ', event.data)
+      // console.log('GameSocket onmessage ', event.data)
 
       const {
         up_pool_data: { players_img: players_img_down, betPool: betPoolUp },
@@ -56,17 +61,9 @@ export const GameSocketProvider = ({ children }: { children: React.ReactNode } )
         live_players,
         all_time_wins,
         win_percent: { down_percent, up_percent }
-      } = JSON.parse(event.data);// TODO: переделать на store
+      } = JSON.parse(event.data)
 
-      // TODO: распилить данные на store
-      // TODO: похоже не нужен redux
-      // console.log(JSON.parse(event.data))
-
-      // dispatch(
-      //   setUser(dataProfile.data.profile)
-      // );
-
-      setGameStatus({
+      const data = {
         upPoolData: {
           playersImg: players_img_up,
           betPool: betPoolUp,
@@ -84,28 +81,43 @@ export const GameSocketProvider = ({ children }: { children: React.ReactNode } )
         last3GamesRes: last_3_games_res,
         livePlayers: live_players,
         allTimeWins: all_time_wins,
-        winPercent: { downPercent: down_percent, upPercent: up_percent }
-      })
+        winPercent: { downPercent: down_percent, upPercent: up_percent },
+        priceHistory
+      }
 
-      // switch (MessageType) {
-      //   case 'PriceHistory':
-      //     setPriceHistory(Data)
-      //     break;
-      //   case 'GameStatus':
-      //     setGameStatus(Data)
-      //     break;
-      // }
+      dispatch(setGameStatus(data))
+
+      // setGameStatus({
+      //   upPoolData: {
+      //     playersImg: players_img_up,
+      //     betPool: betPoolUp,
+      //   },
+      //   downPoolData: {
+      //     playersImg: players_img_down,
+      //     betPool: betPoolDown
+      //   },
+      //   totalBets : total_bets,
+      //   btcPrice: btc_price,
+      //   startBtcPrice: start_btc_price,
+      //   gamePhase: game_phase,
+      //   phaseTimeUntil: phase_time_until,
+      //   gameResult: game_result,
+      //   last3GamesRes: last_3_games_res,
+      //   livePlayers: live_players,
+      //   allTimeWins: all_time_wins,
+      //   winPercent: { downPercent: down_percent, upPercent: up_percent }
+      // })
     };
     gameSocket.onerror = (event) => {
-      console.log("prices socket error: ", event);
+      console.log("game socket error: ", event);
     };
   }, []);
 
   return (
     <PriceHistoryContext.Provider value={priceHistory}>
-      <GameStatusContext.Provider value={gameStatus}>
+      {/*<GameStatusContext.Provider value={gameStatus}>*/}
         {children}
-      </GameStatusContext.Provider>
+      {/*</GameStatusContext.Provider>*/}
     </PriceHistoryContext.Provider>
   );
 

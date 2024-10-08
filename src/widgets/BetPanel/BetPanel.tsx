@@ -1,11 +1,12 @@
-import { useContext } from 'react'
+// import { useContext } from 'react'
 import classNames from 'classnames/bind'
 import styles from './BetPanel.module.scss'
 import { ButtonPlaceBet } from '../../feature'
 import { IDataPanel } from './types'
 import {Icon, Person } from '../../shared'
 import { formatIntTonNumber } from '../../shared/utils'
-import { GameStatusContext } from "../../app/contexts";
+// import { GameStatusContext } from "../../app/contexts";
+import {useSelector} from "react-redux";
 const cx = classNames.bind(styles)
 
 interface Props {
@@ -18,10 +19,8 @@ const titleResultPanel = {
 	down: 'DOWN WINNER'
 }
 
-const IsPerson = (img: string) => <Person key={Date.now() + img} img={img} />
-
 export const BetPanel = ({ data, type = 'up' }: Props) => {
-	const { gamePhase } = useContext(GameStatusContext);
+	const { gamePhase } = useSelector((state: any) => state.gameStatus) // useContext(GameStatusContext);
 
 	const handlerBet = () => {
 		console.log('Bet is ', type)
@@ -56,7 +55,7 @@ export const BetPanel = ({ data, type = 'up' }: Props) => {
 							</p>
 						</div>
 						<div className={cx('panel__data__persons')}>
-							{playersImg.slice(0, 5).map((img: string) => IsPerson(img))}
+							{playersImg.slice(0, 5).map((img: string, index) => <Person key={`${img}_${index}`} img={img} />)}
 							{count > 0 && <p className={cx('panel__persons__count')}><span>{`+${count}`}</span></p>}
 						</div>
 					</>
