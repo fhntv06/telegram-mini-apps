@@ -23,9 +23,11 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	column-gap: 4px;
 	@include border('medium');
 }
-.iconRigth {
-	margin-left: $offset4;
+.icon__left {
+	margin-right: $offset4;
+}
+.icon__rigth {
+	margin-left: $offset8;
 }

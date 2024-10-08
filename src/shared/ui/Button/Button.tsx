@@ -7,11 +7,13 @@ import { Icon } from '../';
 import styles from './Button.module.scss';
 
 interface IProps extends PropsWithChildren {
-	sizeIcons?: IconType
+	sizeIcons?: IconType,
+	sizeLeftIcon?: IconType,
+	sizeRightIcon?: IconType,
 	className?: string,
 	type?: ButtonTypes
 	iconLeftName?: IconNames,
-	iconRigthName?: IconNames
+	iconRightName?: IconNames
 	disabled?: boolean,
 	onClick?: () => void,
 	active ? : boolean
@@ -20,11 +22,13 @@ interface IProps extends PropsWithChildren {
 const cx = classnames.bind(styles);
 
 export const Button = ({
-	sizeIcons,
+	sizeIcons = 'medium',
+	sizeLeftIcon = 'medium',
+	sizeRightIcon = 'medium',
 	className,
 	type = 'gray' as ButtonTypes,
 	iconLeftName,
-	iconRigthName,
+	iconRightName,
 	disabled,
 	onClick,
 	children
@@ -40,9 +44,9 @@ export const Button = ({
 			}
 			disabled={disabled}
 		>
-			{iconLeftName && <Icon name={iconLeftName} size={sizeIcons} />}
+			{iconLeftName && <Icon className={cx('icon__left')} name={iconLeftName} size={sizeLeftIcon || sizeIcons} />}
 			{children}
-			{iconRigthName && <Icon name={iconRigthName} size={sizeIcons} />}
+			{iconRightName && <Icon className={cx('icon__rigth')} name={iconRightName} size={sizeRightIcon || sizeIcons} />}
 		</button>
 	)
 }

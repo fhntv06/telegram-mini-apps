@@ -5,21 +5,22 @@ import styles from './ButtonChangeMode.module.scss'
 const cx = classNames.bind(styles)
 
 interface Props {
-    onClick: () => void
+	onClick: () => void
 }
 
 export const ButtonChangeMode = ({
-    onClick,
+	onClick,
 }: Props) => {
-    const text = "$BTC, 30s";
+	const text = "$BTC, 30s";
 
 	return (
 		<Button
 			className={cx('button')}
 			type='gray'
 			iconLeftName="bitcoin"
-			iconRigthName="arrows-cyrcle"
-			sizeIcons='medium'
+			iconRightName="arrow-down"
+			sizeIcons='small'
+			sizeRightIcon='small'
 			onClick={onClick}
 		>
 			{text}
