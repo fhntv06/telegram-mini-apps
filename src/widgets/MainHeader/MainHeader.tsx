@@ -1,3 +1,4 @@
+import { useSelector } from 'react-redux'
 import classNames from 'classnames/bind'
 import styles from './MainHeader.module.scss'
 
@@ -12,6 +13,8 @@ import {
 const cx = classNames.bind(styles)
 
 export const MainHeader = () => {
+	const { wallet } = useSelector((state: any) => state.user);
+
 	const {
 		// isOpen: isOpenWallet,
 		openModalHandler: openWallet,
@@ -45,7 +48,7 @@ export const MainHeader = () => {
 		<header className={cx('header')}>
 			<div className={cx('header__button')}>
 				<ButtonChangeMode onClick={handlerChangeMode} />
-				<ButtonWallet onClick={handlerWallet} />
+				{wallet && <ButtonWallet onClick={handlerWallet} />}
 			</div>
 			<ButtonBurger onClick={handlerModalAuth} />
 		</header>
