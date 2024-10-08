@@ -1,17 +1,11 @@
 import {
-  // TonConnectButton,
   useTonWallet,
   useTonAddress,
-  useTonConnectUI,
-  ActionConfiguration
 } from '@tonconnect/ui-react'
-import { useState } from 'react'
 
 import { Button } from '../../shared'
 import classNames from 'classnames/bind'
 import styles from './ButtonConnectWallet.module.scss'
-
-import { formatNumber } from '../../shared/utils'
 
 const cx = classNames.bind(styles)
 

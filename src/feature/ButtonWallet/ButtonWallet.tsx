@@ -20,7 +20,7 @@ export const ButtonWallet = ({
 			className={cx('button', '')}
 			type='gray'
 			iconLeftName="ton"
-			iconRigthName="plus"
+			iconRightName="plus"
 			sizeIcons='medium'
 			onClick={onClick}
 		>
