@@ -2,7 +2,7 @@ import { useDispatch } from 'react-redux';
 import { Button } from '../../shared'
 import classNames from 'classnames/bind'
 import styles from './ButtonBet.module.scss'
-import { setBet } from "../../app/store/slices/betsSlice";
+import { setBet } from '../../app/store/slices/bets/betsSlice.ts'
 
 const cx = classNames.bind(styles)
 
@@ -19,10 +19,11 @@ export const ButtonBet = ({
 }: Props) => {
 	const dispatch = useDispatch()
 
-	const handlerBet = ()=> {
+	const handlerBet = () => {
 		onClick()
+
 		dispatch(
-			setBet(bet)
+			setBet({ bet })
 		);
 	}
 
