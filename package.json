@@ -3,9 +3,9 @@
   "private": true,
   "version": "0.0.1",
   "type": "module",
-  "homepage": "https://fhntv06.github.io/telegram-mini-apps",
+  "homepage": "",
   "scripts": {
-    "deploy": "gh-pages -d build",
+    "deploy": "npm run build && gh-pages -d build && ",
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
