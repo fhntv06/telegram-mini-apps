@@ -1,4 +1,5 @@
 import { useContext, useEffect, useId } from 'react'
+import { useDispatch } from 'react-redux'
 import classNames from 'classnames/bind'
 import styles from './MainFooter.module.scss'
 import { BetPanel, PanelButtonsBet } from '../../widgets'
@@ -6,20 +7,22 @@ import { ButtonConnectWallet } from '../../feature'
 import { Icon, Rounds } from '../../shared'
 import { IRoundsType } from '../../shared/types'
 import { GameStatusContext } from '../../app/contexts'
-import { useIsConnectionRestored, useTonWallet } from '@tonconnect/ui-react'
+import { useTonWallet } from '@tonconnect/ui-react'
 
 import { formatNumber } from '../../shared/utils'
+
+import { setUser } from '../../app/store/slices/userSlice'
 
 const cx = classNames.bind(styles)
 
 const IsRound = (countType: IRoundsType) => <Rounds key={useId()} countType={countType} />
 
 export const MainFooter = () => {
+	const dispatch = useDispatch()
 	const { upPoolData, downPoolData, last3GamesRes, livePlayers, allTimeWins } = useContext(GameStatusContext);
 
 	console.log({ upPoolData, downPoolData, last3GamesRes, livePlayers, allTimeWins })
 
-  const isConnectionRestored = useIsConnectionRestored()
   const wallet = useTonWallet()
 
 	const handlerConnectWallet = () => {
@@ -28,19 +31,22 @@ export const MainFooter = () => {
 
 	useEffect(() => {
 		if (wallet) {
-			// данные о кошельке в store
-			// {wallet.account.chain}
-			// {wallet.account.publicKey}
-			// {wallet.account.address}
-			// {wallet.device.appName}
-			// {wallet.device.appVersion}
-			// {wallet.device.maxProtocolVersion}
-			// {wallet.device.platform}
+			dispatch(
+				setUser({
+					wallet,
+					chain: wallet.account.chain,
+					publicKey: wallet.account.publicKey,
+					address: wallet.account.address,
+					appName: wallet.device.appName,
+					appVersion: wallet.device.appVersion,
+					maxProtocolVersion: wallet.device.maxProtocolVersion,
+					platform: wallet.device.platform,
+				})
+			)
 		}
 	}, [wallet])
 
 	console.log("wallet: ", wallet)
-  console.log('isConnectionRestored ', isConnectionRestored)
 
 	return (
 		<footer className={cx('footer')}>

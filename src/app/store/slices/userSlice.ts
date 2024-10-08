@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { IUser } from '../interfaces/user';
 
 const initialState: IUser = {
+    wallet: '',
     chain: '',
     publicKey: '',
     address: '',
@@ -16,6 +17,7 @@ const userSlice = createSlice({
     initialState,
     reducers: {
         setUser(state, action) {
+            state.wallet = action.payload.wallet;
             state.chain = action.payload.chain;
             state.publicKey = action.payload.publicKey;
             state.address = action.payload.address;
@@ -25,6 +27,7 @@ const userSlice = createSlice({
             state.platform = action.payload.platform;
         },
         removeUser(state) {
+            state.wallet = initialState.wallet;
             state.chain = initialState.chain
             state.publicKey = initialState.publicKey
             state.address = initialState.address
