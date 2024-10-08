@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react'
 import { PriceHistoryContext, GameStatusContext } from '../../contexts'
-import { initialDataGameStatus, initialDataPriseHistory } from '../../constants';
+import { initialDataGameStatus, initialDataPriseHistory } from '../../../shared/constants.ts';
 import { IGameStatus } from '../types'
 import { getPriceHistory } from '../../api';
 
-const urlSocket = `${import.meta.env.VITE_SOCKET_PROTOCOL}://${import.meta.env.VITE_DOMAIN}:${import.meta.env.VITE_SOCKET_PORT}`
+const urlSocket = `${import.meta.env.VITE_SOCKET_PROTOCOL}://${import.meta.env.VITE_DOMAIN}:${import.meta.env.VITE_PORT}`
 const gameSocket = new WebSocket(urlSocket);
 
 console.log(gameSocket);
