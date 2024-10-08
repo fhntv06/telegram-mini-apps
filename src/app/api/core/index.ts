@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const url = `${import.meta.env.VITE_API_PROTOCOL}://${import.meta.env.VITE_DOMAIN}:${import.meta.env.VITE_API_PORT}`
+const url = `${import.meta.env.VITE_API_PROTOCOL}://${import.meta.env.VITE_DOMAIN}:${import.meta.env.VITE_PORT}`
 
 interface Headers {
   'Content-Type': string,
