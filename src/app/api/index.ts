@@ -1,2 +1,2 @@
-export { getPriceHistory } from './game'
+export { getPriceHistory } from './prices'
 export { getBalance } from './user'

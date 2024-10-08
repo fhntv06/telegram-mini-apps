@@ -1,7 +1,7 @@
 import { IGameStatus } from './providers/types';
 
 
-export const countPointsChart = 10
+export const countPointsChart = 100
 export const initialDataGameStatus: IGameStatus = {
   upPoolData: {
 		playersImg: [

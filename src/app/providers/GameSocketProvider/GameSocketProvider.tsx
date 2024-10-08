@@ -1,32 +1,35 @@
 import { useState, useEffect } from 'react'
 import { PriceHistoryContext, GameStatusContext } from '../../contexts'
-import { urlWebSocket } from '../../config'
 import { initialDataGameStatus, initialDataPriseHistory } from '../../constants';
 import { IGameStatus } from '../types'
 import { getPriceHistory } from '../../api';
 
-const gameSocket = new WebSocket(urlWebSocket);
+const urlSocket = `${import.meta.env.VITE_SOCKET_PROTOCOL}://${import.meta.env.VITE_DOMAIN}:${import.meta.env.VITE_SOCKET_PORT}`
+const gameSocket = new WebSocket(urlSocket);
 
 console.log(gameSocket);
 
 export const GameSocketProvider = ({ children }: { children: React.ReactNode } ) => {
   const [priceHistory, setPriceHistory] = useState<number[]>(initialDataPriseHistory);
   const [gameStatus, setGameStatus] = useState<IGameStatus>(initialDataGameStatus);
-  // const dispatch = useDispatch();
 
   useEffect(() => {
     console.log('initial priceHistory ', priceHistory)
 
     // TODO: запрос за priceHistory
-    getPriceHistory().then(async (res) => {
-      console.log('res getPriceHistory: ', res);
+    getPriceHistory()
+      .then(async (res) => {
+        console.log('res getPriceHistory: ', res);
 
-      const pricesArray = await res.data.json();
+        const pricesArray = await res.data.json();
 
-      console.log('pricesArray getPriceHistory: ', pricesArray);
+        console.log('pricesArray getPriceHistory: ', pricesArray);
 
-      setPriceHistory(pricesArray)
-    })
+        setPriceHistory(pricesArray)
+      })
+      .catch((error) => {
+        console.log('Error in getPriceHistory: ', error);
+      })
 
     gameSocket.onopen = () => {
       console.log("game socket connected");
@@ -43,6 +46,8 @@ export const GameSocketProvider = ({ children }: { children: React.ReactNode } )
     };
 
     gameSocket.onmessage = (event) => {
+      console.log('GameSocket onmessage ', event.data)
+
       const {
         up_pool_data: { players_img: players_img_down, betPool: betPoolUp },
         down_pool_data: { players_img: players_img_up, betPool: betPoolDown },
@@ -92,7 +97,7 @@ export const GameSocketProvider = ({ children }: { children: React.ReactNode } )
       // }
     };
     gameSocket.onerror = (event) => {
-      console.log("game socket error: ", event);
+      console.log("prices socket error: ", event);
     };
   }, []);
 

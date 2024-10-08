@@ -1,4 +1,7 @@
-import { post } from '../core'
-import { url } from '../config'
+import { get } from '../core'
 
-export const getBalance = (data = {}) => post(`${url}/getBalance`, data)
+// Get balance in nano TON
+export const getBalance = (address: string) => get(`/api/getBalance/${address}`)
+
+// Returns the current address of the pool smart contract.
+export const getAddressContract = () => get('/api/pool/address')
