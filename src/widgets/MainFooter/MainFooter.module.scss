@@ -45,4 +45,17 @@
 	justify-content: space-between;
 	width: 100%;
 	column-gap: $offset8;
+
+	.button,
+	button {
+		width: 100% !important;
+
+		&.hide {
+			display: none !important;
+		}
+	}
+	button {
+		display: flex;
+		justify-content: center;
+	}
 }
