@@ -5,19 +5,22 @@ import styles from './ButtonBurger.module.scss'
 const cx = classNames.bind(styles)
 
 interface Props {
-    onClick: () => void
+	isOpen: boolean,
+	onClick: () => void,
+	className?: string
 }
 
 export const ButtonBurger = ({
-    onClick,
+	isOpen = false,
+	onClick,
+	className,
 }: Props) => {
 
 	return (
 		<Button
-			className={cx('button')}
+			className={cx('button', className)}
 			type='gray'
-			iconLeftName='burger'
-			sizeIcons='big'
+			iconLeftName={isOpen ? 'cross' : 'burger'}
 			onClick={onClick}
 		></Button>
 	)

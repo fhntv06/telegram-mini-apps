@@ -7,17 +7,21 @@ import { formatNumber } from '../../shared/utils'
 const cx = classNames.bind(styles)
 
 interface Props {
-    onClick: () => void
+	isOpen: boolean
+	onClick: () => void,
+	className?: string,
 }
 
 export const ButtonWallet = ({
-    onClick,
+	isOpen = false,
+	onClick,
+	className
 }: Props) => {
 	const tons = 23
 
 	return (
 		<Button
-			className={cx('button', '')}
+			className={cx('button', className)}
 			type='gray'
 			iconLeftName="ton"
 			iconRightName="plus"

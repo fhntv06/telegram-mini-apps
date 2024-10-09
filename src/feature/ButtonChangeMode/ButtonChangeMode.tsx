@@ -5,20 +5,24 @@ import styles from './ButtonChangeMode.module.scss'
 const cx = classNames.bind(styles)
 
 interface Props {
-	onClick: () => void
+	isOpen: boolean,
+	onClick: () => void,
+	className?: string
 }
 
 export const ButtonChangeMode = ({
+	isOpen = false,
 	onClick,
+	className,
 }: Props) => {
 	const text = "$BTC, 30s";
 
 	return (
 		<Button
-			className={cx('button')}
+			className={cx('button', className)}
 			type='gray'
 			iconLeftName="bitcoin"
-			iconRightName="arrow-down"
+			iconRightName={isOpen ? "arrow-up" : "arrow-down"}
 			sizeIcons='small'
 			sizeRightIcon='small'
 			onClick={onClick}
