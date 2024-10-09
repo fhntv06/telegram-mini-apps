@@ -10,6 +10,7 @@ export type IconNames =
     | 'persons'
     | 'wallet'
     | 'arrow-refund'
+    | 'cross'
 
     export type IconType =
     | 'small'

@@ -1,6 +1,7 @@
 @import '/src/shared/assets/styles/basics.scss';
 
 .main {
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
