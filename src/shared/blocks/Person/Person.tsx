@@ -14,7 +14,7 @@ export const Person = ({
 }: Props) => {
   return (
 		<div className={cx('person', className)}>
-			<img className={cx('person__img')} src={img} />
+			<img className={cx('person__img')} src={img}  alt={img}/>
 		</div>
   )
 }

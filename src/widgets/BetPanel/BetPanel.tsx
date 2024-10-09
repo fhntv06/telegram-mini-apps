@@ -3,7 +3,7 @@ import classNames from 'classnames/bind'
 import styles from './BetPanel.module.scss'
 import { ButtonPlaceBet } from '../../feature'
 import { IDataPanel } from './types'
-import {Icon, Person } from '../../shared'
+import { Icon, Person } from '../../shared'
 import { formatIntTonNumber } from '../../shared/utils'
 // import { GameStatusContext } from "../../app/contexts";
 import {useSelector} from "react-redux";

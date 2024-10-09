@@ -1,4 +1,4 @@
-import { PropsWithChildren } from 'react';
+import React, { PropsWithChildren } from 'react';
 import classnames from "classnames/bind";
 import { IconType, IconNames } from '../Icon/types';
 import { ButtonTypes } from './types';
@@ -15,7 +15,7 @@ interface IProps extends PropsWithChildren {
 	iconLeftName?: IconNames,
 	iconRightName?: IconNames
 	disabled?: boolean,
-	onClick?: () => void,
+	onClick?: ((event: React.MouseEvent<HTMLElement>) => void)
 	active ? : boolean
 }
 
