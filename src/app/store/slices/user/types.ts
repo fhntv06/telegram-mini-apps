@@ -7,4 +7,5 @@ export interface IUser {
     appVersion: string,
     maxProtocolVersion: string,
     platform: string,
+    tons: number,
 }

@@ -10,6 +10,7 @@ const initialState: IUser = {
     appVersion: '',
     maxProtocolVersion: '',
     platform: '',
+    tons: 0
 }
 
 const index = createSlice({
@@ -25,19 +26,10 @@ const index = createSlice({
             state.appVersion = action.payload.appVersion;
             state.maxProtocolVersion = action.payload.maxProtocolVersion;
             state.platform = action.payload.platform;
+            state.tons = action.payload.tons;
         },
-        removeUser(state) {
-            state.wallet = initialState.wallet;
-            state.chain = initialState.chain
-            state.publicKey = initialState.publicKey
-            state.address = initialState.address
-            state.appName = initialState.appName
-            state.appVersion = initialState.appVersion
-            state.maxProtocolVersion = initialState.maxProtocolVersion
-            state.platform = initialState.platform
-        }
     }
 });
 
-export const { setUser, removeUser } = index.actions;
+export const { setUser } = index.actions;
 export const userReducer = index.reducer
