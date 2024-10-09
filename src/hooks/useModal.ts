@@ -1,28 +1,26 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import {IModalTypes} from "../widgets/Modal/types.ts";
 
 export const useModal = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [elementTarget, setElementTarget] = useState<HTMLElement | null>(null);
+  const [typeModal, setTypeModal] = useState<IModalTypes>('burger');
 
-  const openModalHandler = (event: React.MouseEvent<HTMLElement>) => {
+  const openModalHandler = (type: IModalTypes = 'burger') => {
     setIsOpen(true)
-
-    console.log(event)
-
-    setElementTarget(event.currentTarget)
+    setTypeModal(type)
   };
 
   const closeModalHandler = () => {
     setIsOpen(false)
-    setElementTarget(null)
+    setTypeModal('burger')
   };
 
-  const toggleModalHandler = (event: React.MouseEvent<HTMLElement>) => {
+  const toggleModalHandler = (type: IModalTypes = 'burger') => {
     setIsOpen(!isOpen)
-    setElementTarget(elementTarget ? null : event.currentTarget)
+    setTypeModal(typeModal ? 'burger' : type)
   };
 
   return {
-    elementTarget, isOpen, openModalHandler, closeModalHandler, toggleModalHandler
+    typeModal, isOpen, openModalHandler, closeModalHandler, toggleModalHandler
   };
 };
