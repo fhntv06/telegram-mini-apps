@@ -2,8 +2,7 @@ import { Button } from '../../shared'
 import classNames from 'classnames/bind'
 import styles from './ButtonWallet.module.scss'
 
-import { formatNumber } from '../../shared/utils'
-
+import { getCorrectBalance } from '../../shared/utils'
 
 const cx = classNames.bind(styles)
 
@@ -29,7 +28,7 @@ export const ButtonWallet = ({
 			sizeIcons='medium'
 			onClick={onClick}
 		>
-			{formatNumber(balance)}
+			{getCorrectBalance(balance)}
 		</Button>
 	)
 }
