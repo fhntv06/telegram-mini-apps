@@ -1,7 +1,4 @@
-import {
-  useRef,
-  // useContext
-} from 'react';
+import { useRef } from 'react';
 import {
   CategoryScale,
   Chart as ChartJS,
@@ -22,7 +19,6 @@ import {
 	startTooltip,
 } from './utils';
 import { useChartData } from '../../hooks';
-// import { PriceHistoryContext, GameStatusContext } from '../../app/contexts'
 import { ChartPanel } from '../'
 
 import classNames from 'classnames/bind'
@@ -69,10 +65,7 @@ const LineChart = ({ data, lockValue }: ILineChartProps) => {
 }
 
 export const Chart = () => {
-  // const priceHistory = useContext<any>(PriceHistoryContext) // из store
-  // const gameStatus = useContext<any>(GameStatusContext) // из store
-  // @ts-ignore
-  const { chartData, lockValue } = useChartData(priceHistory, gameStatus);
+  const { chartData, lockValue } = useChartData();
 
 	return (
     chartData && (

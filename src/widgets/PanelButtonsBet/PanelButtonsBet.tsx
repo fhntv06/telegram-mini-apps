@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { ButtonBet } from '../../feature'
-import { arBets } from '../../shared/constants.ts'
+import { arBets } from '../../shared/constants'
 
 export const PanelButtonsBet = () => {
 	const [bet, setBet] = useState<number | null>(null);

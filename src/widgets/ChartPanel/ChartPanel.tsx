@@ -1,6 +1,4 @@
-// import { useContext } from 'react'
 import classNames from 'classnames/bind'
-// import { GameStatusContext } from '../../app/contexts'
 import { differenceInSeconds } from '../../shared/utils'
 
 import styles from './ChartPanel.module.scss'
