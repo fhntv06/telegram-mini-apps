@@ -1,21 +1,28 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 export const useModal = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [elementTarget, setElementTarget] = useState<HTMLElement | null>(null);
 
-  const openModalHandler = () => {
-    setIsOpen(true);
+  const openModalHandler = (event: React.MouseEvent<HTMLElement>) => {
+    setIsOpen(true)
+
+    console.log(event)
+
+    setElementTarget(event.currentTarget)
   };
 
   const closeModalHandler = () => {
-    setIsOpen(false);
+    setIsOpen(false)
+    setElementTarget(null)
   };
 
-  const toggleModalHandler = () => {
-    setIsOpen(!isOpen);
+  const toggleModalHandler = (event: React.MouseEvent<HTMLElement>) => {
+    setIsOpen(!isOpen)
+    setElementTarget(elementTarget ? null : event.currentTarget)
   };
 
   return {
-    isOpen, openModalHandler, closeModalHandler, toggleModalHandler
+    elementTarget, isOpen, openModalHandler, closeModalHandler, toggleModalHandler
   };
 };

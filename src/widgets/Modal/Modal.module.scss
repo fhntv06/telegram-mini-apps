@@ -1,6 +1,8 @@
 @import '../../shared/assets/styles/basics.scss';
 
 .modal {
+  z-index: 100;
+  display: none;
   position: absolute;
   top: 0;
   left: 0;
@@ -9,6 +11,10 @@
   padding: $offset8 0;
   background: #1C1C1EEB;
   backdrop-filter: blur(16px);
+
+  &.isOpen {
+    display: block;
+  }
 }
 .modal__header {
 	display: flex;
@@ -28,8 +34,10 @@
 .modal__button-select__mode,
 .modal__button-wallet {
   opacity: 0;
+  pointer-events: none;
 
   &.active {
     opacity: 1;
+    pointer-events: all;
   }
 }
