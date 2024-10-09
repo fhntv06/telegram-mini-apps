@@ -7,10 +7,12 @@ export type IconNames =
     | 'flag'
     | 'arrow-up'
     | 'arrow-down'
+    | 'arrow-right'
     | 'persons'
     | 'wallet'
     | 'arrow-refund'
     | 'cross'
+    | 'handshake'
 
     export type IconType =
     | 'small'
