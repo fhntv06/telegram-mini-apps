@@ -1,3 +1,4 @@
+import React from 'react'
 import { Button } from '../../shared'
 import classNames from 'classnames/bind'
 import styles from './ButtonBurger.module.scss'
@@ -5,13 +6,13 @@ import styles from './ButtonBurger.module.scss'
 const cx = classNames.bind(styles)
 
 interface Props {
-	isOpen: boolean,
-	onClick: () => void,
+	isActive?: boolean,
+	onClick?: React.Dispatch<React.SetStateAction<boolean>> | ((event: React.MouseEvent<HTMLElement>) => void)
 	className?: string
 }
 
 export const ButtonBurger = ({
-	isOpen = false,
+	isActive = false,
 	onClick,
 	className,
 }: Props) => {
@@ -20,7 +21,7 @@ export const ButtonBurger = ({
 		<Button
 			className={cx('button', className)}
 			type='gray'
-			iconLeftName={isOpen ? 'cross' : 'burger'}
+			iconLeftName={isActive ? 'cross' : 'burger'}
 			onClick={onClick}
 		></Button>
 	)
