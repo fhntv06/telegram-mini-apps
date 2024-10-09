@@ -1,4 +1,6 @@
 export { useBackendAuth } from './useBackendAuth'
 export { useChartData } from './useChartData'
+export { useGameSocket } from './useGameSocket'
 export { useModal } from './useModal'
-export { useTransaction } from './useTransaction.ts'
+export { useTransaction } from './useTransaction'
+export { usePriceHistory } from './usePriceHistory'
