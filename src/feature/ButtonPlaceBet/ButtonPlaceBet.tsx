@@ -30,12 +30,12 @@ export const ButtonPlaceBet = ({
 		} else if (!wallet) {
 			alert('Подключите кошелек!')
 		} else {
-			sendTransaction()
+			sendTransaction(type)
 			onClick()
 		}
 	}
 
-	const disabled = !bet
+	const disabled = !bet || !wallet
 	const textButton = txInProcess ? 'Loading ...' : `GO ${type}`
 
 	return (

@@ -1,5 +1,3 @@
-import { useSelector } from 'react-redux'
-import React from 'react'
 import { Button } from '../../shared'
 import classNames from 'classnames/bind'
 import styles from './ButtonWallet.module.scss'
@@ -11,17 +9,17 @@ const cx = classNames.bind(styles)
 
 interface Props {
 	isActive?: boolean
-	onClick?: React.Dispatch<React.SetStateAction<boolean>> | ((event: React.MouseEvent<HTMLElement>) => void)
+	onClick?: () => void,
+	balance: string | number,
 	className?: string,
 }
 
 export const ButtonWallet = ({
 	// isActive = false,
 	onClick,
+	balance = '0',
 	className
 }: Props) => {
-	const { tons } = useSelector((state: any) => state.user)
-
 	return (
 		<Button
 			className={cx('button', className)}
@@ -31,7 +29,7 @@ export const ButtonWallet = ({
 			sizeIcons='medium'
 			onClick={onClick}
 		>
-			{formatNumber(tons)}
+			{formatNumber(balance)}
 		</Button>
 	)
 }
