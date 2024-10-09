@@ -1,5 +1,5 @@
 export interface IUser {
-    wallet: string,
+    wallet: any,
     chain: string,
     publicKey: string,
     address: string,
@@ -7,5 +7,5 @@ export interface IUser {
     appVersion: string,
     maxProtocolVersion: string,
     platform: string,
-    tons: number,
+    balance: number,
 }

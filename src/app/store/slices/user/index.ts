@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { IUser } from './types.ts';
 
 const initialState: IUser = {
-    wallet: '',
+    wallet: {},
     chain: '',
     publicKey: '',
     address: '',
@@ -10,7 +10,7 @@ const initialState: IUser = {
     appVersion: '',
     maxProtocolVersion: '',
     platform: '',
-    tons: 0
+    balance: 0
 }
 
 const index = createSlice({
@@ -26,7 +26,7 @@ const index = createSlice({
             state.appVersion = action.payload.appVersion;
             state.maxProtocolVersion = action.payload.maxProtocolVersion;
             state.platform = action.payload.platform;
-            state.tons = action.payload.tons;
+            state.balance = action.payload.balance;
         },
     }
 });
