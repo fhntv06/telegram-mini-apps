@@ -8,8 +8,10 @@ import {
   useLocation,
   useNavigate,
 } from 'react-router-dom'
+import { Provider } from 'react-redux';
 
 import { routes } from '../../app/routes'
+import store from '../../app/store'
 
 function BackButtonManipulator() {
   const location = useLocation();
@@ -36,11 +38,13 @@ function BackButtonManipulator() {
 }
 
 export const App: FC = () => (
-  <BrowserRouter>
-    <BackButtonManipulator/>
-    <Routes>
-      {routes.map((route) => <Route key={route.path} {...route} />)}
-      <Route path='*' element={<Navigate to='/'/>}/>
-    </Routes>
-  </BrowserRouter>
+  <Provider store={store}>
+    <BrowserRouter>
+      <BackButtonManipulator/>
+      <Routes>
+        {routes.map((route) => <Route key={route.path} {...route} />)}
+        <Route path='*' element={<Navigate to='/'/>}/>
+      </Routes>
+    </BrowserRouter>
+  </Provider>
 );
