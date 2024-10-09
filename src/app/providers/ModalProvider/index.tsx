@@ -8,14 +8,12 @@ interface IProps {
 }
 
 export const ModalProvider = ({ children }: IProps) => {
-  const { elementTarget, isOpen, openModalHandler, closeModalHandler, toggleModalHandler } = useModal();
-
-  console.log('isOpen ', isOpen)
+  const { typeModal, isOpen, openModalHandler, closeModalHandler, toggleModalHandler } = useModal();
 
   return (
     <ModalContext.Provider value={{ isOpen, openModalHandler, closeModalHandler, toggleModalHandler }}>
       {children}
-      <Modal isOpen={isOpen} typeModal={elementTarget && elementTarget.dataset.typeModal} onClick={toggleModalHandler}>
+      <Modal isOpen={isOpen} typeModal={typeModal} onClick={closeModalHandler}>
         <p>Modal</p>
       </Modal>
     </ModalContext.Provider>

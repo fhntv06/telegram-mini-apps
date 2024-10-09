@@ -1,8 +1,8 @@
-import React from 'react'
+import { IModalTypes } from '../../../widgets/types'
 
 export interface ModalContextTypes {
   isOpen:  boolean,
-  openModalHandler: ((event: React. MouseEvent<HTMLElement>) => void),
+  openModalHandler: ((type: IModalTypes) => void),
   closeModalHandler: (() => void),
-  toggleModalHandler: ((event: React. MouseEvent<HTMLElement>) => void),
+  toggleModalHandler: ((type: IModalTypes) => void),
 }
