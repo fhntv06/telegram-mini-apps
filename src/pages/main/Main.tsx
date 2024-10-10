@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux';
 import classNames from 'classnames/bind'
 
@@ -9,25 +9,34 @@ import { ModalProvider } from '../../app/providers'
 import styles from './Main.module.scss'
 import { useGameSocket, usePriceHistory } from '../../hooks/'
 import { setGameStatus } from '../../app/store/slices/game'
+import { LoaderSpinner } from '../../shared'
 
 const cx = classNames.bind(styles)
 
 export const Main = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const dispatch = useDispatch();
   const data = useGameSocket()
   const priceHistory = usePriceHistory()
 
   useEffect(() => {
-    dispatch(setGameStatus({ ...data, priceHistory}))
+    if (data.btcPrice && priceHistory.length) {
+      setIsLoading(false)
+      dispatch(setGameStatus({ ...data, priceHistory}))
+    }
   }, [data]);
 
   return (
-    <ModalProvider>
-      <main className={cx('main')}>
-        <MainHeader />
-        <Chart />
-        <MainFooter />
-      </main>
-    </ModalProvider>
+    isLoading
+      ? <LoaderSpinner isLoading={isLoading} />
+      : (
+        <ModalProvider>
+          <main className={cx('main')}>
+            <MainHeader />
+            <Chart />
+            <MainFooter />
+          </main>
+        </ModalProvider>
+      )
   )
 }
