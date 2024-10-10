@@ -1,47 +1,32 @@
 import { useState, useEffect, useCallback } from 'react'
 import { ChartData } from 'chart.js'
 import { useSelector } from 'react-redux'
-
+import { numberLastPoint } from '../shared/constants'
 const maxChartPoints = 110
-const numberLastPoint = 89
+
 const offsetLastPoint = 11
 const arrayDataSplice = new Array(maxChartPoints - numberLastPoint - 1).fill(null)
 
 const createInitialData = (history: any) => ({
-  labels: history?.map(() => ''),
+  labels: history.map(() => ''),
   datasets: [
-    {
-      data: history?.map((el: any) => el),
-    },
+    { data: history.map((el: any) => el) },
   ],
 })
 
-export const useChartData = (
-  // priceHistory: any,
-  // gameStatus: any
-) => {
+export const useChartData = () => {
   const { btcPrice, priceHistory } = useSelector((state: any) => state.gameStatus)
 
-  const lastPrice = btcPrice // gameStatus.btcPrice;
-
-  const [chartData, setChartData] = useState<ChartData<'line'>>(
-    createInitialData(priceHistory)
-  );
+  const [chartData, setChartData] = useState<ChartData<'line'>>(createInitialData(priceHistory))
   const [lockValue, setLockValue] = useState<number | null>(null);
 
   useEffect(() => {
-    if (priceHistory) {
-      setChartData(createInitialData(priceHistory));
-    }
-  }, [priceHistory])
-
-  useEffect(() => {
-    if (lastPrice && chartData.datasets[0].data.length) {
-      setLockValue(lastPrice)
+    if (btcPrice && chartData.datasets[0].data.length) {
+      setLockValue(btcPrice)
     }
 
     updateData()
-  }, [lastPrice]);
+  }, [btcPrice]);
 
   const updateData = useCallback(() => {
     setChartData((prevData: any) => {
@@ -57,10 +42,10 @@ export const useChartData = (
 
       if (data.length > maxChartPoints - 1) data.shift()
 
-      if (lastPrice) data.splice(numberLastPoint, 0, lastPrice)
+      if (btcPrice) data.splice(numberLastPoint, 0, btcPrice)
 
       const changeColorSegments = (ctx: any) => {
-        return (ctx.p0.raw < lastPrice && ctx.p1.raw < lastPrice) ? '#FD2D39' : '#34D269';
+        return (ctx.p0.raw < btcPrice && ctx.p1.raw < btcPrice) ? '#FD2D39' : '#34D269';
       }
 
       return {
@@ -83,13 +68,13 @@ export const useChartData = (
         ],
       }
     })
-  }, [lastPrice]);
+  }, [btcPrice]);
 
   return {
     chartData,
     lockValue,
     updateData,
     maxChartPoints,
-    lastPrice
+    btcPrice
   }
 }
