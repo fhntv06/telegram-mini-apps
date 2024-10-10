@@ -1,0 +1,44 @@
+@import '../../../../shared/assets/styles/basics';
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  row-gap: $offset8;
+  padding: 0 $offset16;
+
+  button {
+    width: 100%;
+
+
+    p {
+      font-weight: 400;
+    }
+
+    @include border('medium')
+  }
+}
+.button__menu {
+  width: 100%;
+  justify-content: flex-start;
+
+  p {
+    font-weight: 400;
+  }
+  span:nth-child(2) {
+    margin-left: $offset12;
+  }
+  span:nth-child(3) {
+    margin-left: auto;
+  }
+}
+.button__social {
+  display: flex;
+  justify-content: space-between;
+  margin-top: $offset12;
+  column-gap: $offset8;
+
+  .button__social__item {
+    flex: 1;
+    max-width: 85px;
+  }
+}

@@ -1,0 +1,1 @@
+export { WalletModalContent } from './WalletModalContent'
