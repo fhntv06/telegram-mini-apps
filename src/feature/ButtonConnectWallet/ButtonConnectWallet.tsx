@@ -9,8 +9,8 @@ import {IconNames, IconType} from '../../shared/ui/Icon/types'
 const cx = classNames.bind(styles)
 
 interface Props {
-	iconRightName: IconNames,
-	sizeIcons: IconType,
+	iconRightName?: IconNames,
+	sizeIcons?: IconType,
 	className?: string,
 	onClick?: () => void
 }
@@ -29,18 +29,15 @@ export const ButtonConnectWallet = ({
 	}
 
   return (
-		<>
-			{/*<TonConnectButton className={cx('button', 'p')} />*/}
-			<Button
-				className={cx('button', 'p', className)}
-				iconLeftName="wallet"
-				iconRightName={iconRightName}
-				sizeIcons={sizeIcons}
-				type='gray'
-				onClick={handlerConnectWallet}
-			>
-				Connect wallet
-			</Button>
-		</>
+		<Button
+			className={cx('button', 'p', className)}
+			iconLeftName="wallet"
+			iconRightName={iconRightName}
+			sizeIcons={sizeIcons}
+			type='gray'
+			onClick={handlerConnectWallet}
+		>
+			Connect wallet
+		</Button>
 	)
 }
