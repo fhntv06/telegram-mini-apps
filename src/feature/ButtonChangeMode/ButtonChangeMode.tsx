@@ -23,8 +23,6 @@ export const ButtonChangeMode = ({
 			type='gray'
 			iconLeftName='bitcoin'
 			iconRightName={isActive ? 'arrow-up' : 'arrow-down'}
-			sizeIcons='small'
-			sizeRightIcon='small'
 			onClick={onClick}
 		>
 			{text}

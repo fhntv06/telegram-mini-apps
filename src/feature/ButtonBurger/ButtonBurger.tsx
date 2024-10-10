@@ -21,6 +21,7 @@ export const ButtonBurger = ({
 		<Button
 			className={cx('button', className)}
 			type='gray'
+			sizeIcons='big'
 			iconLeftName={isActive ? 'cross' : 'burger'}
 			onClick={onClick}
 		/>
