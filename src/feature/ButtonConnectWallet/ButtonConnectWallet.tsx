@@ -1,6 +1,9 @@
-import { Button } from '../../shared'
+import { useTonConnectUI } from '@tonconnect/ui-react';
 import classNames from 'classnames/bind'
+import { Button } from '../../shared'
+
 import styles from './ButtonConnectWallet.module.scss'
+
 import {IconNames, IconType} from '../../shared/ui/Icon/types'
 
 const cx = classNames.bind(styles)
@@ -18,8 +21,11 @@ export const ButtonConnectWallet = ({
 	className,
 	onClick,
 }: Props) => {
+	const [tonConnectUI] = useTonConnectUI()
+
 	const handlerConnectWallet = async () => {
 		if (onClick) onClick()
+		tonConnectUI.openModal()
 	}
 
   return (
