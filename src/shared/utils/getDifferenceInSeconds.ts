@@ -1,5 +1,5 @@
-// export const differenceInSeconds = (timestamp: number) => (timestamp - Date.now()) / 1000;
-export const differenceInSeconds = (sec: number) => {
-  const secStr = sec < 10 ? `0${sec}` : sec > 30 ? `+30` : `${sec}`;
-  return `${secStr}:00`;
-};
+export const differenceInSeconds = (timestamp: number) => {
+  const diffTime = -Math.floor((Date.now() - timestamp) / 1000)
+
+  return diffTime === 0 ? '00:00' : diffTime < 10 ? `00:0${diffTime}` : `00:${diffTime}`
+}
