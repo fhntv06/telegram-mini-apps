@@ -15,7 +15,7 @@
 }
 .select__header-left {
   display: flex;
-  column-gap: $offset4;
+  column-gap: $offset12;
 }
 .select__list {
   padding: $offset12;
@@ -30,8 +30,15 @@
   cursor: pointer;
   transition: background-color 0.3s ease;
 
+  &:first-child {
+    padding-top: 0;
+  }
   &:not(:last-child) {
     padding-bottom: $offset12;
     border-bottom: 1px solid $black;
   }
+}
+.select__header,
+.select__item {
+  text-transform: capitalize;
 }
