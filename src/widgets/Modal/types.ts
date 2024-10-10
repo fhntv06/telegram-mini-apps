@@ -1,1 +1,1 @@
-export type IModalTypes = 'burger' | 'select__mode' | 'wallet' | null | undefined | string
+export type IModalTypes = 'burger' | 'select__mode' | 'wallet'

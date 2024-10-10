@@ -1,6 +1,7 @@
 import React from 'react'
-
+import { useSelector } from 'react-redux'
 import classNames from 'classnames/bind'
+
 import styles from './Modal.module.scss'
 
 import { IModalTypes } from './types'
@@ -11,15 +12,22 @@ const cx = classNames.bind(styles)
 interface IProps {
   isOpen: boolean,
   typeModal: IModalTypes,
-  onClick: (event: React.MouseEvent<HTMLElement>) => void,
+  onClick: () => void,
   children: React.ReactNode
 }
 
-export const Modal = ({ isOpen = false, typeModal = 'burger', onClick, children }: IProps) => {
+export const Modal = ({
+  isOpen = false,
+  typeModal = 'burger',
+  onClick,
+  children
+}: IProps) => {
+  const { balance } = useSelector((state: any) => state.user);
+
   return (
     <div className={cx('modal', { isOpen: isOpen })}>
       <header className={cx('modal__header')}>
-        <div className={cx('modal__header__typeModal', typeModal)}>
+        <div className={cx('modal__header__buttons', typeModal)}>
           <ButtonChangeMode
             className={cx('modal__button-select__mode', { active: typeModal === 'select__mode' })}
             text='$BTC, 30s'
@@ -30,6 +38,7 @@ export const Modal = ({ isOpen = false, typeModal = 'burger', onClick, children 
             className={cx('modal__button-wallet', { active: typeModal === 'wallet' })}
             isActive={typeModal === 'wallet'}
             onClick={onClick}
+            balance={balance}
           />
         </div>
         <ButtonBurger
