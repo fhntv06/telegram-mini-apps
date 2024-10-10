@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import classNames from 'classnames/bind'
-import { TonConnectButton, useTonWallet } from '@tonconnect/ui-react'
+import { useTonWallet } from '@tonconnect/ui-react'
 
 import styles from './MainFooter.module.scss'
 
@@ -12,6 +12,7 @@ import { IRoundsType } from '../../shared/types'
 import { formatNumber, setStorage, formatIntTonNumber, getCorrectBalance } from '../../shared/utils'
 
 import { setUser } from '../../app/store/slices/user'
+import {ButtonConnectWallet} from "../../feature";
 
 const cx = classNames.bind(styles)
 
@@ -77,8 +78,7 @@ export const MainFooter = () => {
 			</main>
 			<footer className={cx('footer__bets')}>
 				{wallet && <PanelButtonsBet/>}
-				{/* hide button, because delete button execute error */}
-				<TonConnectButton className={cx('button', 'p', { hide: wallet })}/>
+				<ButtonConnectWallet sizeIcons='big' />
 			</footer>
 		</footer>
 	)
