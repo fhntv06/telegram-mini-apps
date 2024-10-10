@@ -7,7 +7,7 @@ import { useTransaction } from '../../hooks';
 const cx = classNames.bind(styles)
 
 interface Props {
-	onClick: () => void,
+	onClick?: () => void,
 	type?: 'up' | 'down'
 }
 
@@ -31,7 +31,7 @@ export const ButtonPlaceBet = ({
 			alert('Подключите кошелек!')
 		} else {
 			sendTransaction(type)
-			onClick()
+			if (onClick) onClick()
 		}
 	}
 
