@@ -1,12 +1,9 @@
 @import '/src/shared/assets/styles/basics.scss';
 
 .main {
-    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    min-width: 320px;
-    max-width: 576px;
     height: 100%;
     margin: 0 auto;
     padding: $offset8 0;

@@ -21,11 +21,16 @@
 	display: flex;
 	flex-direction: column;
 	align-content: center;
-	justify-content: center;
+	justify-content: space-between;
 	width: 100%;
-	height: 100%;
 	@include border('large');
 	border: 2px solid;
+	backdrop-filter: blur(16px);
+	overflow: hidden;
+
+	* {
+		z-index: 1;		
+	}
 
 	&:after {
 		content: '';
@@ -55,6 +60,8 @@
 	}
 }
 .panel__data {
+	z-index: 1;
+	position: relative;
 	display: flex;
 	flex-direction: column;
 	width: 100%;
@@ -71,10 +78,10 @@
 	column-gap: $offset4;
 
 	&.up {
-			color: $green100;
+		color: $green100;
 	}
 	&.down {
-			color: $red100;
+		color: $red100;
 	}
 }
 .panel__data__persons {
