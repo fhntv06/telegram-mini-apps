@@ -1,5 +1,5 @@
 export interface IUser {
-    wallet: any,
+    wallet: unknown,
     chain: string,
     publicKey: string,
     address: string,

@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { IUser } from './types.ts';
 
 const initialState: IUser = {
-    wallet: {},
+    wallet: null,
     chain: '',
     publicKey: '',
     address: '',
@@ -17,7 +17,7 @@ const index = createSlice({
     name: 'user',
     initialState,
     reducers: {
-        setUser(state, action) {
+        setUser: (state, action) => {
             state.wallet = action.payload.wallet;
             state.chain = action.payload.chain;
             state.publicKey = action.payload.publicKey;
@@ -28,8 +28,9 @@ const index = createSlice({
             state.platform = action.payload.platform;
             state.balance = action.payload.balance;
         },
+        removeUser: () => initialState
     }
 });
 
-export const { setUser } = index.actions;
+export const { setUser, removeUser } = index.actions;
 export const userReducer = index.reducer
