@@ -1,0 +1,37 @@
+@import '../../assets/styles/basics';
+
+.select p {
+  font-weight: 400;
+}
+.select__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: $offset12;
+  margin-bottom: 2px;
+  background-color: $dark-gray;
+  @include border('medium');
+  cursor: pointer;
+}
+.select__header-left {
+  display: flex;
+  column-gap: $offset4;
+}
+.select__list {
+  padding: $offset12;
+  background-color: $dark-gray;
+  @include border('medium');
+  list-style-type: none;
+}
+.select__item {
+  display: flex;
+  column-gap: $offset12;
+  padding-top: $offset12;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:not(:last-child) {
+    padding-bottom: $offset12;
+    border-bottom: 1px solid $black;
+  }
+}
