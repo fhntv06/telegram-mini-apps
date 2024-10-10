@@ -136,8 +136,6 @@
             </clipPath>
         </defs>
     </symbol>
-
-
     <symbol id="flag-usa" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g clip-path="url(#clip0_397_11659)">
             <g clip-path="url(#clip1_397_11659)">
@@ -156,7 +154,4 @@
             </clipPath>
         </defs>
     </symbol>
-
-
-
 </svg>
