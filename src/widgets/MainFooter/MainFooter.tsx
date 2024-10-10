@@ -9,7 +9,7 @@ import { getBalance } from '../../app/api'
 import { BetPanel, PanelButtonsBet } from '../../widgets'
 import { Icon, Rounds } from '../../shared'
 import { IRoundsType } from '../../shared/types'
-import { formatNumber, setStorage, formatIntTonNumber } from '../../shared/utils'
+import { formatNumber, setStorage, formatIntTonNumber, getCorrectBalance } from '../../shared/utils'
 
 import { setUser } from '../../app/store/slices/user'
 
@@ -61,7 +61,7 @@ export const MainFooter = () => {
 					<h2>ALL TIME WINS</h2>
 					<p>
 						<Icon name='ton' />
-						{formatNumber(allTimeWins)}
+						{getCorrectBalance(allTimeWins)}
 					</p>
 				</div>
 				<div>

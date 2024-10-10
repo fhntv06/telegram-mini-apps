@@ -24,11 +24,11 @@ export const Main = () => {
       setIsLoading(false)
       dispatch(setGameStatus({ ...data, priceHistory}))
     }
-  }, [data]);
+  }, [data, priceHistory])
 
   return (
     isLoading
-      ? <LoaderSpinner isLoading={isLoading} />
+      ? <LoaderSpinner />
       : (
         <ModalProvider>
           <main className={cx('main')}>
