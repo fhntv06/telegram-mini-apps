@@ -26,17 +26,16 @@ export const BetPanel = ({ data, type = 'up' }: Props) => {
 		console.log('Bet is ', type)
 	}
 
-	const completedRound = gamePhase === 3
+	const completedRound = true// gamePhase === 3
 	const { playersImg, betPool } = data;
 	const count = playersImg.length - 5
 
 	return (
-		<div className={cx('panel', {'panel__result': completedRound, [type]: completedRound})}>
-			<div className={cx('panel__data')}>
+		<div className={cx('panel', { 'panel__result': completedRound, [type]: completedRound })}>
 				{
 					completedRound ? (
 						<>
-							<p>{titleResultPanel[type]}</p>
+							<p className={cx('p-small')}>{titleResultPanel[type]}</p>
 							<h1 className={cx('panel__result__text')}>
 								<Icon name='ton' size='big'/>
 								{formatIntTonNumber(betPool)}
@@ -44,25 +43,26 @@ export const BetPanel = ({ data, type = 'up' }: Props) => {
 						</>
 					) : (
 						<>
-						<div className={cx('panel__data__players')}>
-							<p className={cx('players__total', 'p p-small')}>
-								<Icon name='persons'/>
-								{playersImg.length}
-							</p>
-							<p className={cx('players__total', 'p p-small', type)}>
-								<Icon name='ton'/>
-								{formatIntTonNumber(betPool)}
-							</p>
-						</div>
-						<div className={cx('panel__data__persons')}>
-							{playersImg.slice(0, 5).map((img: string, index) => <Person key={`${img}_${index}`} img={img} />)}
-							{count > 0 && <p className={cx('panel__persons__count')}><span>{`+${count}`}</span></p>}
-						</div>
-					</>
+							<div className={cx('panel__data')}>
+								<div className={cx('panel__data__players')}>
+									<p className={cx('players__total', 'p p-small')}>
+										<Icon name='persons'/>
+										{playersImg.length}
+									</p>
+									<p className={cx('players__total', 'p p-small', type)}>
+										<Icon name='ton'/>
+										{formatIntTonNumber(betPool)}
+									</p>
+								</div>
+								<div className={cx('panel__data__persons')}>
+									{playersImg.slice(0, 5).map((img: string, index) => <Person key={`${img}_${index}`} img={img} />)}
+									{count > 0 && <p className={cx('panel__persons__count')}><span>{`+${count}`}</span></p>}
+								</div>
+							</div>
+							{!completedRound && <ButtonPlaceBet type={type} onClick={handlerBet}/>}
+						</>
 				)
-			}
-			</div>
-			{!completedRound && <ButtonPlaceBet type={type} onClick={handlerBet}/>}
+		}
 		</div>
 	)
 }
