@@ -16,37 +16,59 @@ interface IProps extends PropsWithChildren {
 	iconRightName?: IconNames
 	disabled?: boolean,
 	onClick?: ((event: React.MouseEvent<HTMLElement>) => void)
-	active ? : boolean
+	active ? : boolean,
+	href?: string
 }
 
 const cx = classnames.bind(styles);
 
 export const Button = ({
 	sizeIcons = 'medium',
-	sizeLeftIcon = 'medium',
-	sizeRightIcon = 'medium',
+	sizeLeftIcon,
+	sizeRightIcon,
 	className,
 	type = 'gray' as ButtonTypes,
 	iconLeftName,
 	iconRightName,
 	disabled,
 	onClick,
+	href = '',
 	children
 }: IProps) => {
+	const content = (
+		<>
+			{iconLeftName && <Icon className={cx('icon__left')} name={iconLeftName} size={sizeLeftIcon || sizeIcons}/>}
+			{children && <span>{children}</span>}
+			{iconRightName && <Icon className={cx('icon__rigth')} name={iconRightName} size={sizeRightIcon || sizeIcons}/>}
+		</>
+	)
 	return (
-		<button
-			onClick={onClick}
-			className={
-				cx(
-					className,
-					type
-				)
-			}
-			disabled={disabled}
-		>
-			{iconLeftName && <Icon className={cx('icon__left')} name={iconLeftName} size={sizeLeftIcon || sizeIcons} />}
-			{children}
-			{iconRightName && <Icon className={cx('icon__rigth')} name={iconRightName} size={sizeRightIcon || sizeIcons} />}
-		</button>
+		href
+			? (
+				<a
+					href={href}
+				 	className={
+						 cx(
+							 className,
+							 type
+						 )
+					 }
+				>
+					{content}
+				</a>
+			) : (
+				<button
+					onClick={onClick}
+					className={
+						cx(
+							className,
+							type
+						)
+					}
+					disabled={disabled}
+				>
+					{content}
+				</button>
+			)
 	)
 }

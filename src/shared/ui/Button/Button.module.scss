@@ -1,5 +1,9 @@
 @import '../../assets/styles/basics.scss';
 
+a {
+	text-decoration: none;
+}
+
 .gray {
 	width: fit-content;
 	padding: $offset12;
@@ -25,8 +29,8 @@
 	justify-content: center;
 	@include border('medium');
 }
-.icon__left {
-	margin-right: $offset4;
+.icon__left + span {
+	margin-left: $offset4;
 }
 .icon__rigth {
 	margin-left: $offset8;

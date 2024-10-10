@@ -1,3 +1,4 @@
 export type ButtonTypes =
-    | 'gray'
-    | 'bet'
+  | 'gray'
+  | 'bet'
+  | 'white'
