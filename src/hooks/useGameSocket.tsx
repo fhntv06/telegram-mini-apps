@@ -9,16 +9,16 @@ export const useGameSocket = () => {
   const [data, setData] = useState<IGameStatus>(initialDataGameStatus);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      // Эмуляция получения нового сообщения каждую секунду
-      // Обновляем состояние с новыми данными
-      setData((prevData: IGameStatus) => ({
-        ...prevData, // Сохраняем все предыдущие данные
-        btcPrice: Math.floor(Math.random() * (62005 - 62000 + 1)) + 62000 // Обновляем поле priceHistory
-      }));
-    }, 500)
-
-    return () => clearInterval(interval)
+    // const interval = setInterval(() => {
+    //   // Эмуляция получения нового сообщения каждую секунду
+    //   // Обновляем состояние с новыми данными
+    //   setData((prevData: IGameStatus) => ({
+    //     ...prevData, // Сохраняем все предыдущие данные
+    //     btcPrice: (Math.random() * (62001 - 62000 + 1)) + 62000 // Обновляем поле priceHistory
+    //   }));
+    // }, 500)
+    //
+    // return () => clearInterval(interval)
 
     gameSocket.onopen = () => {
       console.log("game socket connected");
