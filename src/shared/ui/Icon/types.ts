@@ -13,6 +13,11 @@ export type IconNames =
     | 'arrow-refund'
     | 'cross'
     | 'handshake'
+    | 'support'
+    | 'x-twitter'
+    | 'telegram'
+    | 'facebook'
+    | 'instagram'
 
     export type IconType =
     | 'small'
