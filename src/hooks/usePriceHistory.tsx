@@ -1,15 +1,19 @@
 import { getPriceHistory } from '../app/api';
 import { useEffect, useState } from 'react';
-// import { initialDataPriceHistory } from '../shared/constants.ts'
+import { initialDataPriceHistory } from '../shared/constants.ts'
 
 export const usePriceHistory = () => {
-  const [priceHistory, setPriceHistory] = useState<number[]>([])//(initialDataPriceHistory);
+  const [priceHistory, setPriceHistory] = useState<number[]>([])
 
   useEffect(() => {
     console.log('Запрос getPriceHistory!')
     getPriceHistory()
       .then(async (res) => setPriceHistory(res.data))
-      .catch((error) => console.log('Error in getPriceHistory: ', error))
+      .catch((error) => {
+        console.log('Error in getPriceHistory: ', error)
+        setPriceHistory(initialDataPriceHistory)
+        console.log('Подключение тестовых данных за место истории цен! Проверьте соединение с сервером!')
+      })
   }, [])
 
 
