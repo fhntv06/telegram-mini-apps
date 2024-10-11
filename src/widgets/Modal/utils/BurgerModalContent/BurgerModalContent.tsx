@@ -31,10 +31,6 @@ const languages = [
 
 const walletData = [
   {
-    text: 'RTYG...F6vT',
-    icon: 'wallet'
-  },
-  {
     text: 'Top up',
     icon: 'plus',
     onClick: () => alert('Top up!'),
@@ -49,7 +45,14 @@ const walletData = [
 ]
 
 export const BurgerModalContent = () => {
-  const { wallet } = useSelector((state: any) => state.user)
+  const { wallet, address } = useSelector((state: any) => state.user)
+
+  walletData.unshift({
+    text: `${address.slice(0, 4)}...${address.slice(address.length - 4)}`,
+    icon: 'wallet',
+    blockSelect: false,
+    action: ''
+  })
 
   return (
     <div className={cx('wrapper')}>
