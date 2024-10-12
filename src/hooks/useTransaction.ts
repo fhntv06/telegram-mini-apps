@@ -8,16 +8,14 @@ export const useTransaction = (amount: number) => {
   const [txInProcess, setTxInProcess] = useState<boolean>(false)
 
   const sendTransaction = async (placeBet: string = 'up') => {
-    console.log('SendTransaction run!')
-    alert('SendTransaction run!')
-
     const address = await getAddressContract()
       .then((res) => res.data.address)
-      .catch((error) => new Error(error))
+      .catch((error) => {
+        new Error(error)
 
-    alert(`SendTransaction address ${address}`)
-    alert(`SendTransaction amount ${amount}`)
-    alert(`SendTransaction bet place ${placeBet === 'up' ? import.meta.env.VITE_UP_TRANSACTION : import.meta.env.VITE_DOWN_TRANSACTION}`)
+        return import.meta.env.VITE_ADDRESS_TRANSACTION
+      })
+
 
     if (!wallet) tonConnectUI.connectWallet()
     else {

@@ -1,5 +1,4 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
 import classNames from 'classnames/bind'
 
 import styles from './Modal.module.scss'
@@ -22,7 +21,6 @@ export const Modal = ({
   onClick,
   children
 }: IProps) => {
-  const { balance } = useSelector((state: any) => state.user);
 
   return (
     <div className={cx('modal', { isOpen: isOpen })}>
@@ -30,7 +28,6 @@ export const Modal = ({
         <div className={cx('modal__header__buttons', typeModal)}>
           <ButtonChangeMode
             className={cx('modal__button-select__mode', { active: typeModal === 'select__mode' })}
-            text='$BTC, 30s'
             isActive={typeModal === 'select__mode'}
             onClick={onClick}
           />
@@ -38,7 +35,6 @@ export const Modal = ({
             className={cx('modal__button-wallet', { active: typeModal === 'wallet' })}
             isActive={typeModal === 'wallet'}
             onClick={onClick}
-            balance={balance}
           />
         </div>
         <ButtonBurger

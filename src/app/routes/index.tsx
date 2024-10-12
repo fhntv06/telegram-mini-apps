@@ -10,10 +10,10 @@ interface Route {
 }
 
 export const routes: Route[] = [
-  { path: '/', Component: Main, title: 'Telegram mini apps' },
-  { path: '/ui', Component: UI, title: 'UI Page' },
+  { path: '/telegram-mini-apps', Component: Main, title: 'Telegram mini apps' },
+  { path: '/telegram-mini-apps/ui', Component: UI, title: 'UI Page' },
   {
-    path: '/ton-connect',
+    path: '/telegram-mini-apps/ton-connect',
     Component: TonConnect,
     title: 'TON Connect',
     icon: (

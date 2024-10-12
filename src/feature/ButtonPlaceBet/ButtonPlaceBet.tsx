@@ -1,8 +1,10 @@
 import { useSelector } from 'react-redux'
-import { Button } from '../../shared'
+import { useTonWallet } from '@tonconnect/ui-react'
 import classNames from 'classnames/bind'
-import styles from './ButtonPlaceBet.module.scss'
 import { useTransaction } from '../../hooks';
+import { Button } from '../../shared'
+
+import styles from './ButtonPlaceBet.module.scss'
 
 const cx = classNames.bind(styles)
 
@@ -15,21 +17,13 @@ export const ButtonPlaceBet = ({
 	onClick,
 	type = 'up',
 }: Props) => {
+  const wallet = useTonWallet()
+
 	const { bet } = useSelector((state: any) => state.bets)
-	const { wallet } = useSelector((state: any) => state.user)
 	const { txInProcess, sendTransaction } = useTransaction(bet)
 
 	const handlerPlaceBet = async () => {
-		console.log({
-			bet,
-			wallet
-		})
-
-		if (!bet) {
-			alert('Выберите ставку!')
-		} else if (!wallet) {
-			alert('Подключите кошелек!')
-		} else {
+		if (bet && wallet) {
 			sendTransaction(type)
 			if (onClick) onClick()
 		}

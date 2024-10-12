@@ -19,7 +19,7 @@ export const Select = ({ data, className = '', typeStyle = '' }: IProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [selectedOption, setSelectedOption] = useState<ISelectOption>(data[0]);
 
-  const handleDropdownToggle = () => setIsOpen(!isOpen)
+  const handleDropdownToggle = () => data.length > 1 && setIsOpen(!isOpen)
   const handleOptionSelect = (option: ISelectOption) => {
     if (!option.blockSelect) setSelectedOption(option)
     handleDropdownToggle()
@@ -37,7 +37,7 @@ export const Select = ({ data, className = '', typeStyle = '' }: IProps) => {
         </div>
         <Icon name={isOpen ? 'arrow-up' : 'arrow-down'} size='big' />
       </div>
-      {isOpen && (
+      {(data.length > 1 && isOpen) && (
         <ul className={cx('select__list')}>
           {data.map((item) => (
             item.text !== selectedOption.text && (

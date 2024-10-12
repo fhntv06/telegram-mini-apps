@@ -1,18 +1,16 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import classNames from 'classnames/bind'
-import { useTonWallet } from '@tonconnect/ui-react'
-
-import styles from './MainFooter.module.scss'
-
+import { useTonWallet, useTonAddress } from '@tonconnect/ui-react'
 import { getBalance } from '../../app/api'
+import { setUser } from '../../app/store/slices/user'
 import { BetPanel, PanelButtonsBet } from '../../widgets'
+import { ButtonConnectWallet } from "../../feature"
 import { Icon, Rounds } from '../../shared'
 import { IRoundsType } from '../../shared/types'
-import { formatNumber, setStorage, formatIntTonNumber, getCorrectBalance } from '../../shared/utils'
+import { formatNumber } from '../../shared/utils'
 
-import { setUser } from '../../app/store/slices/user'
-import {ButtonConnectWallet} from "../../feature";
+import styles from './MainFooter.module.scss'
 
 const cx = classNames.bind(styles)
 
@@ -26,29 +24,34 @@ export const MainFooter = () => {
 		allTimeWins
 	} = useSelector((state: any) => state.gameStatus)
   const wallet = useTonWallet()
+	const address = useTonAddress()
+
+	const setDataUser = async () => {
+		if (wallet) {
+			// TODO: Это убрать в кнопку подключения и перенести в отдельный хук
+			const balance = await getBalance(address)
+				.then(res => res.data.balance)
+				.then((balance) => balance)
+				.catch((error) => new Error(error))
+
+			dispatch(
+				setUser({
+					wallet,
+					chain: wallet.account.chain,
+					publicKey: wallet.account.publicKey,
+					address,
+					appName: wallet.device.appName,
+					appVersion: wallet.device.appVersion,
+					maxProtocolVersion: wallet.device.maxProtocolVersion,
+					platform: wallet.device.platform,
+					balance
+				})
+			)
+		}
+	}
 
 	useEffect(() => {
-		if (wallet) {
-			getBalance(wallet.account.address)
-				.then(res => res.data.balance)
-				.then((balance) => {
-					setStorage('address', wallet.account.address)
-					dispatch(
-						setUser({
-							wallet,
-							chain: wallet.account.chain,
-							publicKey: wallet.account.publicKey,
-							address: wallet.account.address,
-							appName: wallet.device.appName,
-							appVersion: wallet.device.appVersion,
-							maxProtocolVersion: wallet.device.maxProtocolVersion,
-							platform: wallet.device.platform,
-							balance: formatIntTonNumber(balance)
-						})
-					)
-				})
-				.catch((error) => new Error(error))
-		}
+		setDataUser()
 	}, [wallet])
 
 	return (
@@ -62,7 +65,7 @@ export const MainFooter = () => {
 					<h2>ALL TIME WINS</h2>
 					<p>
 						<Icon name='ton' size='big' />
-						{getCorrectBalance(allTimeWins)}
+						{formatNumber(allTimeWins)}
 					</p>
 				</div>
 				<div>
@@ -78,7 +81,7 @@ export const MainFooter = () => {
 			</main>
 			<footer className={cx('footer__bets')}>
 				{wallet && <PanelButtonsBet/>}
-				<ButtonConnectWallet sizeIcons='big' />
+				<ButtonConnectWallet className={cx({ 'hide': wallet })} sizeIcons='big' />
 			</footer>
 		</footer>
 	)

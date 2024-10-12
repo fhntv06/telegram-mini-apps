@@ -12,23 +12,23 @@ export const initialDataPriceHistory: number[] = ((min = 62000, max = 62001) => 
 export const initialDataGameStatus: IGameStatus = {
   upPoolData: {
 		playersImg: [
-			`/images/avatars/user_${Math.floor(Math.random() * (5 - 1 + 1) + 1)}.png`,
-			`/images/avatars/user_${Math.floor(Math.random() * (5 - 1 + 1) + 1)}.png`,
-			`/images/avatars/user_${Math.floor(Math.random() * (5 - 1 + 1) + 1)}.png`,
-			`/images/avatars/user_${Math.floor(Math.random() * (5 - 1 + 1) + 1)}.png`,
+			`/telegram-mini-apps/images/avatars/user_${Math.floor(Math.random() * (5 - 1 + 1) + 1)}.png`,
+			`/telegram-mini-apps/images/avatars/user_${Math.floor(Math.random() * (5 - 1 + 1) + 1)}.png`,
+			`/telegram-mini-apps/images/avatars/user_${Math.floor(Math.random() * (5 - 1 + 1) + 1)}.png`,
+			`/telegram-mini-apps/images/avatars/user_${Math.floor(Math.random() * (5 - 1 + 1) + 1)}.png`,
 		],
 		betPool: 25 * 10**9
 	},
 	downPoolData: {
 		playersImg: [
-			`/images/avatars/user_${Math.floor(Math.random() * (5 - 1 + 1) + 1)}.png`,
-			`/images/avatars/user_${Math.floor(Math.random() * (5 - 1 + 1) + 1)}.png`,
-			`/images/avatars/user_${Math.floor(Math.random() * (5 - 1 + 1) + 1)}.png`,
-			`/images/avatars/user_${Math.floor(Math.random() * (5 - 1 + 1) + 1)}.png`,
-			`/images/avatars/user_${Math.floor(Math.random() * (5 - 1 + 1) + 1)}.png`,
-			`/images/avatars/user_${Math.floor(Math.random() * (5 - 1 + 1) + 1)}.png`,
-			`/images/avatars/user_${Math.floor(Math.random() * (5 - 1 + 1) + 1)}.png`,
-			`/images/avatars/user_${Math.floor(Math.random() * (5 - 1 + 1) + 1)}.png`,
+			`/telegram-mini-apps/images/avatars/user_${Math.floor(Math.random() * (5 - 1 + 1) + 1)}.png`,
+			`/telegram-mini-apps/images/avatars/user_${Math.floor(Math.random() * (5 - 1 + 1) + 1)}.png`,
+			`/telegram-mini-apps/images/avatars/user_${Math.floor(Math.random() * (5 - 1 + 1) + 1)}.png`,
+			`/telegram-mini-apps/images/avatars/user_${Math.floor(Math.random() * (5 - 1 + 1) + 1)}.png`,
+			`/telegram-mini-apps/images/avatars/user_${Math.floor(Math.random() * (5 - 1 + 1) + 1)}.png`,
+			`/telegram-mini-apps/images/avatars/user_${Math.floor(Math.random() * (5 - 1 + 1) + 1)}.png`,
+			`/telegram-mini-apps/images/avatars/user_${Math.floor(Math.random() * (5 - 1 + 1) + 1)}.png`,
+			`/telegram-mini-apps/images/avatars/user_${Math.floor(Math.random() * (5 - 1 + 1) + 1)}.png`,
 		],
 		betPool: 15 * 10**9
 	},
@@ -50,7 +50,7 @@ export const initialDataGameStatus: IGameStatus = {
 export const arBets: number[] = [0.5, 1, 2, 5, 10]
 
 export interface ILang {
-	gameInProcess: string
+	gameInProcess: string[]
 	upWins: string
 	alias: string
 }
@@ -62,22 +62,34 @@ export interface ILanguage {
 }
 export const arLanguagesSite: ILanguage = {
 	english: {
-		gameInProcess: 'GAME IN PROCESS',
+		gameInProcess: [
+			'game in process',
+			'place a bet',
+			'mining process',
+			'start game',
+			'game end',
+		],
 		upWins: 'UP WINS',
 		alias: 'en'
 	},
 	france: {
-		gameInProcess: 'JEU EN COURS',
+		gameInProcess: [
+			'JEU EN COURS',
+		],
 		upWins: 'VICTOIRES EN HAUSSE',
 		alias: 'fr'
 	},
 	germany: {
-		gameInProcess: 'SPIEL IN BEARBEITUNG',
+		gameInProcess: [
+			'SPIEL IN BEARBEITUNG',
+		],
 		upWins: 'GEWINNE NACH OBEN',
 		alias: 'de'
 	},
 	russian: {
-		gameInProcess: 'ИГРА В ПРОЦЕССЕ',
+		gameInProcess: [
+			'ИГРА В ПРОЦЕССЕ',
+		],
 		upWins: 'ВВЕРХ ВЫИГРЫВАЕТ',
 		alias: 'ru'
 	},

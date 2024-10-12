@@ -7,16 +7,16 @@ const cx = classNames.bind(styles)
 interface Props {
 	isActive?: boolean,
 	onClick?: (() => void)
-	text: string,
 	className?: string
 }
 
 export const ButtonChangeMode = ({
 	isActive = false,
 	onClick,
-	text = '$BTC, 30s',
 	className,
 }: Props) => {
+	const textMode = '$BTC, 30s'
+
 	return (
 		<Button
 			className={cx('button', className)}
@@ -24,9 +24,8 @@ export const ButtonChangeMode = ({
 			iconLeftName='bitcoin'
 			iconRightName={isActive ? 'arrow-up' : 'arrow-down'}
 			onClick={onClick}
-			sizeIcons='big'
 		>
-			{text}
+			{textMode}
 		</Button>
 	)
 }

@@ -16,8 +16,8 @@ export const ModalProvider = ({ children }: IProps) => {
     <ModalContext.Provider value={{ isOpen, openModalHandler, closeModalHandler, toggleModalHandler }}>
       {children}
       <Modal isOpen={isOpen} typeModal={typeModal} onClick={closeModalHandler}>
-        {typeModal === 'select__mode' && <SelectModeModalContent />}
-        {typeModal === 'wallet' && <WalletModalContent />}
+        {typeModal === 'select__mode' && <SelectModeModalContent closeModalHandler={closeModalHandler} />}
+        {typeModal === 'wallet' && <WalletModalContent closeModalHandler={closeModalHandler} />}
         {typeModal === 'burger' && <BurgerModalContent />}
       </Modal>
     </ModalContext.Provider>
