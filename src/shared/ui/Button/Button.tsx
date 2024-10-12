@@ -23,9 +23,9 @@ interface IProps extends PropsWithChildren {
 const cx = classnames.bind(styles);
 
 export const Button = ({
-	sizeIcons = 'medium',
-	sizeLeftIcon,
-	sizeRightIcon,
+	sizeIcons,
+	sizeLeftIcon = 'medium',
+	sizeRightIcon = 'medium',
 	className,
 	type = 'gray' as ButtonTypes,
 	iconLeftName,
@@ -37,9 +37,9 @@ export const Button = ({
 }: IProps) => {
 	const content = (
 		<>
-			{iconLeftName && <Icon className={cx('icon__left')} name={iconLeftName} size={sizeLeftIcon || sizeIcons}/>}
+			{iconLeftName && <Icon className={cx('icon__left')} name={iconLeftName} size={sizeIcons || sizeLeftIcon}/>}
 			{children && <span>{children}</span>}
-			{iconRightName && <Icon className={cx('icon__rigth')} name={iconRightName} size={sizeRightIcon || sizeIcons}/>}
+			{iconRightName && <Icon className={cx('icon__rigth')} name={iconRightName} size={sizeIcons || sizeRightIcon}/>}
 		</>
 	)
 	return (

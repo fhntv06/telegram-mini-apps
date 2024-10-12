@@ -6,11 +6,13 @@ a {
 
 .gray {
 	width: fit-content;
-	padding: $offset12;
 	background-color: $dark-gray;
 	font-size: $p-small-size;
 	line-height: 16px;
 	font-weight: 400;
+}
+.gray, .light {
+	padding: $offset12;
 }
 .bet {
 	padding: $offset18;
@@ -22,8 +24,10 @@ a {
 		background-color: $red100;
 	}
 }
-
-.gray, .bet {
+.light {
+	background-color: $white-light;
+}
+.gray, .bet, .light {
 	display: flex;
 	align-items: center;
 	justify-content: center;
