@@ -15,6 +15,7 @@ export const showTooltip: Plugin<"line"> = {
     const heightTooltip = 24;
     const marginX = x + 5;
 
+    // container
     ctx.fillStyle = "#FFFFFF14";
     ctx.beginPath();
     ctx.roundRect(marginX, y - 8, widthTooltip, heightTooltip, 8);
@@ -26,7 +27,7 @@ export const showTooltip: Plugin<"line"> = {
     ctx.fillStyle = "white";
     ctx.textAlign = "center";
     ctx.fillText(
-      Number(options.label).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&.'),
+      Number(options.btcPrice).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&.'),
       marginX + widthTooltip / 2,
       y + 10
     );

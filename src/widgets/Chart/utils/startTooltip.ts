@@ -1,5 +1,10 @@
 import { type Plugin } from "chart.js";
 
+const imgFlag = new Image()
+const loadImgFlag = () => {
+  imgFlag.src = '/telegram-mini-apps/images/canvas/flag.svg'
+}
+
 export const startTooltip: Plugin<"line"> = {
   id: "startTooltip",
   afterDraw: (chart, _args, options) => {
@@ -9,8 +14,8 @@ export const startTooltip: Plugin<"line"> = {
       options.startPrice === undefined
     )
       return;
-    const { ctx } = chart;
-    ctx.save();
+    const { ctx } = chart
+    ctx.save()
 
     const dataset = chart.data.datasets[0].data;
 
@@ -21,54 +26,41 @@ export const startTooltip: Plugin<"line"> = {
       ...(dataset.slice(0, dataset.length - 21) as number[])
     );
 
-    const procent = (options.startPrice - minValue) / (maxValue - minValue);
-    const minValueY = chart.scales.y.getPixelForValue(minValue);
-    const maxValueY = chart.scales.y.getPixelForValue(maxValue);
+    const procent = (options.startPrice - minValue) / (maxValue - minValue)
+    const minValueY = chart.scales.y.getPixelForValue(minValue)
+    const maxValueY = chart.scales.y.getPixelForValue(maxValue)
 
-    let y = minValueY - procent * (minValueY - maxValueY);
+    let y = minValueY - procent * (minValueY - maxValueY)
     y = isNaN(y) ? 0 : y;
 
-    const widthTooltip = 110;
-    const heightTooltip = 30;
-    const marginX = 10;
+    const widthTooltip = 93
+    const widthFlag = 16
+    const heightTooltip = 24
+    const marginXScreen = 8
+    const marginXTolltip = 4
+    const marginX = marginXScreen + marginXTolltip
 
-    ctx.fillStyle = "rgba(0, 0, 0, 0.7)";
-    ctx.beginPath();
-    ctx.roundRect(marginX, y - 10, widthTooltip, heightTooltip, [8]);
-    ctx.fill();
-
-    ctx.restore();
-
-    ctx.fillStyle = "rgba(0, 0, 0, 0.7)";
-    ctx.beginPath();
-    ctx.moveTo(marginX + 15, y - 10);
-    ctx.lineTo(marginX + widthTooltip - 15, y - 10);
-    ctx.lineTo(marginX + widthTooltip - 25, y - 20);
-    ctx.lineTo(marginX + 25, y - 20);
-    ctx.closePath();
-    ctx.fill();
-
-    ctx.restore();
+    // container
+    ctx.fillStyle = "#FFFFFF14"
+    ctx.beginPath()
+    ctx.roundRect(marginXScreen, y - 12, widthTooltip, heightTooltip, 8)
+    ctx.fill()
+    ctx.restore()
 
     // text
-    const gradient = ctx.createLinearGradient(0, y - 15, 0, y);
-    gradient.addColorStop(0, "rgb(251, 226, 70)");
-    gradient.addColorStop(1, "rgb(225, 131, 17)");
-    ctx.fillStyle = gradient;
-    ctx.font = "8px Unbounded";
-    ctx.textAlign = "center";
-    ctx.fillText("START PRICE", marginX + widthTooltip / 2, y - 8);
-    ctx.restore();
-
-    // text
-    ctx.font = "12px Unbounded";
-    ctx.fillStyle = "white";
-    ctx.textAlign = "center";
+    ctx.font = "14px Inter"
+    ctx.fillStyle = "white"
+    ctx.textAlign = "center"
     ctx.fillText(
-      "$ " + new Intl.NumberFormat("en").format(options.startPrice),
-      marginX + widthTooltip / 2,
-      y + 10
-    );
-    ctx.restore();
+      Number(options.startPrice).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&.'),
+      marginX + marginXTolltip + widthTooltip / 2,
+      y + 4
+    )
+    ctx.restore()
+
+    if (!imgFlag.src) loadImgFlag()
+
+    // icon flag
+    ctx.drawImage(imgFlag, marginX, y - 8)
   },
-};
+}

@@ -24,6 +24,7 @@ import { ChartPanel } from '../'
 import classNames from 'classnames/bind'
 import styles from './Chart.module.scss'
 import { numberLastPoint } from '../../shared/constants'
+import { useSelector } from 'react-redux';
 
 const cx = classNames.bind(styles)
 
@@ -45,13 +46,14 @@ interface ILineChartProps {
 }
 
 const LineChart = ({ data, lockValue }: ILineChartProps) => {
+  const { startBtcPrice } = useSelector((state: any) => state.gameStatus)
 	const chartRef = useRef<any>(null);
 
   const options: any = getOptions(
     lockValue, // baseValue - center value
     data.datasets[0].data[numberLastPoint],
-    0
-  );
+    startBtcPrice
+  )
 
   return (
     <Line

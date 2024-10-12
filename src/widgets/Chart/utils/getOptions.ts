@@ -13,7 +13,7 @@ const colors = {
 
 export function getOptions(
   lockValue: number | null,
-  lastPrice: number | Point | null,
+  btcPrice: number | Point | null,
   startPrice: number
 ): ChartOptions {
   return {
@@ -24,13 +24,8 @@ export function getOptions(
       weight: 500,
     },
     plugins: {
-      showTooltip: {
-        label: lastPrice,
-        startPrice: startPrice,
-      },
-      startTooltip: {
-        startPrice: startPrice,
-      },
+      showTooltip: { btcPrice },
+      startTooltip: { startPrice },
       backgroundSplit: {
         lockValue: lockValue ? lockValue : 0,
         startPrice: startPrice,
