@@ -1,18 +1,34 @@
+@use 'sass:math';
+
+$sizeicon: 24px;
+
 .icon {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	
+
 	.small {
 		height: 12px;
 		width: 12px;
+
+		use {
+			transform: scale(math.div(12px, $sizeicon));
+		}
 	}
 	.medium {
 		height: 16px;
 		width: 16px;
+
+		use {
+			transform: scale(math.div(16px, $sizeicon));
+		}
 	}
 	.big {
 		height: 24px;
 		width: 24px;
+
+		use {
+			transform: scale(math.div(24px, $sizeicon));
+		}
 	}
 }

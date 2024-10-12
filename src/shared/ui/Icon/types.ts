@@ -18,6 +18,8 @@ export type IconNames =
     | 'telegram'
     | 'facebook'
     | 'instagram'
+    | 'tether'
+    | 'notcoin'
 
     export type IconType =
     | 'small'
