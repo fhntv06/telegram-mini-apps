@@ -9,10 +9,10 @@
 	padding: $offset12;
 	@include border('large');
 
-	&.up {
+	&.wins {
 		border-color: $green100;
 	}
-	&.down {
+	&.lose {
 		border-color: $red100;
 	}
 }
@@ -48,14 +48,15 @@
 	}
 	p,
 	h1 {
+		text-transform: uppercase;
 		text-align: center;
 	}
-	&.up h1,
-	&.up p {
+	&.wins h1,
+	&.wins p {
 		color: $green100;
 	}
-	&.down h1,
-	&.down p {
+	&.lose h1,
+	&.lose p {
 		color: $red100;
 	}
 }

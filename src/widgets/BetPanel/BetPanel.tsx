@@ -1,12 +1,13 @@
-// import { useContext } from 'react'
+import { useEffect, useState } from 'react'
+import {useSelector} from 'react-redux'
 import classNames from 'classnames/bind'
-import styles from './BetPanel.module.scss'
 import { ButtonPlaceBet } from '../../feature'
 import { IDataPanel } from './types'
 import { Icon, Person } from '../../shared'
 import { formatIntTonNumber } from '../../shared/utils'
-// import { GameStatusContext } from "../../app/contexts";
-import {useSelector} from "react-redux";
+
+import styles from './BetPanel.module.scss'
+
 const cx = classNames.bind(styles)
 
 interface Props {
@@ -14,23 +15,28 @@ interface Props {
 	type?: 'up' | 'down'
 }
 
-const titleResultPanel = {
-	up: 'UP WINNER',
-	down: 'DOWN WINNER'
-}
-
 export const BetPanel = ({ data, type = 'up' }: Props) => {
-	const { gamePhase } = useSelector((state: any) => state.gameStatus)
-	const completedRound = gamePhase === 3
+	const [groupWins, setGroupWins] = useState<string>(type)
+	const { gamePhase, startBtcPrice, btcPrice } = useSelector((state: any) => state.gameStatus)
 	const { playersImg, betPool } = data;
 	const count = playersImg.length - 5
+	const completedRound = gamePhase === 4
 
+	useEffect(() => {
+		if (gamePhase === 4) {
+			setGroupWins(startBtcPrice - btcPrice > 0 ? 'up' : 'down')
+		}
+	}, [gamePhase])
+	
+
+	// TODO: надписи вынести для перевода
+	// упростить использование условия type === groupWins
 	return (
-		<div className={cx('panel', { 'panel__result': completedRound, [type]: completedRound })}>
+		<div className={cx('panel', { 'panel__result': completedRound, 'wins': type === groupWins, 'lose': type !== groupWins })}>
 			{
 				completedRound ? (
 					<>
-						<p className={cx('p-small')}>{titleResultPanel[type]}</p>
+						<p className={cx('p-small')}>{`${type} ${type === groupWins ? 'winners' : 'losers'}`}</p>
 						<h1 className={cx('panel__result__text')}>
 							<Icon name='ton' size='big'/>
 							{formatIntTonNumber(betPool)}
