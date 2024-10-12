@@ -1,12 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { userReducer, betsReducer, gameStatusReducer, langReducer } from './slices'
+import { userReducer, betsReducer, gameStatusReducer, langReducer, modeReducer} from './slices'
 
 const store = configureStore({
     reducer: {
         user: userReducer,
         bets: betsReducer,
         gameStatus: gameStatusReducer,
-        language: langReducer
+        language: langReducer,
+        modeSettings: modeReducer
     }
 });
 
