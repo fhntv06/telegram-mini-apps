@@ -34,7 +34,6 @@ export const startTooltip: Plugin<"line"> = {
     y = isNaN(y) ? 0 : y;
 
     const widthTooltip = 93
-    const widthFlag = 16
     const heightTooltip = 24
     const marginXScreen = 8
     const marginXTolltip = 4

@@ -18,7 +18,7 @@ export const MainHeader = () => {
 		<header className={cx('header')}>
 			<div className={cx('header__button')}>
 				<ButtonChangeMode onClick={() => openModalHandler('select__mode')} />
-				{!wallet && <ButtonWallet onClick={() => openModalHandler('wallet')} />}
+				{wallet && <ButtonWallet onClick={() => openModalHandler('wallet')} />}
 			</div>
 			<ButtonBurger onClick={() => openModalHandler('burger')} />
 		</header>
