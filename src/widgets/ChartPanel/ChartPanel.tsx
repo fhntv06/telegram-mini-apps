@@ -9,6 +9,7 @@ const cx = classNames.bind(styles)
 
 export const ChartPanel = () => {
   const {
+    gamePhase,
     phaseTimeUntil,
     winPercent: { downPercent, upPercent }
   } = useSelector((state: any) => state.gameStatus)
@@ -23,7 +24,7 @@ export const ChartPanel = () => {
         <p className={cx('panel__bet-percent', 'up')}>{upPercent}%</p>
       </div>
       <div className={cx('panel__bet-type', 'time')}>
-        <h2>{gameInProcess}</h2>
+        <h2>{gameInProcess[gamePhase]}</h2>
         <h1>{differenceInSeconds(phaseTimeUntil)}</h1>
       </div>
       <div className={cx('panel__bet-type', 'down')}>
