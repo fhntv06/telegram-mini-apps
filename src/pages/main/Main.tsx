@@ -20,7 +20,7 @@ export const Main = () => {
   const priceHistory = usePriceHistory()
 
   useEffect(() => {
-    if (data.btcPrice && priceHistory.length) {
+    if (data && data.btcPrice && priceHistory.length) {
       setIsLoading(false)
       dispatch(setGameStatus({ ...data, priceHistory}))
     }

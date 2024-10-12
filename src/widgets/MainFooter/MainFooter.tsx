@@ -61,7 +61,7 @@ export const MainFooter = () => {
 				<div className={cx('footer__header__time-wins')}>
 					<h2>ALL TIME WINS</h2>
 					<p>
-						<Icon name='ton' />
+						<Icon name='ton' size='big' />
 						{getCorrectBalance(allTimeWins)}
 					</p>
 				</div>

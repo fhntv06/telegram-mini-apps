@@ -23,7 +23,7 @@ export const Icon = ({
 }: Props) => {
   return (
     <span className={cx('icon', className)}>
-      <svg role='image' className={cx(size)} width={ESize[size]} height={ESize[size]} viewBox={`0 0 ${ESize[size]} ${ESize[size]}`}>
+      <svg role='image' className={cx(size)} width={ESize[size]} height={ESize[size]}>
         <use xlinkHref={`/images/icons.svg#${name}`} />
       </svg>
     </span>

@@ -45,7 +45,7 @@ export const BetPanel = ({ data, type = 'up' }: Props) => {
 									{playersImg.length}
 								</p>
 								<p className={cx('players__total', 'p p-small', type)}>
-									<Icon name='ton'/>
+									<Icon name='ton' size='medium' />
 									{formatIntTonNumber(betPool)}
 								</p>
 							</div>
