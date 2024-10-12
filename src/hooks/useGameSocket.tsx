@@ -5,7 +5,7 @@ import { initialDataGameStatus } from '../shared/constants'
 const urlSocket = `${import.meta.env.VITE_SOCKET_PROTOCOL}://${import.meta.env.VITE_DOMAIN}:${import.meta.env.VITE_PORT}`
 
 export const useGameSocket = () => {
-  const [data, setData] = useState<IGameStatus>(initialDataGameStatus);
+  const [data, setData] = useState<IGameStatus>();
   const [error, setError] = useState<boolean>(false);
 
   useEffect(() => {
@@ -24,6 +24,7 @@ export const useGameSocket = () => {
       console.log("Код: " + event.code + " причина: " + event.reason)
 
       setError(true)
+      setData(initialDataGameStatus)
       console.log('Подключение тестовых данных за место сокета! Проверьте соединение с сервером!')
     };
     gameSocket.onmessage = (event) => {
