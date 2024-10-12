@@ -1,8 +1,9 @@
-import { useSelector } from 'react-redux'
+import { useTonWallet, useTonAddress } from '@tonconnect/ui-react'
 import { Button, Select } from '../../../../shared'
 import classNames from 'classnames/bind'
-import styles from './BurgerModalContent.module.scss'
 import { ButtonConnectWallet } from '../../../../feature'
+
+import styles from './BurgerModalContent.module.scss'
 
 const cx = classNames.bind(styles)
 
@@ -45,19 +46,20 @@ const walletData = [
 ]
 
 export const BurgerModalContent = () => {
-  const { wallet, address } = useSelector((state: any) => state.user)
-
-  walletData.unshift({
-    text: `${address.slice(0, 4)}...${address.slice(address.length - 4)}`,
-    icon: 'wallet',
-    blockSelect: false,
-    action: ''
-  })
+  const wallet = useTonWallet()
+	const address = useTonAddress()  
 
   return (
     <div className={cx('wrapper')}>
       {wallet
-        ? <Select data={walletData}/>
+        ? <Select data={[
+          {
+            text: `${address.slice(0, 4)}...${address.slice(address.length - 4)}`,
+            icon: 'wallet',
+            blockSelect: false,
+            action: ''
+          }, ...walletData
+        ]}/>
         : <ButtonConnectWallet className={cx('button__menu')} iconRightName='plus' sizeIcons='big' />
       }
       <Button

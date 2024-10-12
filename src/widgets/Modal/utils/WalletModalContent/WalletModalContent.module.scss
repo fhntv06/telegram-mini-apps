@@ -1,7 +1,46 @@
-.TonConnectButton {
-  width: 100% !important;
+@import '../../../../shared/assets/styles/basics';
 
-  button {
-    width: 100% !important;
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  padding: $offset12;
+  @include border('large');
+  background-color: $dark-light-gray;
+  backdrop-filter: blur(16px)
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: $offset24;
+
+  header {
+    margin-bottom: $offset12;
   }
+}
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2px;
+}
+.coins {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $offset8;
+}
+.coin {
+  flex-basis: calc((100% - $offset8 * 3) / 4);
+
+  &:hover,
+  &:active,
+  &:focus {
+    background-color: $black;
+  }
+}
+.button__confirm {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  background-color: $black;
 }
