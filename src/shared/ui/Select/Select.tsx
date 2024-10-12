@@ -9,9 +9,11 @@ const cx = classNames.bind(styles)
 
 interface IProps {
   data: ISelectOption[]
+  typeStyle?: string
+  className?: string
 }
 
-export const Select = ({ data }: IProps) => {
+export const Select = ({ data, className = '', typeStyle = '' }: IProps) => {
   const handlerDisconnect = useDisconnect()
   const handlerSetLang = useSetLang()
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -27,7 +29,7 @@ export const Select = ({ data }: IProps) => {
   }
 
   return (
-    <div className={cx('select')}>
+    <div className={cx('select', className, typeStyle)}>
       <div className={cx('select__header')} onClick={handleDropdownToggle}>
         <div className={cx('select__header-left')}>
           <Icon name={selectedOption.icon} size='big' />

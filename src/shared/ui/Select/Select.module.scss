@@ -1,7 +1,15 @@
 @import '../../assets/styles/basics';
 
-.select p {
-  font-weight: 400;
+.select {
+  p {
+    font-weight: 400;
+  }
+  &.light {
+    .select__header,
+    .select__list {
+      background-color: $white-light;
+    }
+  }
 }
 .select__header {
   display: flex;
