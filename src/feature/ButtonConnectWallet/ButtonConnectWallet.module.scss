@@ -5,5 +5,5 @@
   column-gap: $offset8;
   width: 100%;
   background-color: $coins-ton;
-  @include border('large');
+  @include border('medium');
 }
