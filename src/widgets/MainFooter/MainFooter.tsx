@@ -8,7 +8,7 @@ import { BetPanel, PanelButtonsBet } from '../../widgets'
 import { ButtonConnectWallet } from "../../feature"
 import { Icon, Rounds } from '../../shared'
 import { IRoundsType } from '../../shared/types'
-import { formatNumber } from '../../shared/utils'
+import { formatNumber, formatIntTonNumber } from '../../shared/utils'
 
 import styles from './MainFooter.module.scss'
 
@@ -65,7 +65,7 @@ export const MainFooter = () => {
 					<h2>ALL TIME WINS</h2>
 					<p>
 						<Icon name='ton' size='big' />
-						{formatNumber(allTimeWins)}
+						{formatIntTonNumber(allTimeWins)}
 					</p>
 				</div>
 				<div>
