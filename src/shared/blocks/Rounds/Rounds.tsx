@@ -15,7 +15,7 @@ const countTypeClasses = [
 		className: 'up'
 	},
 	{
-		nameIcon: 'arrow-refund',
+		nameIcon: 'refund',
 		className: 'refund'
 	}
 ]

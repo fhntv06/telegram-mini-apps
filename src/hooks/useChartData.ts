@@ -60,10 +60,6 @@ export const useChartData = () => {
                 return context.dataIndex === numberLastPoint ? 5 : 0;
               }
             },
-            segment: {
-              borderColor: changeColorSegments,
-            },
-            spanGaps: true,
           }
         ],
       }
