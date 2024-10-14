@@ -63,6 +63,7 @@ export interface ILanguage {
 export const arLanguagesSite: ILanguage = {
 	english: {
 		gameInProcess: [
+			'Game in progress',
 			'Accepting Bets',
 			'Mining Process',
 			'Round in Progress',
@@ -73,6 +74,7 @@ export const arLanguagesSite: ILanguage = {
 	},
 	france: {
 		gameInProcess: [
+			"Jeu en cours",
 			"Accepter des paris",
 			"Processus d'extraction",
 			"Cycle en cours",
@@ -83,6 +85,7 @@ export const arLanguagesSite: ILanguage = {
 	},
 	germany: {
 		gameInProcess: [
+			'Spiel läuft',
 			'Wetten annehmen',
 			'Bergbauprozess',
 			'Runde läuft',
@@ -93,6 +96,7 @@ export const arLanguagesSite: ILanguage = {
 	},
 	russian: {
 		gameInProcess: [
+			'Игра в процессе',
 			"Прием ставок",
 			"Процесс майнинга",
 			"Раунд продолжается",
