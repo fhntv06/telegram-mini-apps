@@ -29,8 +29,8 @@ export const useGameSocket = () => {
     };
     gameSocket.onmessage = (event) => {
       const {
-        up_pool_data: { players_img: players_img_down, betPool: betPoolUp },
-        down_pool_data: { players_img: players_img_up, betPool: betPoolDown },
+        up_pool_data: { players_img: players_img_up, betPool: betPoolUp },
+        down_pool_data: { players_img: players_img_down, betPool: betPoolDown },
         total_bets, btc_price, start_btc_price, game_phase, phase_time_until, game_result,
         last_3_games_res,
         live_players,
@@ -79,7 +79,7 @@ export const useGameSocket = () => {
         }));
 
       }, 500)
-      
+
       return () => clearInterval(interval)
     }
   }, [error]);
