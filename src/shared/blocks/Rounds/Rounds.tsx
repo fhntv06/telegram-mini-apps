@@ -7,12 +7,12 @@ const cx = classNames.bind(styles)
 
 const countTypeClasses = [
 	{
-		nameIcon: 'arrow-up',
-		className: 'up'
-	},
-	{
 		nameIcon: 'arrow-down',
 		className: 'down'
+	},
+	{
+		nameIcon: 'arrow-up',
+		className: 'up'
 	},
 	{
 		nameIcon: 'arrow-refund',
