@@ -1,6 +1,5 @@
 export type IconNames =
     | 'bitcoin'
-    | 'bitcoin-medium'
     | 'arrows-cyrcle'
     | 'ton'
     | 'burger'

@@ -25,7 +25,7 @@ export const ChartPanel = () => {
       </div>
       <div className={cx('panel__bet-type', 'time')}>
         <h2>{gameInProcess[gamePhase]}</h2>
-        <h1>{differenceInSeconds(phaseTimeUntil)}</h1>
+        {<h1>{gamePhase !== 2 || gamePhase !== 4 ? 'Please wait' : differenceInSeconds(phaseTimeUntil)}</h1>}
       </div>
       <div className={cx('panel__bet-type', 'down')}>
       <h2>DOWN WINS</h2>

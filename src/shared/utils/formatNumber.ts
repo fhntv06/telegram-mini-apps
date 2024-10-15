@@ -35,3 +35,9 @@ export const getCorrectBalance = (number: number | string) => (
     () => roundToThree(formatIntTonNumber(number))
   )
 )
+export const getCorrectBalanceWithFormatNumber = (number: number | string) => (
+  checker(
+    number,
+    () => formatNumber(roundToThree(formatIntTonNumber(number)))
+  )
+)

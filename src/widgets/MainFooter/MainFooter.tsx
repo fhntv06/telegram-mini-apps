@@ -8,9 +8,10 @@ import { BetPanel, PanelButtonsBet } from '../../widgets'
 import { ButtonConnectWallet } from "../../feature"
 import { Icon, Rounds } from '../../shared'
 import { IRoundsType } from '../../shared/types'
-import { formatNumber, formatIntTonNumber } from '../../shared/utils'
+import { formatNumber } from '../../shared/utils'
 
 import styles from './MainFooter.module.scss'
+import { getCorrectBalanceWithFormatNumber } from "../../shared/utils/formatNumber.ts";
 
 const cx = classNames.bind(styles)
 
@@ -65,7 +66,7 @@ export const MainFooter = () => {
 					<h2>ALL TIME WINS</h2>
 					<p>
 						<Icon name='ton' size='big' />
-						{formatIntTonNumber(allTimeWins)}
+						{getCorrectBalanceWithFormatNumber(allTimeWins)}
 					</p>
 				</div>
 				<div>

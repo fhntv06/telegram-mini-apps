@@ -44,10 +44,6 @@ export const useChartData = () => {
 
       if (btcPrice) data.splice(numberLastPoint, 0, btcPrice)
 
-      const changeColorSegments = (ctx: any) => {
-        return (ctx.p0.raw < btcPrice && ctx.p1.raw < btcPrice) ? '#FD2D39' : '#34D269';
-      }
-
       return {
         ...prevData,
         datasets: [

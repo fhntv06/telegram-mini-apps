@@ -1,0 +1,18 @@
+@import '../../assets/styles/basics';
+
+.wrapper {
+  position: fixed;
+  top: 100px;
+  left: 50%;
+  display: flex;
+  height: 72px;
+  width: 100%;
+  padding: $offset12 $offset16;
+  background-color: $black;
+  @include border('large');
+  transform: translate(-50%, -50%);
+
+  p {
+    font-weight: 400;
+  }
+}

@@ -29,7 +29,7 @@
 	overflow: hidden;
 
 	* {
-		z-index: 1;		
+		z-index: 1;
 	}
 
 	&:after {
@@ -94,12 +94,12 @@
 	z-index: 10;
 	position: absolute;
 	top: 0;
-	right: -2px;
+	right: 0px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	height: 32px;
-	width: 32px;
+	height: 30px;
+	width: 30px;
 	border-radius: 50%;
 
 	span {
@@ -110,7 +110,7 @@
 
 	&::before {
 		background-color: $dark-gray;
-		transform: translateX(-2px);
+		transform: translateX(-4px);
 	}
 	&::after {
 		background-color: $white;

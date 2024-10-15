@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react'
 import { IGameStatus } from '../app/providers/types'
-// import { initialDataGameStatus } from '../shared/constants'
+import { initialDataGameStatus } from '../shared/constants'
 
 const urlSocket = `${import.meta.env.VITE_SOCKET_PROTOCOL}://${import.meta.env.VITE_DOMAIN}:${import.meta.env.VITE_PORT}`
 
+const initTestData = false
+
 export const useGameSocket = () => {
-  const [data, setData] = useState<IGameStatus>()
+  const [data, setData] = useState<IGameStatus>(initialDataGameStatus)
   const [error, setError] = useState<boolean>(false)
 
   const handlerConnection = () => {
@@ -56,24 +58,29 @@ export const useGameSocket = () => {
     gameSocket.onerror = (event) => console.log("game socket error: ", event)
   }
 
-  useEffect(handlerConnection, [error])
+  const handlerTestConnection = () => {
+      const interval = setInterval(() => {
+        // Эмуляция получения нового сообщения каждую секунду
+        // Обновляем состояние с новыми данными
 
-  // test
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     // Эмуляция получения нового сообщения каждую секунду
-  //     // Обновляем состояние с новыми данными
-  //
-  //     // @ts-ignore
-  //     setData((prevData: IGameStatus) => ({
-  //       ...prevData, // Сохраняем все предыдущие данные
-  //       btcPrice: (Math.random() * (62001 - 62000 + 1)) + 62000 // Обновляем поле priceHistory
-  //     }));
-  //
-  //   }, 500)
-  //
-  //   return () => clearInterval(interval)
-  // }, [error]);
+        // @ts-ignore
+        setData((prevData: IGameStatus) => ({
+          ...prevData, // Сохраняем все предыдущие данные
+          btcPrice: (Math.random() * (62001 - 62000 + 1)) + 62000 // Обновляем поле priceHistory
+        }));
+
+      }, 500)
+
+      return () => clearInterval(interval)
+  }
+
+  useEffect(() => {
+    if (initTestData) {
+      handlerTestConnection()
+    } else {
+      handlerConnection()
+    }
+  }, [error])
 
   return data
 }

@@ -85,7 +85,7 @@ export const backgroundSplitPlugin: Plugin<"line"> = {
     gradientGreen.addColorStop(0.8, "rgba(52, 210, 105, 0.2)");
     gradientGreen.addColorStop(1, "rgba(52, 210, 105, 0.28)");
 
-    drawRoundedRect(chartArea.left, 0, chartArea.right, y / 2, gradientGreen);
+    drawRoundedRect(chartArea.left, 0, chartArea.right, y, gradientGreen);
 
     // нижний градент красного цвета
     const gradientRed = ctx.createLinearGradient(0, y + 1, 0, chartArea.bottom);

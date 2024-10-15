@@ -11,7 +11,7 @@ $widthPerson: 32px;
   @for $i from 2 through 6 {
     &:nth-child(#{$i}) {
       z-index: $i;
-      left: calc($i * ($widthPerson - 4px) - $widthPerson);
+      left: calc($i * ($widthPerson - 6px) - $widthPerson);
     }
   }
 
@@ -23,9 +23,9 @@ $widthPerson: 32px;
     width: 100%;
     height: 100%;
     background-color: $dark-gray;
-    transform: translateX(-2px);
+    transform: translateX(-1px);
     border-radius: 50%;
-  } 
+  }
 
   img {
     z-index: 1;
