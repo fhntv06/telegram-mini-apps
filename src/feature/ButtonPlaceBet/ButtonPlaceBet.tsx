@@ -23,10 +23,10 @@ export const ButtonPlaceBet = ({
 	const { txInProcess, sendTransaction } = useTransaction(bet)
 
 	const handlerPlaceBet = async () => {
-		if (bet && wallet) {
-			sendTransaction(type)
-			if (onClick) onClick()
-		}
+		navigator.vibrate(500)
+		
+		sendTransaction(type)
+		if (onClick) onClick()
 	}
 
 	const disabled = !bet || !wallet
