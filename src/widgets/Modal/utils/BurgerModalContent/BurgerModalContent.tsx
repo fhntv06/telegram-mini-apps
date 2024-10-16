@@ -67,7 +67,7 @@ export const BurgerModalContent = () => {
         iconLeftName='handshake'
         iconRightName='arrow-right'
         sizeIcons='big'
-        href='/'
+        href='https://t.me/CryptoPulseTest_bot'
       >
         <p>Affiliate</p>
       </Button>
@@ -76,7 +76,7 @@ export const BurgerModalContent = () => {
         iconLeftName='support'
         iconRightName='arrow-right'
         sizeIcons='big'
-        href='/'
+        href='https://t.me/pulse_social/7'
       >
         <p>Technical support</p>
       </Button>
