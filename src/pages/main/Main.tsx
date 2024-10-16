@@ -36,7 +36,7 @@ export const Main = () => {
             <Chart />
             <MainFooter />
           </main>
-          <Notification />
+          {/* <Notification /> */}
         </ModalProvider>
       )
   )
