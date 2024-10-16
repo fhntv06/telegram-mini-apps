@@ -11,10 +11,14 @@
 .container {
   display: flex;
   flex-direction: column;
-  margin-bottom: $offset24;
 
   header {
     margin-bottom: $offset12;
+  }
+  .content {
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
   }
 }
 header {

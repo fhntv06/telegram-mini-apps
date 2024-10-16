@@ -56,10 +56,10 @@ export const WalletModalContent = ({ closeModalHandler }: IProps) => {
           <p>TOP UP TO CONTINUE</p>
           <span onClick={closeModalHandler}><Icon name='cross' size='big' /></span>
         </header>
-        <Select data={marketData} typeStyle='light' />
-      </div>
-      <div className={cx('container')}>
-        <Select data={exchangeData} typeStyle='light' />
+        <div className={cx('content')}>
+          <Select data={marketData} typeStyle='light' />
+          <Select data={exchangeData} typeStyle='light' />
+        </div>
       </div>
     </div>
   )
