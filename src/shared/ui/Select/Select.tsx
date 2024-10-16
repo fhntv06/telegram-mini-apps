@@ -32,7 +32,7 @@ export const Select = ({ data, className = '', typeStyle = '' }: IProps) => {
     <div className={cx('select', className, typeStyle)}>
       <div className={cx('select__header')} onClick={handleDropdownToggle}>
         <div className={cx('select__header-left')}>
-          <Icon name={selectedOption.icon} size='big' />
+          <Icon className={cx('select__icon')} name={selectedOption.icon} size='big' />
           <p>{selectedOption.text}</p>
         </div>
         <Icon name={isOpen ? 'arrow-up' : 'arrow-down'} size='big' />
@@ -49,7 +49,7 @@ export const Select = ({ data, className = '', typeStyle = '' }: IProps) => {
                   handleOptionSelect(item)
                 }}
               >
-                <Icon name={item.icon} size='big'/>
+                <Icon className={cx('select__icon')} name={item.icon} size='big'/>
                 <p>{item.text}</p>
               </li>
             )
