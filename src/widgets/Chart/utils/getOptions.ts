@@ -71,7 +71,7 @@ export function getOptions(
         },
         ticks: { // значения по оси Y
           display: true,
-          stepSize: 2, // шаг значения по оси Y
+          stepSize: 10, // шаг значения по оси Y
           z: 1,
           align: "start",
           font: {
@@ -128,8 +128,6 @@ export function getOptions(
     animation: {
       duration: 0,
     },
-    interaction: {
-      intersect: false,
-    },
+
   };
 }
