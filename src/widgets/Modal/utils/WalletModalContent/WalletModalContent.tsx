@@ -14,22 +14,38 @@ const marketData = [
     icon: 'market',
   },
   {
-    text: 'Market 1',
-    icon: 'bitcoin',
-    onClick: () => alert('Select market 1!'),
+    text: 'Send',
+    icon: 'send-market',
+    blockSelect: true,
+    onClick: () => window.location.href = 'https://t.me/CryptoBot',
   },
   {
-    text: 'Market 2',
-    icon: 'bitcoin',
-    onClick: () => alert('Select market 2!'),
+    text: 'Wallet',
+    icon: 'wallet-market',
+    blockSelect: true,
+    onClick: () => window.location.href = 'https://t.me/wallet',
   }
 ]
 const exchangeData = [
   {
     text: 'Centralised exchange',
     icon: 'exchange',
-    onClick: () => alert('30 seconds'),
   },
+  {
+    text: 'mexc',
+    icon: 'mexc-market',
+    blockSelect: true,
+  },
+  {
+    text: 'binance',
+    icon: 'binance-market',
+    blockSelect: true,
+  },
+  {
+    text: 'bybit',
+    icon: 'bybit-market',
+    blockSelect: true,
+  }
 ]
 
 export const WalletModalContent = ({ closeModalHandler }: IProps) => {
