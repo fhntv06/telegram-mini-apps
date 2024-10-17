@@ -13,3 +13,7 @@ const headers: Headers = {
 export const get = async (handle: string) => (
   axios.get(`${url}${handle}`,{ headers: { ...headers }})
 )
+
+export const post = async (url: string, data = {}) => (
+  axios.post(url, data, { headers: { ...headers }})
+);
