@@ -14,6 +14,11 @@ export const showTooltip: Plugin<"line"> = {
     const widthTooltip = 83;
     const heightTooltip = 24;
     const marginX = x + 5;
+    let colorText = '#fff'
+
+    if (options.gamePhase === 3) {
+      colorText = options.btcPrice > options.startPrice ? '#28DA64' : '#FD2D39'
+    }
 
     // container
     ctx.fillStyle = "#FFFFFF14";
@@ -24,7 +29,8 @@ export const showTooltip: Plugin<"line"> = {
 
     // text
     ctx.font = "14px Inter";
-    ctx.fillStyle = "white";
+    ctx.fillStyle = colorText;
+
     ctx.textAlign = "center";
     ctx.fillText(
       Number(options.btcPrice).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&.'),

@@ -46,13 +46,14 @@ interface ILineChartProps {
 }
 
 const LineChart = ({ data, lockValue }: ILineChartProps) => {
-  const { startBtcPrice } = useSelector((state: any) => state.gameStatus)
+  const { startBtcPrice, gamePhase } = useSelector((state: any) => state.gameStatus)
 	const chartRef = useRef<any>(null);
 
   const options: any = getOptions(
     lockValue, // baseValue - center value
     data.datasets[0].data[numberLastPoint],
-    startBtcPrice
+    startBtcPrice,
+    gamePhase
   )
 
   return (

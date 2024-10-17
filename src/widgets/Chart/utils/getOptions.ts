@@ -14,7 +14,8 @@ const colors = {
 export function getOptions(
   lockValue: number | null,
   btcPrice: number | Point | null,
-  startPrice: number
+  startPrice: number,
+  gamePhase: number,
 ): ChartOptions {
   return {
     resizeDelay: 100,
@@ -24,7 +25,7 @@ export function getOptions(
       weight: 500,
     },
     plugins: {
-      showTooltip: { btcPrice },
+      showTooltip: { btcPrice, startPrice, gamePhase },
       startTooltip: { startPrice },
       backgroundSplit: {
         lockValue: lockValue ? lockValue : 0,
@@ -56,14 +57,14 @@ export function getOptions(
           const max = Math.max(
             ...(dataset.slice(0, dataset.length - 21) as number[])
           );
-          return max + 10;
+          return dataset[dataset.length - 21] + 25;
         },
         suggestedMin: (ctx: any) => {
           const dataset = ctx.chart.data.datasets[0].data;
           const min = Math.min(
             ...(dataset.slice(0, dataset.length - 21) as number[])
           );
-          return min - 10;
+          return dataset[dataset.length - 21] - 25;
         },
         grid: {
           display: true, // горизонтальные пунктирные линии
