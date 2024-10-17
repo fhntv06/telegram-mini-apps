@@ -10,7 +10,17 @@ const initialState: IUser = {
     appVersion: '',
     maxProtocolVersion: '',
     platform: '',
-    balance: 0
+    balance: 0,
+    id: 0,
+    username: '',
+    photo_url: '',
+    last_name: '',
+    first_name: '',
+    is_bot: '',
+    is_premium: '',
+    language_code: '',
+    allows_write_to_pm: '',
+    added_to_attachment_menu: '',
 }
 
 const index = createSlice({
@@ -28,9 +38,21 @@ const index = createSlice({
             state.platform = action.payload.platform;
             state.balance = action.payload.balance;
         },
+        setUserDataTelegram: (state, action) => {
+            state.id = action.payload.id
+            state.username = action.payload.username
+            state.photo_url = action.payload.photo_url
+            state.last_name = action.payload.last_name
+            state.first_name = action.payload.first_name
+            state.is_bot = action.payload.is_bot
+            state.is_premium = action.payload.is_premium
+            state.language_code = action.payload.language_code
+            state.allows_write_to_pm = action.payload.allows_write_to_pm
+            state.added_to_attachment_menu = action.payload.added_to_attachment_menu
+        },
         removeUser: () => initialState
     }
 });
 
-export const { setUser, removeUser } = index.actions;
+export const { setUser, setUserDataTelegram, removeUser } = index.actions;
 export const userReducer = index.reducer
