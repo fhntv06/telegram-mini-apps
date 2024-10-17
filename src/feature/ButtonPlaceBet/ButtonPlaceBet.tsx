@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux'
 import { useTonWallet } from '@tonconnect/ui-react'
 import classNames from 'classnames/bind'
-import { useTransaction } from '../../hooks';
+import { useTransaction, useGetPhrases } from '../../hooks';
 import { Button } from '../../shared'
 
 import styles from './ButtonPlaceBet.module.scss'
@@ -22,6 +22,9 @@ export const ButtonPlaceBet = ({
 	const { bet } = useSelector((state: any) => state.bets)
 	const { txInProcess, sendTransaction } = useTransaction(bet)
 
+  // @ts-ignore
+  const { goUp, goDown } = useGetPhrases(['goUp', 'goDown'])
+
 	const handlerPlaceBet = async () => {
 		navigator.vibrate(500)
 		
@@ -30,7 +33,7 @@ export const ButtonPlaceBet = ({
 	}
 
 	const disabled = !bet || !wallet
-	const textButton = txInProcess ? 'Loading ...' : `GO ${type}`
+	const textButton = txInProcess ? 'Loading ...' : type === 'up' ? goUp : goDown
 
 	return (
 		<Button

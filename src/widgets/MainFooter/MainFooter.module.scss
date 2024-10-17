@@ -7,6 +7,10 @@
 	row-gap: $offset12;
 	padding: $offset16;
 
+	h2 {
+		text-transform: uppercase;
+	}
+
 	&__header,
 	&__main,
 	&__footer {

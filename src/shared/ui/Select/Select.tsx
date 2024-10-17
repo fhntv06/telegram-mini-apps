@@ -1,9 +1,12 @@
 import { useState} from 'react'
+import { useSelector } from 'react-redux'
 import classNames from 'classnames/bind'
 import { Icon } from '../'
-import { ISelectOption } from './types'
-import styles from './Select.module.scss'
 import { useDisconnect, useSetLang } from '../../../hooks'
+import { ISelectOption } from './types'
+import { arLanguagesSite } from '../../constants'
+
+import styles from './Select.module.scss'
 
 const cx = classNames.bind(styles)
 
@@ -18,6 +21,8 @@ export const Select = ({ data, className = '', typeStyle = '' }: IProps) => {
   const handlerSetLang = useSetLang()
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [selectedOption, setSelectedOption] = useState<ISelectOption>(data[0]);
+  const { lang } = useSelector((state: any) => state.language)
+
 
   const handleDropdownToggle = () => data.length > 1 && setIsOpen(!isOpen)
   const handleOptionSelect = (option: ISelectOption) => {
@@ -33,7 +38,8 @@ export const Select = ({ data, className = '', typeStyle = '' }: IProps) => {
       <div className={cx('select__header')} onClick={handleDropdownToggle}>
         <div className={cx('select__header-left')}>
           <Icon className={cx('select__icon')} name={selectedOption.icon} size='big' />
-          <p>{selectedOption.text}</p>
+          {/* @ts-ignore */}
+          <p>{arLanguagesSite[lang][selectedOption.text]}</p>
         </div>
         <Icon name={isOpen ? 'arrow-up' : 'arrow-down'} size='big' />
       </div>
@@ -50,7 +56,8 @@ export const Select = ({ data, className = '', typeStyle = '' }: IProps) => {
                 }}
               >
                 <Icon className={cx('select__icon')} name={item.icon} size='big'/>
-                <p>{item.text}</p>
+                {/* @ts-ignore */}
+                <p>{arLanguagesSite[lang][item.text]}</p>
               </li>
             )
           ))}

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import {useSelector} from 'react-redux'
 import classNames from 'classnames/bind'
 import { ButtonPlaceBet } from '../../feature'
+import { useGetPhrases } from '../../hooks'
 import { IDataPanel } from './types'
 import { Icon, Person } from '../../shared'
 import { formatIntTonNumber } from '../../shared/utils'
@@ -22,9 +23,12 @@ export const BetPanel = ({ data, type = 'up' }: Props) => {
 	const count = playersImg.length - 5
 	const completedRound = gamePhase === 4
 
+	// @ts-ignore
+	const { up, down, winners, losers } = useGetPhrases(['up', 'down', 'winners', 'losers'])
+
 	useEffect(() => {
 		if (gamePhase === 4) {
-			setGroupWins(startBtcPrice - btcPrice > 0 ? 'up' : 'down')
+			setGroupWins(startBtcPrice - btcPrice > 0 ? up : down)
 		}
 	}, [gamePhase])
 	
@@ -36,7 +40,7 @@ export const BetPanel = ({ data, type = 'up' }: Props) => {
 			{
 				completedRound ? (
 					<>
-						<p className={cx('p-small')}>{`${type} ${type === groupWins ? 'winners' : 'losers'}`}</p>
+						<p className={cx('p-small')}>{`${type} ${type === groupWins ? winners : losers}`}</p>
 						<h1 className={cx('panel__result__text')}>
 							<Icon name='ton' size='big'/>
 							{formatIntTonNumber(betPool)}

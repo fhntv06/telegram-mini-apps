@@ -14,6 +14,10 @@
 
   header {
     margin-bottom: $offset12;
+
+    p {
+      text-transform: uppercase;
+    }
   }
   .content {
     display: flex;

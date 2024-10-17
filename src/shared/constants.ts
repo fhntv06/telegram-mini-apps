@@ -51,13 +51,46 @@ export const arBets: number[] = [0.5, 1, 2, 5, 10]
 
 export interface ILang {
 	gameInProcess: string[]
-	upWins: string
+	upWins:	string
+	downWins: string
+	selectMode:	string
+	assets: string
+	confirm: string
+	topUpToContinue: string
+	P2PMarket: string
+	centralisedExchange: string
+	topUp: string
+	disconnect: string
+	affiliate: string
+	technicalSupport: string
+	connectWallet: string
+	english: string
+	spanish: string
+	chinese: string
+	russian: string
+	livePlayers: string
+	last3rounds: string
+	allTimeWins: string
+	goUp: string
+	goDown: string
+	up: string
+	down: string
+	winners: string
+	losers: string
+	send: string
+	wallet: string
+	mexc: string
+	binance: string
+	bybit: string
+	'110sec': string
+	'5minutes': string
+	'30minutes': string
 	alias: string
 }
 export interface ILanguage {
 	english: ILang
-	france: ILang
-	germany: ILang
+	spanish: ILang
+	chinese: ILang
 	russian: ILang
 }
 export const arLanguagesSite: ILanguage = {
@@ -70,29 +103,128 @@ export const arLanguagesSite: ILanguage = {
 			'Asset Distribution',
 		],
 		upWins: 'UP WINS',
+		downWins: 'DOWN WINS',
+		selectMode: 'select mode',
+		assets: 'assets',
+		confirm: 'Confirm',
+		topUpToContinue: 'top up to continue',
+		P2PMarket: 'P2P Market',
+		centralisedExchange: 'centralised exchange',
+		topUp: 'Top Up',
+		disconnect: 'Disconnect',
+		affiliate: 'Affiliate',
+		technicalSupport: 'Technical Support',
+		connectWallet: 'Connect Wallet',
+		english: 'English',
+		spanish: 'Spanish',
+		chinese: 'Chinese',
+		russian: 'Russian',
+		livePlayers: 'live players',
+		last3rounds: 'last 3 rounds',
+		allTimeWins: 'all time wins',
+		goUp: 'go up',
+		goDown: 'go down',
+		up: 'up',
+		down: 'down',
+		winners: 'winners',
+		losers: 'losers',
+		send: 'send',
+		wallet: 'wallet',
+		mexc: 'mexc',
+		binance: 'binance',
+		bybit: 'bybit',
+		'110sec': '110sec',
+		'5minutes': '5minutes',
+		'30minutes': '30minutes',
 		alias: 'en'
 	},
-	france: {
+	spanish: {
 		gameInProcess: [
-			"Jeu en cours",
-			"Accepter des paris",
-			"Processus d'extraction",
-			"Cycle en cours",
-			"Répartition des actifs",
+			'Juego en progreso',
+			'Aceptar apuestas',
+			'Proceso de Minería',
+			'Ronda en curso',
+			'Distribución de activos',
 		],
-		upWins: 'VICTOIRES EN HAUSSE',
-		alias: 'fr'
+		upWins: 'arriba Gana',
+		downWins: 'abajo gana',
+		selectMode: 'seleccionar Modo',
+		assets: 'activos',
+		confirm: 'Confirmar',
+		topUpToContinue: 'recarga Para Continuar',
+		P2PMarket: 'Mercado P2P',
+		centralisedExchange: 'intercambio centralizado',
+		topUp: 'recarga',
+		disconnect: 'Desconectar',
+		affiliate: 'Afiliado',
+		technicalSupport: 'Soporte Técnico',
+		connectWallet: 'Conecte la Billetera',
+		english: 'Inglés',
+		spanish: 'Español',
+		chinese: 'Chino',
+		russian: 'Ruso',
+		livePlayers: 'jugadores en Vivo',
+		last3rounds: 'últimas 3 rondas',
+		allTimeWins: 'todos los Tiempos Ganan',
+		goUp: 'sube',
+		goDown: 'bajar',
+		up: 'subir',
+		down: 'abajo',
+		winners: 'ganadores',
+		losers: 'perdedores',
+		send: 'send',
+		wallet: 'wallet',
+		mexc: 'mexc',
+		binance: 'binance',
+		bybit: 'bybit',
+		'110sec': '110 segundos',
+		'5minutes': '5minutos',
+		'30minutes': '30 minutos',
+		alias: 'es'
 	},
-	germany: {
+	chinese: {
 		gameInProcess: [
-			'Spiel läuft',
-			'Wetten annehmen',
-			'Bergbauprozess',
-			'Runde läuft',
-			'Vermögensverteilung',
+			"游戏进行中",
+			"接受投注",
+			"采矿过程",
+			"进行中",
+			"资产分配",
 		],
-		upWins: 'GEWINNE NACH OBEN',
-		alias: 'de'
+		upWins: '胜出',
+		downWins: '胜利',
+		selectMode: '选择模式',
+		assets: '资产',
+		confirm: '确认',
+		topUpToContinue: '顶起来继续',
+		P2PMarket: 'P2P市场',
+		centralisedExchange: '集中交易所',
+		topUp: '补足；补足',
+		disconnect: '断开连接',
+		affiliate: '附属机构',
+		technicalSupport: '技术支持',
+		connectWallet: '连接钱包',
+		english: '英语',
+		spanish: '西班牙语',
+		chinese: '中文',
+		russian: '俄语',
+		livePlayers: '现场玩家',
+		last3rounds: '最后三轮',
+		allTimeWins: '所有时间都赢',
+		goUp: '上去',
+		goDown: '下去',
+		up: '向上',
+		down: '向下',
+		winners: '得奖者',
+		losers: '失败者',
+		send: 'send',
+		wallet: 'wallet',
+		mexc: 'mexc',
+		binance: 'binance',
+		bybit: 'bybit',
+		'110sec':'110秒',
+		'5minutes':'5分钟',
+		'30minutes':'30分钟',
+		alias: 'zh'
 	},
 	russian: {
 		gameInProcess: [
@@ -102,7 +234,40 @@ export const arLanguagesSite: ILanguage = {
 			"Раунд продолжается",
 			"Распределение активов",
 		],
-		upWins: 'ВВЕРХ ВЫИГРЫВАЕТ',
+		upWins: 'Вверх выигрывает',
+		downWins: 'Внизу выигрывает',
+		selectMode: 'Выберите режим',
+		assets: 'Активы',
+		confirm: 'Подтвердить',
+		topUpToContinue: 'Верхний вверх для продолжения',
+		P2PMarket: 'Р2Р Рынок',
+		centralisedExchange: 'Централизованная биржа',
+		topUp: 'Верхний вверх',
+		disconnect: 'Отключить',
+		affiliate: 'Партнер',
+		technicalSupport: 'Техническая поддержка',
+		connectWallet: 'Подключите кошелек',
+		english: 'Английский',
+		spanish: 'Испанский',
+		chinese: 'Китайский',
+		russian: 'Русский',
+		livePlayers: 'Играков онлайн',
+		last3rounds: 'Последние 3 раунда',
+		allTimeWins: 'Выйграно за все время',
+		goUp: 'Вверх',
+		goDown: 'Вниз',
+		up: 'Вверх',
+		down: 'Вниз',
+		winners: 'Победители',
+		losers: 'Проигравшие',
+		send: 'Send',
+		wallet: 'Wallet',
+		mexc: 'mexc',
+		binance: 'binance',
+		bybit: 'bybit',
+		'110sec':'110сек',
+		'5minutes':'5мин',
+		'30minutes':'30мин',
 		alias: 'ru'
 	},
 }

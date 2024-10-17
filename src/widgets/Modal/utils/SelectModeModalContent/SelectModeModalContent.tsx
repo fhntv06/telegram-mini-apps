@@ -1,12 +1,13 @@
-import { Button, Icon, Select } from '../../../../shared'
-import classNames from 'classnames/bind'
-import { IconNames } from '../../../../shared/types'
+import { useState } from 'react'
 import { useDispatch } from 'react-redux'
+import classNames from 'classnames/bind'
+import { IModeSettings } from '../../../../app/store/slices/mode/types'
+import { IconNames } from '../../../../shared/types'
 import { setModeSettings, initialState } from '../../../../app/store/slices/mode'
+import { useGetPhrases } from '../../../../hooks'
+import { Button, Icon, Select } from '../../../../shared'
 
 import styles from './SelectModeModalContent.module.scss'
-import { useState } from 'react'
-import { IModeSettings } from '../../../../app/store/slices/mode/types'
 
 const cx = classNames.bind(styles)
 
@@ -16,19 +17,16 @@ interface IProps {
 
 const modeData = [
   {
-    text: '30 seconds',
+    text: '110sec',
     icon: 'timer',
-    onClick: () => alert('30 seconds'),
   },
   {
-    text: '5 seconds',
+    text: '5minutes',
     icon: 'timer',
-    onClick: () => alert('5 seconds'),
   },
   {
-    text: '1 minutes',
+    text: '30minutes',
     icon: 'timer',
-    onClick: () => alert('1 minutes'),
   },
 ]
 
@@ -50,14 +48,17 @@ export const SelectModeModalContent = ({ closeModalHandler }: IProps) => {
   const [modeSettins, setStateModeSettings] = useState<IModeSettings>(initialState)
   const dispatch = useDispatch()
 
+  // @ts-ignore
+  const { selectMode, assets, confirm } = useGetPhrases(['selectMode', 'assets', 'confirm'])
+
   const confirmHandler = () => {
     dispatch(
       setModeSettings({
         coin: 'btc',
         time: {
-            text: '$BTC, 30s',
-            value: 30,
-            unit: 's'
+          text: '$BTC, 30s',
+          value: 30,
+          unit: 's'
         },
       })
     )
@@ -67,14 +68,14 @@ export const SelectModeModalContent = ({ closeModalHandler }: IProps) => {
     <div className={cx('wrapper')}>
       <div className={cx('container')}>
         <header>
-          <p>SELECT MODE</p>
+          <p>{selectMode}</p>
           <span onClick={closeModalHandler}><Icon name='cross' size='big' /></span>
         </header>
         <Select data={modeData} typeStyle='light' />
       </div>
       <div className={cx('container')}>
         <header>
-          <p>COINS</p>
+          <p>{assets}</p>
         </header>
         <div className={cx('coins')}>
           {coins.map((coin: IconNames) => (
@@ -89,7 +90,7 @@ export const SelectModeModalContent = ({ closeModalHandler }: IProps) => {
         </div>
       </div>
 
-      <Button className={cx('button__confirm')} onClick={confirmHandler}>Confirm</Button>
+      <Button className={cx('button__confirm')} onClick={confirmHandler} disabled>{confirm}</Button>
     </div>
   )
 }

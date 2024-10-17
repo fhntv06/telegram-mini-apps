@@ -2,6 +2,7 @@ import { useTonWallet, useTonAddress } from '@tonconnect/ui-react'
 import { Button, Select } from '../../../../shared'
 import classNames from 'classnames/bind'
 import { ButtonConnectWallet } from '../../../../feature'
+import { useGetPhrases } from '../../../../hooks'
 
 import styles from './BurgerModalContent.module.scss'
 
@@ -14,13 +15,13 @@ const languages = [
     action: 'set-lang'
   },
   {
-    text: 'france',
-    icon: 'flag-france',
+    text: 'spanish',
+    icon: 'flag-spanish',
     action: 'set-lang'
   },
   {
-    text: 'germany',
-    icon: 'flag-germany',
+    text: 'chinese',
+    icon: 'flag-china',
     action: 'set-lang'
   },
   {
@@ -32,13 +33,13 @@ const languages = [
 
 const walletData = [
   {
-    text: 'Top up',
+    text: 'topUp',
     icon: 'plus',
     onClick: () => alert('Top up!'),
     blockSelect: true,
   },
   {
-    text: 'Disconnect',
+    text: 'disconnect',
     icon: 'disconnect',
     blockSelect: true,
     action: 'disconnect'
@@ -48,6 +49,9 @@ const walletData = [
 export const BurgerModalContent = () => {
   const wallet = useTonWallet()
 	const address = useTonAddress()  
+
+  // @ts-ignore
+  const { affiliate, technicalSupport } = useGetPhrases(['affiliate', 'technicalSupport'])
 
   return (
     <div className={cx('wrapper')}>
@@ -69,7 +73,7 @@ export const BurgerModalContent = () => {
         sizeIcons='big'
         href='https://t.me/CryptoPulseTest_bot'
       >
-        <p>Affiliate</p>
+        <p>{affiliate}</p>
       </Button>
       <Button
         className={cx('button__menu')}
@@ -78,7 +82,7 @@ export const BurgerModalContent = () => {
         sizeIcons='big'
         href='https://t.me/pulse_social/7'
       >
-        <p>Technical support</p>
+        <p>{technicalSupport}</p>
       </Button>
       <Select data={languages} />
       <div className={cx('button__social')}>

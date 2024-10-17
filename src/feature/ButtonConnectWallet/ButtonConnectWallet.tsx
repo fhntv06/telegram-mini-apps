@@ -1,10 +1,10 @@
 import { useTonConnectUI } from '@tonconnect/ui-react';
 import classNames from 'classnames/bind'
 import { Button } from '../../shared'
+import { IconNames, IconType } from '../../shared/ui/Icon/types'
+import { useGetPhrases } from '../../hooks'
 
 import styles from './ButtonConnectWallet.module.scss'
-
-import {IconNames, IconType} from '../../shared/ui/Icon/types'
 
 const cx = classNames.bind(styles)
 
@@ -23,6 +23,9 @@ export const ButtonConnectWallet = ({
 }: Props) => {
 	const [tonConnectUI] = useTonConnectUI()
 
+  // @ts-ignore
+  const { connectWallet } = useGetPhrases(['connectWallet'])
+
 	const handlerConnectWallet = async () => {
 		if (onClick) onClick()
 		tonConnectUI.openModal()
@@ -37,7 +40,7 @@ export const ButtonConnectWallet = ({
 			type='gray'
 			onClick={handlerConnectWallet}
 		>
-			Connect wallet
+			{connectWallet}
 		</Button>
 	)
 }

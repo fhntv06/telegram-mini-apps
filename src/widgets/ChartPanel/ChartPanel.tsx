@@ -16,7 +16,7 @@ export const ChartPanel = () => {
   } = useSelector((state: any) => state.gameStatus)
 
   // @ts-ignore
-  const { gameInProcess, upWins } = useGetPhrases(['gameInProcess', 'upWins'])
+  const { gameInProcess, upWins, downWins } = useGetPhrases(['gameInProcess', 'upWins', 'downWins'])
 
   return (
     <div className={cx('panel')}>
@@ -36,7 +36,7 @@ export const ChartPanel = () => {
         }
       </div>
       <div className={cx('panel__bet-type', 'down')}>
-        <h2>DOWN WINS</h2>
+        <h2>{downWins}</h2>
         <p className={cx('panel__bet-percent', 'down')}>{downPercent}%</p>
       </div>
     </div>

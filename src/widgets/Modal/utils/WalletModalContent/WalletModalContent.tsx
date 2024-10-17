@@ -1,5 +1,8 @@
 import { Select, Icon } from '../../../../shared'
 import classNames from 'classnames/bind'
+
+import { useGetPhrases } from '../../../../hooks'
+
 import styles from './WalletModalContent.module.scss'
 
 interface IProps {
@@ -10,17 +13,17 @@ const cx = classNames.bind(styles)
 
 const marketData = [
   {
-    text: 'P2P Market',
+    text: 'P2PMarket',
     icon: 'market',
   },
   {
-    text: 'Send',
+    text: 'send',
     icon: 'send-market',
     blockSelect: true,
     onClick: () => window.location.href = 'https://t.me/CryptoBot',
   },
   {
-    text: 'Wallet',
+    text: 'wallet',
     icon: 'wallet-market',
     blockSelect: true,
     onClick: () => window.location.href = 'https://t.me/wallet',
@@ -28,7 +31,7 @@ const marketData = [
 ]
 const exchangeData = [
   {
-    text: 'Centralised exchange',
+    text: 'centralisedExchange',
     icon: 'exchange',
   },
   {
@@ -52,11 +55,14 @@ const exchangeData = [
 ]
 
 export const WalletModalContent = ({ closeModalHandler }: IProps) => {
+  // @ts-ignore
+  const { topUpToContinue } = useGetPhrases(['topUpToContinue'])
+
   return (
     <div className={cx('wrapper')}>
       <div className={cx('container')}>
         <header>
-          <p>TOP UP TO CONTINUE</p>
+          <p>{topUpToContinue}</p>
           <span onClick={closeModalHandler}><Icon name='cross' size='big' /></span>
         </header>
         <div className={cx('content')}>
