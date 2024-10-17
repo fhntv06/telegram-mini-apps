@@ -59,19 +59,19 @@ export const useGameSocket = () => {
   }
 
   const handlerTestConnection = () => {
-      const interval = setInterval(() => {
-        // Эмуляция получения нового сообщения каждую секунду
-        // Обновляем состояние с новыми данными
+    const interval = setInterval(() => {
+      // Эмуляция получения нового сообщения каждую секунду
+      // Обновляем состояние с новыми данными
 
-        // @ts-ignore
-        setData((prevData: IGameStatus) => ({
-          ...prevData, // Сохраняем все предыдущие данные
-          btcPrice: (Math.random() * (62001 - 62000 + 1)) + 62000 // Обновляем поле priceHistory
-        }));
+      // @ts-ignore
+      setData((prevData: IGameStatus) => ({
+        ...prevData, // Сохраняем все предыдущие данные
+        btcPrice: (Math.random() * (62001 - 62000 + 1)) + 62000 // Обновляем поле priceHistory
+      }));
 
-      }, 500)
+    }, 500)
 
-      return () => clearInterval(interval)
+    return () => clearInterval(interval)
   }
 
   useEffect(() => {

@@ -54,16 +54,16 @@ export function getOptions(
         position: 'right', // позиция градации значенийпо оси Y
         suggestedMax: (ctx: any) => {
           const dataset = ctx.chart.data.datasets[0].data;
-          const max = Math.max(
-            ...(dataset.slice(0, dataset.length - 21) as number[])
-          );
+          // const max = Math.max(
+          //   ...(dataset.slice(0, dataset.length - 21) as number[])
+          // );
           return dataset[dataset.length - 21] + 25;
         },
         suggestedMin: (ctx: any) => {
           const dataset = ctx.chart.data.datasets[0].data;
-          const min = Math.min(
-            ...(dataset.slice(0, dataset.length - 21) as number[])
-          );
+          // const min = Math.min(
+          //   ...(dataset.slice(0, dataset.length - 21) as number[])
+          // );
           return dataset[dataset.length - 21] - 25;
         },
         grid: {
