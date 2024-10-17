@@ -35,16 +35,19 @@ const exchangeData = [
     text: 'mexc',
     icon: 'mexc-market',
     blockSelect: true,
+    onClick: () => window.location.href = 'https://otc.mexc.com/ru-RU/fastTransaction',
   },
   {
     text: 'binance',
     icon: 'binance-market',
     blockSelect: true,
+    onClick: () => window.location.href = 'https://www.binance.com/en-GB/crypto/buy/USD/TON',
   },
   {
     text: 'bybit',
     icon: 'bybit-market',
     blockSelect: true,
+    onClick: () => window.location.href = 'https://www.bybit.com/fiat/trade/express/home',
   }
 ]
 

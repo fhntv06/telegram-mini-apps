@@ -9,7 +9,7 @@ import { ModalProvider } from '../../app/providers'
 import styles from './Main.module.scss'
 import { useGameSocket, usePriceHistory } from '../../hooks/'
 import { setGameStatus } from '../../app/store/slices/game'
-import { LoaderSpinner } from '../../shared'
+import { LoaderSpinner, Notification } from '../../shared'
 
 const cx = classNames.bind(styles)
 
