@@ -18,8 +18,8 @@ export const ButtonPlaceBet = ({
 	type = 'up',
 }: Props) => {
   const wallet = useTonWallet()
-
 	const { bet } = useSelector((state: any) => state.bets)
+	const { gamePhase } = useSelector((state: any) => state.gameStatus)
 	const { txInProcess, sendTransaction } = useTransaction(bet)
 
   // @ts-ignore
@@ -27,12 +27,12 @@ export const ButtonPlaceBet = ({
 
 	const handlerPlaceBet = async () => {
 		navigator.vibrate(500)
-		
+
 		sendTransaction(type)
 		if (onClick) onClick()
 	}
 
-	const disabled = !bet || !wallet
+	const disabled = !bet || !wallet && gamePhase === 1
 	const textButton = txInProcess ? 'Loading ...' : type === 'up' ? goUp : goDown
 
 	return (
