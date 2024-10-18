@@ -20,6 +20,13 @@ export type IconNames =
     | 'instagram'
     | 'tether'
     | 'notcoin'
+    | 'copy'
+    | 'etherium-coin'
+    | 'gold-coin'
+    | 'oil-coin'
+    | 'solana-coin'
+    | 'nasdaq-coin'
+    | 'sp500-coin'
 
     export type IconType =
     | 'small'
