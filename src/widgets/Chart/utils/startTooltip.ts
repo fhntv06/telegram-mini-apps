@@ -40,7 +40,7 @@ export const startTooltip: Plugin<"line"> = {
     const marginX = marginXScreen + marginXTolltip
 
     // container
-    ctx.fillStyle = "#FFFFFF14"
+    ctx.fillStyle = "#1C1C1E94"
     ctx.beginPath()
     ctx.roundRect(marginXScreen, y - 12, widthTooltip, heightTooltip, 8)
     ctx.fill()

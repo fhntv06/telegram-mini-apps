@@ -21,7 +21,7 @@ export const showTooltip: Plugin<"line"> = {
     }
 
     // container
-    ctx.fillStyle = "#FFFFFF14";
+    ctx.fillStyle = "#1C1C1E94";
     ctx.beginPath();
     ctx.roundRect(marginX, y - 8, widthTooltip, heightTooltip, 8);
     ctx.fill();

@@ -81,17 +81,17 @@ export const backgroundSplitPlugin: Plugin<"line"> = {
     const gradientGreen = ctx.createLinearGradient(0, 0, 0, isNaN(y) ? 0 : y - 1);
     gradientGreen.addColorStop(0, "rgba(52, 210, 105, 0)");
     gradientGreen.addColorStop(0.2, "rgba(52, 210, 105, 0.1)");
-    gradientGreen.addColorStop(0.5, "rgba(52, 210, 105, 0.15)");
-    gradientGreen.addColorStop(0.8, "rgba(52, 210, 105, 0.2)");
-    gradientGreen.addColorStop(1, "rgba(52, 210, 105, 0.28)");
+    gradientGreen.addColorStop(0.3, "rgba(52, 210, 105, 0.15)");
+    gradientGreen.addColorStop(0.5, "rgba(52, 210, 105, 0.3)");
+    gradientGreen.addColorStop(1, "rgba(52, 210, 105, 0.4)");
 
     drawRoundedRect(chartArea.left, 0, chartArea.right, y, gradientGreen);
 
     // нижний градент красного цвета
     const gradientRed = ctx.createLinearGradient(0, y + 1, 0, chartArea.bottom);
-    gradientRed.addColorStop(0, "rgba(253, 45, 57, 0.28)");
-    gradientRed.addColorStop(0.2, "rgba(253, 45, 57, 0.2)");
-    gradientRed.addColorStop(0.5, "rgba(253, 45, 57, 0.15)");
+    gradientRed.addColorStop(0, "rgba(253, 45, 57, 0.4)");
+    gradientRed.addColorStop(0.4, "rgba(253, 45, 57, 0.3)");
+    gradientRed.addColorStop(0.6, "rgba(253, 45, 57, 0.15)");
     gradientRed.addColorStop(0.8, "rgba(253, 45, 57, 0.1)");
     gradientRed.addColorStop(1, "rgba(253, 45, 57, 0)");
 
