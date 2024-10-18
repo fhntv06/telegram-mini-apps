@@ -1,0 +1,1 @@
+export { WinsOrLoseContent } from './WinsOrLoseContent'

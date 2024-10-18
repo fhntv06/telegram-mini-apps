@@ -1,0 +1,25 @@
+@import '../../../../shared/assets/styles/basics';
+
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+
+  &.right {
+    text-align: right;
+  }
+  &.wins {
+    color: $green100;
+  }
+  &.lose {
+    color: $red100;
+  }
+  h2 {
+    text-transform: uppercase;
+    color: $gray;
+  }
+}

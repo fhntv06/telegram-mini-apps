@@ -2,7 +2,7 @@ import { IModalTypes } from '../../../widgets/types'
 
 export interface ModalContextTypes {
   isOpen:  boolean,
-  openModalHandler: ((type: IModalTypes) => void),
-  closeModalHandler: (() => void),
-  toggleModalHandler: ((type: IModalTypes) => void),
+  openHandler: ((type: IModalTypes) => void),
+  closeHandler: (() => void),
+  toggleHandler: ((type: IModalTypes) => void),
 }

@@ -6,7 +6,10 @@ import classNames from 'classnames/bind'
 import { postReferral } from '../../app/api'
 import { MainHeader, MainFooter, Chart } from '../../widgets'
 
-import { ModalProvider } from '../../app/providers'
+import { ModalProvider, NotificationProvider } from '../../app/providers'
+
+import Lottie from 'react-lottie'
+import animationData from '../../shared/assets/animation/win.json'
 
 import styles from './Main.module.scss'
 
@@ -55,7 +58,7 @@ export const Main = () => {
     const hash = window.location.hash.slice(1)
     // alert(hash)
     const params = new URLSearchParams(hash)
-    
+
     // alert(JSON.stringify(params))
     // alert(params.get('tgWebAppStartParam'))
 
@@ -67,17 +70,38 @@ export const Main = () => {
   }, [])
   // postEvent('web_app_set_background_color', { color: '#1C1C1E' })
 
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: animationData,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice"
+    }
+  }
+
   return (
     isLoading
       ? <LoaderSpinner />
       : (
         <ModalProvider>
+          <NotificationProvider>
           <main className={cx('main')}>
             <MainHeader />
             <Chart />
             <MainFooter />
           </main>
-          {/* <Notification /> */}
+          {/*<Lottie*/}
+          {/*  style={{*/}
+          {/*    zIndex: 100,*/}
+          {/*    position: 'absolute',*/}
+          {/*    top: 0,*/}
+          {/*    left: 0,*/}
+          {/*    width: '100%',*/}
+          {/*    height: '100%',*/}
+          {/*  }}*/}
+          {/*  options={defaultOptions}*/}
+          {/*/>*/}
+          </ NotificationProvider>
         </ModalProvider>
       )
   )

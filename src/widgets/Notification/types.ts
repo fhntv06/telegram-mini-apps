@@ -1,0 +1,1 @@
+export type INotificationTypes = 'warning' | 'wins' | 'lose'
