@@ -3,13 +3,21 @@
 a {
 	text-decoration: none;
 }
-
 .gray {
 	width: fit-content;
 	background-color: $dark-gray;
 	font-size: $p-small-size;
 	line-height: 16px;
 	font-weight: 400;
+
+	&.active {
+		background-color: $black;
+	}
+	&:hover,
+	&:active,
+	&:focus {
+		background-color: $black;
+	}
 }
 .gray, .light {
 	padding: $offset12;

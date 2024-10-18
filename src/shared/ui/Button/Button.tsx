@@ -16,13 +16,14 @@ interface IProps extends PropsWithChildren {
 	iconRightName?: IconNames
 	disabled?: boolean,
 	onClick?: ((event: React.MouseEvent<HTMLElement>) => void)
-	active ? : boolean,
+	active? : boolean,
 	href?: string
 }
 
 const cx = classnames.bind(styles);
 
 export const Button = ({
+	active = false,
 	sizeIcons,
 	sizeLeftIcon = 'medium',
 	sizeRightIcon = 'medium',
@@ -38,37 +39,14 @@ export const Button = ({
 	const content = (
 		<>
 			{iconLeftName && <Icon className={cx('icon__left')} name={iconLeftName} size={sizeIcons || sizeLeftIcon}/>}
-			{children && <span>{children}</span>}
+			{(children && iconLeftName && iconRightName) ? <span>{children}</span> : children}
 			{iconRightName && <Icon className={cx('icon__rigth')} name={iconRightName} size={sizeIcons || sizeRightIcon}/>}
 		</>
 	)
+	const classNames = cx(className, type, { active: active })
 	return (
 		href
-			? (
-				<a
-					href={href}
-				 	className={
-						 cx(
-							 className,
-							 type
-						 )
-					 }
-				>
-					{content}
-				</a>
-			) : (
-				<button
-					onClick={onClick}
-					className={
-						cx(
-							className,
-							type
-						)
-					}
-					disabled={disabled}
-				>
-					{content}
-				</button>
-			)
+			? <a href={href} className={classNames}>{content}</a>
+			: <button  className={classNames} disabled={disabled} onClick={onClick}>{content}</button>
 	)
 }
