@@ -39,10 +39,23 @@
 }
 .select__item {
   display: flex;
+  align-items: center;
   column-gap: $offset12;
   padding-top: $offset12;
   cursor: pointer;
   transition: background-color 0.3s ease;
+
+  &__right-text {
+    margin-left: auto;
+  }
+
+  &.disabled {
+    filter: brightness(0.8);
+
+    p {
+      color: $light-gray;
+    }
+  }
 
   &:active,
   &:focus {

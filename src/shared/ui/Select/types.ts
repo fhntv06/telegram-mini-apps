@@ -4,4 +4,6 @@ export interface ISelectOption {
   action?: string
   blockSelect?: boolean
   onClick?: () => void
+  disabled?: boolean
+  rightText?: string
 }
