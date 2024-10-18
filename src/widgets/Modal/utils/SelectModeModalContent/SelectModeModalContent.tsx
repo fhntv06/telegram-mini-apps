@@ -18,29 +18,70 @@ interface IProps {
 const modeData = [
   {
     text: '110sec',
+    rightText: 'commingSoon',
     icon: 'timer',
   },
   {
     text: '5minutes',
+    rightText: 'commingSoon',
     icon: 'timer',
+    disabled: true
   },
   {
     text: '30minutes',
+    rightText: 'commingSoon',
     icon: 'timer',
+    disabled: true
   },
 ]
 
-const coins: IconNames[] = [
-  'bitcoin',
-  'bitcoin',
-  'notcoin',
-  'ton',
-  'tether', 
-  'ton',
-  'tether',
-  'notcoin',
-  'bitcoin',
-  'bitcoin'
+interface ICoins {
+  icon: IconNames,
+  choose: boolean,
+  disabled: boolean,
+}
+
+const coins: ICoins[] = [
+  {
+    icon: 'bitcoin',
+    choose: true,
+    disabled: false,
+  },
+  {
+    icon: 'ton',
+    choose: false,
+    disabled: true,
+  },
+  {
+    icon: 'etherium-coin',
+    choose: false,
+    disabled: true,
+  },
+  {
+    icon: 'solana-coin',
+    choose: false,
+    disabled: true,
+  },
+  {
+    icon: 'oil-coin',
+    choose: false,
+    disabled: true,
+  },
+  {
+    icon: 'gold-coin',
+    choose: false,
+    disabled: true,
+  },
+  {
+    icon: 'nasdaq-coin',
+    choose: false,
+    disabled: true,
+  },
+  {
+    icon: 'sp500-coin',
+    choose: false,
+    disabled: true,
+  },
 ]
 
 export const SelectModeModalContent = ({ closeModalHandler }: IProps) => {
@@ -64,7 +105,7 @@ export const SelectModeModalContent = ({ closeModalHandler }: IProps) => {
     )
     closeModalHandler()
   }
-  return (  
+  return (
     <div className={cx('wrapper')}>
       <div className={cx('container')}>
         <header>
@@ -78,14 +119,17 @@ export const SelectModeModalContent = ({ closeModalHandler }: IProps) => {
           <p>{assets}</p>
         </header>
         <div className={cx('coins')}>
-          {coins.map((coin: IconNames) => (
+          {coins.map((coin: ICoins) => (
             <Button
-              className={cx('coin')}
-              iconLeftName={coin}
-              sizeLeftIcon='big'
+              key={coin.icon}
+              className={cx('coin', { active: coin.choose, 'mask--disabled': coin.disabled })}
               type='light'
+              disabled={coin.disabled}
               // onClick={() => setStateModeSettings(coin)}
-            />
+            >
+              <Icon name={coin.icon} size='big' />
+              {coin.disabled && <p className={cx('p-x-small')}>COMING SOON</p>}
+            </Button>
           ))}
         </div>
       </div>

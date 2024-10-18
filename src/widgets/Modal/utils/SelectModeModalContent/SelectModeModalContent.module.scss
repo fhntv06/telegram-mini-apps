@@ -33,12 +33,21 @@ header {
   gap: $offset8;
 }
 .coin {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  row-gap: $offset4;
   flex-basis: calc((100% - $offset8 * 3) / 4);
+  overflow: hidden;
 
-  &:hover,
-  &:active,
-  &:focus {
+  p {
+    color: $light-gray;
+  }
+  &.active {
     background-color: $black;
+  }
+  &.mask--disabled {
+    filter: brightness(.8);
   }
 }
 .button__confirm {

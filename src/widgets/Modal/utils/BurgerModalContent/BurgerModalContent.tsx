@@ -48,7 +48,7 @@ const walletData = [
 
 export const BurgerModalContent = () => {
   const wallet = useTonWallet()
-	const address = useTonAddress()  
+	const address = useTonAddress()
 
   // @ts-ignore
   const { affiliate, technicalSupport } = useGetPhrases(['affiliate', 'technicalSupport'])

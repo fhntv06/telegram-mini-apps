@@ -1,9 +1,12 @@
-import { Select, Icon } from '../../../../shared'
+import { useState } from 'react'
+import { motion } from 'framer-motion'
+import { Select, Icon, Button } from '../../../../shared'
 import classNames from 'classnames/bind'
 
 import { useGetPhrases } from '../../../../hooks'
 
 import styles from './WalletModalContent.module.scss'
+import {useTonAddress} from "@tonconnect/ui-react";
 
 interface IProps {
   closeModalHandler: () => void
@@ -55,19 +58,61 @@ const exchangeData = [
 ]
 
 export const WalletModalContent = ({ closeModalHandler }: IProps) => {
+  const [isCopied, setIsCopied] = useState<boolean>(false);
+  const address = useTonAddress()
+
+  const handlerCopyAddress = () => {
+    navigator.clipboard
+      .writeText(address)
+      .then(() => {
+        setIsCopied(true);
+        const timer = setTimeout(() => {
+          setIsCopied(false)
+          clearTimeout(timer)
+        }, 3000);
+      })
+      .catch((error) => {
+        console.error("Error copying address to clipboard:", error);
+      });
+  };
+
   // @ts-ignore
-  const { topUpToContinue } = useGetPhrases(['topUpToContinue'])
+  const { topUpToContinue, yourWallet, copied } = useGetPhrases(['topUpToContinue', 'yourWallet', 'copied'])
 
   return (
     <div className={cx('wrapper')}>
       <div className={cx('container')}>
         <header>
           <p>{topUpToContinue}</p>
-          <span onClick={closeModalHandler}><Icon name='cross' size='big' /></span>
+          <span onClick={closeModalHandler}><Icon name='cross' size='big'/></span>
         </header>
         <div className={cx('content')}>
-          <Select data={marketData} typeStyle='light' />
-          <Select data={exchangeData} typeStyle='light' />
+          <Select data={marketData} typeStyle='light'/>
+          <Select data={exchangeData} typeStyle='light'/>
+        </div>
+      </div>
+      <div className={cx('container')}>
+        <header>
+          <p>{yourWallet}</p>
+        </header>
+        <div className={cx('content')}>
+          <Button
+            className={cx('button__address')}
+            iconLeftName='wallet'
+            iconRightName='copy'
+            sizeIcons='big'
+            type='light'
+            onClick={handlerCopyAddress}
+          >
+            <motion.h2
+              className={cx('copy_text')}
+              initial={{ opacity: 0 }}
+              animate={isCopied ? { opacity: 1 } : { opacity: 0 }}
+            >
+              {copied}
+            </motion.h2>
+            {`${address.slice(0, 4)}...${address.slice(address.length - 4)}`}
+          </Button>
         </div>
       </div>
     </div>
