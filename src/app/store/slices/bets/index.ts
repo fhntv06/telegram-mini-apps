@@ -12,7 +12,7 @@ const index = createSlice({
             state.bet = action.payload.bet;
         }
     }
-});
+})
 
 export const { setBet } = index.actions;
 export const betsReducer = index.reducer;
