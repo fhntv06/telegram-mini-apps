@@ -19,7 +19,10 @@ export const useGameSocket = () => {
       console.log("Код: " + event.code + " причина: " + event.reason)
       console.log('Переподключение к сокету!')
 
-      setError((prev) => !prev)
+      const timer = setTimeout(() => {
+        setError((prev) => !prev)
+        clearTimeout(timer)
+      }, 2000)
     }
     gameSocket.onmessage = (event) => {
       const {

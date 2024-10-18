@@ -1,3 +1,4 @@
+export { useAnimation } from './useAnimation'
 export { useBackendAuth } from './useBackendAuth'
 export { useChartData } from './useChartData'
 export { useDisconnect } from './useDisconnect'

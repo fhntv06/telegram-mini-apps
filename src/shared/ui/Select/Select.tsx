@@ -2,7 +2,7 @@ import { useState} from 'react'
 import { useSelector } from 'react-redux'
 import classNames from 'classnames/bind'
 import { Icon } from '../'
-import {useDisconnect, useGetPhrases, useSetLang} from '../../../hooks'
+import {useDisconnect, useSetLang} from '../../../hooks'
 import { ISelectOption } from './types'
 import { arLanguagesSite } from '../../constants'
 

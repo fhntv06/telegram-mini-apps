@@ -10,14 +10,14 @@ interface IProps {
 }
 
 export const ModalProvider = ({ children }: IProps) => {
-  const { typeModal, isOpen, openModalHandler, closeModalHandler, toggleModalHandler } = useModal();
+  const { typeModal, isOpen, openHandler, closeHandler, toggleHandler } = useModal();
 
   return (
-    <ModalContext.Provider value={{ isOpen, openModalHandler, closeModalHandler, toggleModalHandler }}>
+    <ModalContext.Provider value={{ isOpen, openHandler, closeHandler, toggleHandler }}>
       {children}
-      <Modal isOpen={isOpen} typeModal={typeModal} onClick={closeModalHandler}>
-        {typeModal === 'select__mode' && <SelectModeModalContent closeModalHandler={closeModalHandler} />}
-        {typeModal === 'wallet' && <WalletModalContent closeModalHandler={closeModalHandler} />}
+      <Modal isOpen={isOpen} typeModal={typeModal} onClick={closeHandler}>
+        {typeModal === 'select__mode' && <SelectModeModalContent closeModalHandler={closeHandler} />}
+        {typeModal === 'wallet' && <WalletModalContent closeModalHandler={closeHandler} />}
         {typeModal === 'burger' && <BurgerModalContent />}
       </Modal>
     </ModalContext.Provider>
