@@ -57,6 +57,8 @@ export interface ILang {
 	assets: string
 	confirm: string
 	topUpToContinue: string
+	yourWallet: string
+	copied: string
 	P2PMarket: string
 	centralisedExchange: string
 	topUp: string
@@ -85,6 +87,7 @@ export interface ILang {
 	'110sec': string
 	'5minutes': string
 	'30minutes': string
+	commingSoon: string
 	alias: string
 }
 export interface ILanguage {
@@ -98,7 +101,7 @@ export const arLanguagesSite: ILanguage = {
 		gameInProcess: [
 			'Game in progress',
 			'Accepting Bets',
-			'Mining Process',
+			'consolidating bets',
 			'Round in Progress',
 			'Asset Distribution',
 		],
@@ -108,6 +111,8 @@ export const arLanguagesSite: ILanguage = {
 		assets: 'assets',
 		confirm: 'Confirm',
 		topUpToContinue: 'top up to continue',
+		yourWallet: 'your wallet',
+		copied: 'copied',
 		P2PMarket: 'P2P Market',
 		centralisedExchange: 'centralised exchange',
 		topUp: 'Top Up',
@@ -136,13 +141,14 @@ export const arLanguagesSite: ILanguage = {
 		'110sec': '110sec',
 		'5minutes': '5minutes',
 		'30minutes': '30minutes',
+		commingSoon: 'COMMING SOON',
 		alias: 'en'
 	},
 	spanish: {
 		gameInProcess: [
 			'Juego en progreso',
 			'Aceptar apuestas',
-			'Proceso de Minería',
+			'consolidar apuestas',
 			'Ronda en curso',
 			'Distribución de activos',
 		],
@@ -152,6 +158,8 @@ export const arLanguagesSite: ILanguage = {
 		assets: 'activos',
 		confirm: 'Confirmar',
 		topUpToContinue: 'recarga Para Continuar',
+		yourWallet: 'tu billetera',
+		copied: 'copiada',
 		P2PMarket: 'Mercado P2P',
 		centralisedExchange: 'intercambio centralizado',
 		topUp: 'recarga',
@@ -180,13 +188,14 @@ export const arLanguagesSite: ILanguage = {
 		'110sec': '110 segundos',
 		'5minutes': '5minutos',
 		'30minutes': '30 minutos',
+		commingSoon: 'MUY PRONTO',
 		alias: 'es'
 	},
 	chinese: {
 		gameInProcess: [
 			"游戏进行中",
 			"接受投注",
-			"采矿过程",
+			"合并赌注",
 			"进行中",
 			"资产分配",
 		],
@@ -196,6 +205,8 @@ export const arLanguagesSite: ILanguage = {
 		assets: '资产',
 		confirm: '确认',
 		topUpToContinue: '顶起来继续',
+		yourWallet: '你的钱包',
+		copied: '复制的',
 		P2PMarket: 'P2P市场',
 		centralisedExchange: '集中交易所',
 		topUp: '补足；补足',
@@ -224,13 +235,14 @@ export const arLanguagesSite: ILanguage = {
 		'110sec':'110秒',
 		'5minutes':'5分钟',
 		'30minutes':'30分钟',
+		commingSoon: '即将推出',
 		alias: 'zh'
 	},
 	russian: {
 		gameInProcess: [
 			'Игра в процессе',
 			"Прием ставок",
-			"Процесс майнинга",
+			"консолидация ставок",
 			"Раунд продолжается",
 			"Распределение активов",
 		],
@@ -240,6 +252,8 @@ export const arLanguagesSite: ILanguage = {
 		assets: 'Активы',
 		confirm: 'Подтвердить',
 		topUpToContinue: 'Верхний вверх для продолжения',
+		yourWallet: 'ваш кошелек',
+		copied: 'скопировано',
 		P2PMarket: 'Р2Р Рынок',
 		centralisedExchange: 'Централизованная биржа',
 		topUp: 'Верхний вверх',
@@ -268,6 +282,7 @@ export const arLanguagesSite: ILanguage = {
 		'110sec':'110сек',
 		'5minutes':'5мин',
 		'30minutes':'30мин',
+		commingSoon: 'СКОРО',
 		alias: 'ru'
 	},
 }
