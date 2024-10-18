@@ -44,9 +44,6 @@ export const MainHeader = () => {
 					}
 				})
 				.catch((error) => {
-					openHandlerNotification('wins')
-					openHandlerAnimation('wins')
-					setTonsHandler(20)
 					console.log(error)
 				})
 
