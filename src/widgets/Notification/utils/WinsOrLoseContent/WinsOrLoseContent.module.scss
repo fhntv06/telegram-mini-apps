@@ -9,15 +9,21 @@
   display: flex;
   flex-direction: column;
 
+
+  p, h2 {
+    font-weight: 400;
+
+    &.wins {
+      color: $green100;
+    }
+    &.lose {
+      color: $red100;
+    }
+  }
   &.right {
     text-align: right;
   }
-  &.wins {
-    color: $green100;
-  }
-  &.lose {
-    color: $red100;
-  }
+
   h2 {
     text-transform: uppercase;
     color: $gray;

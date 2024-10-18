@@ -1,22 +1,19 @@
 @import '../../shared/assets/styles/basics';
 
 .wrapper {
-  display: none;
   position: absolute;
   top: 0;
   left: 50%;
+  display: flex;
   align-items: start;
   column-gap: $offset16;
   height: 72px;
   width: 100%;
   padding: $offset12 $offset16;
-  background-color: $black;
+  background-color: $light-black;
   @include border('large');
   transform: translateX(-50%);
 
-  &.isOpen {
-    display: flex;
-  }
   p {
     font-weight: 400;
   }

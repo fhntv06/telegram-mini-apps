@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useNotification } from '../../../hooks'
 import { NotificationContext } from '../../contexts'
 import { Notification } from '../../../widgets'
@@ -10,14 +10,20 @@ interface IProps {
 }
 
 export const NotificationProvider = ({ children }: IProps) => {
-  const { type, isOpen, openHandler, closeHandler, toggleHandler } = useNotification();
+  const { tons, type, isOpen, openHandler, closeHandler, setTonsHandler } = useNotification();
+
+  useEffect(() => {
+    const timer = setTimeout(closeHandler, 3000)
+
+    return () => clearTimeout(timer)
+  }, [isOpen]);
 
   return (
-    <NotificationContext.Provider value={{ isOpen, openHandler, closeHandler, toggleHandler }}>
+    <NotificationContext.Provider value={{ isOpen, openHandler, closeHandler, setTonsHandler }}>
       {children}
       <Notification isOpen={isOpen} type={type}>
         {type === 'warning' && <WarningNotificationContent closeHandler={closeHandler} />}
-        {(type === 'wins' || type === 'lose') && <WinsOrLoseContent type={type} />}
+        {(type === 'wins' || type === 'lose' || type === 'refund') && <WinsOrLoseContent type={type} tons={tons} />}
       </Notification>
     </NotificationContext.Provider>
   )

@@ -1,13 +1,18 @@
 import { ActionConfiguration, SendTransactionRequest, useTonConnectUI, useTonWallet } from '@tonconnect/ui-react'
-import { useState } from 'react'
+import {useContext, useState} from 'react'
 import { getAddressContract } from '../app/api/game'
+import { AnimationContext } from '../app/contexts'
+import { AnimationContextTypes } from '../app/providers/types'
 
 export const useTransaction = (amount: number) => {
   const wallet = useTonWallet()
   const [tonConnectUI] = useTonConnectUI()
   const [txInProcess, setTxInProcess] = useState<boolean>(false)
+  const { openHandler } = useContext<AnimationContextTypes>(AnimationContext)
 
   const sendTransaction = async (placeBet: string = 'up') => {
+    setTxInProcess(true);
+
     const address = await getAddressContract()
       .then((res) => res.data.address)
       .catch((error) => {
@@ -15,7 +20,6 @@ export const useTransaction = (amount: number) => {
 
         return import.meta.env.VITE_ADDRESS_TRANSACTION
       })
-
 
     if (!wallet) tonConnectUI.connectWallet()
     else {
@@ -43,7 +47,8 @@ export const useTransaction = (amount: number) => {
         console.log(error)
       }
 
-      setTxInProcess(false);
+      openHandler('youAreIn')
+      setTxInProcess(false)
     }
   }
 

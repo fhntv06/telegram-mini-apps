@@ -1,1 +1,1 @@
-export type INotificationTypes = 'warning' | 'wins' | 'lose'
+export type INotificationTypes = 'warning' | 'wins' | 'lose' | 'refund'

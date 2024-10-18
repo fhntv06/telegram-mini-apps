@@ -5,5 +5,5 @@ export const NotificationContext = createContext<NotificationContextTypes>({
   isOpen: false,
   openHandler: () => {},
   closeHandler: () => {},
-  toggleHandler: () => {},
+  setTonsHandler: () => {},
 });

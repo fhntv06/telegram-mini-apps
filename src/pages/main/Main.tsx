@@ -6,10 +6,7 @@ import classNames from 'classnames/bind'
 import { postReferral } from '../../app/api'
 import { MainHeader, MainFooter, Chart } from '../../widgets'
 
-import { ModalProvider, NotificationProvider } from '../../app/providers'
-
-import Lottie from 'react-lottie'
-import animationData from '../../shared/assets/animation/win.json'
+import { ModalProvider, NotificationProvider, AnimationProvider } from '../../app/providers'
 
 import styles from './Main.module.scss'
 
@@ -20,8 +17,8 @@ import { LoaderSpinner } from '../../shared'
 const cx = classNames.bind(styles)
 
 export const Main = () => {
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState<boolean>(true)
+  const dispatch = useDispatch()
   const data = useGameSocket()
   const priceHistory = usePriceHistory()
   const wallet = useTonWallet()
@@ -70,38 +67,20 @@ export const Main = () => {
   }, [])
   // postEvent('web_app_set_background_color', { color: '#1C1C1E' })
 
-  const defaultOptions = {
-    loop: true,
-    autoplay: true,
-    animationData: animationData,
-    rendererSettings: {
-      preserveAspectRatio: "xMidYMid slice"
-    }
-  }
-
   return (
     isLoading
       ? <LoaderSpinner />
       : (
         <ModalProvider>
           <NotificationProvider>
-          <main className={cx('main')}>
-            <MainHeader />
-            <Chart />
-            <MainFooter />
-          </main>
-          {/*<Lottie*/}
-          {/*  style={{*/}
-          {/*    zIndex: 100,*/}
-          {/*    position: 'absolute',*/}
-          {/*    top: 0,*/}
-          {/*    left: 0,*/}
-          {/*    width: '100%',*/}
-          {/*    height: '100%',*/}
-          {/*  }}*/}
-          {/*  options={defaultOptions}*/}
-          {/*/>*/}
-          </ NotificationProvider>
+            <AnimationProvider>
+              <main className={cx('main')}>
+                <MainHeader />
+                <Chart />
+                <MainFooter />
+              </main>
+            </AnimationProvider>
+          </NotificationProvider>
         </ModalProvider>
       )
   )

@@ -4,5 +4,5 @@ export interface NotificationContextTypes {
   isOpen:  boolean,
   openHandler: ((type: INotificationTypes) => void),
   closeHandler: (() => void),
-  toggleHandler: ((type: INotificationTypes) => void),
+  setTonsHandler: ((tons: number) => void),
 }

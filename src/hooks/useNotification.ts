@@ -3,7 +3,8 @@ import { INotificationTypes } from '../widgets/types'
 
 export const useNotification = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [type, setType] = useState<INotificationTypes>('warning');
+  const [type, setType] = useState<INotificationTypes>('warning')
+  const [tons, setTons] = useState<number>(0)
 
   const openHandler = (type: INotificationTypes = 'warning') => {
     setIsOpen(true)
@@ -12,15 +13,13 @@ export const useNotification = () => {
 
   const closeHandler = () => {
     setIsOpen(false)
-    setType('warning')
   };
 
-  const toggleHandler = (type: INotificationTypes = 'warning') => {
-    setIsOpen(!isOpen)
-    setType(type ? 'warning' : type)
-  };
+  const setTonsHandler = (tons: number = 0) => {
+    setTons(tons)
+  }
 
   return {
-    type, isOpen, openHandler, closeHandler, toggleHandler
+    tons, type, isOpen, openHandler, closeHandler, setTonsHandler
   };
 };

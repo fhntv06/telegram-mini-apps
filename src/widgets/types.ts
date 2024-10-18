@@ -1,3 +1,4 @@
+export * from './AnimationBlock/types'
 export * from './BetPanel/types'
 export * from './MainFooter/types'
 export * from './Modal/types'

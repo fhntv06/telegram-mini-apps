@@ -1,3 +1,4 @@
+export { AnimationBlock } from './AnimationBlock'
 export { App } from './App'
 export { BetPanel } from './BetPanel'
 export { ErrorBoundary } from './ErrorBoundary'
