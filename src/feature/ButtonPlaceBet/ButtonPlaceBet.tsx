@@ -26,10 +26,12 @@ export const ButtonPlaceBet = ({
   const { goUp, goDown } = useGetPhrases(['goUp', 'goDown'])
 
 	const handlerPlaceBet = async () => {
-		navigator.vibrate(500)
-
 		sendTransaction(type)
 		if (onClick) onClick()
+
+		if (navigator.vibrate !== undefined) {
+			navigator.vibrate(500)
+		}
 	}
 
 	const disabled = !bet || !wallet && gamePhase === 1
