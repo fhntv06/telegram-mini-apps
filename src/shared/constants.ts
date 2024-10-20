@@ -99,7 +99,7 @@ export interface ILanguage {
 export const arLanguagesSite: ILanguage = {
 	english: {
 		gameInProcess: [
-			'Game in progress',
+			'Waiting Bets',
 			'Accepting Bets',
 			'consolidating bets',
 			'Round in Progress',
@@ -146,7 +146,7 @@ export const arLanguagesSite: ILanguage = {
 	},
 	spanish: {
 		gameInProcess: [
-			'Juego en progreso',
+			'Apuestas en espera',
 			'Aceptar apuestas',
 			'consolidar apuestas',
 			'Ronda en curso',
@@ -193,7 +193,7 @@ export const arLanguagesSite: ILanguage = {
 	},
 	chinese: {
 		gameInProcess: [
-			"游戏进行中",
+			"等待投注",
 			"接受投注",
 			"合并赌注",
 			"进行中",
@@ -240,7 +240,7 @@ export const arLanguagesSite: ILanguage = {
 	},
 	russian: {
 		gameInProcess: [
-			'Игра в процессе',
+			'Ожидание ставок',
 			"Прием ставок",
 			"консолидация ставок",
 			"Раунд продолжается",
