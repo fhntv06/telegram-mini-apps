@@ -19,7 +19,7 @@ interface Props {
 export const BetPanel = ({ data, type = 'up' }: Props) => {
 	const [groupWins, setGroupWins] = useState<string>(type)
 	const { gamePhase, startBtcPrice, btcPrice } = useSelector((state: any) => state.gameStatus)
-	const { playersImg, betPool } = data;
+	const { playersImg, betPool } = data
 	const count = playersImg.length - 5
 	const completedRound = gamePhase === 4
 
@@ -28,7 +28,7 @@ export const BetPanel = ({ data, type = 'up' }: Props) => {
 
 	useEffect(() => {
 		if (gamePhase === 4) {
-			setGroupWins(startBtcPrice - btcPrice > 0 ? up : down)
+			setGroupWins(btcPrice - startBtcPrice > 0 ? up : down)
 		}
 	}, [gamePhase])
 	
