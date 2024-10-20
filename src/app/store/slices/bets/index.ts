@@ -1,7 +1,9 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit'
+import { IBets } from './types'
 
-const initialState: { bet: number } = {
-    bet: 0
+const initialState: IBets = {
+    bet: 0,
+    address: ''
 }
 
 const index = createSlice({
@@ -10,9 +12,12 @@ const index = createSlice({
     reducers: {
         setBet(state, action) {
             state.bet = action.payload.bet;
+        },
+        setAddressTransaction(state, action) {
+            state.address = action.payload.address;
         }
     }
 })
 
-export const { setBet } = index.actions;
+export const { setBet, setAddressTransaction } = index.actions;
 export const betsReducer = index.reducer;
