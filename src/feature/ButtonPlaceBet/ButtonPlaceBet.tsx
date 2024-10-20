@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux'
-import { useTonWallet } from '@tonconnect/ui-react'
+import { useTonWallet, useTonConnectUI } from '@tonconnect/ui-react'
 import classNames from 'classnames/bind'
 import { useTransaction, useGetPhrases } from '../../hooks';
 import { Button } from '../../shared'
@@ -17,7 +17,8 @@ export const ButtonPlaceBet = ({
 	onClick,
 	type = 'up',
 }: Props) => {
-  const wallet = useTonWallet()
+  	const wallet = useTonWallet()
+	const [tonConnectUI] = useTonConnectUI()
 	const { bet } = useSelector((state: any) => state.bets)
 	const { gamePhase } = useSelector((state: any) => state.gameStatus)
 	const { txInProcess, sendTransaction } = useTransaction(bet)
@@ -41,7 +42,7 @@ export const ButtonPlaceBet = ({
 		<Button
 			type='bet'
 			className={cx('button-placebet', type, 'p', { 'disabled': !bet })}
-			onClick={handlerPlaceBet}
+			onClick={() => wallet ? tonConnectUI.connectWallet() : handlerPlaceBet()}
 			disabled={disabled}
 		>
 			{textButton}

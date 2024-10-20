@@ -1,55 +1,58 @@
-import { ActionConfiguration, SendTransactionRequest, useTonConnectUI, useTonWallet } from '@tonconnect/ui-react'
-import {useContext, useState} from 'react'
+import { ActionConfiguration, SendTransactionRequest, useTonConnectUI } from '@tonconnect/ui-react'
+import { useContext, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { getAddressContract } from '../app/api/game'
 import { AnimationContext } from '../app/contexts'
 import { AnimationContextTypes } from '../app/providers/types'
+import { setAddressTransaction } from '../app/store/slices/bets'
 
 export const useTransaction = (amount: number) => {
-  const wallet = useTonWallet()
   const [tonConnectUI] = useTonConnectUI()
   const [txInProcess, setTxInProcess] = useState<boolean>(false)
   const { openHandler } = useContext<AnimationContextTypes>(AnimationContext)
-
+  const dispatch = useDispatch()
+  const { address: addressTransactionStore } = useSelector((state: any) => state.bets)
+  
   const sendTransaction = async (placeBet: string = 'up') => {
-    setTxInProcess(true);
+    setTxInProcess(true)
 
-    const address = await getAddressContract()
-      .then((res) => res.data.address)
-      .catch((error) => {
-        new Error(error)
+    const addressTransaction = addressTransactionStore || (
+      await getAddressContract()
+        .then(({ data: { address } }) => {
+          dispatch(
+            setAddressTransaction({ address })
+          )
 
-        return import.meta.env.VITE_ADDRESS_TRANSACTION
-      })
+          return address
+        })
+        .catch((error) => {
+          new Error('Error in getAddressContract: ' + error)
+          
+          return import.meta.env.VITE_ADDRESS_TRANSACTION
+        })
+    )
 
-    if (!wallet) tonConnectUI.connectWallet()
-    else {
-      setTxInProcess(true);
-
-      const settingsTransaction: ActionConfiguration = {
-        modals: 'all',
-        notifications: 'all'
-      }
-
-      const transaction: SendTransactionRequest = {
-        validUntil: Math.floor(Date.now() / 1000) + 60, // 60 sec
-        messages: [
-          {
-            address,// import.meta.env.VITE_ADDRESS_TRANSACTION,
-            amount: (amount * 1e9).toString(), // Toncoin in nanotons
-            payload: placeBet === 'up' ? import.meta.env.VITE_UP_TRANSACTION : import.meta.env.VITE_DOWN_TRANSACTION
-          },
-        ],
-      };
-
-      try {
-        await tonConnectUI.sendTransaction(transaction, settingsTransaction)
-      } catch (error) {
-        console.log(error)
-      }
-
-      openHandler('youAreIn')
-      setTxInProcess(false)
+    const settingsTransaction: ActionConfiguration = {
+      modals: 'all',
+      notifications: 'all'
     }
+
+    const transaction: SendTransactionRequest = {
+      validUntil: Math.floor(Date.now() / 1000) + 60, // 60 sec
+      messages: [
+        {
+          address: addressTransaction,
+          amount: (amount * 1e9).toString(), // Toncoin in nanotons
+          payload: placeBet === 'up' ? import.meta.env.VITE_UP_TRANSACTION : import.meta.env.VITE_DOWN_TRANSACTION
+        },
+      ],
+    }
+
+    await tonConnectUI.sendTransaction(transaction, settingsTransaction)
+      .then(() => openHandler('youAreIn'))
+      .catch((error) => console.log('sendTransaction: ', error))
+
+    setTxInProcess(false)
   }
 
   return {
