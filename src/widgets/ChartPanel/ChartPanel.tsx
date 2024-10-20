@@ -1,10 +1,10 @@
+import { useSelector } from 'react-redux'
 import { motion } from 'framer-motion'
 import classNames from 'classnames/bind'
+import { useGetPhrases } from '../../hooks'
 import { differenceInSeconds } from '../../shared/utils'
 
 import styles from './ChartPanel.module.scss'
-import {useSelector} from "react-redux";
-import { useGetPhrases } from '../../hooks'
 
 const cx = classNames.bind(styles)
 
