@@ -3,6 +3,7 @@ import { useTonWallet, useTonConnectUI } from '@tonconnect/ui-react'
 import classNames from 'classnames/bind'
 import { useTransaction, useGetPhrases } from '../../hooks';
 import { Button } from '../../shared'
+import { removeBet } from '../../app/store/slices/bets'
 
 import styles from './ButtonPlaceBet.module.scss'
 
@@ -29,6 +30,10 @@ export const ButtonPlaceBet = ({
 	const handlerPlaceBet = async () => {
 		sendTransaction(type)
 		if (onClick) onClick()
+
+		removeBet()
+
+		console.log('after removeBet ', bet)
 
 		if (navigator.vibrate !== undefined) {
 			navigator.vibrate(500)

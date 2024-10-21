@@ -14,6 +14,9 @@ import { useGameSocket, usePriceHistory, useUserData } from '../../hooks/'
 import { setGameStatus } from '../../app/store/slices/game'
 import { LoaderSpinner } from '../../shared'
 
+import { getAddressContract } from '../../app/api/game'
+import { setDataTransaction } from '../../app/store/slices/bets'
+
 const cx = classNames.bind(styles)
 
 export const Main = () => {
@@ -64,6 +67,23 @@ export const Main = () => {
     }
 
     console.log('tgWebAppStartParam ', params.get('tgWebAppStartParam'))
+
+    getAddressContract()
+      .then(({ data: { address, mainnet } }) => {
+        dispatch(
+          setDataTransaction({ address, mainnet })
+        )
+
+        console.log('запрос getAddressContract')
+        console.log({ address, mainnet })
+
+        return address
+      })
+      .catch((error) => {
+        new Error('Error in getAddressContract: ' + error)
+        
+        return import.meta.env.VITE_ADDRESS_TRANSACTION
+      })
   }, [])
   // postEvent('web_app_set_background_color', { color: '#1C1C1E' })
 
