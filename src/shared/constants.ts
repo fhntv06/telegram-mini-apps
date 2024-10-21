@@ -84,7 +84,7 @@ export interface ILang {
 	mexc: string
 	binance: string
 	bybit: string
-	'110 Seconds': string
+	'30 Seconds': string
 	'5 Minutes': string
 	'30 Minutes': string
 	commingSoon: string
@@ -138,7 +138,7 @@ export const arLanguagesSite: ILanguage = {
 		mexc: 'mexc',
 		binance: 'binance',
 		bybit: 'bybit',
-		'110 Seconds': '110 Seconds',
+		'30 Seconds': '30 Seconds',
 		'5 Minutes': '5 Minutes',
 		'30 Minutes': '30 Minutes',
 		commingSoon: 'COMMING SOON',
@@ -185,7 +185,7 @@ export const arLanguagesSite: ILanguage = {
 		mexc: 'mexc',
 		binance: 'binance',
 		bybit: 'bybit',
-		'110 Seconds': '110 Segundos',
+		'30 Seconds': '110 Segundos',
 		'5 Minutes': '5 Minutos',
 		'30 Minutes': '30 Minutos',
 		commingSoon: 'MUY PRONTO',
@@ -232,7 +232,7 @@ export const arLanguagesSite: ILanguage = {
 		mexc: 'mexc',
 		binance: 'binance',
 		bybit: 'bybit',
-		'110 Seconds':'110秒',
+		'30 Seconds':'110秒',
 		'5 Minutes':'5分钟',
 		'30 Minutes':'30分钟',
 		commingSoon: '即将推出',
@@ -279,7 +279,7 @@ export const arLanguagesSite: ILanguage = {
 		mexc: 'mexc',
 		binance: 'binance',
 		bybit: 'bybit',
-		'110 Seconds':'110 Секунд',
+		'30 Seconds':'110 Секунд',
 		'5 Minutes':'5 Минут',
 		'30 Minutes':'30 Минут',
 		commingSoon: 'СКОРО',
