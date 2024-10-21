@@ -4,7 +4,7 @@ import classNames from 'classnames/bind'
 import { ButtonPlaceBet } from '../../feature'
 import { useGetPhrases } from '../../hooks'
 import { IDataPanel } from './types'
-import { Icon, Person } from '../../shared'
+import {Counter, Icon, Person} from '../../shared'
 import { formatIntTonNumber } from '../../shared/utils'
 
 import styles from './BetPanel.module.scss'
@@ -28,10 +28,10 @@ export const BetPanel = ({ data, type = 'up' }: Props) => {
 
 	useEffect(() => {
 		if (gamePhase === 4) {
-			setGroupWins(btcPrice - startBtcPrice > 0 ? up : down)
+			setGroupWins(btcPrice - startBtcPrice > 0 ? 'up' : 'down')
 		}
 	}, [gamePhase])
-	
+
 
 	// TODO: надписи вынести для перевода
 	// упростить использование условия type === groupWins
@@ -40,11 +40,11 @@ export const BetPanel = ({ data, type = 'up' }: Props) => {
 			{
 				completedRound ? (
 					<>
-						<p className={cx('p-small')}>{`${type} ${type === groupWins ? winners : losers}`}</p>
-						<h1 className={cx('panel__result__text')}>
+						<p className={cx('p-small')}>{`${type === 'up' ? up : down} ${type === groupWins ? winners : losers}`}</p>
+						<div className={cx('panel__result__text')}>
 							<Icon name='ton' size='big'/>
-							{formatIntTonNumber(betPool)}
-						</h1>
+							<Counter value={betPool} className='h1' direction={type} />
+						</div>
 					</>
 				) : (
 					<>
