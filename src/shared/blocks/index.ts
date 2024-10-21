@@ -1,3 +1,4 @@
+export { Counter } from './Counter'
 export { LoaderSpinner } from './LoaderSpinner'
 export { Notification } from '../../widgets/Notification'
 export { Rounds } from './Rounds'
