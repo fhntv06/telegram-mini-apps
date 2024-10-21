@@ -16,7 +16,7 @@ interface IProps {
 
 const modeData = [
   {
-    text: '110 Seconds',
+    text: '30 Seconds',
     rightText: 'commingSoon',
     icon: 'timer',
   },
