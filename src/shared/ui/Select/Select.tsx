@@ -39,7 +39,7 @@ export const Select = ({ data, className = '', typeStyle = '' }: IProps) => {
         <div className={cx('select__header-left')}>
           <Icon className={cx('select__icon')} name={selectedOption.icon} size='big' />
           {/* @ts-ignore */}
-          <p>{arLanguagesSite[lang][selectedOption.text]}</p>
+          <p>{selectedOption.customText ? selectedOption.text : arLanguagesSite[lang][selectedOption.text]}</p>
         </div>
         <Icon name={isOpen ? 'arrow-up' : 'arrow-down'} size='big' />
       </div>
@@ -57,7 +57,7 @@ export const Select = ({ data, className = '', typeStyle = '' }: IProps) => {
               >
                 <Icon className={cx('select__icon')} name={item.icon} size='big'/>
                 {/* @ts-ignore */}
-                <p>{arLanguagesSite[lang][item.text]}</p>
+                <p>{item.customText ? item.text : arLanguagesSite[lang][item.text]}</p>
                 {/* @ts-ignore */}
                 {item.rightText && <p className={cx('select__item__right-text', 'p-x-small')}>{arLanguagesSite[lang][item.rightText]}</p>}
               </li>

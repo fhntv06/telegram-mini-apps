@@ -59,9 +59,9 @@ export const BurgerModalContent = () => {
         ? <Select data={[
           {
             text: `${address.slice(0, 4)}...${address.slice(address.length - 4)}`,
+            customText: true,
             icon: 'wallet',
             blockSelect: false,
-            action: ''
           }, ...walletData
         ]}/>
         : <ButtonConnectWallet className={cx('button__menu')} iconRightName='plus' sizeIcons='big' />
