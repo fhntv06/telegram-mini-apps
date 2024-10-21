@@ -1,4 +1,5 @@
 export interface IBets {
     bet: number,
-    address: string
+    address: string,
+    mainnet: boolean,
 }
