@@ -6,7 +6,6 @@ import { IconNames } from '../../../../shared/types'
 import { setModeSettings, initialState } from '../../../../app/store/slices/mode'
 import { useGetPhrases } from '../../../../hooks'
 import { Button, Icon, Select } from '../../../../shared'
-
 import styles from './SelectModeModalContent.module.scss'
 
 const cx = classNames.bind(styles)
@@ -17,18 +16,18 @@ interface IProps {
 
 const modeData = [
   {
-    text: '110sec',
+    text: '110 Seconds',
     rightText: 'commingSoon',
     icon: 'timer',
   },
   {
-    text: '5minutes',
+    text: '5 Minutes',
     rightText: 'commingSoon',
     icon: 'timer',
     disabled: true
   },
   {
-    text: '30minutes',
+    text: '30 Minutes',
     rightText: 'commingSoon',
     icon: 'timer',
     disabled: true
