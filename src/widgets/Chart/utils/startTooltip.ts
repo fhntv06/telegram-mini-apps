@@ -11,9 +11,10 @@ export const startTooltip: Plugin<"line"> = {
     if (
       options.startPrice === 0 ||
       options.startPrice === null ||
-      options.startPrice === undefined
-    )
-      return;
+      options.startPrice === undefined ||
+      options.gamePhase !== 3
+    ) return
+    
     const { ctx } = chart
     ctx.save()
 

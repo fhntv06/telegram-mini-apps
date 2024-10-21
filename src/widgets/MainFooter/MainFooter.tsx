@@ -28,6 +28,7 @@ export const MainFooter = () => {
 	} = useSelector((state: any) => state.gameStatus)
   const wallet = useTonWallet()
 	const address = useTonAddress()
+	const { gamePhase } = useSelector((state: any) => state.gameStatus)
 
   // @ts-ignore
   const { livePlayers, last3rounds, allTimeWins } = useGetPhrases(['livePlayers', 'last3rounds', 'allTimeWins'])
@@ -39,6 +40,8 @@ export const MainFooter = () => {
 				.then(res => res.data.balance)
 				.then((balance) => balance)
 				.catch((error) => new Error(error))
+
+			console.log('getBalance = new balance', balance)
 
 			dispatch(
 				setUser({
@@ -59,6 +62,10 @@ export const MainFooter = () => {
 	useEffect(() => {
 		setDataUser()
 	}, [wallet])
+
+	useEffect(() => {
+		if (gamePhase === 3 || gamePhase === 0) setDataUser()
+	}, [gamePhase])
 
 	return (
 		<footer className={cx('footer')}>

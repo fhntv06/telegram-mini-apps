@@ -26,7 +26,7 @@ export function getOptions(
     },
     plugins: {
       showTooltip: { btcPrice, startPrice, gamePhase },
-      startTooltip: { startPrice },
+      startTooltip: { startPrice, gamePhase },
       backgroundSplit: {
         lockValue: lockValue ? lockValue : 0,
         startPrice: startPrice,

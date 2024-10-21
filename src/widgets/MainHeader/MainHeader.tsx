@@ -19,15 +19,16 @@ export const MainHeader = () => {
 	const { openHandler: openHandlerModal } = useContext<ModalContextTypes>(ModalContext)
 	const { openHandler: openHandlerAnimation } = useContext<AnimationContextTypes>(AnimationContext)
 	const { gamePhase } = useSelector((state: any) => state.gameStatus)
+	const { bet } = useSelector((state: any) => state.bets)
 
 	useEffect(() => {
-		if (gamePhase !== 0 && gamePhase !== 1) {
+		if (gamePhase === 2) {
 			openHandlerNotification('warning')
 		}
-		if (gamePhase === 4 && address) {
+		if (gamePhase === 4 && address && bet) {
 			getWalletBet(address)
 				.then((res) => {
-					console.log('res ', res)
+					console.log('res getWalletBet', res)
 					if (res.data.error) {
 						throw new Error('Error getWalletBet: res have error')
 					}
@@ -46,8 +47,6 @@ export const MainHeader = () => {
 				.catch((error) => {
 					console.log(error)
 				})
-
-			openHandlerNotification('wins')
 		}
 	}, [gamePhase]);
 
