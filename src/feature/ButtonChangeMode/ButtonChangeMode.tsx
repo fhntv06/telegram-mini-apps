@@ -15,7 +15,7 @@ export const ButtonChangeMode = ({
 	onClick,
 	className,
 }: Props) => {
-	const textMode = '$BTC, 110s'
+	const textMode = '$BTC, 30s'
 
 	return (
 		<Button
