@@ -42,16 +42,14 @@ ChartJS.register(
 
 interface ILineChartProps {
   data: ChartData<'line'>,
-  lockValue: number | null;
 }
 
-const LineChart = ({ data, lockValue }: ILineChartProps) => {
+const LineChart = ({ data }: ILineChartProps) => {
   const { startBtcPrice, gamePhase } = useSelector((state: any) => state.gameStatus)
 	const chartRef = useRef<any>(null);
 
   const options: any = getOptions(
-    lockValue, // baseValue - center value
-    data.datasets[0].data[numberLastPoint],
+    data.datasets[0].data[numberLastPoint], // baseValue - center value
     startBtcPrice,
     gamePhase
   )
@@ -68,13 +66,13 @@ const LineChart = ({ data, lockValue }: ILineChartProps) => {
 }
 
 export const Chart = () => {
-  const { chartData, lockValue } = useChartData();
+  const { chartData } = useChartData();
 
 	return (
     chartData && (
       <div className={cx('chart')}>
         <ChartPanel/>
-        <LineChart data={chartData} lockValue={lockValue}/>
+        <LineChart data={chartData} />
       </div>
     )
   )

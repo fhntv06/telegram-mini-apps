@@ -5,15 +5,14 @@ import type {
   Point
 } from "chart.js";
 // @ts-ignore
-import { _DeepPartialObject } from "chart.js/dist/types/utils";
+import { _DeepPartialObject } from 'chart.js/dist/types/utils'
 
 const colors = {
   grid: '#FFFFFF0A',
 }
 
 export function getOptions(
-  lockValue: number | null,
-  btcPrice: number | Point | null,
+  btcPrice:  number | Point | null,
   startPrice: number,
   gamePhase: number,
 ): ChartOptions {
@@ -27,10 +26,7 @@ export function getOptions(
     plugins: {
       showTooltip: { btcPrice, startPrice, gamePhase },
       startTooltip: { startPrice, gamePhase },
-      backgroundSplit: {
-        lockValue: lockValue ? lockValue : 0,
-        startPrice: startPrice,
-      },
+      backgroundSplit: { btcPrice, startPrice, gamePhase },
       legend: {
         display: false,
       },

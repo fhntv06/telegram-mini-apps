@@ -3,41 +3,15 @@ import { type Plugin } from "chart.js";
 export const backgroundSplitPlugin: Plugin<"line"> = {
   id: "backgroundSplit",
   beforeDraw: (chart, _args, options) => {
-    let y = 0;
-
     const ctx = chart.ctx;
     const chartArea = chart.chartArea;
     const dataset = chart.data.datasets[0].data;
     if (!ctx || !chartArea || dataset.length === 0) return;
 
-    if (
-      options.lockValue !== undefined ||
-      options.lockValue !== null ||
-      dataset.length <= 0
-    ) {
-      const dataIndex = dataset.findIndex((el) => el === options.lockValue);
+    const y = options.gamePhase !== 3
+      ? chart.scales.y.getPixelForValue(options.btcPrice)
+      : chart.scales.y.getPixelForValue(options.startPrice)
 
-      if (dataIndex !== -1 && options.startPrice === 0) {
-        y = chart.scales.y.getPixelForValue(dataset[dataIndex] as number) ?? 0;
-      } else if (options.startPrice !== 0) {
-        const minValue = Math.min(
-          ...(dataset.slice(0, dataset.length - 21) as number[])
-        );
-        const maxValue = Math.max(
-          ...(dataset.slice(0, dataset.length - 21) as number[])
-        );
-
-        const procent = (options.startPrice - minValue) / (maxValue - minValue);
-        const minValueY = chart.scales.y.getPixelForValue(minValue);
-        const maxValueY = chart.scales.y.getPixelForValue(maxValue);
-
-        y = minValueY - procent * (minValueY - maxValueY);
-      }
-    } else {
-      y = chart.scales.y.getPixelForValue(
-        dataset[dataset.length - 21] as number
-      );
-    }
     ctx.save();
 
     const drawRoundedRect = (
@@ -74,8 +48,6 @@ export const backgroundSplitPlugin: Plugin<"line"> = {
       ctx.stroke();
       ctx.fill();
     }
-
-    y = isNaN(y) ? 0 : y;
 
     // верхний градент зеленого цвета
     const gradientGreen = ctx.createLinearGradient(0, 0, 0, isNaN(y) ? 0 : y - 1);
