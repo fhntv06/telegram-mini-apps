@@ -2,6 +2,7 @@ import classNames from 'classnames/bind'
 import { useTonAddress } from '@tonconnect/ui-react'
 
 import styles from './WinsOrLoseContent.module.scss'
+import {formatIntTonNumber} from "../../../../shared/utils";
 
 const cx = classNames.bind(styles)
 
@@ -22,7 +23,7 @@ export const WinsOrLoseContent = ({ type, tons }: IProps) => {
       </div>
       <div className={cx('container', 'right', type)}>
         <h2 className={cx(type)}>{isWins ? 'received' : 'spent'}</h2>
-        <p className={cx(type)}>{isWins ? '+' : '-'} {tons} TON</p>
+        <p className={cx(type)}>{isWins ? '+' : '-'} {formatIntTonNumber(tons)} TON</p>
       </div>
     </div>
   )
