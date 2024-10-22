@@ -1,12 +1,15 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Select, Icon, Button } from '../../../../shared'
+import { useTonAddress } from '@tonconnect/ui-react'
 import classNames from 'classnames/bind'
+import { Select, Icon, Button } from '../../../../shared'
 
 import { useGetPhrases } from '../../../../hooks'
 
+import sendIcon from '../../../../shared/assets/send.png'
+import walletIcon from '../../../../shared/assets/wallet.png'
+
 import styles from './WalletModalContent.module.scss'
-import {useTonAddress} from "@tonconnect/ui-react";
 
 interface IProps {
   closeModalHandler: () => void
@@ -21,13 +24,13 @@ const marketData = [
   },
   {
     text: 'send',
-    icon: 'send-market',
+    icon: sendIcon,
     blockSelect: true,
     onClick: () => window.location.href = 'https://t.me/CryptoBot',
   },
   {
     text: 'wallet',
-    icon: 'wallet-market',
+    icon: walletIcon,
     blockSelect: true,
     onClick: () => window.location.href = 'https://t.me/wallet',
   }
@@ -78,6 +81,8 @@ export const WalletModalContent = ({ closeModalHandler }: IProps) => {
 
   // @ts-ignore
   const { topUpToContinue, yourWallet, copied } = useGetPhrases(['topUpToContinue', 'yourWallet', 'copied'])
+
+  console.log(marketData)
 
   return (
     <div className={cx('wrapper')}>
