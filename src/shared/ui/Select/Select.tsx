@@ -37,7 +37,10 @@ export const Select = ({ data, className = '', typeStyle = '' }: IProps) => {
     <div className={cx('select', className, typeStyle)}>
       <div className={cx('select__header')} onClick={handleDropdownToggle}>
         <div className={cx('select__header-left')}>
-          <Icon className={cx('select__icon')} name={selectedOption.icon} size='big' />
+          {(selectedOption.icon.indexOf('image/png') === -1)
+            ? <Icon className={cx('select__icon')} name={selectedOption.icon} size='big'/>
+            : <img src={selectedOption.icon}  alt='icon' />
+          }
           {/* @ts-ignore */}
           <p>{selectedOption.customText ? selectedOption.text : arLanguagesSite[lang][selectedOption.text]}</p>
         </div>
@@ -55,7 +58,10 @@ export const Select = ({ data, className = '', typeStyle = '' }: IProps) => {
                   handleOptionSelect(item)
                 }}
               >
-                <Icon className={cx('select__icon')} name={item.icon} size='big'/>
+                {(item.icon.indexOf('image/png') === -1)
+                  ? <Icon className={cx('select__icon')} name={item.icon} size='big'/>
+                  : <img src={item.icon} alt='icon' />
+                }
                 {/* @ts-ignore */}
                 <p>{item.customText ? item.text : arLanguagesSite[lang][item.text]}</p>
                 {/* @ts-ignore */}
