@@ -32,23 +32,26 @@ export const Main = () => {
   // const { initDataRaw, initData } = retrieveLaunchParams();
 
   useEffect(() => {
-    if (!referral) new Error('Error: for postReferral dont have referral!')
-    if (!userData?.id) new Error('Error: for postReferral dont have user telegram id!')
-
-    postReferral(
-      {
-        telegram_id: `${userData?.id}`,
-        wallet_address: address,
-        referral,
-      }
-    )
-    .then((res)=> {
-      console.log('Запрос postReferral!')
-      console.log(res)
-    })
-    .catch((err) => {
-      console.log(err)
-    })
+    if (!referral || !userData?.id || !address) {
+      new Error(`Error: for postReferral dont have user
+        ${!referral ? 'referral' : !userData?.id ? 'telegram id' : !address ? 'address' : ''}
+      !`)
+    } else {
+      postReferral(
+        {
+          telegram_id: `${userData?.id}`,
+          wallet_address: address,
+          referral,
+        }
+      )
+        .then((res)=> {
+          console.log('Запрос postReferral!')
+          console.log(res)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    }
   }, [referral])
 
   useEffect(() => {
@@ -84,7 +87,7 @@ export const Main = () => {
       })
       .catch((error) => {
         new Error('Error in getAddressContract: ' + error)
-        
+
         return import.meta.env.VITE_ADDRESS_TRANSACTION
       })
   }, [])
