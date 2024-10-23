@@ -9,7 +9,7 @@ export const useTransaction = (amount: number) => {
   const [txInProcess, setTxInProcess] = useState<boolean>(false)
   const { openHandler } = useContext<AnimationContextTypes>(AnimationContext)
   const { address, mainnet } = useSelector((state: any) => state.bets)
-  
+
   const sendTransaction = async (placeBet: string = 'up') => {
     setTxInProcess(true)
 
@@ -17,8 +17,6 @@ export const useTransaction = (amount: number) => {
       modals: 'all',
       notifications: 'all'
     }
-    console.log('betsData.address ', address)
-    console.log('betsData.mainnet ', mainnet)
 
     const transaction: SendTransactionRequest = {
       validUntil: Math.floor(Date.now() / 1000) + 60, // 60 sec
@@ -31,12 +29,6 @@ export const useTransaction = (amount: number) => {
       ],
       network: mainnet ? CHAIN.MAINNET : CHAIN.TESTNET
     }
-
-    console.log({
-      transaction,
-      settings: { address, mainnet: mainnet ? CHAIN.MAINNET : CHAIN.TESTNET },
-      configuration
-    })
 
     await tonConnectUI.sendTransaction(transaction, configuration)
       .then(() => openHandler('youAreIn'))

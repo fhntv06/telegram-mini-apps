@@ -37,6 +37,7 @@ export const Main = () => {
         ${!referral ? 'referral' : !userData?.id ? 'telegram id' : !address ? 'address' : ''}
       !`)
     } else {
+      // TODO: вынести логику лишних запросов выше
       postReferral(
         {
           telegram_id: `${userData?.id}`,
@@ -45,8 +46,7 @@ export const Main = () => {
         }
       )
         .then((res)=> {
-          console.log('Запрос postReferral!')
-          console.log(res)
+          console.log('Data post referral: ', res.data)
         })
         .catch((err) => {
           console.log(err)
@@ -68,19 +68,8 @@ export const Main = () => {
           setDataTransaction({ address, mainnet })
         )
 
-        console.log('WebApp.initDataUnsafe.start_param ', WebApp.initDataUnsafe.start_param)
-
-        setReferral(WebApp.initDataUnsafe.start_param || '')
-
-        const hash = window.location.hash.slice(1)
-        const params = new URLSearchParams(hash)
-
-        console.log('window.location.hash ', window.location.hash)
-        console.log('hash ', hash)
-        console.log('params ', params)
-
-        for(const [ key, value ] of params) {
-          console.log(key, value)
+        if (WebApp.initDataUnsafe.start_param) {
+          setReferral(WebApp.initDataUnsafe.start_param || '')
         }
 
         return address

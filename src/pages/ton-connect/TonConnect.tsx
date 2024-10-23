@@ -31,9 +31,6 @@ export const TonConnect: FC = () => {
   const address = useTonAddress();
   const rawAddress = useTonAddress(false);
 
-  console.log('wallet ', wallet)
-  console.log('address ', address)
-
   const transaction = {
     validUntil: Date.now() + 5 * 60 * 1000, // 5 minutes
     messages: [
@@ -74,8 +71,6 @@ export const TonConnect: FC = () => {
   } else if (!wallet) {
     textButton = 'Connect Wallet'
   }
-
-  console.log('isConnectionRestored ', isConnectionRestored);
 
   return !wallet ? (
     <header className={cx('header')}>

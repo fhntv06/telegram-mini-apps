@@ -24,7 +24,7 @@ export const MainFooter = () => {
 		downPoolData,
 		last3GamesRes,
 		livePlayers: livePlayersCount,
-		allTimeWins: allTimeWinsCount 
+		allTimeWins: allTimeWinsCount
 	} = useSelector((state: any) => state.gameStatus)
   const wallet = useTonWallet()
 	const address = useTonAddress()
@@ -40,8 +40,6 @@ export const MainFooter = () => {
 				.then(res => res.data.balance)
 				.then((balance) => balance)
 				.catch((error) => new Error(error))
-
-			console.log('getBalance = new balance', balance)
 
 			dispatch(
 				setUser({

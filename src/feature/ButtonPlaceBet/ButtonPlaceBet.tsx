@@ -33,8 +33,6 @@ export const ButtonPlaceBet = ({
 
 		removeBet()
 
-		console.log('after removeBet ', bet)
-
 		if (navigator.vibrate !== undefined) {
 			navigator.vibrate(500)
 		}
