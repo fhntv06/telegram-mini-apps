@@ -58,7 +58,7 @@ export const Select = ({ data, className = '', typeStyle = '' }: IProps) => {
                   handleOptionSelect(item)
                 }}
               >
-                {(item.icon.indexOf('image/png') === -1)
+                {(item.icon.indexOf('image/png') === -1 && item.icon.indexOf('.png') === -1)
                   ? <Icon className={cx('select__icon')} name={item.icon} size='big'/>
                   : <img src={item.icon} alt='icon' />
                 }
