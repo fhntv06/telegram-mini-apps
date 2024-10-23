@@ -319,7 +319,7 @@
             fill="white" />
     </symbol>
     <symbol id="refund" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path fill-rule="evenodd" clip-rule="evenodd" d="M2 8.00004C2 7.63185 2.29848 7.33337 2.66667 7.33337H13.3333C13.7015 7.33337 14 7.63185 14 8.00004C14 8.36823 13.7015 8.66671 13.3333 8.66671H2.66667C2.29848 8.66671 2 8.36823 2 8.00004Z" fill="white"/>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M3 12C3 11.4477 3.44772 11 4 11H20C20.5523 11 21 11.4477 21 12C21 12.5523 20.5523 13 20 13H4C3.44772 13 3 12.5523 3 12Z" fill="white"/>
     </symbol>
     <symbol id="warning" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path fill-rule="evenodd" clip-rule="evenodd"
