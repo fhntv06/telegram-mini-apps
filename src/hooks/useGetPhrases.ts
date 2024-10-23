@@ -1,11 +1,11 @@
-import {useSelector} from "react-redux";
-import { arLanguagesSite, ILang } from '../shared/constants'
+import { useSelector } from 'react-redux'
+import { arLanguagesPhraseSite, ILangPhrase } from '../shared/constants'
 
 export const useGetPhrases = (data: string[]) => {
-  const { lang } = useSelector((state: any) => state.language)
+  const { name } = useSelector((state: any) => state.language)
 
   // @ts-ignore
-  const objPhrases: ILang = arLanguagesSite[lang]
+  const objPhrases: ILangPhrase = arLanguagesPhraseSite[name]
 
   // @ts-ignore
   return data.reduce((accum, keyPhrase) => ( { ...accum, [keyPhrase]: objPhrases[keyPhrase] }), {})

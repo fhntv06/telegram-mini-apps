@@ -2,7 +2,7 @@ import { useTonConnectUI, Locales } from '@tonconnect/ui-react'
 import { useDispatch } from 'react-redux'
 import { setLang } from '../app/store/slices/language'
 import { ILang } from '../app/store/slices/language/types'
-import {arLanguagesSite} from "../shared/constants.ts";
+import { arLanguagesPhraseSite } from '../shared/constants.ts'
 
 export const useSetLang = () => {
   const dispatch = useDispatch()
@@ -10,13 +10,13 @@ export const useSetLang = () => {
   const [_, setOptions] = useTonConnectUI();
   const onLanguageChange = (language: Locales) => setOptions({ language })
 
-  return ({ lang } : ILang) => {
+  return (data : ILang) => {
     // @ts-ignore
-    const { alias } = arLanguagesSite[lang]
+    const { alias } = arLanguagesPhraseSite[data.name]
 
-    dispatch(setLang({ lang }))
+    dispatch(setLang(data))
     if (alias === 'en' || alias === 'ru') {
-      onLanguageChange(lang as Locales)
+      onLanguageChange(data.name as Locales)
     }
   }
 }

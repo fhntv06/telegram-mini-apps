@@ -1,9 +1,12 @@
-import { useState } from 'react'
+// import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import classNames from 'classnames/bind'
-import { IModeSettings } from '../../../../app/store/slices/mode/types'
+// import { IModeSettings } from '../../../../app/store/slices/mode/types'
 import { IconNames } from '../../../../shared/types'
-import { setModeSettings, initialState } from '../../../../app/store/slices/mode'
+import {
+  setModeSettings,
+  // initialState
+} from '../../../../app/store/slices/mode'
 import { useGetPhrases } from '../../../../hooks'
 import { Button, Icon, Select } from '../../../../shared'
 import styles from './SelectModeModalContent.module.scss'
@@ -16,21 +19,22 @@ interface IProps {
 
 const modeData = [
   {
-    text: '30 Seconds',
+    name: '30 Seconds',
     rightText: 'commingSoon',
     icon: 'timer',
+    active: true
   },
   {
-    text: '5 Minutes',
+    name: '5 Minutes',
     rightText: 'commingSoon',
     icon: 'timer',
-    disabled: true
+    active: false
   },
   {
-    text: '30 Minutes',
+    name: '30 Minutes',
     rightText: 'commingSoon',
     icon: 'timer',
-    disabled: true
+    active: false
   },
 ]
 
@@ -85,7 +89,7 @@ const coins: ICoins[] = [
 
 export const SelectModeModalContent = ({ closeModalHandler }: IProps) => {
   // @ts-ignore
-  const [modeSettins, setStateModeSettings] = useState<IModeSettings>(initialState)
+  // const [modeSettins, setStateModeSettings] = useState<IModeSettings>(initialState)
   const dispatch = useDispatch()
 
   // @ts-ignore

@@ -2,7 +2,10 @@ import { createSlice } from '@reduxjs/toolkit';
 import { ILang } from './types'
 
 const initialState: ILang = {
-  lang: 'english'
+  name: 'english',
+  icon: 'flag-uk',
+  action: 'set-lang',
+  active: true
 }
 
 const langSlice = createSlice({
@@ -10,7 +13,10 @@ const langSlice = createSlice({
   initialState,
   reducers: {
     setLang(state, action) {
-      state.lang = action.payload.lang
+      state.name = action.payload.name
+      state.icon = action.payload.icon
+      state.action = action.payload.action
+      state.active = action.payload.active
     }
   }
 });

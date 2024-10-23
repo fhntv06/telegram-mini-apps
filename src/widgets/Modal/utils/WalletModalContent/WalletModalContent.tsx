@@ -19,17 +19,17 @@ const cx = classNames.bind(styles)
 
 const marketData = [
   {
-    text: 'P2PMarket',
+    name: 'P2PMarket',
     icon: 'market',
   },
   {
-    text: 'send',
+    name: 'send',
     icon: sendIcon,
     blockSelect: true,
     onClick: () => window.location.href = 'https://t.me/CryptoBot',
   },
   {
-    text: 'wallet',
+    name: 'wallet',
     icon: walletIcon,
     blockSelect: true,
     onClick: () => window.location.href = 'https://t.me/wallet',
@@ -37,23 +37,23 @@ const marketData = [
 ]
 const exchangeData = [
   {
-    text: 'centralisedExchange',
+    name: 'centralisedExchange',
     icon: 'exchange',
   },
   {
-    text: 'mexc',
+    name: 'mexc',
     icon: 'mexc-market',
     blockSelect: true,
     onClick: () => window.location.href = 'https://otc.mexc.com/ru-RU/fastTransaction',
   },
   {
-    text: 'binance',
+    name: 'binance',
     icon: 'binance-market',
     blockSelect: true,
     onClick: () => window.location.href = 'https://www.binance.com/en-GB/crypto/buy/USD/TON',
   },
   {
-    text: 'bybit',
+    name: 'bybit',
     icon: 'bybit-market',
     blockSelect: true,
     onClick: () => window.location.href = 'https://www.bybit.com/fiat/trade/express/home',
@@ -81,8 +81,6 @@ export const WalletModalContent = ({ closeModalHandler }: IProps) => {
 
   // @ts-ignore
   const { topUpToContinue, yourWallet, copied } = useGetPhrases(['topUpToContinue', 'yourWallet', 'copied'])
-
-  console.log(marketData)
 
   return (
     <div className={cx('wrapper')}>

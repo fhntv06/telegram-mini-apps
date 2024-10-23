@@ -1,3 +1,6 @@
 export interface ILang {
-  lang: 'russian' | 'english' | 'france' | 'germany' | string
+  name: 'english' | 'spanish' | 'chinese' | 'russian' | string,
+  icon: 'flag-uk' | 'flag-spanish' | 'flag-china' | 'flag-russia' | string,
+  action?: 'set-lang' | string,
+  active?: boolean
 }

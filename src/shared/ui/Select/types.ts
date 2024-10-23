@@ -1,5 +1,5 @@
 export interface ISelectOption {
-  text: string
+  name: string
   customText?: boolean
   icon: string
   action?: string
@@ -7,4 +7,5 @@ export interface ISelectOption {
   onClick?: () => void
   disabled?: boolean
   rightText?: string
+  active: boolean
 }

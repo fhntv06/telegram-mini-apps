@@ -1,5 +1,5 @@
 import { IGameStatus } from '../app/providers/types.ts';
-
+import { ILang } from '../app/store/slices/types'
 export const countPointsChart = 100
 export const numberLastPoint = 89
 export const initialDataPriceHistory: number[] = ((min = 62000, max = 62001) => {
@@ -49,7 +49,7 @@ export const initialDataGameStatus: IGameStatus = {
 }
 export const arBets: number[] = [0.5, 1, 2, 5, 10]
 
-export interface ILang {
+export interface ILangPhrase {
 	gameInProcess: string[]
 	upWins:	string
 	downWins: string
@@ -91,12 +91,12 @@ export interface ILang {
 	alias: string
 }
 export interface ILanguage {
-	english: ILang
-	spanish: ILang
-	chinese: ILang
-	russian: ILang
+	english: ILangPhrase
+	spanish: ILangPhrase
+	chinese: ILangPhrase
+	russian: ILangPhrase
 }
-export const arLanguagesSite: ILanguage = {
+export const arLanguagesPhraseSite: ILanguage = {
 	english: {
 		gameInProcess: [
 			'Waiting Bets',
@@ -286,3 +286,25 @@ export const arLanguagesSite: ILanguage = {
 		alias: 'ru'
 	},
 }
+export const arLanguagesSite: ILang[] = [
+	{
+		name: 'english',
+		icon: 'flag-uk',
+		action: 'set-lang',
+	},
+	{
+		name: 'spanish',
+		icon: 'flag-spanish',
+		action: 'set-lang',
+	},
+	{
+		name: 'chinese',
+		icon: 'flag-china',
+		action: 'set-lang',
+	},
+	{
+		name: 'russian',
+		icon: 'flag-russia',
+		action: 'set-lang',
+	}
+]

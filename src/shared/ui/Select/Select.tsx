@@ -2,9 +2,9 @@ import { useState} from 'react'
 import { useSelector } from 'react-redux'
 import classNames from 'classnames/bind'
 import { Icon } from '../'
-import {useDisconnect, useSetLang} from '../../../hooks'
+import { useDisconnect, useSetLang } from '../../../hooks'
 import { ISelectOption } from './types'
-import { arLanguagesSite } from '../../constants'
+import { arLanguagesPhraseSite } from '../../constants'
 
 import styles from './Select.module.scss'
 
@@ -12,7 +12,7 @@ const cx = classNames.bind(styles)
 
 interface IProps {
   data: ISelectOption[]
-  typeStyle?: string
+  typeStyle: '' | 'light'
   className?: string
 }
 
@@ -20,8 +20,8 @@ export const Select = ({ data, className = '', typeStyle = '' }: IProps) => {
   const handlerDisconnect = useDisconnect()
   const handlerSetLang = useSetLang()
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [selectedOption, setSelectedOption] = useState<ISelectOption>(data[0]);
-  const { lang } = useSelector((state: any) => state.language)
+  const [selectedOption, setSelectedOption] = useState<ISelectOption>(data.find((item) => item.active) || data[0]);
+  const { name } = useSelector((state: any) => state.language)
 
   const handleDropdownToggle = () => data.length > 1 && setIsOpen(!isOpen)
   const handleOptionSelect = (option: ISelectOption) => {
@@ -29,7 +29,7 @@ export const Select = ({ data, className = '', typeStyle = '' }: IProps) => {
     handleDropdownToggle()
 
     if (option.action === 'disconnect') handlerDisconnect()
-    if (option.action === 'set-lang') handlerSetLang({ lang: option.text })
+    if (option.action === 'set-lang') handlerSetLang(option)
   }
 
   // @ts-ignore
@@ -42,16 +42,16 @@ export const Select = ({ data, className = '', typeStyle = '' }: IProps) => {
             : <img src={selectedOption.icon}  alt='icon' />
           }
           {/* @ts-ignore */}
-          <p>{selectedOption.customText ? selectedOption.text : arLanguagesSite[lang][selectedOption.text]}</p>
+          <p>{selectedOption.customText ? selectedOption.name : arLanguagesPhraseSite[name][selectedOption.name]}</p>
         </div>
         <Icon name={isOpen ? 'arrow-up' : 'arrow-down'} size='big' />
       </div>
       {(data.length > 1 && isOpen) && (
         <ul className={cx('select__list')}>
           {data.map((item) => (
-            item.text !== selectedOption.text && (
+            item.name !== selectedOption.name && (
               <li
-                key={item.text}
+                key={item.name}
                 className={cx('select__item', { disabled: item.disabled })}
                 onClick={() => {
                   if (item.onClick) item.onClick()
@@ -63,9 +63,9 @@ export const Select = ({ data, className = '', typeStyle = '' }: IProps) => {
                   : <img src={item.icon} alt='icon' />
                 }
                 {/* @ts-ignore */}
-                <p>{item.customText ? item.text : arLanguagesSite[lang][item.text]}</p>
+                <p>{item.customText ? item.name : arLanguagesPhraseSite[name][item.name]}</p>
                 {/* @ts-ignore */}
-                {item.rightText && <p className={cx('select__item__right-text', 'p-x-small')}>{arLanguagesSite[lang][item.rightText]}</p>}
+                {item.rightText && <p className={cx('select__item__right-text', 'p-x-small')}>{arLanguagesPhraseSite[name][item.rightText]}</p>}
               </li>
             )
           ))}
