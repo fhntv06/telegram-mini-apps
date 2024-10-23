@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux';
-import { useTonWallet } from "@tonconnect/ui-react"
+import { useTonAddress } from '@tonconnect/ui-react'
+import WebApp from '@twa-dev/sdk';
+// import { retrieveLaunchParams } from '@telegram-apps/sdk'
 // import { postEvent } from '@telegram-apps/sdk'
 import classNames from 'classnames/bind'
 import { postReferral } from '../../app/api'
@@ -24,28 +26,30 @@ export const Main = () => {
   const dispatch = useDispatch()
   const data = useGameSocket()
   const priceHistory = usePriceHistory()
-  const wallet = useTonWallet()
+  const address = useTonAddress()
   const userData = useUserData()
-  const [referral, setReferral] = useState<null| string>(null)
+  const [referral, setReferral] = useState<string>('')
+  // const { initDataRaw, initData } = retrieveLaunchParams();
 
   useEffect(() => {
-    // alert('userData?.id: ' + userData?.id)
-    if (wallet && userData?.id && referral) {
-      postReferral(
-        {
-          telegram_id: userData?.id,
-          wallet_address: wallet,
-          referral,
-        }
-      )
-      .then((res)=> {
-        console.log(res)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-    }
-  }, [wallet])
+    if (!referral) new Error('Error: for postReferral dont have referral!')
+    if (!userData?.id) new Error('Error: for postReferral dont have user telegram id!')
+
+    postReferral(
+      {
+        telegram_id: `${userData?.id}`,
+        wallet_address: address,
+        referral,
+      }
+    )
+    .then((res)=> {
+      console.log('Запрос postReferral!')
+      console.log(res)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  }, [referral])
 
   useEffect(() => {
     if (data && data.btcPrice && priceHistory.length) {
@@ -55,27 +59,26 @@ export const Main = () => {
   }, [data, priceHistory])
 
   useEffect(() => {
-    const hash = window.location.hash.slice(1)
-    // alert(hash)
-    const params = new URLSearchParams(hash)
-
-    // alert(JSON.stringify(params))
-    // alert(params.get('tgWebAppStartParam'))
-
-    if (params.get('tgWebAppStartParam')) {
-      setReferral(params.get('tgWebAppStartParam'))
-    }
-
-    console.log('tgWebAppStartParam ', params.get('tgWebAppStartParam'))
-
     getAddressContract()
       .then(({ data: { address, mainnet } }) => {
         dispatch(
           setDataTransaction({ address, mainnet })
         )
 
-        console.log('запрос getAddressContract')
-        console.log({ address, mainnet })
+        console.log('WebApp.initDataUnsafe.start_param ', WebApp.initDataUnsafe.start_param)
+
+        setReferral(WebApp.initDataUnsafe.start_param || '')
+
+        const hash = window.location.hash.slice(1)
+        const params = new URLSearchParams(hash)
+
+        console.log('window.location.hash ', window.location.hash)
+        console.log('hash ', hash)
+        console.log('params ', params)
+
+        for(const [ key, value ] of params) {
+          console.log(key, value)
+        }
 
         return address
       })

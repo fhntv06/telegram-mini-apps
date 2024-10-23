@@ -19,6 +19,7 @@ function BackButtonManipulator() {
 
   useEffect(() => {
     function onClick() {
+      console.log('navigate -1')
       navigate(-1)
     }
     WebApp.BackButton.onClick(onClick)

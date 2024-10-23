@@ -14,6 +14,6 @@ export const get = async (handle: string) => (
   axios.get(`${url}${handle}`,{ headers: { ...headers }})
 )
 
-export const post = async (url: string, data = {}) => (
-  axios.post(url, data, { headers: { ...headers }})
+export const post = async (handle: string, data = {}) => (
+  axios.post(`${url}${handle}`, data, { headers: { ...headers }})
 );
