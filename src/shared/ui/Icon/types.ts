@@ -10,7 +10,7 @@ export type IconNames =
     | 'arrow-right'
     | 'persons'
     | 'wallet'
-    | 'arrow-refund'
+    | 'refund'
     | 'cross'
     | 'handshake'
     | 'support'
