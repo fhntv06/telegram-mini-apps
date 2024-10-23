@@ -12,7 +12,7 @@ const cx = classNames.bind(styles)
 
 interface IProps {
   data: ISelectOption[]
-  typeStyle: '' | 'light'
+  typeStyle?: '' | 'light'
   className?: string
 }
 

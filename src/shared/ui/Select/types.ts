@@ -7,5 +7,5 @@ export interface ISelectOption {
   onClick?: () => void
   disabled?: boolean
   rightText?: string
-  active: boolean
+  active?: boolean
 }
