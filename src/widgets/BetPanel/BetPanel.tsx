@@ -17,7 +17,7 @@ interface Props {
 }
 
 export const BetPanel = ({ data, type = 'up' }: Props) => {
-	const [groupWins, setGroupWins] = useState<string>(type)
+	const [groupWins, setGroupWins] = useState<'up' | 'down'>(type)
 	const { gamePhase, startBtcPrice, btcPrice, upPoolData, downPoolData } = useSelector((state: any) => state.gameStatus)
 	const { playersImg, betPool } = data
 	const count = playersImg.length - 5
@@ -42,7 +42,7 @@ export const BetPanel = ({ data, type = 'up' }: Props) => {
 						<p className={cx('p-small')}>{`${type === 'up' ? up : down} ${type === groupWins ? winners : losers}`}</p>
 						<div className={cx('panel__result__text')}>
 							<Icon name='ton' size='big'/>
-							<Counter value={(upPoolData.betPool + downPoolData.betPool) * 0.95} className='h1' direction={type} />
+							<Counter value={(upPoolData.betPool + downPoolData.betPool) * 0.95} className='h1' direction={type === groupWins ? 'up' : 'down'} />
 						</div>
 					</>
 				) : (
