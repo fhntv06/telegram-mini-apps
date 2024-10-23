@@ -13,10 +13,10 @@ const cx = classNames.bind(styles)
 
 interface Props {
 	data: IDataPanel
-	type: 'up' | 'down'
+	type?: 'up' | 'down'
 }
 
-export const BetPanel = ({ data, type }: Props) => {
+export const BetPanel = ({ data, type='up' }: Props) => {
 	const [groupWins, setGroupWins] = useState<'up' | 'down'>()
 	const { gamePhase, startBtcPrice, btcPrice, upPoolData, downPoolData } = useSelector((state: any) => state.gameStatus)
 	const { playersImg, betPool } = data
