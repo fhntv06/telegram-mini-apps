@@ -14,10 +14,10 @@ const defaultOptions = {
 }
 
 const styles = {
-  top: '35%',
+  top: '50%',
   left: '50%',
-  width: '30%',
-  height: '30%',
+  width: '80%',
+  height: '80%',
   transform: 'translate(-50%, -50%)'
 }
 
@@ -36,14 +36,21 @@ const listAnimates = {
     }
   },
   consolidate: {
-    styles,
+    styles: {
+      ...styles,
+      top: '58%',
+      left: '62%',
+    },
     animation: consolidatingBetsData,
     settings: {
       loop: true
     }
   },
   youAreIn: {
-    styles,
+    styles: {
+      ...styles,
+      top: '58%',
+    },
     animation: youAreInData,
     settings: {
     }

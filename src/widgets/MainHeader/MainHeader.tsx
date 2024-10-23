@@ -5,8 +5,8 @@ import classNames from 'classnames/bind'
 
 import styles from './MainHeader.module.scss'
 
-import {AnimationContext, ModalContext, NotificationContext} from '../../app/contexts'
-import {AnimationContextTypes, ModalContextTypes, NotificationContextTypes} from '../../app/providers/types'
+import { AnimationContext, ModalContext, NotificationContext } from '../../app/contexts'
+import { AnimationContextTypes, ModalContextTypes, NotificationContextTypes } from '../../app/providers/types'
 import { ButtonChangeMode, ButtonWallet, ButtonBurger } from '../../feature/'
 import {getWalletBet} from "../../app/api/user";
 
