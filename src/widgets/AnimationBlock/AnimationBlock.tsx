@@ -14,6 +14,8 @@ const defaultOptions = {
 }
 
 const styles = {
+  zIndex: 100,
+  position: 'absolute',
   top: '50%',
   left: '50%',
   width: '80%',
@@ -38,7 +40,7 @@ const listAnimates = {
   consolidate: {
     styles: {
       ...styles,
-      top: '58%',
+      top: '65%',
       left: '62%',
     },
     animation: consolidatingBetsData,
@@ -49,7 +51,9 @@ const listAnimates = {
   youAreIn: {
     styles: {
       ...styles,
-      top: '58%',
+      top: '40%',
+      width: '45%',
+      height: '45%',
     },
     animation: youAreInData,
     settings: {
@@ -65,21 +69,18 @@ export const AnimationBlock = ({ animation } :IProps) => {
   return (
     <AnimatePresence>
       {animation && (
-        <Lottie
-          style={{
-            zIndex: 100,
-            position: 'absolute',
-            // @ts-ignore
-            ...listAnimates[animation].styles
-          }}
-          options={{
-            ...defaultOptions,
-            // @ts-ignore
-            ...listAnimates[animation].settings,
-            // @ts-ignore
-            animationData: listAnimates[animation].animation,
-          }}
-        />
+        // @ts-ignore
+        <div style={listAnimates[animation].styles}>
+          <Lottie
+            options={{
+              ...defaultOptions,
+              // @ts-ignore
+              ...listAnimates[animation].settings,
+              // @ts-ignore
+              animationData: listAnimates[animation].animation,
+            }}
+          />
+        </div>
       )}
     </AnimatePresence>
   )
