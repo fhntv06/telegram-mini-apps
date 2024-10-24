@@ -17,20 +17,31 @@ interface Props {
 }
 
 export const BetPanel = ({ data, type='up' }: Props) => {
-	const [groupWins, setGroupWins] = useState<'up' | 'down'>()
-	const { gamePhase, startBtcPrice, btcPrice, upPoolData, downPoolData } = useSelector((state: any) => state.gameStatus)
+	const { gamePhase, gameResult, upPoolData, downPoolData } = useSelector((state: any) => state.gameStatus)
+	const [groupWins, setGroupWins] = useState<'up' | 'down'>(gameResult > 0 ? 'up' : 'down')
 	const { playersImg, betPool } = data
 	const count = playersImg.length - 5
-	const completedRound = gamePhase === 4
+	const [completedRound, setCompletedRound] = useState<boolean>(false)
 
 	// @ts-ignore
 	const { up, down, winners, losers } = useGetPhrases(['up', 'down', 'winners', 'losers'])
 
 	useEffect(() => {
 		if (gamePhase === 4) {
-			setGroupWins(btcPrice - startBtcPrice > 0 ? 'up' : 'down')
+			setGroupWins(gameResult > 0 ? 'up' : 'down')
 		}
-	}, [gamePhase])
+	}, [gameResult])
+
+	useEffect(() => {
+		setCompletedRound(gamePhase === 4)
+	}, [gamePhase]);
+
+	console.log({
+		gamePhase,
+		gameResult,
+		type,
+		groupWins,
+	})
 
 	// TODO: надписи вынести для перевода
 	// упростить использование условия type === groupWins
