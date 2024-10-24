@@ -71,13 +71,16 @@ export const Main = () => {
         if (WebApp.initDataUnsafe.start_param) {
           setReferral(WebApp.initDataUnsafe.start_param || '')
         }
-
-        return address
       })
       .catch((error) => {
         new Error('Error in getAddressContract: ' + error)
 
-        return import.meta.env.VITE_ADDRESS_TRANSACTION
+        dispatch(
+          setDataTransaction({
+            address: import.meta.env.VITE_ADDRESS_TRANSACTION,
+            mainnet: true
+          })
+        )
       })
   }, [])
   // postEvent('web_app_set_background_color', { color: '#1C1C1E' })

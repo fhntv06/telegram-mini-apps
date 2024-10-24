@@ -36,13 +36,6 @@ export const BetPanel = ({ data, type='up' }: Props) => {
 		setCompletedRound(gamePhase === 4)
 	}, [gamePhase]);
 
-	console.log({
-		gamePhase,
-		gameResult,
-		type,
-		groupWins,
-	})
-
 	// TODO: надписи вынести для перевода
 	// упростить использование условия type === groupWins
 	return (
