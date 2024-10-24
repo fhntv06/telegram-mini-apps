@@ -36,31 +36,7 @@ const modeData = [
     icon: 'timer',
     disabled: true,
     blockSelect: true,
-  },
-  {
-    name: '301 Minutes',
-    customText: true,
-    rightText: 'commingSoon',
-    icon: 'timer',
-    disabled: true,
-    blockSelect: true,
-  },
-  {
-    name: '01 Minutes',
-    customText: true,
-    rightText: 'commingSoon',
-    icon: 'timer',
-    disabled: true,
-    blockSelect: true,
-  },
-  {
-    name: '011 Minutes',
-    customText: true,
-    rightText: 'commingSoon',
-    icon: 'timer',
-    disabled: true,
-    blockSelect: true,
-  },
+  }
 ]
 
 interface ICoins {
