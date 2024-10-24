@@ -9,3 +9,11 @@ export interface ISelectOption {
   rightText?: string
   active?: boolean
 }
+
+export type ITypeSelect = '' | 'light'
+
+export interface ISelect {
+  data: ISelectOption[]
+  typeStyle?: ITypeSelect
+  className?: string
+}

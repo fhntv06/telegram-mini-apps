@@ -1,29 +1,31 @@
 import { useState} from 'react'
 import { useSelector } from 'react-redux'
 import classNames from 'classnames/bind'
+import { AnimatePresence, motion, useWillChange } from 'framer-motion'
 import { Icon } from '../'
 import { useDisconnect, useSetLang } from '../../../hooks'
-import { ISelectOption } from './types'
+import {ISelectOption, ISelect } from './types'
 import { arLanguagesPhraseSite } from '../../constants'
 
 import styles from './Select.module.scss'
 
 const cx = classNames.bind(styles)
 
-interface IProps {
-  data: ISelectOption[]
-  typeStyle?: '' | 'light'
-  className?: string
-}
-
-export const Select = ({ data, className = '', typeStyle = '' }: IProps) => {
+export const Select = ({ data, className = '', typeStyle = '' }: ISelect) => {
+  const willChange = useWillChange()
   const handlerDisconnect = useDisconnect()
   const handlerSetLang = useSetLang()
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [disabled, setDisabled] = useState<boolean>(false)
   const [selectedOption, setSelectedOption] = useState<ISelectOption>(data.find((item) => item.active) || data[0]);
   const { name } = useSelector((state: any) => state.language)
 
-  const handleDropdownToggle = () => data.length > 1 && setIsOpen(!isOpen)
+  const handleDropdownToggle = () => {
+    if (data.length > 1 && !disabled) {
+      setIsOpen(!isOpen)
+      setDisabled(true)
+    }
+  }
   const handleOptionSelect = (option: ISelectOption) => {
     if (!option.blockSelect) setSelectedOption(option)
     handleDropdownToggle()
@@ -35,7 +37,7 @@ export const Select = ({ data, className = '', typeStyle = '' }: IProps) => {
   // @ts-ignore
   return (
     <div className={cx('select', className, typeStyle)}>
-      <div className={cx('select__header')} onClick={handleDropdownToggle}>
+      <button className={cx('select__header')} onClick={handleDropdownToggle} disabled={disabled}>
         <div className={cx('select__header-left')}>
           {(selectedOption.icon.indexOf('image/png') === -1)
             ? <Icon className={cx('select__icon')} name={selectedOption.icon} size='big'/>
@@ -45,34 +47,48 @@ export const Select = ({ data, className = '', typeStyle = '' }: IProps) => {
           <p>{selectedOption.customText ? selectedOption.name : arLanguagesPhraseSite[name][selectedOption.name]}</p>
         </div>
         <Icon name={isOpen ? 'arrow-up' : 'arrow-down'} size='big' />
-      </div>
-      {(data.length > 1 && isOpen) && (
-        <ul className={cx('select__list')}>
-          {data.map((item) => (
-            item.name !== selectedOption.name && (
-              <li
-                key={item.name}
-                className={cx('select__item', { disabled: item.disabled })}
-                onClick={() => {
-                  if (!item.disabled) {
-                    if (item.onClick) item.onClick()
-                    handleOptionSelect(item)
+      </button>
+      <AnimatePresence>
+        {(data.length > 1 && isOpen) && (
+          <motion.ul
+            className={cx('select__list')}
+            initial={{ maxHeight: 0 }}
+            animate={{ maxHeight: 194 }}
+            exit={{ maxHeight: 0 }}
+            transition={{
+              delay: .1,
+              duration: .3,
+              ease: isOpen ? 'easeIn' : 'easeOut',
+            }}
+            onAnimationComplete={() => setDisabled(false)}
+            style={{ willChange }}
+          >
+            {data.map((item) => (
+              item.name !== selectedOption.name && (
+                <li
+                  key={item.name}
+                  className={cx('select__item', { disabled: item.disabled })}
+                  onClick={() => {
+                    if (!item.disabled) {
+                      if (item.onClick) item.onClick()
+                      handleOptionSelect(item)
+                    }
+                  }}
+                >
+                  {(item.icon.indexOf('image/png') === -1 && item.icon.indexOf('.png') === -1)
+                    ? <Icon className={cx('select__icon')} name={item.icon} size='big'/>
+                    : <img src={item.icon} alt='icon' />
                   }
-                }}
-              >
-                {(item.icon.indexOf('image/png') === -1 && item.icon.indexOf('.png') === -1)
-                  ? <Icon className={cx('select__icon')} name={item.icon} size='big'/>
-                  : <img src={item.icon} alt='icon' />
-                }
-                {/* @ts-ignore */}
-                <p>{item.customText ? item.name : arLanguagesPhraseSite[name][item.name]}</p>
-                {/* @ts-ignore */}
-                {item.rightText && <p className={cx('select__item__right-text', 'p-x-small')}>{arLanguagesPhraseSite[name][item.rightText]}</p>}
-              </li>
-            )
-          ))}
-        </ul>
-      )}
+                  {/* @ts-ignore */}
+                  <p>{item.customText ? item.name : arLanguagesPhraseSite[name][item.name]}</p>
+                  {/* @ts-ignore */}
+                  {item.rightText && <p className={cx('select__item__right-text', 'p-x-small')}>{arLanguagesPhraseSite[name][item.rightText]}</p>}
+                </li>
+              )
+            ))}
+          </motion.ul>
+        )}
+      </AnimatePresence>
     </div>
   )
 }

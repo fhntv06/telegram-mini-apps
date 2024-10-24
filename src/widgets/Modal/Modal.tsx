@@ -5,6 +5,7 @@ import styles from './Modal.module.scss'
 
 import { IModalTypes } from './types'
 import { ButtonChangeMode, ButtonWallet, ButtonBurger } from '../../feature'
+import { AnimatePresence, motion, useWillChange } from 'framer-motion'
 
 const cx = classNames.bind(styles)
 
@@ -21,29 +22,45 @@ export const Modal = ({
   onClick,
   children
 }: IProps) => {
+  const willChange = useWillChange()
 
   return (
-    <div className={cx('modal', { isOpen: isOpen })}>
-      <header className={cx('modal__header')}>
-        <div className={cx('modal__header__buttons', typeModal)}>
-          <ButtonChangeMode
-            className={cx('modal__button-select__mode', { active: typeModal === 'select__mode' })}
-            isActive={typeModal === 'select__mode'}
-            onClick={onClick}
-          />
-          <ButtonWallet
-            className={cx('modal__button-wallet', { active: typeModal === 'wallet' })}
-            isActive={typeModal === 'wallet'}
-            onClick={onClick}
-          />
-        </div>
-        <ButtonBurger
-          className={cx('modal__button-burger', { active: typeModal === 'burger' })}
-          isActive={typeModal === 'burger'}
-          onClick={onClick}
-        />
-      </header>
-      {children}
-    </div>
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          className={cx('modal')}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{
+            delay: .1,
+            duration: .3,
+            ease: 'easeInOut',
+          }}
+          style={{ willChange }}
+        >
+          <header className={cx('modal__header')}>
+            <div className={cx('modal__header__buttons', typeModal)}>
+              <ButtonChangeMode
+                className={cx('modal__button-select__mode', { active: typeModal === 'select__mode' })}
+                isActive={typeModal === 'select__mode'}
+                onClick={onClick}
+              />
+              <ButtonWallet
+                className={cx('modal__button-wallet', { active: typeModal === 'wallet' })}
+                isActive={typeModal === 'wallet'}
+                onClick={onClick}
+              />
+            </div>
+            <ButtonBurger
+              className={cx('modal__button-burger', { active: typeModal === 'burger' })}
+              isActive={typeModal === 'burger'}
+              onClick={onClick}
+            />
+          </header>
+          {children}
+        </motion.div>
+      )}
+    </AnimatePresence>
   )
 }

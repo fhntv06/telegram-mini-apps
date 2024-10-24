@@ -15,6 +15,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
   padding: $offset12;
   margin-bottom: 2px;
   background-color: $dark-gray;
@@ -32,11 +33,13 @@
   column-gap: $offset12;
 }
 .select__list {
+  max-height: 200px;
   padding: 0 $offset12;
   background-color: $dark-gray;
   @include border('medium');
   list-style-type: none;
-  overflow: hidden;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 .select__item {
   display: flex;
