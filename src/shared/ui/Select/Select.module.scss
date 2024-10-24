@@ -32,16 +32,17 @@
   column-gap: $offset12;
 }
 .select__list {
-  padding: $offset12;
+  padding: 0 $offset12;
   background-color: $dark-gray;
   @include border('medium');
   list-style-type: none;
+  overflow: hidden;
 }
 .select__item {
   display: flex;
   align-items: center;
   column-gap: $offset12;
-  padding-top: $offset12;
+  padding: $offset12 0;
   cursor: pointer;
   transition: background-color 0.3s ease;
 
@@ -61,11 +62,7 @@
   &:focus {
     background-color: $black;
   }
-  &:first-child {
-    padding-top: 0;
-  }
   &:not(:last-child) {
-    padding-bottom: $offset12;
     border-bottom: 1px solid $black;
   }
 }

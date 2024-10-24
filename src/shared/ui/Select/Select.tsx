@@ -54,8 +54,10 @@ export const Select = ({ data, className = '', typeStyle = '' }: IProps) => {
                 key={item.name}
                 className={cx('select__item', { disabled: item.disabled })}
                 onClick={() => {
-                  if (item.onClick) item.onClick()
-                  handleOptionSelect(item)
+                  if (!item.disabled) {
+                    if (item.onClick) item.onClick()
+                    handleOptionSelect(item)
+                  }
                 }}
               >
                 {(item.icon.indexOf('image/png') === -1 && item.icon.indexOf('.png') === -1)

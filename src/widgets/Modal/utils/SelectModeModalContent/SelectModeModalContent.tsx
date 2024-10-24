@@ -22,19 +22,20 @@ const modeData = [
     name: '30 Seconds',
     rightText: 'commingSoon',
     icon: 'timer',
-    active: true
   },
   {
     name: '5 Minutes',
     rightText: 'commingSoon',
     icon: 'timer',
-    active: false
+    disabled: true,
+    blockSelect: true,
   },
   {
     name: '30 Minutes',
     rightText: 'commingSoon',
     icon: 'timer',
-    active: false
+    disabled: true,
+    blockSelect: true,
   },
 ]
 
