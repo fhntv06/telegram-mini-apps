@@ -71,6 +71,7 @@ h1, h2, p, .h1, .h2, .p, a, button {
   color: $white;
 }
 button {
+  background-color: unset;
   outline: none;
   border: none;
   cursor: pointer;
