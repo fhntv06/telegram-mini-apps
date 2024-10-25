@@ -35,12 +35,20 @@ a {
 .light {
 	background-color: $white-light;
 }
-.gray, .bet, .light {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	@include border('medium');
+button,
+a {
+	&.white {
+		background-color: $white;
+		color: $black;
+	}
+	&.gray, &.bet, &.light, &.white {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		@include border('medium');
+	}
 }
+
 .icon__left + span {
 	margin-left: $offset4;
 }

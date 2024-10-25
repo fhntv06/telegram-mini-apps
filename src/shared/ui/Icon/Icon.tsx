@@ -1,20 +1,15 @@
-import { type IconType, type IconNames } from './types';
-import classNames from 'classnames/bind';
-import styles from './Icon.module.scss';
+import classNames from 'classnames/bind'
+import styles from './Icon.module.scss'
 
-const cx = classNames.bind(styles);
+import { IIcon } from './types'
 
-interface Props {
-  className?: string;
-  name: IconNames | string;
-  size?: IconType,
-}
+const cx = classNames.bind(styles)
 
 export const Icon = ({
   className,
   name,
-  size = 'medium'
-}: Props) => {
+  size = 'medium',
+}: IIcon) => {
   return (
     <span className={cx('icon', className)}>
       <svg role='image' className={cx(size)} >
