@@ -88,6 +88,12 @@ export interface ILangPhrase {
 	'5 Minutes': string
 	'30 Minutes': string
 	commingSoon: string
+	onboarding: string[]
+	start: string
+	prev: string
+	next: string
+	skip: string
+	begin: string
 	alias: string
 }
 export interface ILanguage {
@@ -142,6 +148,19 @@ export const arLanguagesPhraseSite: ILanguage = {
 		'5 Minutes': '5 Minutes',
 		'30 Minutes': '30 Minutes',
 		commingSoon: 'COMMING SOON',
+		onboarding: [
+			'Predict the value of cryptoassets and earn on it',
+			'To get started connect your TON wallet',
+			'Choose the size of the investment and decide how the value of the asset will change GO UP or GO DOWN',
+			'At the end the round, the winners will get their earning directly to the same digatal wallet they signed the trade with',
+			'If you don\'t have enough money to participate, click on the “+” at the top of the screen and choose a convenient method of replenishment',
+			'You can change the mode by pressing the button in the upper left corner of the screen and selecting the desired parameters'
+		],
+		start: 'Start',
+		prev: 'Prev',
+		next: 'Next',
+		skip: 'Skip',
+		begin: 'Begin',
 		alias: 'en'
 	},
 	spanish: {
@@ -189,6 +208,19 @@ export const arLanguagesPhraseSite: ILanguage = {
 		'5 Minutes': '5 Minutos',
 		'30 Minutes': '30 Minutos',
 		commingSoon: 'MUY PRONTO',
+		onboarding: [
+			'Prediga el valor de los criptoactivos y gane con él',
+			'Para comenzar, conecte su billetera TON',
+			'Elija el tamaño de la inversión y decida cómo cambiará el valor del activo, SUBA o BAJE',
+			'Al final de la ronda, los ganadores recibirán sus ganancias directamente en la misma billetera digatal con la que firmaron el intercambio',
+			'Si no tiene suficiente dinero para participar, haga clic en el signo “+” en la parte superior de la pantalla y elija un método conveniente de reposición',
+			'Puede cambiar el modo presionando el botón en la esquina superior izquierda de la pantalla y seleccionando los parámetros deseados'
+		],
+		start: 'Inicio',
+		prev: 'Anterior',
+		next: 'Siguiente',
+		skip: 'Saltar',
+		begin: 'comenzar',
 		alias: 'es'
 	},
 	chinese: {
@@ -236,6 +268,19 @@ export const arLanguagesPhraseSite: ILanguage = {
 		'5 Minutes':'5分钟',
 		'30 Minutes':'30分钟',
 		commingSoon: '即将推出',
+		onboarding: [
+			'预测加密资产的价值并从中获利',
+			'要开始，连接你的钱包吨。..',
+			'选择投资的规模，并决定资产的价值将如何变化，上升或下降',
+			'在本轮结束时，获胜者将直接将他们的奖金存入他们签署交易所的同一个digatal钱包',
+			'如果您没有足够的资金参与，请点击屏幕顶部的"+"标志，并选择方便的补货方式',
+			'您可以通过按下屏幕左上角的按钮并选择所需的参数来更改模式'
+		],
+		start: '开始',
+		prev: '上一篇',
+		next: '下一个',
+		skip: '跳过',
+		begin: '開始啦。',
 		alias: 'zh'
 	},
 	russian: {
@@ -283,6 +328,19 @@ export const arLanguagesPhraseSite: ILanguage = {
 		'5 Minutes':'5 Минут',
 		'30 Minutes':'30 Минут',
 		commingSoon: 'СКОРО',
+		onboarding: [
+			'Прогнозируйте стоимость криптоактивов и зарабатывайте на этом',
+			'Для начала подключите свой кошелек TON',
+			'Выберите размер инвестиций и решите, как изменится стоимость актива - ПОВЫСИТСЯ или ПОНИЗИТСЯ',
+			'В конце раунда победители получат свои заработанные средства непосредственно на тот же цифровой кошелек, с помощью которого они заключили сделку',
+			'Если у вас недостаточно денег для участия, нажмите на “+” в верхней части экрана и выберите удобный способ пополнения',
+			'Вы можете изменить режим, нажав кнопку в левом верхнем углу экрана и выбрав нужные параметры'
+			],
+		start: 'Вперед',
+		prev: 'Предыдущий',
+		next: 'Следующий',
+		skip: 'Пропустить',
+		begin: 'Начать',
 		alias: 'ru'
 	},
 }

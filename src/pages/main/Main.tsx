@@ -2,12 +2,10 @@ import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { useTonAddress } from '@tonconnect/ui-react'
 import WebApp from '@twa-dev/sdk';
-// import { retrieveLaunchParams } from '@telegram-apps/sdk'
-// import { postEvent } from '@telegram-apps/sdk'
 import classNames from 'classnames/bind'
+import { AnimatePresence, motion, useWillChange } from 'framer-motion'
 import { postReferral } from '../../app/api'
-import { MainHeader, MainFooter, Chart } from '../../widgets'
-
+import { MainHeader, MainFooter, Chart, Onboarding } from '../../widgets'
 import { ModalProvider, NotificationProvider, AnimationProvider } from '../../app/providers'
 
 import styles from './Main.module.scss'
@@ -29,7 +27,8 @@ export const Main = () => {
   const address = useTonAddress()
   const userData = useUserData()
   const [referral, setReferral] = useState<string>('')
-  // const { initDataRaw, initData } = retrieveLaunchParams();
+  const [skipOnBoarding, setSkipOnBoarding] = useState<boolean>(false)
+  const willChange = useWillChange()
 
   useEffect(() => {
     if (!referral || !userData?.id || !address) {
@@ -83,23 +82,44 @@ export const Main = () => {
         )
       })
   }, [])
-  // postEvent('web_app_set_background_color', { color: '#1C1C1E' })
 
   return (
     isLoading
       ? <LoaderSpinner />
-      : (
-        <ModalProvider>
-          <NotificationProvider>
-            <AnimationProvider>
-              <main className={cx('main')}>
-                <MainHeader />
-                <Chart />
-                <MainFooter />
-              </main>
-            </AnimationProvider>
-          </NotificationProvider>
-        </ModalProvider>
-      )
+        : !skipOnBoarding
+          ? (
+            <AnimatePresence>
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{
+                  delay: .1,
+                  duration: .3,
+                  ease: 'easeIn',
+                }}
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  willChange,
+                  height: '100%',
+                }}
+              >
+                <Onboarding handlerSkip={setSkipOnBoarding}/>
+              </motion.div>
+            </AnimatePresence>
+          ) : (
+            <ModalProvider>
+              <NotificationProvider>
+                <AnimationProvider>
+                  <main className={cx('main')}>
+                    <MainHeader/>
+                    <Chart/>
+                    <MainFooter/>
+                  </main>
+                </AnimationProvider>
+              </NotificationProvider>
+            </ModalProvider>
+          )
   )
 }
