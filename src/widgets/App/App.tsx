@@ -5,8 +5,6 @@ import {
   Route,
   BrowserRouter,
   Routes,
-  useLocation,
-  useNavigate,
 } from 'react-router-dom'
 import { Provider } from 'react-redux';
 
@@ -14,26 +12,14 @@ import { routes } from '../../app/routes'
 import store from '../../app/store'
 
 function BackButtonManipulator() {
-  const location = useLocation();
-  const navigate = useNavigate();
-
   useEffect(() => {
-    function onClick() {
-      console.log('navigate -1')
-      navigate(-1)
-    }
-    WebApp.BackButton.onClick(onClick)
+    const closeApp = () => WebApp.close()
 
-    return () => WebApp.BackButton.offClick(onClick)
-  }, [navigate]);
+    WebApp.expand()
+    WebApp.BackButton.onClick(closeApp)
 
-  useEffect(() => {
-    if (location.pathname === '/') {
-      WebApp.BackButton.isVisible && WebApp.BackButton.hide()
-    } else {
-      !WebApp.BackButton.isVisible && WebApp.BackButton.show()
-    }
-  }, [location])
+    return () => WebApp.BackButton.offClick(closeApp)
+  }, []);
 
   return null;
 }
