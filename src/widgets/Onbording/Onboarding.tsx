@@ -32,6 +32,7 @@ export const Onboarding = ({ handlerSkip, className }: IOnbording) => {
         <AnimatePresence>
           {startOnboarding ? (
             <motion.div
+              className={cx('onboarding__screen')}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -39,13 +40,6 @@ export const Onboarding = ({ handlerSkip, className }: IOnbording) => {
                 delay: .2,
                 duration: .3,
                 ease: 'easeIn',
-              }}
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                willChange,
-                height: '100%',
-                padding: 16
               }}
             >
               <div className={cx('onboarding__screen__header')}>
