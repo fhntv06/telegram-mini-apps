@@ -30,6 +30,8 @@ export const useTransaction = (amount: number) => {
       network: mainnet ? CHAIN.MAINNET : CHAIN.TESTNET
     }
 
+    // TODO: когда отправлен то ставим картину и отправляем
+    // TODO: взять адрес картинки из user.photo_url
     await tonConnectUI.sendTransaction(transaction, configuration)
       .then(() => openHandler('youAreIn'))
       .catch((error) => console.error('Error sendTransaction: ', error))
