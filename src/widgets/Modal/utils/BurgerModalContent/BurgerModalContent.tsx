@@ -15,7 +15,7 @@ const walletData = [
   {
     name: 'topUp',
     icon: 'plus',
-    onClick: () => alert('Top up!'),
+    onClick: () => console.log('Top up!'),
     blockSelect: true,
   },
   {
