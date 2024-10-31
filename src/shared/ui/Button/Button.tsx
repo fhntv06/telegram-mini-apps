@@ -40,7 +40,7 @@ export const Button = ({
 		<>
 			{iconLeftName && <Icon className={cx('icon__left')} name={iconLeftName} size={sizeIcons || sizeLeftIcon} />}
 			{(children && iconLeftName && iconRightName) ? <span>{children}</span> : children}
-			{iconRightName && <Icon className={cx('icon__rigth')} name={iconRightName} size={sizeIcons || sizeRightIcon} />}
+			{iconRightName && <Icon className={cx('icon__right')} name={iconRightName} size={sizeIcons || sizeRightIcon} />}
 		</>
 	)
 	const classNames = cx(className, type, { active: active })

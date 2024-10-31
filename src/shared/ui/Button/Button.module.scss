@@ -13,11 +13,6 @@ a {
 	&.active {
 		background-color: $black;
 	}
-	&:hover,
-	&:active,
-	&:focus {
-		background-color: $black;
-	}
 }
 .gray, .light {
 	padding: $offset12;
@@ -52,6 +47,6 @@ a {
 .icon__left + span {
 	margin-left: $offset4;
 }
-.icon__rigth {
+.icon__right {
 	margin-left: $offset8;
 }

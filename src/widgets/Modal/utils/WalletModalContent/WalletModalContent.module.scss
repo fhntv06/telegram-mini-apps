@@ -42,12 +42,6 @@ header {
 }
 .coin {
   flex-basis: calc((100% - $offset8 * 3) / 4);
-
-  &:hover,
-  &:active,
-  &:focus {
-    background-color: $black;
-  }
 }
 .button__confirm {
   display: flex;
