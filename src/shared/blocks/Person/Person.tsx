@@ -1,20 +1,21 @@
 import classNames from 'classnames/bind'
+import { IPerson } from './types'
 import styles from './Person.module.scss'
 
 const cx = classNames.bind(styles)
 
 interface Props {
 	className?: string,
-	img: string
+	data: IPerson
 }
 
 export const Person = ({
 	className,
-	img
+	data,
 }: Props) => {
   return (
 		<div className={cx('person', className)}>
-			<img className={cx('person__img')} src={img}  alt={img}/>
+			{data.isPending ? 'test' : <img className={cx('person__img')} src={data.img}  alt={data.img} />}
 		</div>
   )
 }

@@ -1,4 +1,6 @@
+import { IPerson } from '../../shared/blocks/Person/types'
+
 export interface IDataPanel {
-  playersImg: string[]
+  bets: IPerson[]
   betPool: number
 }

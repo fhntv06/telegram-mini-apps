@@ -11,31 +11,35 @@ export const initialDataPriceHistory: number[] = ((min = 62000, max = 62001) => 
 })();
 export const initialDataGameStatus: IGameStatus = {
   upPoolData: {
-		playersImg: [
-			`/telegram-mini-apps/images/avatars/user_${Math.floor(Math.random() * (5 - 1 + 1) + 1)}.png`,
-			`/telegram-mini-apps/images/avatars/user_${Math.floor(Math.random() * (5 - 1 + 1) + 1)}.png`,
-			`/telegram-mini-apps/images/avatars/user_${Math.floor(Math.random() * (5 - 1 + 1) + 1)}.png`,
-			`/telegram-mini-apps/images/avatars/user_${Math.floor(Math.random() * (5 - 1 + 1) + 1)}.png`,
+		bets: [
+			{
+				img: `/telegram-mini-apps/images/avatars/user_${Math.floor(Math.random() * (5 - 1 + 1) + 1)}.png`,
+				isPending: true
+			},
 		],
 		betPool: 25 * 10**9
 	},
 	downPoolData: {
-		playersImg: [
-			`/telegram-mini-apps/images/avatars/user_${Math.floor(Math.random() * (5 - 1 + 1) + 1)}.png`,
-			`/telegram-mini-apps/images/avatars/user_${Math.floor(Math.random() * (5 - 1 + 1) + 1)}.png`,
-			`/telegram-mini-apps/images/avatars/user_${Math.floor(Math.random() * (5 - 1 + 1) + 1)}.png`,
-			`/telegram-mini-apps/images/avatars/user_${Math.floor(Math.random() * (5 - 1 + 1) + 1)}.png`,
-			`/telegram-mini-apps/images/avatars/user_${Math.floor(Math.random() * (5 - 1 + 1) + 1)}.png`,
-			`/telegram-mini-apps/images/avatars/user_${Math.floor(Math.random() * (5 - 1 + 1) + 1)}.png`,
-			`/telegram-mini-apps/images/avatars/user_${Math.floor(Math.random() * (5 - 1 + 1) + 1)}.png`,
-			`/telegram-mini-apps/images/avatars/user_${Math.floor(Math.random() * (5 - 1 + 1) + 1)}.png`,
+		bets: [
+			{
+				img: `/telegram-mini-apps/images/avatars/user_${Math.floor(Math.random() * (5 - 1 + 1) + 1)}.png`,
+				isPending: false
+			},
+			{
+				img: `/telegram-mini-apps/images/avatars/user_${Math.floor(Math.random() * (5 - 1 + 1) + 1)}.png`,
+				isPending: false
+			},
+			{
+				img: `/telegram-mini-apps/images/avatars/user_${Math.floor(Math.random() * (5 - 1 + 1) + 1)}.png`,
+				isPending: true
+			},
 		],
 		betPool: 15 * 10**9
 	},
 	totalBets: 50 * 10**9,
 	btcPrice: (Math.floor(Math.random() * (62001 - 62000 + 1))) + 62000,
 	startBtcPrice: (Math.floor(Math.random() * (62001 - 62000 + 1))) + 62000,
-	gamePhase: 4,
+	gamePhase: 0,
 	phaseTimeUntil: Date.now() + 30 * 1000,
 	gameResult: 0,
 	last3GamesRes: [Math.floor(Math.random() * (2 - 1 + 1)) + 1, Math.floor(Math.random() * (2 - 1 + 1)) + 1, Math.floor(Math.random() * (2 - 1 + 1)) + 1],

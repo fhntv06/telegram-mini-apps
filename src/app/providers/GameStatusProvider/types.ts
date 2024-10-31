@@ -1,12 +1,12 @@
-import { IRoundsType } from '../../../shared/types'
+import { IPerson, IRoundsType} from '../../../shared/types'
 
 export interface IGameStatus {
 	upPoolData: {
-		playersImg: string[]
+		bets: IPerson[]
 		betPool: number
 	},
 	downPoolData: {
-		playersImg: string[]
+		bets: IPerson[]
 		betPool: number
 	},
 	totalBets : number,

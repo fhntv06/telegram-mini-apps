@@ -1,3 +1,4 @@
 export interface IPerson {
-  img: string,
+  img: string
+  isPending: boolean
 }

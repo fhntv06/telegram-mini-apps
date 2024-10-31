@@ -3,11 +3,11 @@ import { IGameStatus } from '../../../providers/types';
 
 const initialState: IGameStatus = {
   upPoolData: {
-    playersImg: [],
+    bets: [],
     betPool: 0
   },
   downPoolData: {
-    playersImg: [],
+    bets: [],
     betPool: 0
   },
   totalBets : 0,
@@ -31,10 +31,10 @@ const gameStatusSlice = createSlice({
   initialState,
   reducers: {
     setGameStatus(state, action) {
-      state.upPoolData.playersImg = action.payload.upPoolData.playersImg;
+      state.upPoolData.bets = action.payload.upPoolData.bets;
       state.upPoolData.betPool = action.payload.upPoolData.betPool;
 
-      state.downPoolData.playersImg = action.payload.downPoolData.playersImg;
+      state.downPoolData.bets = action.payload.downPoolData.bets;
       state.downPoolData.betPool = action.payload.downPoolData.betPool;
 
       state.totalBets = action.payload.totalBets;

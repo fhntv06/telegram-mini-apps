@@ -19,8 +19,8 @@ interface Props {
 export const BetPanel = ({ data, type='up' }: Props) => {
 	const { gamePhase, gameResult, upPoolData, downPoolData } = useSelector((state: any) => state.gameStatus)
 	const [groupWins, setGroupWins] = useState<'up' | 'down'>(gameResult > 0 ? 'up' : 'down')
-	const { playersImg, betPool } = data
-	const count = playersImg.length - 5
+	const { bets, betPool } = data
+	const count = bets.length - 5
 	const [completedRound, setCompletedRound] = useState<boolean>(false)
 
 	// @ts-ignore
@@ -55,7 +55,7 @@ export const BetPanel = ({ data, type='up' }: Props) => {
 							<div className={cx('panel__data__players')}>
 								<p className={cx('players__total', 'p p-small')}>
 									<Icon name='persons'/>
-									{playersImg.length}
+									{bets.length}
 								</p>
 								<p className={cx('players__total', 'p p-small', type)}>
 									<Icon name='ton' size='medium' />
@@ -63,7 +63,7 @@ export const BetPanel = ({ data, type='up' }: Props) => {
 								</p>
 							</div>
 							<div className={cx('panel__data__persons')}>
-								{playersImg.slice(0, 5).map((img: string, index) => <Person key={`${img}_${index}`} img={img} />)}
+								{bets.slice(0, 5).map((betsItem, index) => <Person key={`${betsItem.playerImage}_${index}`} data={betsItem} />)}
 								{count > 0 && <p className={cx('panel__persons__count')}><span>{`+${count}`}</span></p>}
 							</div>
 						</div>

@@ -3,6 +3,7 @@ import { useContext, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { AnimationContext } from '../app/contexts'
 import { AnimationContextTypes } from '../app/providers/types'
+import {postDataBetDetailsPlayers} from "../app/api/user";
 
 export const useTransaction = (amount: number) => {
   const [tonConnectUI] = useTonConnectUI()
@@ -30,10 +31,29 @@ export const useTransaction = (amount: number) => {
       network: mainnet ? CHAIN.MAINNET : CHAIN.TESTNET
     }
 
-    // TODO: когда отправлен то ставим картину и отправляем
+    // TODO: postDataBetDetailsPlayers отправляем когда успех в transaction-signed
+
+    window.addEventListener('ton-connect-ui-transaction-signed', (event) => {
+      console.log('Transaction init', event.detail);
+    });
+
+    postDataBetDetailsPlayers({
+      //telegram_user_image: ,
+      wallet_address: address,
+      bet_amount: (amount * 1e9).toString(),
+      bet_status: placeBet === 'up'
+    })
+      .then(() => {
+
+      })
+      .catch((error) => console.error('Error postDataBetDetailsPlayers: ', error))
+
     // TODO: взять адрес картинки из user.photo_url
     await tonConnectUI.sendTransaction(transaction, configuration)
-      .then(() => openHandler('youAreIn'))
+      .then((data) => {
+        console.log('data success transaction', data)
+        openHandler('youAreIn')
+      })
       .catch((error) => console.error('Error sendTransaction: ', error))
 
     setTxInProcess(false)

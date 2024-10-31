@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react'
 import { IGameStatus } from '../app/providers/types'
-// import { initialDataGameStatus } from '../shared/constants'
+import { initialDataGameStatus } from '../shared/constants'
 
 const urlSocket = `${import.meta.env.VITE_SOCKET_PROTOCOL}://${import.meta.env.VITE_DOMAIN}:${import.meta.env.VITE_PORT}`
 
-const initTestData = false
+const initTestData = true
 
 export const useGameSocket = () => {
-  const [data, setData] = useState<IGameStatus>()
+  const [data, setData] = useState<IGameStatus>(initialDataGameStatus)
   const [error, setError] = useState<boolean>(false)
 
   const handlerConnection = () => {
@@ -26,8 +26,8 @@ export const useGameSocket = () => {
     }
     gameSocket.onmessage = (event) => {
       const {
-        up_pool_data: { players_img: players_img_up, betPool: betPoolUp },
-        down_pool_data: { players_img: players_img_down, betPool: betPoolDown },
+        up_pool_data: { bets: players_img_up, betPool: betPoolUp },
+        down_pool_data: { bets: players_img_down, betPool: betPoolDown },
         total_bets, btc_price, start_btc_price, game_phase, phase_time_until, game_result,
         last_3_games_res,
         live_players,
@@ -37,11 +37,11 @@ export const useGameSocket = () => {
 
       const data = {
         upPoolData: {
-          playersImg: players_img_up,
+          bets: players_img_up,
           betPool: betPoolUp,
         },
         downPoolData: {
-          playersImg: players_img_down,
+          bets: players_img_down,
           betPool: betPoolDown
         },
         totalBets : total_bets,
