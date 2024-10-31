@@ -114,7 +114,7 @@ export const WalletModalContent = ({ closeModalHandler }: IProps) => {
             >
               {copied}
             </motion.h2>
-            {`${address.slice(0, 4)}...${address.slice(address.length - 4)}`}
+            <p>{`${address.slice(0, 4)}...${address.slice(address.length - 4)}`}</p>
           </Button>
         </div>
       </div>
