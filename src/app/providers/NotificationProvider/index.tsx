@@ -13,7 +13,7 @@ export const NotificationProvider = ({ children }: IProps) => {
   const { tons, type, isOpen, openHandler, closeHandler, setTonsHandler } = useNotification();
 
   useEffect(() => {
-    const timer = setTimeout(closeHandler, 3000)
+    const timer = setTimeout(closeHandler, 5000)
 
     return () => clearTimeout(timer)
   }, [isOpen]);
