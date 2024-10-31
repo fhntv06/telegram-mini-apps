@@ -63,7 +63,7 @@ export const BetPanel = ({ data, type='up' }: Props) => {
 								</p>
 							</div>
 							<div className={cx('panel__data__persons')}>
-								{bets.slice(0, 5).map((betsItem, index) => <Person key={`${betsItem.playerImage}_${index}`} data={betsItem} />)}
+								{bets.slice(0, 5).map((betsItem, index) => <Person key={`${betsItem.img}_${index}`} data={betsItem} />)}
 								{count > 0 && <p className={cx('panel__persons__count')}><span>{`+${count}`}</span></p>}
 							</div>
 						</div>

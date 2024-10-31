@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react'
 import { IGameStatus } from '../app/providers/types'
-import { initialDataGameStatus } from '../shared/constants'
+// import { initialDataGameStatus } from '../shared/constants'
 
 const urlSocket = `${import.meta.env.VITE_SOCKET_PROTOCOL}://${import.meta.env.VITE_DOMAIN}:${import.meta.env.VITE_PORT}`
 
-const initTestData = true
+const initTestData = false
 
 export const useGameSocket = () => {
-  const [data, setData] = useState<IGameStatus>(initialDataGameStatus)
+  const [data, setData] = useState<IGameStatus>()
   const [error, setError] = useState<boolean>(false)
 
   const handlerConnection = () => {

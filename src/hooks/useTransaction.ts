@@ -1,18 +1,25 @@
-import { ActionConfiguration, SendTransactionRequest, useTonConnectUI, CHAIN } from '@tonconnect/ui-react'
+import {ActionConfiguration, SendTransactionRequest, useTonConnectUI, CHAIN, useTonWallet} from '@tonconnect/ui-react'
 import { useContext, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { AnimationContext } from '../app/contexts'
 import { AnimationContextTypes } from '../app/providers/types'
 import {postDataBetDetailsPlayers} from "../app/api/user";
+import {useUserData} from "./useUserData.ts";
 
 export const useTransaction = (amount: number) => {
+  const wallet = useTonWallet();
   const [tonConnectUI] = useTonConnectUI()
   const [txInProcess, setTxInProcess] = useState<boolean>(false)
   const { openHandler } = useContext<AnimationContextTypes>(AnimationContext)
   const { address, mainnet } = useSelector((state: any) => state.bets)
+  // const userData = useUserData()
+
+  // const initData = WebApp.initDataUnsafe;
 
   const sendTransaction = async (placeBet: string = 'up') => {
     setTxInProcess(true)
+
+    // console.log('initData userData ', initData.user)
 
     const configuration: ActionConfiguration = {
       modals: 'all',
@@ -33,20 +40,30 @@ export const useTransaction = (amount: number) => {
 
     // TODO: postDataBetDetailsPlayers отправляем когда успех в transaction-signed
 
-    window.addEventListener('ton-connect-ui-transaction-signed', (event) => {
-      console.log('Transaction init', event.detail);
-    });
-
     postDataBetDetailsPlayers({
-      //telegram_user_image: ,
+      telegram_user_image: userData?.photo_url || '',
       wallet_address: address,
-      bet_amount: (amount * 1e9).toString(),
-      bet_status: placeBet === 'up'
+      bet_amount: amount * 1e9,
+      variant_bet: placeBet
     })
-      .then(() => {
+        .then((res) => console.log('Data postDataBetDetailsPlayers: ', res.data))
+        .catch((error) => console.error('Error postDataBetDetailsPlayers: ', error))
+    return
 
+    window.addEventListener('ton-connect-ui-transaction-signed', (event) => {
+      console.log('Event ', 'ton-connect-ui-transaction-signed')
+      // @ts-ignore
+      console.log('Transaction init', event.detail)
+
+      postDataBetDetailsPlayers({
+        telegram_user_image: userData?.photo_url || '',
+        wallet_address: address,
+        bet_amount: (amount * 1e9).toString(),
+        variant_bet: placeBet
       })
-      .catch((error) => console.error('Error postDataBetDetailsPlayers: ', error))
+        .then((res) => console.log('Data postDataBetDetailsPlayers: ', res.data))
+        .catch((error) => console.error('Error postDataBetDetailsPlayers: ', error))
+    })
 
     // TODO: взять адрес картинки из user.photo_url
     await tonConnectUI.sendTransaction(transaction, configuration)

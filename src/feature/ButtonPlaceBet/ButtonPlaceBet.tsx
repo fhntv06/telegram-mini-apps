@@ -46,7 +46,8 @@ export const ButtonPlaceBet = ({
 			type='bet'
 			className={cx('button-placebet', type, 'p', { 'disabled': !bet })}
 			onClick={() => !wallet ? tonConnectUI.connectWallet() : handlerPlaceBet()}
-			disabled={disabled}
+			onClick={handlerPlaceBet}
+			disabled={false}
 		>
 			{textButton}
 		</Button>
