@@ -14,7 +14,7 @@ export const initialDataGameStatus: IGameStatus = {
 		bets: [
 			{
 				img: `/telegram-mini-apps/images/avatars/user_${Math.floor(Math.random() * (5 - 1 + 1) + 1)}.png`,
-				isPending: true
+				is_pending: true
 			},
 		],
 		betPool: 25 * 10**9

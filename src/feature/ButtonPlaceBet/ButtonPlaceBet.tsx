@@ -27,7 +27,7 @@ export const ButtonPlaceBet = ({
   // @ts-ignore
   const { goUp, goDown } = useGetPhrases(['goUp', 'goDown'])
 
-	const handlerPlaceBet = async () => {
+	const handlerPlaceBet = () => {
 		sendTransaction(type)
 		if (onClick) onClick()
 
@@ -46,8 +46,7 @@ export const ButtonPlaceBet = ({
 			type='bet'
 			className={cx('button-placebet', type, 'p', { 'disabled': !bet })}
 			onClick={() => !wallet ? tonConnectUI.connectWallet() : handlerPlaceBet()}
-			onClick={handlerPlaceBet}
-			disabled={false}
+			disabled={disabled}
 		>
 			{textButton}
 		</Button>

@@ -22,7 +22,8 @@ const ErrorBoundaryError: FC<{ error: unknown }> = ({ error }) => (
 
 export const Root: FC = () => {
   useEffect(() => {
-    // import('eruda').then((lib) => lib.default.init())
+    import('eruda').then((lib) => lib.default.init())
+
     new Promise((resolve) => resolve(null))
       .then(() => WebApp.setHeaderColor('#1C1C1E'))
   }, [])

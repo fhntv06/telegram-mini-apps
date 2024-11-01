@@ -44,7 +44,7 @@ export const Onboarding = ({ handlerSkip, className }: IOnbording) => {
             >
               <div className={cx('onboarding__screen__header')}>
                 <div className={cx('onboarding__screen__pagination')}>
-                  {indexSlideActive} / 5
+                  {indexSlideActive} / {screens}
                   <button className='p p-reg' onClick={() => handlerSkip(true)}>{skip}</button>
                 </div>
               </div>
@@ -67,7 +67,7 @@ export const Onboarding = ({ handlerSkip, className }: IOnbording) => {
                 spaceBetween={16}
               >
                 {[1, 2, 3, 4, 5].map((index) => (
-                  <div className={cx('onboarding__screen')}>
+                  <div key={index * index} className={cx('onboarding__screen')}>
                     <SwiperSlide className={cx('onboarding__screen__main')}>
                       <div className={cx('screen')}>
                         <div className={cx(`screen__${index}`)} />
