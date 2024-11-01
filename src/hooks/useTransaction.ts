@@ -12,12 +12,10 @@ export const useTransaction = (amount: number) => {
   const { address, mainnet } = useSelector((state: any) => state.bets)
   const userDataTelegram = useSelector((state: any) => state.userDataTelegram)
   const userDataWallet = useSelector((state: any) => state.userDataWallet)
-  // const [placeBet, setPlaceBet] = useState<'up' | 'down'>('up')
+  const [placeBet, setPlaceBet] = useState<'up' | 'down'>('up')
 
-  const handlerTransactionSignedEvent = (event: any) => {
+  const handlerTransactionSignedEvent = () => {
     console.log('Event ', 'ton-connect-ui-transaction-signed')
-    // @ts-ignore
-    console.log('Transaction init', event.detail)
 
     postDataBetDetailsPlayers({
       telegram_user_image: userDataTelegram?.photo_url ||
@@ -26,7 +24,7 @@ export const useTransaction = (amount: number) => {
         + import.meta.env.VITE_PORT + '/images/avatars/player1.svg',
       wallet_address: userDataWallet.address,
       bet_amount: amount * 1e9,
-      variant_bet: 'up' //placeBet
+      variant_bet: placeBet
     })
       .then((res) => console.log('Data postDataBetDetailsPlayers: ', res.data))
       .catch((error) => console.error('Error postDataBetDetailsPlayers: ', error))
@@ -35,8 +33,10 @@ export const useTransaction = (amount: number) => {
   useEffect(() => {
     window.addEventListener('ton-connect-ui-transaction-signed', handlerTransactionSignedEvent)
 
+    console.log('повешен ton-connect-ui-transaction-signed')
+
     return window.removeEventListener('ton-connect-ui-transaction-signed', handlerTransactionSignedEvent)
-  }, [])
+  }, [placeBet])
 
   const sendTransaction = async (placeBet: 'up' | 'down') => {
     setTxInProcess(true)
@@ -58,13 +58,13 @@ export const useTransaction = (amount: number) => {
       network: mainnet ? CHAIN.MAINNET : CHAIN.TESTNET
     }
 
-    // TODO: postDataBetDetailsPlayers отправляем когда успех в transaction-signed
+    setPlaceBet(placeBet)
 
-    // setPlaceBet(placeBet)
-
-    // TODO: взять адрес картинки из user.photo_url
     await tonConnectUI.sendTransaction(transaction, configuration)
-      .then(() => openHandler('youAreIn'))
+      .then(() => {
+        handlerTransactionSignedEvent()
+        openHandler('youAreIn')
+      })
       .catch((error) => console.error('Error sendTransaction: ', error))
 
     setTxInProcess(false)

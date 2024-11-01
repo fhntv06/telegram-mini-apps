@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { useTonAddress } from '@tonconnect/ui-react'
-import { initData, useSignal } from '@telegram-apps/sdk-react';
 import WebApp from '@twa-dev/sdk';
 import classNames from 'classnames/bind'
 import { AnimatePresence, motion, useWillChange } from 'framer-motion'
@@ -31,7 +30,6 @@ export const Main = () => {
   const [referral, setReferral] = useState<string>('')
   const [skipOnBoarding, setSkipOnBoarding] = useState<boolean>(false)
   const willChange = useWillChange()
-  const initDataState = useSignal(initData.state)
 
   useEffect(() => {
     if (!referral || !userData?.id || !address) {
