@@ -1,9 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { userReducer, betsReducer, gameStatusReducer, langReducer, modeReducer} from './slices'
+import { userDataWalletReducer, userDataTelegramReducer, betsReducer, gameStatusReducer, langReducer, modeReducer} from './slices'
 
 const store = configureStore({
     reducer: {
-        user: userReducer,
+        userDataWallet: userDataWalletReducer,
+        userDataTelegram: userDataTelegramReducer,
         bets: betsReducer,
         gameStatus: gameStatusReducer,
         language: langReducer,

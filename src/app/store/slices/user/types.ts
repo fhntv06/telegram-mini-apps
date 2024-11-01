@@ -8,6 +8,9 @@ export interface IUser {
     maxProtocolVersion: string
     platform: string
     balance: number
+}
+
+export interface IUserDataTelegram {
     id: number
     username: string
     photo_url: string
