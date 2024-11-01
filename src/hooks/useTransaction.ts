@@ -1,23 +1,45 @@
-import {ActionConfiguration, SendTransactionRequest, useTonConnectUI, CHAIN, useTonWallet} from '@tonconnect/ui-react'
-import { useContext, useState } from 'react'
+import { ActionConfiguration, SendTransactionRequest, useTonConnectUI, CHAIN } from '@tonconnect/ui-react'
+import {useContext, useEffect, useState} from 'react'
 import { useSelector } from 'react-redux'
 import { AnimationContext } from '../app/contexts'
 import { AnimationContextTypes } from '../app/providers/types'
-import {postDataBetDetailsPlayers} from "../app/api/user";
-import {useUserData} from "./useUserData.ts";
+import { postDataBetDetailsPlayers } from '../app/api/user'
 
 export const useTransaction = (amount: number) => {
-  const wallet = useTonWallet();
-  const userData = useUserData()
   const [tonConnectUI] = useTonConnectUI()
   const [txInProcess, setTxInProcess] = useState<boolean>(false)
   const { openHandler } = useContext<AnimationContextTypes>(AnimationContext)
   const { address, mainnet } = useSelector((state: any) => state.bets)
+  const userDataTelegram = useSelector((state: any) => state.userDataTelegram)
+  const userDataWallet = useSelector((state: any) => state.userDataWallet)
+  // const [placeBet, setPlaceBet] = useState<'up' | 'down'>('up')
 
-  const sendTransaction = async (placeBet: string = 'up') => {
+  const handlerTransactionSignedEvent = (event: any) => {
+    console.log('Event ', 'ton-connect-ui-transaction-signed')
+    // @ts-ignore
+    console.log('Transaction init', event.detail)
+
+    postDataBetDetailsPlayers({
+      telegram_user_image: userDataTelegram?.photo_url ||
+        import.meta.env.VITE_API_PROTOCOL + '://'
+        + import.meta.env.VITE_DOMAIN + ':'
+        + import.meta.env.VITE_PORT + '/images/avatars/player1.svg',
+      wallet_address: userDataWallet.address,
+      bet_amount: amount * 1e9,
+      variant_bet: 'up' //placeBet
+    })
+      .then((res) => console.log('Data postDataBetDetailsPlayers: ', res.data))
+      .catch((error) => console.error('Error postDataBetDetailsPlayers: ', error))
+  }
+
+  useEffect(() => {
+    window.addEventListener('ton-connect-ui-transaction-signed', handlerTransactionSignedEvent)
+
+    return window.removeEventListener('ton-connect-ui-transaction-signed', handlerTransactionSignedEvent)
+  }, [])
+
+  const sendTransaction = async (placeBet: 'up' | 'down') => {
     setTxInProcess(true)
-
-    // console.log('initData userData ', initData.user)
 
     const configuration: ActionConfiguration = {
       modals: 'all',
@@ -38,37 +60,11 @@ export const useTransaction = (amount: number) => {
 
     // TODO: postDataBetDetailsPlayers отправляем когда успех в transaction-signed
 
-    postDataBetDetailsPlayers({
-      telegram_user_image: userData?.photo_url || '',
-      wallet_address: wallet.account.address,
-      bet_amount: amount * 1e9,
-      variant_bet: placeBet
-    })
-        .then((res) => console.log('Data postDataBetDetailsPlayers: ', res.data))
-        .catch((error) => console.error('Error postDataBetDetailsPlayers: ', error))
-    return
-
-    window.addEventListener('ton-connect-ui-transaction-signed', (event) => {
-      console.log('Event ', 'ton-connect-ui-transaction-signed')
-      // @ts-ignore
-      console.log('Transaction init', event.detail)
-
-      postDataBetDetailsPlayers({
-        telegram_user_image: userData?.photo_url || '',
-        wallet_address: address,
-        bet_amount: (amount * 1e9).toString(),
-        variant_bet: placeBet
-      })
-        .then((res) => console.log('Data postDataBetDetailsPlayers: ', res.data))
-        .catch((error) => console.error('Error postDataBetDetailsPlayers: ', error))
-    })
+    // setPlaceBet(placeBet)
 
     // TODO: взять адрес картинки из user.photo_url
     await tonConnectUI.sendTransaction(transaction, configuration)
-      .then((data) => {
-        console.log('data success transaction', data)
-        openHandler('youAreIn')
-      })
+      .then(() => openHandler('youAreIn'))
       .catch((error) => console.error('Error sendTransaction: ', error))
 
     setTxInProcess(false)
