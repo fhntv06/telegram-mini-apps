@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { useTonAddress } from '@tonconnect/ui-react'
+import { initData, useSignal } from '@telegram-apps/sdk-react';
 import WebApp from '@twa-dev/sdk';
 import classNames from 'classnames/bind'
 import { AnimatePresence, motion, useWillChange } from 'framer-motion'
@@ -16,6 +17,7 @@ import { LoaderSpinner } from '../../shared'
 
 import { getAddressContract } from '../../app/api/game'
 import { setDataTransaction } from '../../app/store/slices/bets'
+import { setUserDataTelegram } from '../../app/store/slices/user'
 
 const cx = classNames.bind(styles)
 
@@ -29,8 +31,7 @@ export const Main = () => {
   const [referral, setReferral] = useState<string>('')
   const [skipOnBoarding, setSkipOnBoarding] = useState<boolean>(false)
   const willChange = useWillChange()
-
-    console.log('userData main ', userData)
+  const initDataState = useSignal(initData.state)
 
   useEffect(() => {
     if (!referral || !userData?.id || !address) {
@@ -55,6 +56,7 @@ export const Main = () => {
     }
   }, [referral])
 
+  // update data backend
   useEffect(() => {
     if (data && data.btcPrice && priceHistory.length) {
       setIsLoading(false)
@@ -62,7 +64,14 @@ export const Main = () => {
     }
   }, [data, priceHistory])
 
+  // initial process app
   useEffect(() => {
+    if (WebApp.initDataUnsafe && WebApp.initDataUnsafe.user) {
+      dispatch(
+        setUserDataTelegram(WebApp.initDataUnsafe.user)
+      )
+    }
+
     getAddressContract()
       .then(({ data: { address, mainnet } }) => {
         dispatch(
