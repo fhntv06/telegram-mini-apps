@@ -13,7 +13,7 @@ export const useUserData = () => {
         setUserDataTelegram(initData.user)
       )
     }
-  }, [initData])
+  }, [])
 
   return initData.user
 }

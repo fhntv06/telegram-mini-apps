@@ -30,6 +30,8 @@ export const Main = () => {
   const [skipOnBoarding, setSkipOnBoarding] = useState<boolean>(false)
   const willChange = useWillChange()
 
+    console.log('userData main ', userData)
+
   useEffect(() => {
     if (!referral || !userData?.id || !address) {
       new Error(`Error: for postReferral dont have user

@@ -8,13 +8,11 @@ import {useUserData} from "./useUserData.ts";
 
 export const useTransaction = (amount: number) => {
   const wallet = useTonWallet();
+  const userData = useUserData()
   const [tonConnectUI] = useTonConnectUI()
   const [txInProcess, setTxInProcess] = useState<boolean>(false)
   const { openHandler } = useContext<AnimationContextTypes>(AnimationContext)
   const { address, mainnet } = useSelector((state: any) => state.bets)
-  // const userData = useUserData()
-
-  // const initData = WebApp.initDataUnsafe;
 
   const sendTransaction = async (placeBet: string = 'up') => {
     setTxInProcess(true)
@@ -42,7 +40,7 @@ export const useTransaction = (amount: number) => {
 
     postDataBetDetailsPlayers({
       telegram_user_image: userData?.photo_url || '',
-      wallet_address: address,
+      wallet_address: wallet.account.address,
       bet_amount: amount * 1e9,
       variant_bet: placeBet
     })
