@@ -17,7 +17,7 @@ const sliceUserDataWallet = createSlice({
   name: 'userDataWallet',
   initialState,
   reducers: {
-    setUser: (state, action) => {
+    setUserDataWallet: (state, action) => {
       state.wallet = action.payload.wallet;
       state.chain = action.payload.chain;
       state.publicKey = action.payload.publicKey;
@@ -28,10 +28,10 @@ const sliceUserDataWallet = createSlice({
       state.platform = action.payload.platform;
       state.balance = action.payload.balance;
     },
-    removeUser: () => initialState
+    removeUserDataWallet: () => initialState
   }
 })
 
-export const { setUser, removeUser } = sliceUserDataWallet.actions
+export const { setUserDataWallet, removeUserDataWallet } = sliceUserDataWallet.actions
 
 export const userDataWalletReducer = sliceUserDataWallet.reducer

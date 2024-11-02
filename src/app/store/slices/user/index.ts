@@ -1,4 +1,4 @@
-export { setUser, removeUser } from './sliceUserDataWallet'
+export { setUserDataWallet, removeUserDataWallet } from './sliceUserDataWallet'
 export { setUserDataTelegram } from './sliceUserDataTelegram'
 
 export { userDataWalletReducer } from './sliceUserDataWallet'

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import classNames from 'classnames/bind'
 import { useTonWallet, useTonAddress } from '@tonconnect/ui-react'
 import { getBalance } from '../../app/api'
-import { setUser } from '../../app/store/slices/user'
+import { setUserDataWallet } from '../../app/store/slices/user'
 import { BetPanel, PanelButtonsBet } from '../../widgets'
 import { ButtonConnectWallet } from '../../feature'
 import { useGetPhrases } from '../../hooks'
@@ -42,7 +42,7 @@ export const MainFooter = () => {
 				.catch((error) => new Error(error))
 
 			dispatch(
-				setUser({
+				setUserDataWallet({
 					wallet,
 					chain: wallet.account.chain,
 					publicKey: wallet.account.publicKey,
