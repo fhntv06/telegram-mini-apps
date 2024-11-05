@@ -27,28 +27,37 @@ export const Main = () => {
   const priceHistory = usePriceHistory()
   const address = useTonAddress()
   const userData = useUserData()
-  const [referral, setReferral] = useState<string>('')
   const [skipOnBoarding, setSkipOnBoarding] = useState<boolean>(false)
   const willChange = useWillChange()
   const wallet = useTonWallet()
 
+  const handlerPostReferral = () => {
+    new Promise((resolve) => resolve(null))
+      .then(() => {
+        if (userData) dispatch(setUserDataTelegram(userData))
+
+        // For wait Telegram data
+        const data: { telegram_id: string, wallet_address?: string, referral?: string } = {
+          telegram_id: `${userData?.id}`,
+        }
+
+        if (address) {
+          data['wallet_address'] = address
+        }
+        if (WebApp.initDataUnsafe.start_param) {
+          data['referral'] = WebApp.initDataUnsafe.start_param
+        }
+
+        postReferral(data)
+          .then((res)=> console.log('Data post referral: ', res.data))
+          .catch((err) => console.log(err))
+      })
+  }
+
+  // for disconnect action
   useEffect(() => {
-    if (!userData?.id) new Error('Error: for postReferral dont have user telegram id!')
-    else {
-      const data: { telegram_id: string, wallet_address?: string, referral?: string } = {
-        telegram_id: `${userData?.id}`,
-      }
-
-      if (address) {
-        data['wallet_address'] = address
-      }
-      if (referral) {
-        data['referral'] = referral
-      }
-
-      postReferral(data)
-        .then((res)=> console.log('Data post referral: ', res.data))
-        .catch((err) => console.log(err))
+    if (userData?.id && wallet) {
+      handlerPostReferral()
     }
   }, [wallet])
 
@@ -62,31 +71,18 @@ export const Main = () => {
 
   // initial process app
   useEffect(() => {
-    if (WebApp.initDataUnsafe && WebApp.initDataUnsafe.user) {
-      dispatch(
-        setUserDataTelegram(WebApp.initDataUnsafe.user)
-      )
-    }
+    if (userData?.id) handlerPostReferral()
+    else new Error('Error: for postReferral dont have user telegram id!')
 
     getAddressContract()
-      .then(({ data: { address, mainnet } }) => {
-        dispatch(
-          setDataTransaction({ address, mainnet })
-        )
-
-        if (WebApp.initDataUnsafe.start_param) {
-          setReferral(WebApp.initDataUnsafe.start_param || '')
-        }
-      })
+      .then(({ data: { address, mainnet } }) => dispatch(setDataTransaction({ address, mainnet })))
       .catch((error) => {
         new Error('Error in getAddressContract: ' + error)
 
-        dispatch(
-          setDataTransaction({
+        dispatch(setDataTransaction({
             address: import.meta.env.VITE_ADDRESS_TRANSACTION,
             mainnet: true
-          })
-        )
+          }))
       })
   }, [])
 
