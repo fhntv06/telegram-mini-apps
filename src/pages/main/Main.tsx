@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux';
-import { useTonAddress } from '@tonconnect/ui-react'
+import { useTonAddress, useTonWallet } from '@tonconnect/ui-react'
 import WebApp from '@twa-dev/sdk';
 import classNames from 'classnames/bind'
 import { AnimatePresence, motion, useWillChange } from 'framer-motion'
@@ -30,29 +30,27 @@ export const Main = () => {
   const [referral, setReferral] = useState<string>('')
   const [skipOnBoarding, setSkipOnBoarding] = useState<boolean>(false)
   const willChange = useWillChange()
+  const wallet = useTonWallet()
 
   useEffect(() => {
-    if (!referral || !userData?.id || !address) {
-      new Error(`Error: for postReferral dont have user
-        ${!referral ? 'referral' : !userData?.id ? 'telegram id' : !address ? 'address' : ''}
-      !`)
-    } else {
-      // TODO: вынести логику лишних запросов выше
-      postReferral(
-        {
-          telegram_id: `${userData?.id}`,
-          wallet_address: address,
-          referral,
-        }
-      )
-        .then((res)=> {
-          console.log('Data post referral: ', res.data)
-        })
-        .catch((err) => {
-          console.log(err)
-        })
+    if (!userData?.id) new Error('Error: for postReferral dont have user telegram id!')
+    else {
+      const data: { telegram_id: string, wallet_address?: string, referral?: string } = {
+        telegram_id: `${userData?.id}`,
+      }
+
+      if (address) {
+        data['wallet_address'] = address
+      }
+      if (referral) {
+        data['referral'] = referral
+      }
+
+      postReferral(data)
+        .then((res)=> console.log('Data post referral: ', res.data))
+        .catch((err) => console.log(err))
     }
-  }, [referral])
+  }, [wallet])
 
   // update data backend
   useEffect(() => {
