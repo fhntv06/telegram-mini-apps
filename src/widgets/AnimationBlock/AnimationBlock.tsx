@@ -1,8 +1,9 @@
 import Lottie from 'react-lottie'
-import { AnimatePresence } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import winAnimationData from '../../shared/assets/animation/win.json'
 import consolidatingBetsData from '../../shared/assets/animation/consolidatingBets.json'
 import youAreInData from '../../shared/assets/animation/youAreIn.json'
+import loadPerson from '../../shared/assets/animation/loadPerson.json'
 
 const defaultOptions = {
   loop: false,
@@ -52,10 +53,20 @@ const listAnimates = {
     styles: {
       ...styles,
       top: '40%',
-      width: '45%',
+      width: '55%',
       height: '45%',
     },
     animation: youAreInData,
+    settings: {
+    }
+  },
+  loadPerson: {
+    styles: {
+      ...styles,
+      width: '100%',
+      height: '100%',
+    },
+    animation: loadPerson,
     settings: {
     }
   }
@@ -70,7 +81,17 @@ export const AnimationBlock = ({ animation } :IProps) => {
     <AnimatePresence>
       {animation && (
         // @ts-ignore
-        <div style={listAnimates[animation].styles}>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{
+            delay: .1,
+            duration: .3,
+            ease: 'easeIn',
+          }}
+          style={listAnimates[animation].styles}
+        >
           <Lottie
             options={{
               ...defaultOptions,
@@ -80,7 +101,7 @@ export const AnimationBlock = ({ animation } :IProps) => {
               animationData: listAnimates[animation].animation,
             }}
           />
-        </div>
+        </motion.div>
       )}
     </AnimatePresence>
   )

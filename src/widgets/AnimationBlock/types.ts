@@ -1,1 +1,1 @@
-export type IAnimationTypes = 'wins' | 'consolidate' | 'youAreIn' | null
+export type IAnimationTypes = 'wins' | 'consolidate' | 'youAreIn' | 'loadPerson' | null
