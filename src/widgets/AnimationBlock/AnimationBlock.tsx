@@ -90,6 +90,7 @@ export const AnimationBlock = ({ animation } :IProps) => {
             duration: .3,
             ease: 'easeIn',
           }}
+          // @ts-ignore
           style={listAnimates[animation].styles}
         >
           <Lottie
