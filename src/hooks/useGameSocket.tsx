@@ -24,40 +24,7 @@ export const useGameSocket = () => {
         clearTimeout(timer)
       }, 2000)
     }
-    gameSocket.onmessage = (event) => {
-      const {
-        up_pool_data: { bets: players_img_up, betPool: betPoolUp },
-        down_pool_data: { bets: players_img_down, betPool: betPoolDown },
-        total_bets, btc_price, start_btc_price, game_phase, phase_time_until, game_result,
-        last_3_games_res,
-        live_players,
-        all_time_wins,
-        win_percent: { down_percent, up_percent }
-      } = JSON.parse(event.data)
-
-      const data = {
-        upPoolData: {
-          bets: players_img_up,
-          betPool: betPoolUp,
-        },
-        downPoolData: {
-          bets: players_img_down,
-          betPool: betPoolDown
-        },
-        totalBets : total_bets,
-        btcPrice: btc_price,
-        startBtcPrice: start_btc_price,
-        gamePhase: game_phase,
-        phaseTimeUntil: phase_time_until,
-        gameResult: game_result,
-        last3GamesRes: last_3_games_res,
-        livePlayers: live_players,
-        allTimeWins: all_time_wins,
-        winPercent: { downPercent: down_percent, upPercent: up_percent },
-      }
-
-      setData(data)
-    };
+    gameSocket.onmessage = (event) => setData(JSON.parse(event.data))
     gameSocket.onerror = (event) => console.log("game socket error: ", event)
   }
 
