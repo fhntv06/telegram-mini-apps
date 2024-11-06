@@ -37,12 +37,12 @@ export const Main = () => {
         if (userData) dispatch(setUserDataTelegram(userData))
 
         // For wait Telegram data
-        const data: { telegram_id: string, wallet_address?: string, referral?: string } = {
-          telegram_id: `${userData?.id}`,
+        const data: { telegramId: string, walletAddress?: string, referral?: string } = {
+          telegramId: `${userData?.id}`,
         }
 
         if (address) {
-          data['wallet_address'] = address
+          data['walletAddress'] = address
         }
         if (WebApp.initDataUnsafe.start_param) {
           data['referral'] = WebApp.initDataUnsafe.start_param
