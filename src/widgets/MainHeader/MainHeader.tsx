@@ -33,9 +33,9 @@ export const MainHeader = () => {
             if (res.data.error) {
               throw new Error('Error getWalletBet: res have error')
             }
-            if (res.data.win_reward) {
+            if (res.data.winReward) {
               openHandlerNotification('wins')
-              setTonsHandler(res.data.win_reward)
+              setTonsHandler(res.data.winReward)
               openHandlerAnimation('wins')
             } else if (res.data.loose) {
               openHandlerNotification('lose')
@@ -45,9 +45,7 @@ export const MainHeader = () => {
               setTonsHandler(res.data.refund)
             }
           })
-          .catch((error) => {
-            console.log(error)
-          })
+          .catch((error) => console.log(error))
       }
 		}
 	}, [gamePhase]);

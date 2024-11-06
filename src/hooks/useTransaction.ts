@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 import { AnimationContext } from '../app/contexts'
 import { AnimationContextTypes } from '../app/providers/types'
 import { postDataBetDetailsPlayers } from '../app/api/user'
+import {useUserData} from "./useUserData.ts";
 
 export const useTransaction = (amount: number) => {
   const tonAddress = useTonAddress()
@@ -11,7 +12,7 @@ export const useTransaction = (amount: number) => {
   const [txInProcess, setTxInProcess] = useState<boolean>(false)
   const { openHandler } = useContext<AnimationContextTypes>(AnimationContext)
   const { address, mainnet } = useSelector((state: any) => state.bets)
-  const userDataTelegram = useSelector((state: any) => state.userDataTelegram)
+  const userData = useUserData()
 
   const sendTransaction = async (placeBet: 'up' | 'down') => {
     setTxInProcess(true)
@@ -35,14 +36,16 @@ export const useTransaction = (amount: number) => {
 
     await tonConnectUI.sendTransaction(transaction, configuration)
       .then(() => {
-        postDataBetDetailsPlayers({
-          telegram_id: userDataTelegram.id,
-          wallet_address: tonAddress,
-          bet_amount: amount * 1e9,
-          variant_bet: placeBet
-        })
-          .then(() => openHandler('youAreIn'))
-          .catch((error) => console.error('Error postDataBetDetailsPlayers: ', error))
+        if (userData?.id) {
+          postDataBetDetailsPlayers({
+            telegramId: userData?.id,
+            walletAddress: tonAddress,
+            betAmount: amount * 1e9,
+            variantBet: placeBet
+          })
+            .then(() => openHandler('youAreIn'))
+            .catch((error) => console.error('Error postDataBetDetailsPlayers: ', error))
+        }
       })
       .catch((error) => console.error('Error sendTransaction: ', error))
 
