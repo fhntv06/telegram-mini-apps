@@ -35,15 +35,6 @@ export const useTransaction = (amount: number) => {
 
     await tonConnectUI.sendTransaction(transaction, configuration)
       .then(() => {
-        console.log('send postDataBetDetailsPlayers ',
-          {
-            telegram_id: userDataTelegram.id,
-            wallet_address: tonAddress,
-            bet_amount: amount * 1e9,
-            variant_bet: placeBet
-          }
-        )
-
         postDataBetDetailsPlayers({
           telegram_id: userDataTelegram.id,
           wallet_address: tonAddress,
