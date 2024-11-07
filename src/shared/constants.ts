@@ -14,7 +14,7 @@ export const initialDataGameStatus: IGameStatus = {
 		bets: [
 			{
 				img: `/telegram-mini-apps/images/avatars/user_${Math.floor(Math.random() * (5 - 1 + 1) + 1)}.png`,
-				is_pending: true
+				isPending: true
 			},
 		],
 		betPool: 25 * 10**9
@@ -23,15 +23,15 @@ export const initialDataGameStatus: IGameStatus = {
 		bets: [
 			{
 				img: `/telegram-mini-apps/images/avatars/user_${Math.floor(Math.random() * (5 - 1 + 1) + 1)}.png`,
-				is_pending: false
+				isPending: false
 			},
 			{
 				img: `/telegram-mini-apps/images/avatars/user_${Math.floor(Math.random() * (5 - 1 + 1) + 1)}.png`,
-				is_pending: false
+				isPending: false
 			},
 			{
 				img: `/telegram-mini-apps/images/avatars/user_${Math.floor(Math.random() * (5 - 1 + 1) + 1)}.png`,
-				is_pending: true
+				isPending: true
 			},
 		],
 		betPool: 15 * 10**9

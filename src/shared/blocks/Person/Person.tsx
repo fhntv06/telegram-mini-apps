@@ -16,13 +16,13 @@ export const Person = ({
 	className,
 	data,
 }: Props) => {
-	const { img, is_pending } = data
+	const { img, isPending } = data
 	const { type, openHandler, closeHandler } = useAnimation()
 
 	useEffect(() => {
-		if (is_pending) openHandler('loadPerson')
+		if (isPending) openHandler('loadPerson')
 		else closeHandler()
-	}, [is_pending]);
+	}, [isPending])
 
   return (
 		<div className={cx('person', className)}>

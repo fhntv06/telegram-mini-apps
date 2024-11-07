@@ -12,14 +12,14 @@ const cx = classNames.bind(styles)
 interface IProps {
   isOpen: boolean,
   typeModal: IModalTypes,
-  onClick: () => void,
+  closeHandler: () => void,
   children: React.ReactNode
 }
 
 export const Modal = ({
   isOpen = false,
   typeModal = 'burger',
-  onClick,
+  closeHandler,
   children
 }: IProps) => {
   const willChange = useWillChange()
@@ -43,20 +43,20 @@ export const Modal = ({
             <header className={cx('modal__header')}>
               <div className={cx('modal__header__buttons', typeModal)}>
                 <ButtonChangeMode
-                    className={cx('modal__button-select__mode', {active: typeModal === 'select__mode'})}
-                    isActive={typeModal === 'select__mode'}
-                    onClick={onClick}
+                  className={cx('modal__button-select__mode', {active: typeModal === 'select__mode'})}
+                  isActive={typeModal === 'select__mode'}
+                  onClick={closeHandler}
                 />
                 <ButtonWallet
-                    className={cx('modal__button-wallet', {active: typeModal === 'wallet'})}
-                    isActive={typeModal === 'wallet'}
-                    onClick={onClick}
+                  className={cx('modal__button-wallet', {active: typeModal === 'wallet'})}
+                  isActive={typeModal === 'wallet'}
+                  onClick={closeHandler}
                 />
               </div>
               <ButtonBurger
-                  className={cx('modal__button-burger', {active: typeModal === 'burger'})}
-                  isActive={typeModal === 'burger'}
-                  onClick={onClick}
+                className={cx('modal__button-burger', {active: typeModal === 'burger'})}
+                isActive={typeModal === 'burger'}
+                onClick={closeHandler}
               />
             </header>
             {children}
@@ -73,6 +73,7 @@ export const Modal = ({
              ease: 'easeInOut',
             }}
             style={{willChange}}
+            onClick={closeHandler}
           />
         </>
       )}

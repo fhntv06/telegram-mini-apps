@@ -26,27 +26,27 @@ export const MainHeader = () => {
 			openHandlerNotification('warning')
 		}
 		if (gamePhase === 4 && address && bet) {
-			getWalletBet(address)
-				.then((res) => {
-					console.log('res getWalletBet', res)
-					if (res.data.error) {
-						throw new Error('Error getWalletBet: res have error')
-					}
-					if (res.data.win_reward) {
-						openHandlerNotification('wins')
-						setTonsHandler(res.data.win_reward)
-						openHandlerAnimation('wins')
-					} else if (res.data.loose) {
-						openHandlerNotification('lose')
-						setTonsHandler(res.data.loose)
-					} else if (res.data.refund) {
-						openHandlerNotification('refund')
-						setTonsHandler(res.data.refund)
-					}
-				})
-				.catch((error) => {
-					console.log(error)
-				})
+      if (address) {
+        getWalletBet(address)
+          .then((res) => {
+            console.log('res getWalletBet', res)
+            if (res.data.error) {
+              throw new Error('Error getWalletBet: res have error')
+            }
+            if (res.data.winReward) {
+              openHandlerNotification('wins')
+              setTonsHandler(res.data.winReward)
+              openHandlerAnimation('wins')
+            } else if (res.data.loose) {
+              openHandlerNotification('lose')
+              setTonsHandler(res.data.loose)
+            } else if (res.data.refund) {
+              openHandlerNotification('refund')
+              setTonsHandler(res.data.refund)
+            }
+          })
+          .catch((error) => console.log(error))
+      }
 		}
 	}, [gamePhase]);
 
