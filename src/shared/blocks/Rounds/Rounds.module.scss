@@ -1,8 +1,7 @@
 @import '../../assets/styles/basics.scss';
 
 .rounds {
-	width: 20px;
-	padding: $offset4;
+	padding: 2px;
 	@include border('small');
 
 	&.up {
