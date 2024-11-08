@@ -1,36 +1,28 @@
 @use 'sass:math';
 @import '../../assets/styles/basics';
 
-$sizeicon: 24px;
+$sizeIcon: 24px;
 
 .icon {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 
+	use {
+		height: 100%;
+		width: 100%;
+	}
 	.small {
 		height: 12px;
 		width: 12px;
-
-		use {
-			transform: scale(math.div(12px, $sizeicon));
-		}
 	}
 	.medium {
 		height: 16px;
 		width: 16px;
-
-		use {
-			transform: scale(math.div(16px, $sizeicon));
-		}
 	}
 	.big {
 		height: 24px;
 		width: 24px;
-
-		use {
-			transform: scale(math.div(24px, $sizeicon));
-		}
 	}
 	.logo {
 		width: 240px;

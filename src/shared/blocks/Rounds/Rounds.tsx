@@ -7,15 +7,15 @@ const cx = classNames.bind(styles)
 
 const countTypeClasses = [
 	{
-		nameIcon: 'arrow-down',
+		nameIcon: 'arrow-down-medium',
 		className: 'down'
 	},
 	{
-		nameIcon: 'arrow-up',
+		nameIcon: 'arrow-up-medium',
 		className: 'up'
 	},
 	{
-		nameIcon: 'refund',
+		nameIcon: 'refund-medium',
 		className: 'refund'
 	}
 ]
@@ -23,7 +23,7 @@ const countTypeClasses = [
 export const Rounds = ({ countType }: IRounds) => {
 	return (
 		<div className={cx('rounds', countTypeClasses[countType].className)}>
-			<Icon name={countTypeClasses[countType].nameIcon} size='small' />
+			<Icon name={countTypeClasses[countType].nameIcon} size='medium' />
 		</div>
 	)
 }

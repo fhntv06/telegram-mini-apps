@@ -75,7 +75,7 @@ export const MainFooter = () => {
 				<div className={cx('footer__header__time-wins')}>
 					<h2>{allTimeWins}</h2>
 					<p>
-						<Icon name='ton' size='medium' />
+						<Icon name='ton-medium' size='medium' />
 						{getCorrectBalanceWithFormatNumber(allTimeWinsCount)}
 					</p>
 				</div>

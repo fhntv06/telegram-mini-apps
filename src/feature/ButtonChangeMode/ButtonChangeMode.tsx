@@ -21,8 +21,8 @@ export const ButtonChangeMode = ({
 		<Button
 			className={cx('button', className)}
 			type='gray'
-			iconLeftName='bitcoin'
-			iconRightName={isActive ? 'arrow-up' : 'arrow-down'}
+			iconLeftName='bitcoin-medium'
+			iconRightName={isActive ? 'arrow-up-medium' : 'arrow-down-medium'}
 			onClick={onClick}
 		>
 			{textMode}
