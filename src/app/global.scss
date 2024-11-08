@@ -1,5 +1,10 @@
 @import '../shared/assets/styles/basics.scss';
 
+@font-face {
+  font-family: 'Inter';
+  src: url('../shared/assets/fonts/Inter.woff2') format('woff2')
+}
+
 * {
   margin: 0;
   padding: 0;

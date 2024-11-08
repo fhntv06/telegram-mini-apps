@@ -54,11 +54,11 @@ export const BetPanel = ({ data, type='up' }: Props) => {
 						<div className={cx('panel__data')}>
 							<div className={cx('panel__data__players')}>
 								<p className={cx('players__total', 'p p-small')}>
-									<Icon name='persons'/>
+									<Icon name='persons-medium'/>
 									{bets.length}
 								</p>
-								<p className={cx('players__total', 'p p-small', type)}>
-									<Icon name='ton' size='medium' />
+								<p className={cx('players__total', 'p-small', type)}>
+									<Icon name='ton-medium' size='medium' />
 									{formatIntTonNumber(betPool)}
 								</p>
 							</div>
