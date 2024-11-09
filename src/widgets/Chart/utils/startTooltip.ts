@@ -1,4 +1,4 @@
-import { type Plugin } from "chart.js";
+import { type Plugin } from "chart.js"
 
 const imgFlag = new Image()
 const loadImgFlag = () => {
@@ -8,31 +8,26 @@ const loadImgFlag = () => {
 export const startTooltip: Plugin<"line"> = {
   id: "startTooltip",
   afterDraw: (chart, _args, options) => {
-    if (
-      options.startPrice === 0 ||
-      options.startPrice === null ||
-      options.startPrice === undefined ||
-      options.gamePhase !== 3
-    ) return
+    if (options.startBtcPrice === 0 || options.gamePhase !== 3) return
     
     const { ctx } = chart
     ctx.save()
 
-    const dataset = chart.data.datasets[0].data;
+    const dataset = chart.data.datasets[0].data
 
     const minValue = Math.min(
       ...(dataset.slice(0, dataset.length - 21) as number[])
-    );
+    )
     const maxValue = Math.max(
       ...(dataset.slice(0, dataset.length - 21) as number[])
-    );
+    )
 
-    const procent = (options.startPrice - minValue) / (maxValue - minValue)
+    const procent = (options.startBtcPrice - minValue) / (maxValue - minValue)
     const minValueY = chart.scales.y.getPixelForValue(minValue)
     const maxValueY = chart.scales.y.getPixelForValue(maxValue)
 
     let y = minValueY - procent * (minValueY - maxValueY)
-    y = isNaN(y) ? 0 : y;
+    y = isNaN(y) ? 0 : y
 
     const widthTooltip = 93
     const heightTooltip = 24
@@ -52,7 +47,7 @@ export const startTooltip: Plugin<"line"> = {
     ctx.fillStyle = "white"
     ctx.textAlign = "center"
     ctx.fillText(
-      Number(options.startPrice).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&.'),
+      Number(options.startBtcPrice).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&.'),
       marginX + marginXTolltip + widthTooltip / 2,
       y + 4
     )

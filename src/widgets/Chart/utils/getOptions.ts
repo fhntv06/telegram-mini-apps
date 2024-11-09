@@ -13,7 +13,7 @@ const colors = {
 
 export function getOptions(
   btcPrice:  number | Point | null,
-  startPrice: number,
+  startBtcPrice: number,
   gamePhase: number,
 ): ChartOptions {
   return {
@@ -24,9 +24,9 @@ export function getOptions(
       weight: 500,
     },
     plugins: {
-      showTooltip: { btcPrice, startPrice, gamePhase },
-      startTooltip: { startPrice, gamePhase },
-      backgroundSplit: { btcPrice, startPrice, gamePhase },
+      showTooltip: { btcPrice, startBtcPrice, gamePhase },
+      startTooltip: { startBtcPrice, btcPrice, gamePhase },
+      backgroundSplit: { btcPrice, startBtcPrice, gamePhase },
       legend: {
         display: false,
       },

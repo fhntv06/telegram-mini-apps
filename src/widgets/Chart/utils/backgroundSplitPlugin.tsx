@@ -8,9 +8,9 @@ export const backgroundSplitPlugin: Plugin<"line"> = {
     const dataset = chart.data.datasets[0].data;
     if (!ctx || !chartArea || dataset.length === 0) return;
 
-    const y = options.gamePhase !== 3
+    const y = (options.gamePhase !== 3 || options.startBtcPrice === 0)
       ? chart.scales.y.getPixelForValue(options.btcPrice)
-      : chart.scales.y.getPixelForValue(options.startPrice)
+      : chart.scales.y.getPixelForValue(options.startBtcPrice)
 
     ctx.save();
 
