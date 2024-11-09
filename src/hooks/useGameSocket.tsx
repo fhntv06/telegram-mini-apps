@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react'
 import { IGameStatus } from '../app/providers/types'
-// import { initialDataGameStatus } from '../shared/constants'
+import { initialDataGameStatus } from '../shared/constants'
 
 const urlSocket = `${import.meta.env.VITE_SOCKET_PROTOCOL}://${import.meta.env.VITE_DOMAIN}:${import.meta.env.VITE_PORT}`
 
-const initTestData = false
+const initTestData = true
 
 export const useGameSocket = () => {
-  const [data, setData] = useState<IGameStatus>()
+  const [data, setData] = useState<IGameStatus>(initialDataGameStatus)
   const [error, setError] = useState<boolean>(false)
 
   const handlerConnection = () => {
@@ -29,15 +29,26 @@ export const useGameSocket = () => {
   }
 
   const handlerTestConnection = () => {
+    const signs = [-1, 1];
+    const defaultMax = 62050
+    const defaultMin = 61950
+
     const interval = setInterval(() => {
+      const offsetDynamic = Math.random() * (50 - 10 + 1) + 10
+      const randomIndex = Math.floor(Math.random() * signs.length)
+      const signOffsetDynamic = signs[randomIndex] * offsetDynamic
+
+      console.log(signOffsetDynamic)
+
+      const dynamicValue = (Math.random() * (defaultMax + signOffsetDynamic - defaultMin + signOffsetDynamic + 1)) + defaultMin + signOffsetDynamic
       // Эмуляция получения нового сообщения каждую секунду
       // Обновляем состояние с новыми данными
 
       // @ts-ignore
       setData((prevData: IGameStatus) => ({
         ...prevData, // Сохраняем все предыдущие данные
-        btcPrice: (Math.random() * (62001 - 62000 + 1)) + 62000 // Обновляем поле priceHistory
-      }));
+        btcPrice: dynamicValue, // Обновляем поле priceHistory
+      }))
 
     }, 500)
 

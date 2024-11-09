@@ -7,3 +7,10 @@
   @include border('large');
   overflow: hidden;
 }
+.chart__line {
+  position: relative;
+  width: calc(100% + 32px) !important;
+  height: 100% !important;
+  aspect-ratio: 1;
+  margin-left: -32px;
+}

@@ -1,4 +1,5 @@
 import { type Plugin } from "chart.js"
+import { numberLastPoint } from '../../../shared/constants'
 
 const imgFlag = new Image()
 const loadImgFlag = () => {
@@ -16,24 +17,25 @@ export const startTooltip: Plugin<"line"> = {
     const dataset = chart.data.datasets[0].data
 
     const minValue = Math.min(
-      ...(dataset.slice(0, dataset.length - 21) as number[])
+      ...(dataset.slice(0, numberLastPoint) as number[])
     )
     const maxValue = Math.max(
-      ...(dataset.slice(0, dataset.length - 21) as number[])
+      ...(dataset.slice(0, numberLastPoint) as number[])
     )
 
     const procent = (options.startBtcPrice - minValue) / (maxValue - minValue)
     const minValueY = chart.scales.y.getPixelForValue(minValue)
     const maxValueY = chart.scales.y.getPixelForValue(maxValue)
 
-    let y = minValueY - procent * (minValueY - maxValueY)
-    y = isNaN(y) ? 0 : y
+    const y = minValueY - procent * (minValueY - maxValueY)
 
-    const widthTooltip = 93
+    const widthTooltip = 96
     const heightTooltip = 24
-    const marginXScreen = 8
-    const marginXTolltip = 4
-    const marginX = marginXScreen + marginXTolltip
+
+    // 16 - offset padding letf container, 32 - offset margin left container
+    const marginXScreen = 16 + 32
+    const marginXFlag = marginXScreen + 4
+    const marginXText = marginXFlag + 4
 
     // container
     ctx.fillStyle = "#1C1C1E94"
@@ -48,7 +50,7 @@ export const startTooltip: Plugin<"line"> = {
     ctx.textAlign = "center"
     ctx.fillText(
       Number(options.startBtcPrice).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&.'),
-      marginX + marginXTolltip + widthTooltip / 2,
+      marginXText + widthTooltip / 2,
       y + 4
     )
     ctx.restore()
@@ -56,6 +58,6 @@ export const startTooltip: Plugin<"line"> = {
     if (!imgFlag.src) loadImgFlag()
 
     // icon flag
-    ctx.drawImage(imgFlag, marginX, y - 8)
+    ctx.drawImage(imgFlag, marginXFlag, y - 8)
   },
 }

@@ -7,6 +7,9 @@ export const usePriceHistory = () => {
 
   useEffect(() => {
     console.log('Запрос getPriceHistory!')
+    setPriceHistory(initialDataPriceHistory)
+
+    return
     getPriceHistory()
       .then(async (res) => setPriceHistory(res.data))
       .catch((error) => {

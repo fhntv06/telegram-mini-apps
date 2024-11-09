@@ -45,11 +45,11 @@ interface ILineChartProps {
 }
 
 const LineChart = ({ data }: ILineChartProps) => {
-  const { startBtcPrice, gamePhase } = useSelector((state: any) => state.gameStatus)
+  const { startBtcPrice, btcPrice, gamePhase } = useSelector((state: any) => state.gameStatus)
 	const chartRef = useRef<any>(null);
 
   const options: any = getOptions(
-    data.datasets[0].data[numberLastPoint], // baseValue - center value
+    btcPrice,
     startBtcPrice,
     gamePhase
   )
@@ -57,7 +57,7 @@ const LineChart = ({ data }: ILineChartProps) => {
   return (
     <Line
       ref={chartRef}
-      className='z-10'
+      className={cx('chart__line')}
       options={options}
       plugins={[showTooltip, startTooltip]}
       data={data}
@@ -66,7 +66,7 @@ const LineChart = ({ data }: ILineChartProps) => {
 }
 
 export const Chart = () => {
-  const { chartData } = useChartData();
+  const chartData = useChartData()
 
 	return (
     chartData && (

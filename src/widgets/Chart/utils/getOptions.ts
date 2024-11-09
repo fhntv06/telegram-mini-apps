@@ -10,13 +10,15 @@ import { _DeepPartialObject } from 'chart.js/dist/types/utils'
 const colors = {
   grid: '#FFFFFF0A',
 }
+const stepSize = 10
 
 export function getOptions(
-  btcPrice:  number | Point | null,
+  btcPrice:  number | Point,
   startBtcPrice: number,
   gamePhase: number,
 ): ChartOptions {
   return {
+    responsive: true,
     resizeDelay: 100,
     font: {
       family: "Inter",
@@ -49,18 +51,21 @@ export function getOptions(
         display: true,
         position: 'right', // позиция градации значенийпо оси Y
         suggestedMax: (ctx: any) => {
-          const dataset = ctx.chart.data.datasets[0].data;
-          // const max = Math.max(
-          //   ...(dataset.slice(0, dataset.length - 21) as number[])
-          // );
-          return dataset[dataset.length - 21] + 25;
+          const dataset = ctx.chart.data.datasets[0].data
+          const max = Math.max(...(dataset as number[]))
+
+          return max + max * 0.0001
         },
         suggestedMin: (ctx: any) => {
-          const dataset = ctx.chart.data.datasets[0].data;
-          // const min = Math.min(
-          //   ...(dataset.slice(0, dataset.length - 21) as number[])
-          // );
-          return dataset[dataset.length - 21] - 25;
+          const dataset = ctx.chart.data.datasets[0].data
+          const min = Math.min(...(dataset as number[]))
+          
+console.log('min ', min);
+console.log('min ', min - min * 0.001)
+
+console.log('diff min ', min * 0.001)
+
+          return min - min * 0.001
         },
         grid: {
           display: true, // горизонтальные пунктирные линии
@@ -68,7 +73,7 @@ export function getOptions(
         },
         ticks: { // значения по оси Y
           display: true,
-          stepSize: 10, // шаг значения по оси Y
+          stepSize, // шаг значения по оси Y
           z: 1,
           align: "start",
           font: {
@@ -104,11 +109,11 @@ export function getOptions(
     },
     elements: {
       point: {
-        radius: 4,
+        radius: 0, // радиус точки
         backgroundColor: '#fff',
       },
       line: {
-        tension: 0.001, // натяжение
+        tension: 0.5, // натяжение
         borderJoinStyle: 'round', // обводка углов в местах соединения линий
         borderWidth: 2, // ширина линии
         borderColor: '#BFBFC0', // цвет линии
@@ -116,9 +121,9 @@ export function getOptions(
     },
     layout: {
       padding: {
-        top: 0,
-        right: 10,
-        bottom: 0,
+        top: 15,
+        right: 16,
+        bottom: -15,
         left: 0,
       },
     },
