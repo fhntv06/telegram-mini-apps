@@ -17,7 +17,7 @@ export const showTooltip: Plugin<"line"> = {
     let colorText = '#fff'
 
     if (options.gamePhase === 3) {
-      colorText = options.btcPrice > options.startPrice ? '#28DA64' : '#FD2D39'
+      colorText = options.btcPrice > options.startBtcPrice ? '#28DA64' : '#FD2D39'
     }
 
     // container
