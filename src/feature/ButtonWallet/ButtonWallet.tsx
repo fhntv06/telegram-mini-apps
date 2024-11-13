@@ -22,8 +22,8 @@ export const ButtonWallet = ({
 		<Button
 			className={cx('button', className)}
 			type='gray'
-			iconLeftName="ton"
-			iconRightName="plus"
+			iconLeftName="ton-medium"
+			iconRightName="plus-medium"
 			sizeIcons='medium'
 			onClick={onClick}
 		>
