@@ -6,6 +6,7 @@ export type IconNames =
     | 'ton-medium'
     | 'burger'
     | 'plus'
+    | 'plus-medium'
     | 'flag'
     | 'arrow-up'
     | 'arrow-up-medium'
