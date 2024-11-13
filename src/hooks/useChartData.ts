@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import { numberLastPoint } from '../shared/constants'
 
 const createInitialData = (history: any) => ({
-  labels: history.map(() => ''),
+  labels: [...history, '', '', ''].map(() => ''), // added label for create offset x-axis
   datasets: [
     { data: history.map((el: any) => el) },
   ],

@@ -7,13 +7,11 @@ export const showTooltip: Plugin<"line"> = {
     const { ctx } = chart
     ctx.save()
 
-    console.log('showTooltip data ', chart.getDatasetMeta(0).data)
-
-    const { x, y } = chart.getDatasetMeta(0).data[numberLastPoint]
+    const y = chart.getDatasetMeta(0).data[numberLastPoint].y
 
     const widthTooltip = 83
     const heightTooltip = 24
-    const marginX = x - 16 - 16
+    const marginXRight = chart.width - widthTooltip - 8
     let colorText = '#fff'
 
     if (options.gamePhase === 3) {
@@ -23,7 +21,7 @@ export const showTooltip: Plugin<"line"> = {
     // container
     ctx.fillStyle = "#1C1C1E94"
     ctx.beginPath()
-    ctx.roundRect(marginX, y - 8, widthTooltip, heightTooltip, 8)
+    ctx.roundRect(marginXRight, y - 8, widthTooltip, heightTooltip, 8)
     ctx.fill()
     ctx.restore()
 
@@ -34,7 +32,7 @@ export const showTooltip: Plugin<"line"> = {
     ctx.textAlign = "center"
     ctx.fillText(
       Number(options.btcPrice).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&.'),
-      marginX + widthTooltip / 2,
+      marginXRight + widthTooltip / 2,
       y + 10
     )
     ctx.restore()
