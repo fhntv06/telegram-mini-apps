@@ -30,15 +30,13 @@ export const useGameSocket = () => {
 
   const handlerTestConnection = () => {
     const signs = [-1, 1];
-    const defaultMax = 62050
-    const defaultMin = 61950
+    const defaultMax = 66100
+    const defaultMin = 64000
 
     const interval = setInterval(() => {
       const offsetDynamic = Math.random() * (50 - 10 + 1) + 10
       const randomIndex = Math.floor(Math.random() * signs.length)
       const signOffsetDynamic = signs[randomIndex] * offsetDynamic
-
-      console.log(signOffsetDynamic)
 
       const dynamicValue = (Math.random() * (defaultMax + signOffsetDynamic - defaultMin + signOffsetDynamic + 1)) + defaultMin + signOffsetDynamic
       // Эмуляция получения нового сообщения каждую секунду
@@ -47,10 +45,10 @@ export const useGameSocket = () => {
       // @ts-ignore
       setData((prevData: IGameStatus) => ({
         ...prevData, // Сохраняем все предыдущие данные
-        btcPrice: dynamicValue, // Обновляем поле priceHistory
+        btcPrice: dynamicValue + 2500, // Обновляем поле priceHistory
       }))
 
-    }, 500)
+    }, 1000)
 
     return () => clearInterval(interval)
   }

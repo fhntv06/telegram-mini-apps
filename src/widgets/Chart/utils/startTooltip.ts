@@ -10,7 +10,7 @@ export const startTooltip: Plugin<"line"> = {
   id: "startTooltip",
   afterDraw: (chart, _args, options) => {
     if (options.startBtcPrice === 0 || options.gamePhase !== 3) return
-    
+
     const { ctx } = chart
     ctx.save()
 
@@ -28,6 +28,20 @@ export const startTooltip: Plugin<"line"> = {
     const maxValueY = chart.scales.y.getPixelForValue(maxValue)
 
     const y = minValueY - procent * (minValueY - maxValueY)
+
+    console.log('ticks: ', chart.scales.y.getTicks().length)
+
+    console.log({
+      startBtcPrice: chart.scales.y.getPixelForValue(options.startBtcPrice),
+      62000: chart.scales.y.getPixelForValue(62000),
+      62140: chart.scales.y.getPixelForValue(62140),
+      up: y < maxValueY,
+      down: y > minValueY,
+      center: y > maxValueY && y < minValueY,
+      y,
+      minValueY,
+      maxValueY,
+    })
 
     const widthTooltip = 96
     const heightTooltip = 24

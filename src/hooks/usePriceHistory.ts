@@ -8,7 +8,7 @@ export const usePriceHistory = () => {
   useEffect(() => {
     console.log('Запрос getPriceHistory!')
     setPriceHistory(initialDataPriceHistory)
-
+    console.log('initialDataPriceHistory ', initialDataPriceHistory)
     return
     getPriceHistory()
       .then(async (res) => setPriceHistory(res.data))

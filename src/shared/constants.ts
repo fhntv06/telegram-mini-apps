@@ -1,11 +1,12 @@
 import { IGameStatus } from '../app/providers/types.ts';
 import { ILang } from '../app/store/slices/types'
-export const countPointsChart = 25
+export const countPointsChart = 10
 export const numberLastPoint = countPointsChart - 1
 export const initialDataPriceHistory: number[] = ((min = 62000, max = 62100) => {
 	const array: number[] = [];
 	for (let i = 0; i < countPointsChart; i++) {
 		array.push((Math.random() * (max - min + 1)) + min);
+		// array.push(min + i * 450);
 	}
 	return array;
 })();

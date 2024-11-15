@@ -10,7 +10,11 @@ import { _DeepPartialObject } from 'chart.js/dist/types/utils'
 const colors = {
   grid: '#FFFFFF0A',
 }
-const stepSize = 10
+
+const MIN_NUMBER = 10
+const MAX_NUMBER = 25
+const lastStep = 25
+const currentNumber = 25
 
 export function getOptions(
   btcPrice:  number | Point,
@@ -54,18 +58,17 @@ export function getOptions(
           const dataset = ctx.chart.data.datasets[0].data
           const max = Math.max(...(dataset as number[]))
 
-          return max + max * 0.0001
+          console.log('max ', max)
+
+          return max
         },
         suggestedMin: (ctx: any) => {
           const dataset = ctx.chart.data.datasets[0].data
           const min = Math.min(...(dataset as number[]))
-          
-console.log('min ', min);
-console.log('min ', min - min * 0.001)
 
-console.log('diff min ', min * 0.001)
+          console.log('min ', min)
 
-          return min - min * 0.001
+          return min
         },
         grid: {
           display: true, // горизонтальные пунктирные линии
@@ -73,7 +76,34 @@ console.log('diff min ', min * 0.001)
         },
         ticks: { // значения по оси Y
           display: true,
-          stepSize, // шаг значения по оси Y
+          stepSize: (ctx: any) => {
+            const dataset = ctx.chart.data.datasets[0].data
+            const max = Math.max(...(dataset as number[]))
+            const min = Math.min(...(dataset as number[]))
+            const currentDifference = Math.abs(max - min);
+            // всего точек должно быть 25
+            // k - коэффициент
+            // пример
+            // если разница: max - min = 250
+            // количество tick должно быть 25
+            // шаг должен быть: 250 / 25 = 10
+            // шаг должен быть: 5000 / 25 = 200
+
+            console.log("diff ", max - min);
+
+            console.log(ctx.chart.scales.y);
+
+            // Вычисляем предыдущую разницу на основе текущего числа
+            const previousDifference = (lastStep - MIN_NUMBER) / (MAX_NUMBER - MIN_NUMBER) * 100;
+
+            const c = currentDifference > previousDifference
+              ? Math.max(MIN_NUMBER, currentNumber - 1)
+              : Math.min(MAX_NUMBER, currentNumber + 1);
+
+            console.log('ticks ', c)
+
+            return c
+          },
           z: 1,
           align: "start",
           font: {
@@ -121,8 +151,8 @@ console.log('diff min ', min * 0.001)
     },
     layout: {
       padding: {
-        top: 15,
-        right: 16,
+        top: 80,
+        right: 8,
         bottom: -15,
         left: 0,
       },
