@@ -108,7 +108,7 @@ export function getOptions(
         backgroundColor: '#fff',
       },
       line: {
-        tension: 0.001, // натяжение
+        tension: 0.5, // натяжение
         borderJoinStyle: 'round', // обводка углов в местах соединения линий
         borderWidth: 2, // ширина линии
         borderColor: '#BFBFC0', // цвет линии
@@ -116,7 +116,7 @@ export function getOptions(
     },
     layout: {
       padding: {
-        top: 0,
+        top: 80,
         right: 10,
         bottom: 0,
         left: 0,
