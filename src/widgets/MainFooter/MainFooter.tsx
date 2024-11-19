@@ -39,7 +39,11 @@ export const MainFooter = () => {
 			const balance = await getBalance(address)
 				.then(res => res.data.balance)
 				.then((balance) => balance)
-				.catch((error) => new Error(error))
+				.catch((error) => {
+					new Error(error)
+
+					return 0
+				})
 
 			dispatch(
 				setUserDataWallet({
