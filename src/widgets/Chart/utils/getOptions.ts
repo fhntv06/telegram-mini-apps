@@ -16,6 +16,20 @@ const MAX_NUMBER = 25
 const lastStep = 25
 const currentNumber = 25
 
+const calcSuggest = (
+  ctx: { chart: { data: { datasets: { data: any }[] } } },
+  startBtcPrice: number,
+  btcPrice: number | Point,
+  gamePhase: number
+): number[] => {
+  const dataset = ctx.chart.data.datasets[0].data
+  const max = Math.max(...(dataset as number[]), startBtcPrice)
+  const min = Math.min(...(dataset as number[]), startBtcPrice || btcPrice as number)
+  const offset = gamePhase === 3 ? (max - min) * 0.03 : 10
+
+  return [max + offset, min - offset]
+}
+
 export function getOptions(
   btcPrice:  number | Point,
   startBtcPrice: number,
@@ -25,7 +39,7 @@ export function getOptions(
     responsive: true,
     resizeDelay: 100,
     font: {
-      family: "Inter",
+      family: 'Inter',
       size: 8,
       weight: 500,
     },
@@ -54,22 +68,8 @@ export function getOptions(
         },
         display: true,
         position: 'right', // позиция градации значенийпо оси Y
-        suggestedMax: (ctx: any) => {
-          const dataset = ctx.chart.data.datasets[0].data
-          const max = Math.max(...(dataset as number[]))
-
-          console.log('max ', max)
-
-          return max
-        },
-        suggestedMin: (ctx: any) => {
-          const dataset = ctx.chart.data.datasets[0].data
-          const min = Math.min(...(dataset as number[]))
-
-          console.log('min ', min)
-
-          return min
-        },
+        suggestedMax: (ctx: any) => calcSuggest(ctx, startBtcPrice, btcPrice, gamePhase)[0],
+        suggestedMin: (ctx: any) => calcSuggest(ctx, startBtcPrice, btcPrice, gamePhase)[1],
         grid: {
           display: true, // горизонтальные пунктирные линии
           color: colors.grid,
