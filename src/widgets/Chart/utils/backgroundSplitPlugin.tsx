@@ -33,22 +33,6 @@ export const backgroundSplitPlugin: Plugin<"line"> = {
       ctx.fill();
     };
 
-    // Dashed line
-    const createDashLine = (
-      x: number,
-      y: number,
-      width: number,
-      fillColor: string
-    ) => {
-      ctx.setLineDash([4, 4]); // Устанавливаем стиль линии как пунктирную
-      ctx.beginPath(); // Начинаем новый путь
-      ctx.strokeStyle = fillColor;
-      ctx.moveTo(x, y); // Перемещаемся к начальной точке
-      ctx.lineTo(x + width, y); // Рисуем линию до конечной точки
-      ctx.stroke();
-      ctx.fill();
-    }
-
     // верхний градент зеленого цвета
     const gradientGreen = ctx.createLinearGradient(0, 0, 0, isNaN(y) ? 0 : y - 1);
     gradientGreen.addColorStop(0, "rgba(52, 210, 105, 0)");
@@ -68,8 +52,5 @@ export const backgroundSplitPlugin: Plugin<"line"> = {
     gradientRed.addColorStop(1, "rgba(253, 45, 57, 0)");
 
     drawRoundedRect(chartArea.left, y, chartArea.right, chartArea.bottom + 50, gradientRed);
-
-    // Линия по середине
-    createDashLine(chartArea.left, y, chartArea.right, '#FFFFFF3D')
   },
 };
