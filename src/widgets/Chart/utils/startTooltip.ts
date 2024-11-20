@@ -1,5 +1,4 @@
-import { type Plugin } from "chart.js"
-import { numberLastPoint } from '../../../shared/constants'
+import { type Plugin } from 'chart.js'
 
 const imgFlag = new Image()
 const loadImgFlag = () => {
@@ -14,14 +13,10 @@ export const startTooltip: Plugin<"line"> = {
     const { ctx } = chart
     ctx.save()
 
-    const dataset = chart.data.datasets[0].data
+    const dataset = chart.data.datasets[0].data as number[]
 
-    const minValue = Math.min(
-      ...(dataset.slice(0, numberLastPoint) as number[])
-    )
-    const maxValue = Math.max(
-      ...(dataset.slice(0, numberLastPoint) as number[])
-    )
+    const minValue = Math.min(...dataset)
+    const maxValue = Math.max(...dataset)
 
     const procent = (options.startBtcPrice - minValue) / (maxValue - minValue)
     const minValueY = chart.scales.y.getPixelForValue(minValue)
@@ -29,25 +24,11 @@ export const startTooltip: Plugin<"line"> = {
 
     const y = minValueY - procent * (minValueY - maxValueY)
 
-    console.log('ticks: ', chart.scales.y.getTicks().length)
-
-    console.log({
-      startBtcPrice: chart.scales.y.getPixelForValue(options.startBtcPrice),
-      62000: chart.scales.y.getPixelForValue(62000),
-      62140: chart.scales.y.getPixelForValue(62140),
-      up: y < maxValueY,
-      down: y > minValueY,
-      center: y > maxValueY && y < minValueY,
-      y,
-      minValueY,
-      maxValueY,
-    })
-
     const widthTooltip = 96
     const heightTooltip = 24
 
-    // 16 - offset padding letf container, 32 - offset margin left container
-    const marginXScreen = 16 + 32
+    // 16 - offset padding left container, 64 - offset margin left container
+    const marginXScreen = 16 + 64
     const marginXFlag = marginXScreen + 4
     const marginXText = marginXFlag + 4
 
