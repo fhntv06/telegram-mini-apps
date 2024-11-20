@@ -1,6 +1,6 @@
 import { IGameStatus } from '../app/providers/types.ts';
 import { ILang } from '../app/store/slices/types'
-export const countPointsChart = 10
+export const countPointsChart = 20
 export const numberLastPoint = countPointsChart - 1
 export const initialDataPriceHistory: number[] = ((min = 61900, max = 62100) => {
 	const array: number[] = [];

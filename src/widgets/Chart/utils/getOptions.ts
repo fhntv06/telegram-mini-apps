@@ -1,11 +1,6 @@
-import type {
-  ChartOptions,
-  ChartTypeRegistry,
-  PluginOptionsByType,
-  Point
-} from "chart.js";
+import type {ChartOptions, ChartTypeRegistry, PluginOptionsByType, Point} from "chart.js";
 // @ts-ignore
-import { _DeepPartialObject } from 'chart.js/dist/types/utils'
+import {_DeepPartialObject} from 'chart.js/dist/types/utils'
 
 const colors = {
   grid: '#FFFFFF0A',
@@ -160,11 +155,7 @@ export function getOptions(
         ticks: { // значения по оси Y
           display: true,
           // @ts-ignore
-          stepSize: (ctx: any) => {
-            const step = dynamicStep(ctx, startBtcPrice, btcPrice)
-
-            return step
-          },
+          stepSize: (ctx: any) => (dynamicStep(ctx, startBtcPrice, btcPrice as number)),
           z: 1,
           align: "start",
           font: {
@@ -188,14 +179,14 @@ export function getOptions(
     animations: {
       x: {
         delay: 0,
-        duration: 500,
-        easing: "easeInQuad",
+        duration: 300,
+        easing: "linear",
         type: "number",
       },
       backgroundSplit: {
         delay: 0,
-        duration: 1000,
-        easing: "easeInCubic",
+        duration: 300,
+        easing: "linear",
       },
     },
     elements: {
