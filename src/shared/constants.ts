@@ -2,7 +2,7 @@ import { IGameStatus } from '../app/providers/types.ts';
 import { ILang } from '../app/store/slices/types'
 export const countPointsChart = 10
 export const numberLastPoint = countPointsChart - 1
-export const initialDataPriceHistory: number[] = ((min = 62000, max = 62100) => {
+export const initialDataPriceHistory: number[] = ((min = 61900, max = 62100) => {
 	const array: number[] = [];
 	for (let i = 0; i < countPointsChart; i++) {
 		array.push((Math.random() * (max - min + 1)) + min);
@@ -39,7 +39,7 @@ export const initialDataGameStatus: IGameStatus = {
 	},
 	totalBets: 50 * 10**9,
 	btcPrice: (Math.floor(Math.random() * (62100 - 62000 + 1))) + 62000,
-	startBtcPrice: (Math.floor(Math.random() * (62100 - 62000 + 1))) + 62000,
+	startBtcPrice: 62000,
 	gamePhase: 3,
 	phaseTimeUntil: Date.now() + 30 * 1000,
 	gameResult: 0,
@@ -50,7 +50,7 @@ export const initialDataGameStatus: IGameStatus = {
 		downPercent : 200,
 		upPercent : 200
 	},
-	priceHistory: initialDataPriceHistory
+	// priceHistory: initialDataPriceHistory
 }
 export const arBets: number[] = [0.5, 1, 2, 5, 10]
 
