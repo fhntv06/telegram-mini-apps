@@ -23,7 +23,6 @@ import { ChartPanel } from '../'
 
 import classNames from 'classnames/bind'
 import styles from './Chart.module.scss'
-import { numberLastPoint } from '../../shared/constants'
 import { useSelector } from 'react-redux';
 
 const cx = classNames.bind(styles)
