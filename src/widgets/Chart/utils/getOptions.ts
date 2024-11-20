@@ -11,23 +11,104 @@ const colors = {
   grid: '#FFFFFF0A',
 }
 
-const MIN_NUMBER = 10
-const MAX_NUMBER = 25
-const lastStep = 25
-const currentNumber = 25
-
 const calcSuggest = (
   ctx: { chart: { data: { datasets: { data: any }[] } } },
   startBtcPrice: number,
-  btcPrice: number | Point,
-  gamePhase: number
+  btcPrice: number,
 ): number[] => {
-  const dataset = ctx.chart.data.datasets[0].data
-  const max = Math.max(...(dataset as number[]), startBtcPrice)
-  const min = Math.min(...(dataset as number[]), startBtcPrice || btcPrice as number)
-  const offset = gamePhase === 3 ? (max - min) * 0.03 : 10
+  const dataset = ctx.chart.data.datasets[0].data as number[]
+  const max = Math.max(...dataset, startBtcPrice)
+  const min = Math.min(...dataset, startBtcPrice || btcPrice )
+  const offset = (max - min) * 0.01
 
   return [max + offset, min - offset]
+}
+const dynamicStep = (
+  ctx: { chart: { data: { datasets: { data: number[] }[] } } },
+  startBtcPrice: number,
+  btcPrice: number,
+): number => {
+  const dataset = ctx.chart.data.datasets[0].data
+  const max = Math.max(...dataset, startBtcPrice)
+  const min = Math.min(...dataset, startBtcPrice || btcPrice)
+  const range = Math.abs(max - min)
+
+  console.log({
+    dataset,
+    max,
+    min,
+    startBtcPrice,
+    btcPrice,
+    or: startBtcPrice || btcPrice
+  })
+
+  if (range > 5000) {
+    console.log({
+    step: 2000,
+    range,
+  })
+    return 2000
+  } else if (range > 1500) {
+    console.log({
+    step: 500,
+    range,
+  })
+    return 250
+  } else if (range > 500) {
+    console.log({
+    step: 100,
+    range,
+  })
+    return 100
+  } else if (range > 100) {
+    console.log({
+    step: 50,
+    range,
+  })
+    return 50
+  } else if (range > 50) {
+    console.log({
+      step: 10,
+      range,
+    })
+    return 10
+  } else if (range > 10) {
+    console.log({
+    step: 2,
+    range,
+  })
+    return 2
+  } else if (range > 1) {
+    console.log({
+      step: 1,
+      range,
+    })
+    return 1
+  } else if (range > 0.5) {
+    console.log({
+      step: 1,
+      range,
+    })
+    return 1
+  } else if (range > 0.05) {
+    console.log({
+      step: 0.1,
+      range,
+    })
+    return 0.1
+  } else if (range > 0.005) {
+    console.log({
+      step: 0.01,
+      range,
+    })
+    return 0.01
+  } else {
+    console.log({
+      step: 0.005,
+      range,
+    })
+    return 0.005
+  }
 }
 
 export function getOptions(
@@ -68,7 +149,9 @@ export function getOptions(
         },
         display: true,
         position: 'right', // позиция градации значенийпо оси Y
+        // @ts-ignore
         suggestedMax: (ctx: any) => calcSuggest(ctx, startBtcPrice, btcPrice, gamePhase)[0],
+        // @ts-ignore
         suggestedMin: (ctx: any) => calcSuggest(ctx, startBtcPrice, btcPrice, gamePhase)[1],
         grid: {
           display: true, // горизонтальные пунктирные линии
@@ -76,33 +159,11 @@ export function getOptions(
         },
         ticks: { // значения по оси Y
           display: true,
+          // @ts-ignore
           stepSize: (ctx: any) => {
-            const dataset = ctx.chart.data.datasets[0].data
-            const max = Math.max(...(dataset as number[]))
-            const min = Math.min(...(dataset as number[]))
-            const currentDifference = Math.abs(max - min);
-            // всего точек должно быть 25
-            // k - коэффициент
-            // пример
-            // если разница: max - min = 250
-            // количество tick должно быть 25
-            // шаг должен быть: 250 / 25 = 10
-            // шаг должен быть: 5000 / 25 = 200
+            const step = dynamicStep(ctx, startBtcPrice, btcPrice)
 
-            console.log("diff ", max - min);
-
-            console.log(ctx.chart.scales.y);
-
-            // Вычисляем предыдущую разницу на основе текущего числа
-            const previousDifference = (lastStep - MIN_NUMBER) / (MAX_NUMBER - MIN_NUMBER) * 100;
-
-            const c = currentDifference > previousDifference
-              ? Math.max(MIN_NUMBER, currentNumber - 1)
-              : Math.min(MAX_NUMBER, currentNumber + 1);
-
-            console.log('ticks ', c)
-
-            return c
+            return step
           },
           z: 1,
           align: "start",
@@ -127,14 +188,14 @@ export function getOptions(
     animations: {
       x: {
         delay: 0,
-        duration: 300,
-        easing: "linear",
+        duration: 500,
+        easing: "easeInQuad",
         type: "number",
       },
       backgroundSplit: {
         delay: 0,
         duration: 1000,
-        easing: "linear",
+        easing: "easeInCubic",
       },
     },
     elements: {
