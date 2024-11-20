@@ -1,6 +1,11 @@
-import type {ChartOptions, ChartTypeRegistry, PluginOptionsByType, Point} from "chart.js";
+import type {
+  ChartOptions,
+  ChartTypeRegistry,
+  PluginOptionsByType,
+  Point
+} from "chart.js";
 // @ts-ignore
-import {_DeepPartialObject} from 'chart.js/dist/types/utils'
+import { _DeepPartialObject } from 'chart.js/dist/types/utils'
 
 const colors = {
   grid: '#FFFFFF0A',
