@@ -1,17 +1,18 @@
 import { useState, useEffect } from 'react'
 import { ChartData } from 'chart.js'
 import { useSelector } from 'react-redux'
-import { countPointsChart, numberLastPoint } from '../shared/constants.ts'
+import { numberLastPoint } from '../shared/constants.ts'
 
 const createInitialData = (history: number[]) => ({
-  labels: [...history, '', ''].map(() => ''), // added label for create offset x-axis
+  // 4 '' for mobile
+  labels: [...history, '', '', '', ''].map(() => ''), // added label for create offset x-axis
   datasets: [
     { data: history.map((el: number) => el) },
   ],
 })
 
 export const useChartData = () => {
-  const { btcPrice, priceHistory, startBtcPrice } = useSelector((state: any) => state.gameStatus)
+  const { btcPrice, priceHistory } = useSelector((state: any) => state.gameStatus)
 
   const [chartData, setChartData] = useState<ChartData<'line'>>(createInitialData(priceHistory))
 
