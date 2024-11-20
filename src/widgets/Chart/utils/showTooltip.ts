@@ -1,5 +1,4 @@
-import { type Plugin } from "chart.js"
-import { numberLastPoint } from '../../../shared/constants'
+import { type Plugin } from 'chart.js'
 
 const offsetDashedLine = [32, 100]
 // Dashed line
@@ -26,7 +25,8 @@ export const showTooltip: Plugin<"line"> = {
     const chartArea = chart.chartArea;
     ctx.save()
 
-    const y = chart.getDatasetMeta(0).data[numberLastPoint].y
+    const data = chart.getDatasetMeta(0).data
+    const y = data[data.length - 1].y
 
     const widthTooltip = 83
     const heightTooltip = 24
@@ -40,7 +40,7 @@ export const showTooltip: Plugin<"line"> = {
     // container
     ctx.fillStyle = "#1C1C1E94"
     ctx.beginPath()
-    ctx.roundRect(marginXRight, y - 8, widthTooltip, heightTooltip, 8)
+    ctx.roundRect(marginXRight, y - heightTooltip / 2, widthTooltip, heightTooltip, 8)
     ctx.fill()
     ctx.restore()
 
@@ -52,7 +52,7 @@ export const showTooltip: Plugin<"line"> = {
     ctx.fillText(
       Number(options.btcPrice).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&.'),
       marginXRight + widthTooltip / 2,
-      y + 10
+      y + 6
     )
     ctx.restore()
 
@@ -60,7 +60,7 @@ export const showTooltip: Plugin<"line"> = {
     createDashLine(
       ctx,
       chartArea.left - offsetDashedLine[0],
-      chart.scales.y.getPixelForValue(options.btcPrice),
+      y,
       chartArea.right + offsetDashedLine[1],
       '#FFFFFF3D'
     )
