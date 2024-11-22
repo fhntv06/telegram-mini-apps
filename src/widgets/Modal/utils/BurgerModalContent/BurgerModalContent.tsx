@@ -4,10 +4,11 @@ import { useTonWallet, useTonAddress } from '@tonconnect/ui-react'
 import { Button, Select } from '../../../../shared'
 import classNames from 'classnames/bind'
 import { ButtonConnectWallet } from '../../../../feature'
-import { useGetPhrases } from '../../../../hooks'
+import {useGetPhrases, useSendMessageSocket} from '../../../../hooks'
 import { arLanguagesSite } from '../../../../shared/constants'
 
 import styles from './BurgerModalContent.module.scss'
+import { SelectHorizontal } from '../../../../shared/ui/SelectHorizontal'
 
 const cx = classNames.bind(styles)
 
@@ -30,9 +31,13 @@ export const BurgerModalContent = () => {
   const wallet = useTonWallet()
 	const address = useTonAddress()
   const language= useSelector((state: any) => state.language)
+  const sendMessageSocket = useSendMessageSocket();
 
   // @ts-ignore
-  const { affiliate, technicalSupport } = useGetPhrases(['affiliate', 'technicalSupport'])
+  const { affiliate, technicalSupport, realMode, gameWithRealTONCoins, demoMode, learningWithNonRealCoins } = useGetPhrases([
+    'affiliate', 'technicalSupport', 'realMode',
+    'gameWithRealTONCoins', 'demoMode', 'learningWithNonRealCoins'
+  ])
 
   const languages = useMemo(() => [language].concat(arLanguagesSite.filter((item) => item.name != language.name)), [language.name])
 
@@ -69,6 +74,14 @@ export const BurgerModalContent = () => {
         <p>{technicalSupport}</p>
       </Button>
       <Select data={languages} />
+      <SelectHorizontal
+        textBtnLeft={realMode}
+        textDescrBtnLeft={gameWithRealTONCoins}
+        textBtnRight={demoMode}
+        textDescrBtnRight={learningWithNonRealCoins}
+        onClickLeftBtn={() => sendMessageSocket()}
+        onClickRightBtn={() => sendMessageSocket('DEMO')}
+      />
       <div className={cx('button__social')}>
         <Button
           className={cx('button__social__item')}
