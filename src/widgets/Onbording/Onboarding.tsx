@@ -7,14 +7,15 @@ import {
   // IScreen
 } from './types'
 
-import { useGetPhrases } from '../../hooks'
+import { useGetPhrases, useSendMessageSocket } from '../../hooks'
 import { Button, Icon } from '../../shared'
 
 import styles from './Onbording.module.scss'
+import { SelectHorizontal } from '../../shared/ui/SelectHorizontal'
 
 const cx = classNames.bind(styles)
 
-const screens = 5
+const screens = [1, 2, 3, 4, 5, 6]
 
 export const Onboarding = ({ handlerSkip, className }: IOnbording) => {
   const swiperRef = useRef(null)
@@ -22,9 +23,19 @@ export const Onboarding = ({ handlerSkip, className }: IOnbording) => {
   const [startOnboarding, setStartOnboarding] = useState<boolean>(false)
   const [disabledPrevButton, setDisabledPrevButton] = useState<boolean>(true)
   const [indexSlideActive, setIndexSlideActive] = useState<number>(1)
+  const sendMessageSocket = useSendMessageSocket();
 
-  // @ts-ignore
-  const { onboarding, start, prev, next, skip, begin } = useGetPhrases(['onboarding', 'start', 'prev', 'next', 'skip', 'begin'])
+  const {
+    // @ts-ignore
+    onboarding, start, prev, next, skip, begin,
+    // @ts-ignore
+    realMode, gameWithRealTONCoins, demoMode, learningWithNonRealCoins, selectGameMode
+  } = useGetPhrases([
+    'onboarding', 'start', 'prev',
+    'next', 'skip', 'begin',
+    'realMode', 'gameWithRealTONCoins', 'demoMode',
+    'learningWithNonRealCoins', 'selectGameMode'
+  ])
 
   return (
     <div className={cx('onboarding', className)}>
@@ -44,7 +55,7 @@ export const Onboarding = ({ handlerSkip, className }: IOnbording) => {
             >
               <div className={cx('onboarding__screen__header')}>
                 <div className={cx('onboarding__screen__pagination')}>
-                  {indexSlideActive} / {screens}
+                  {indexSlideActive} / {screens.length}
                   <button className='p p-reg' onClick={() => handlerSkip(true)}>{skip}</button>
                 </div>
               </div>
@@ -66,13 +77,31 @@ export const Onboarding = ({ handlerSkip, className }: IOnbording) => {
                 centeredSlides={true}
                 spaceBetween={16}
               >
-                {[1, 2, 3, 4, 5].map((index) => (
-                  <div key={index * index} className={cx('onboarding__screen')}>
+                {screens.map((index) => (
+                  <div key={`screen_${index}`} className={cx('onboarding__screen')}>
                     <SwiperSlide className={cx('onboarding__screen__main')}>
-                      <div className={cx('screen')}>
-                        <div className={cx(`screen__${index}`)} />
-                      </div>
-                      <p className={cx('text')}>{onboarding[index]}</p>
+                      {
+                        (index === 6) ? (
+                          <div className={cx('onboarding__screen__custom-content')}>
+                            <h1>{selectGameMode}</h1>
+                            <SelectHorizontal
+                              textBtnLeft={realMode}
+                              textDescrBtnLeft={gameWithRealTONCoins}
+                              textBtnRight={demoMode}
+                              textDescrBtnRight={learningWithNonRealCoins}
+                              onClickLeftBtn={() => sendMessageSocket()}
+                              onClickRightBtn={() => sendMessageSocket('DEMO')}
+                            />
+                            <p className={cx('text', 'p-reg')}>{onboarding[index]}</p>
+                          </div>
+                        ) : (
+                          <>
+                          <div className={cx('screen')}>
+                              <div className={cx(`screen__${index}`)}/>
+                            </div>
+                            <p className={cx('text', 'p-reg')}>{onboarding[index]}</p>
+                          </>
+                        )}
                     </SwiperSlide>
                   </div>
                 ))}
@@ -91,7 +120,7 @@ export const Onboarding = ({ handlerSkip, className }: IOnbording) => {
                   >
                     {prev}
                   </Button>
-                  {indexSlideActive !== screens ? (
+                  {indexSlideActive !== screens.length ? (
                     <Button
                       className={cx('button', 'p')}
                       type='white'
@@ -104,7 +133,7 @@ export const Onboarding = ({ handlerSkip, className }: IOnbording) => {
                       {next}
                       <svg id="arrow-right-black" width="24" height="24" viewBox="0 0 24 24" fill="none"
                               xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" clip-rule="evenodd"
+                        <path fillRule="evenodd" clipRule="evenodd"
                               d="M15.7605 11.356C16.0798 11.7117 16.0798 12.2883 15.7605 12.644L9.39578 19.7333C9.07647 20.0889 8.55878 20.0889 8.23948 19.7333C7.92018 19.3776 7.92018 18.801 8.23948 18.4453L14.0261 12L8.23948 5.55467C7.92017 5.19901 7.92017 4.62239 8.23948 4.26674C8.55878 3.91109 9.07647 3.91109 9.39577 4.26674L15.7605 11.356Z"
                               fill="#1C1C1E"/>
                       </svg>

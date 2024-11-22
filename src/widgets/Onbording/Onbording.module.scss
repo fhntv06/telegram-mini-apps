@@ -58,6 +58,20 @@
       }
     }
   }
+  &__custom-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    row-gap: calc($offset16 * 2);
+    width: calc(100vw - 16px - 16px);
+    max-width: 100%;
+    height: 100%;
+    padding-top: 120px;
+
+    h1 {
+      text-align: center;
+    }
+  }
 }
 .onboarding__slider {
   //height: 100%;
