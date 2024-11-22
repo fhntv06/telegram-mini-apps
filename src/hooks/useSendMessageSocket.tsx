@@ -1,11 +1,10 @@
 import { gameSocket } from '../shared/constants'
 
-export const useSendMessageSocket = (
-  gameMode: 'ON_CHAIN' | 'DEMO' = 'ON_CHAIN',
-  ticker: 'BTC-30' = 'BTC-30'
-): (gameMode?: string, ticker?: string) => void => {
-
-  return () => {
+export const useSendMessageSocket = () => {
+  return (
+    gameMode: 'ON_CHAIN' | 'DEMO' = 'ON_CHAIN',
+    ticker: 'BTC-30' = 'BTC-30'
+  ): void => {
     if (gameSocket && gameSocket.readyState === WebSocket.OPEN) {
       try {
         // Отправляем сообщение в формате JSON
