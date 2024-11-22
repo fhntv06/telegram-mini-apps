@@ -61,10 +61,10 @@ export const SelectHorizontal = ({
 					}}
 					className={cx('select-horizontal__changes')}
 				/>
-				<button className={cx('select-horizontal__button')} onClick={handlerLeftBtn} disabled={!chosen}>
+				<button className={cx('select-horizontal__button', { 'deactive': totalDisabled })} onClick={handlerLeftBtn} disabled={!chosen || totalDisabled}>
 					{textBtnLeft}
 				</button>
-				<button className={cx('select-horizontal__button')} onClick={handlerRightBtn} disabled={chosen}>
+				<button className={cx('select-horizontal__button', { 'deactive': totalDisabled })} onClick={handlerRightBtn} disabled={chosen || totalDisabled}>
 					{textBtnRight}
 				</button>
 			</div>
