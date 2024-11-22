@@ -1,0 +1,49 @@
+@import '../../assets/styles/basics.scss';
+
+.select-horizontal {
+	display: flex;
+	flex-direction: column;
+	row-gap: $offset12;
+}
+.select-horizontal__buttons {
+	position: relative;
+	display: flex;
+	padding: $offset12;
+	background-color: $dark-gray;
+	@include border('large');
+}
+.select-horizontal__changes {
+	position: absolute;
+	top: $offset12;
+	left: $offset12;
+	width: calc(50% - $offset12);
+	height: 60px;
+	background-color: $gray;
+	@include border('medium');
+}
+.select-horizontal__button {
+	z-index: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: $offset20 0;
+	width: 50%;
+	text-transform: uppercase;
+}
+.select-horizontal__descriptions {
+	display: flex;
+
+	h2 {
+		color: $gray;
+		padding: 0 40px;
+		width: 50%;
+		text-align: center;
+		text-transform: uppercase;
+		transition: color .3s ease-out;
+
+		&.active {
+			color: $white;
+			transition: color .5s ease-in;
+		}
+	}
+}
