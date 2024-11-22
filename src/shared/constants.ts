@@ -1,5 +1,7 @@
 import { IGameStatus } from '../app/providers/types.ts';
 import { ILang } from '../app/store/slices/types'
+export const urlSocket = `${import.meta.env.VITE_SOCKET_PROTOCOL}://${import.meta.env.VITE_DOMAIN}:${import.meta.env.VITE_PORT}`
+export const gameSocket = new WebSocket(urlSocket)
 export const countPointsChart = 20
 export const numberLastPoint = countPointsChart - 1
 export const initialDataPriceHistory: number[] = ((min = 61900, max = 62100) => {
@@ -94,6 +96,11 @@ export interface ILangPhrase {
 	'30 Minutes': string
 	commingSoon: string
 	onboarding: string[]
+	realMode: string
+	gameWithRealTONCoins: string
+	demoMode: string
+	learningWithNonRealCoins: string
+	selectGameMode: string
 	start: string
 	prev: string
 	next: string
@@ -159,8 +166,14 @@ export const arLanguagesPhraseSite: ILanguage = {
 			'Choose the size of the investment and decide how the value of the asset will change GO UP or GO DOWN',
 			'At the end the round, the winners will get their earning directly to the same digatal wallet they signed the trade with',
 			'If you don\'t have enough money to participate, click on the “+” at the top of the screen and choose a convenient method of replenishment',
-			'You can change the mode by pressing the button in the upper left corner of the screen and selecting the desired parameters'
+			'You can change the mode by pressing the button in the upper left corner of the screen and selecting the desired parameters',
+			'Now select a game mode, and start predicting. You can change your choice at any time in the menu'
 		],
+		realMode: 'real mode',
+		gameWithRealTONCoins: 'game with real ton coins',
+		demoMode: 'demo mode',
+		learningWithNonRealCoins: 'learning with non real coins',
+		selectGameMode: 'Select game mode',
 		start: 'Start',
 		prev: 'Prev',
 		next: 'Next',
@@ -219,8 +232,14 @@ export const arLanguagesPhraseSite: ILanguage = {
 			'Elija el tamaño de la inversión y decida cómo cambiará el valor del activo, SUBA o BAJE',
 			'Al final de la ronda, los ganadores recibirán sus ganancias directamente en la misma billetera digatal con la que firmaron el intercambio',
 			'Si no tiene suficiente dinero para participar, haga clic en el signo “+” en la parte superior de la pantalla y elija un método conveniente de reposición',
-			'Puede cambiar el modo presionando el botón en la esquina superior izquierda de la pantalla y seleccionando los parámetros deseados'
+			'Puede cambiar el modo presionando el botón en la esquina superior izquierda de la pantalla y seleccionando los parámetros deseados',
+			'Ahora selecciona un modo de juego y comienza a predecir. Puedes cambiar tu elección en cualquier momento en el menú.'
 		],
+		realMode: 'modo real',
+		gameWithRealTONCoins: 'juego con monedas de toneladas reales',
+		demoMode: 'modo de demostración',
+		learningWithNonRealCoins: 'aprender con monedas no reales',
+		selectGameMode: 'Seleccionar modo de juego',
 		start: 'Inicio',
 		prev: 'Anterior',
 		next: 'Siguiente',
@@ -279,8 +298,14 @@ export const arLanguagesPhraseSite: ILanguage = {
 			'选择投资的规模，并决定资产的价值将如何变化，上升或下降',
 			'在本轮结束时，获胜者将直接将他们的奖金存入他们签署交易所的同一个digatal钱包',
 			'如果您没有足够的资金参与，请点击屏幕顶部的"+"标志，并选择方便的补货方式',
-			'您可以通过按下屏幕左上角的按钮并选择所需的参数来更改模式'
+			'您可以通过按下屏幕左上角的按钮并选择所需的参数来更改模式',
+			'现在选择游戏模式并开始预测。您可以随时在菜单中更改您的选择'
 		],
+		realMode: '实模式',
+		gameWithRealTONCoins: '使用真吨硬币的游戏',
+		demoMode: '演示模式',
+		learningWithNonRealCoins: '用非真实硬币学习',
+		selectGameMode: '选择游戏模式',
 		start: '开始',
 		prev: '上一篇',
 		next: '下一个',
@@ -339,8 +364,14 @@ export const arLanguagesPhraseSite: ILanguage = {
 			'Выберите размер инвестиций и решите, как изменится стоимость актива - ПОВЫСИТСЯ или ПОНИЗИТСЯ',
 			'В конце раунда победители получат свои заработанные средства непосредственно на тот же цифровой кошелек, с помощью которого они заключили сделку',
 			'Если у вас недостаточно денег для участия, нажмите на “+” в верхней части экрана и выберите удобный способ пополнения',
-			'Вы можете изменить режим, нажав кнопку в левом верхнем углу экрана и выбрав нужные параметры'
-			],
+			'Вы можете изменить режим, нажав кнопку в левом верхнем углу экрана и выбрав нужные параметры',
+			'Теперь выберите режим игры и приступайте к прогнозированию. Вы можете изменить свой выбор в любой момент в меню.'
+		],
+		realMode: 'реальный режим',
+		gameWithRealTONCoins: 'игра с реальными тоннами монет',
+		demoMode: 'деморежим',
+		learningWithNonRealCoins: 'обучение с ненастоящими монетами',
+		selectGameMode: 'Выбрать режим игры',
 		start: 'Вперед',
 		prev: 'Предыдущий',
 		next: 'Следующий',
