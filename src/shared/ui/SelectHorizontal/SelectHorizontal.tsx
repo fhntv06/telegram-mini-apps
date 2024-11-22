@@ -69,10 +69,10 @@ export const SelectHorizontal = ({
 				</button>
 			</div>
 			{
-				(!textDescrBtnLeft && !textDescrBtnRight) && (
+				(textDescrBtnLeft && textDescrBtnRight) && (
 					<div className={cx('select-horizontal__descriptions')}>
-						{!textDescrBtnLeft && (<h2 className={cx({'active': !chosen})}>{textDescrBtnLeft}</h2>)}
-						{!textDescrBtnRight && (<h2 className={cx({'active': chosen})}>{textDescrBtnRight}</h2>)}
+						<h2 className={cx({'active': !chosen})}>{textDescrBtnLeft}</h2>
+						<h2 className={cx({'active': chosen})}>{textDescrBtnRight}</h2>
 					</div>
 				)
 			}
