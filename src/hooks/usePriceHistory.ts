@@ -1,17 +1,14 @@
-import { getPriceHistory } from '../app/api';
-import { useEffect, useState } from 'react';
-import { initialDataPriceHistory } from '../shared/constants.ts'
+import { getPriceHistory } from '../app/api'
+import { useEffect, useState } from 'react'
+import { countPointsChart, initialDataPriceHistory } from '../shared/constants.ts'
 
 export const usePriceHistory = () => {
   const [priceHistory, setPriceHistory] = useState<number[]>([])
 
   useEffect(() => {
     console.log('Запрос getPriceHistory!')
-    setPriceHistory(initialDataPriceHistory)
-    console.log('initialDataPriceHistory ', initialDataPriceHistory)
-    return
     getPriceHistory()
-      .then(async (res) => setPriceHistory(res.data))
+      .then(async (res) => setPriceHistory(res.data.slice(0,countPointsChart)))
       .catch((error) => {
         console.log('Error in getPriceHistory: ', error)
         setPriceHistory(initialDataPriceHistory)

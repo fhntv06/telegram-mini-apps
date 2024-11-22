@@ -89,7 +89,7 @@ export const Main = () => {
   return (
     isLoading
       ? <LoaderSpinner />
-        : skipOnBoarding
+        : !skipOnBoarding
           ? (
             <AnimatePresence>
               <motion.div

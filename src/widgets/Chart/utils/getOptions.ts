@@ -33,80 +33,27 @@ const dynamicStep = (
   const min = Math.min(...dataset, startBtcPrice || btcPrice)
   const range = Math.abs(max - min)
 
-  console.log({
-    dataset,
-    max,
-    min,
-    startBtcPrice,
-    btcPrice,
-    or: startBtcPrice || btcPrice
-  })
-
   if (range > 5000) {
-    console.log({
-    step: 2000,
-    range,
-  })
     return 2000
   } else if (range > 1500) {
-    console.log({
-    step: 500,
-    range,
-  })
     return 250
   } else if (range > 500) {
-    console.log({
-    step: 100,
-    range,
-  })
     return 100
   } else if (range > 100) {
-    console.log({
-    step: 50,
-    range,
-  })
     return 50
   } else if (range > 50) {
-    console.log({
-      step: 10,
-      range,
-    })
     return 10
   } else if (range > 10) {
-    console.log({
-    step: 2,
-    range,
-  })
     return 2
   } else if (range > 1) {
-    console.log({
-      step: 1,
-      range,
-    })
     return 1
   } else if (range > 0.5) {
-    console.log({
-      step: 1,
-      range,
-    })
     return 1
   } else if (range > 0.05) {
-    console.log({
-      step: 0.1,
-      range,
-    })
     return 0.1
   } else if (range > 0.005) {
-    console.log({
-      step: 0.01,
-      range,
-    })
     return 0.01
   } else {
-    console.log({
-      step: 0.005,
-      range,
-    })
     return 0.005
   }
 }
