@@ -1,18 +1,16 @@
 import { useState, useEffect } from 'react'
 import { IGameStatus } from '../app/providers/types'
-// import { initialDataGameStatus } from '../shared/constants'
-
-const urlSocket = `${import.meta.env.VITE_SOCKET_PROTOCOL}://${import.meta.env.VITE_DOMAIN}:${import.meta.env.VITE_PORT}`
+import {
+  // initialDataGameStatus,
+  gameSocket,
+} from '../shared/constants'
 
 const initTestData = false
-
 export const useGameSocket = () => {
   const [data, setData] = useState<IGameStatus>()
   const [error, setError] = useState<boolean>(false)
 
   const handlerConnection = () => {
-    const gameSocket = new WebSocket(urlSocket)
-
     gameSocket.onopen = () => console.log("game socket connected")
     gameSocket.onclose = (event) => {
       console.log(event.wasClean ? "Соединение закрыто чисто" : "Обрыв соединения");
