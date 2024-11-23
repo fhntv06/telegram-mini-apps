@@ -107,6 +107,8 @@ export interface ILangPhrase {
 	skip: string
 	begin: string
 	alias: string
+	notEnoughDemoBalance: string
+	yourAnOutOfTime: string
 }
 export interface ILanguage {
 	english: ILangPhrase
@@ -179,7 +181,9 @@ export const arLanguagesPhraseSite: ILanguage = {
 		next: 'Next',
 		skip: 'Skip',
 		begin: 'Begin',
-		alias: 'en'
+		alias: 'en',
+		notEnoughDemoBalance: 'Not enough demo balance',
+		yourAnOutOfTime: 'Your an out of time to bet in this round, please wait for next round',
 	},
 	spanish: {
 		gameInProcess: [
@@ -245,15 +249,17 @@ export const arLanguagesPhraseSite: ILanguage = {
 		next: 'Siguiente',
 		skip: 'Saltar',
 		begin: 'comenzar',
-		alias: 'es'
+		alias: 'es',
+		notEnoughDemoBalance: 'No hay suficiente saldo de demostración',
+		yourAnOutOfTime: 'Te quedaste sin tiempo para apostar en esta ronda, espera a la próxima ronda',
 	},
 	chinese: {
 		gameInProcess: [
-			"等待投注",
-			"接受投注",
-			"合并赌注",
-			"进行中",
-			"资产分配",
+			'等待投注',
+			'接受投注',
+			'合并赌注',
+			'进行中',
+			'资产分配',
 		],
 		upWins: '胜出',
 		downWins: '胜利',
@@ -297,7 +303,7 @@ export const arLanguagesPhraseSite: ILanguage = {
 			'要开始，连接你的钱包吨。..',
 			'选择投资的规模，并决定资产的价值将如何变化，上升或下降',
 			'在本轮结束时，获胜者将直接将他们的奖金存入他们签署交易所的同一个digatal钱包',
-			'如果您没有足够的资金参与，请点击屏幕顶部的"+"标志，并选择方便的补货方式',
+			'如果您没有足够的资金参与，请点击屏幕顶部的'+'标志，并选择方便的补货方式',
 			'您可以通过按下屏幕左上角的按钮并选择所需的参数来更改模式',
 			'现在选择游戏模式并开始预测。您可以随时在菜单中更改您的选择'
 		],
@@ -311,15 +317,17 @@ export const arLanguagesPhraseSite: ILanguage = {
 		next: '下一个',
 		skip: '跳过',
 		begin: '開始啦。',
-		alias: 'zh'
+		alias: 'zh',
+		notEnoughDemoBalance:'没有足够的演示平衡',
+		yourAnOutOfTime: '你在这轮投注的时间已经用完了，请等待下一轮',
 	},
 	russian: {
 		gameInProcess: [
 			'Ожидание ставок',
-			"Прием ставок",
-			"консолидация ставок",
-			"Раунд продолжается",
-			"Распределение активов",
+			'Прием ставок',
+			'консолидация ставок',
+			'Раунд продолжается',
+			'Распределение активов',
 		],
 		upWins: 'Вверх выигрывает',
 		downWins: 'Внизу выигрывает',
@@ -377,7 +385,9 @@ export const arLanguagesPhraseSite: ILanguage = {
 		next: 'Следующий',
 		skip: 'Пропустить',
 		begin: 'Начать',
-		alias: 'ru'
+		alias: 'ru',
+		notEnoughDemoBalance: 'Недостаточно демо-баланса',
+		yourAnOutOfTime: 'У вас не хватило времени сделать ставку в этом раунде, пожалуйста, дождитесь следующего раунда',
 	},
 }
 export const arLanguagesSite: ILang[] = [
