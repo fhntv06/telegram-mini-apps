@@ -3,27 +3,28 @@ import { IGameStatus } from '../app/providers/types'
 import {
   // initialDataGameStatus,
   gameSocket,
+  urlSocket,
 } from '../shared/constants'
 
 const initTestData = false
 export const useGameSocket = () => {
+  const [socket, setSocket] = useState<WebSocket>(gameSocket)
   const [data, setData] = useState<IGameStatus>()
-  const [error, setError] = useState<boolean>(false)
 
   const handlerConnection = () => {
-    gameSocket.onopen = () => console.log("game socket connected")
-    gameSocket.onclose = (event) => {
+    socket.onopen = () => console.log("game socket connected")
+    socket.onclose = (event) => {
       console.log(event.wasClean ? "Соединение закрыто чисто" : "Обрыв соединения");
       console.log("Код: " + event.code + " причина: " + event.reason)
       console.log('Переподключение к сокету!')
 
       const timer = setTimeout(() => {
-        setError((prev) => !prev)
+        setSocket(new WebSocket(urlSocket))
         clearTimeout(timer)
       }, 2000)
     }
-    gameSocket.onmessage = (event) => setData(JSON.parse(event.data))
-    gameSocket.onerror = (event) => console.log("game socket error: ", event)
+    socket.onmessage = (event) => setData(JSON.parse(event.data))
+    socket.onerror = (event) => console.log("game socket error: ", event)
   }
 
   const handlerTestConnection = () => {
@@ -74,7 +75,7 @@ export const useGameSocket = () => {
     } else {
       handlerConnection()
     }
-  }, [error])
+  }, [socket])
 
   return data
 }
