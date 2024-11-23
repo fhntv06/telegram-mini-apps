@@ -7,7 +7,9 @@ export const initialState: IModeSettings = {
         text: '$BTC, 30s',
         value: 30,
         unit: 's'
-    }
+    },
+    ticker: 'BTC-30',
+    gameMode: 'ON_CHAIN'
 }
 
 const index = createSlice({
@@ -17,6 +19,8 @@ const index = createSlice({
         setModeSettings(state, action) {
             state.coin = action.payload.coin
             state.time = action.payload.time
+            state.ticker = action.payload.ticker
+            state.gameMode = action.payload.gameMode
         }
     }
 });

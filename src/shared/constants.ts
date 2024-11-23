@@ -402,3 +402,8 @@ export const arLanguagesSite: ILang[] = [
 		action: 'set-lang',
 	}
 ]
+export const initialDataGameMode = {
+	ticker: 'BTC-30',
+	gameMode: 'ON_CHAIN',
+}
+export const isDemoMode = 'DEMO'

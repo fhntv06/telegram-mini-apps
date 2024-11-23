@@ -12,6 +12,7 @@ import { Button, Icon } from '../../shared'
 
 import styles from './Onbording.module.scss'
 import { SelectHorizontal } from '../../shared/ui/SelectHorizontal'
+import {isDemoMode} from "../../shared/constants.ts";
 
 const cx = classNames.bind(styles)
 
@@ -85,12 +86,13 @@ export const Onboarding = ({ handlerSkip, className }: IOnbording) => {
                           <div className={cx('onboarding__screen__custom-content')}>
                             <h1>{selectGameMode}</h1>
                             <SelectHorizontal
+                              changeId={isDemoMode}
                               textBtnLeft={realMode}
                               textDescrBtnLeft={gameWithRealTONCoins}
                               textBtnRight={demoMode}
                               textDescrBtnRight={learningWithNonRealCoins}
                               onClickLeftBtn={() => sendMessageSocket()}
-                              onClickRightBtn={() => sendMessageSocket('DEMO')}
+                              onClickRightBtn={() => sendMessageSocket(isDemoMode)}
                             />
                             <p className={cx('text', 'p-reg')}>{onboarding[index]}</p>
                           </div>

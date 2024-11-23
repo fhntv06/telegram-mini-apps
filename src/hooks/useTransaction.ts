@@ -2,15 +2,17 @@ import { ActionConfiguration, SendTransactionRequest, useTonConnectUI, CHAIN, us
 import { useContext, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { AnimationContext } from '../app/contexts'
-import { AnimationContextTypes } from '../app/providers/types'
+import { IAnimationContextTypes } from '../app/providers/types'
 import { postDataBetDetailsPlayers } from '../app/api/user'
 import { useUserData } from './useUserData.ts'
+import {isDemoMode} from "../shared/constants.ts";
 
 export const useTransaction = (amount: number) => {
   const tonAddress = useTonAddress()
   const [tonConnectUI] = useTonConnectUI()
   const [txInProcess, setTxInProcess] = useState<boolean>(false)
-  const { openHandler } = useContext<AnimationContextTypes>(AnimationContext)
+  const { openHandler } = useContext<IAnimationContextTypes>(AnimationContext)
+  const { ticker, gameMode } = useSelector((state: any) => state.modeSettings)
   const { address, mainnet } = useSelector((state: any) => state.bets)
   const userData = useUserData()
 
@@ -21,7 +23,6 @@ export const useTransaction = (amount: number) => {
       modals: ['before', 'success', 'error'],
       notifications: ['before', 'success', 'error']
     }
-
     const transaction: SendTransactionRequest = {
       validUntil: Math.floor(Date.now() / 1000) + 60, // 60 sec
       messages: [
@@ -33,57 +34,65 @@ export const useTransaction = (amount: number) => {
       ],
       network: mainnet ? CHAIN.MAINNET : CHAIN.TESTNET
     }
+    const dataPlayer = {
+      ticker,
+      gameMode,
+      telegramId: userData?.id,
+      walletAddress: tonAddress,
+      betAmount: amount * 1e9,
+      variantBet: placeBet
+    }
 
-    await tonConnectUI.sendTransaction(transaction, configuration)
-      .then(() => {
-        if (userData?.id) {
-          postDataBetDetailsPlayers({
-            telegramId: userData?.id,
-            walletAddress: tonAddress,
-            betAmount: amount * 1e9,
-            variantBet: placeBet
-          })
-            .then(() => openHandler('youAreIn'))
-            .catch((error) => console.error('Error postDataBetDetailsPlayers: ', error))
-        }
+    const handlerPostDataBetDetailsPlayers= () => {
+      console.log(dataPlayer)
+      postDataBetDetailsPlayers(dataPlayer)
+        .then(() => openHandler('youAreIn'))
+        .catch((error) => console.error('Error postDataBetDetailsPlayers: ', error))
+    }
+    if (gameMode === isDemoMode) handlerPostDataBetDetailsPlayers()
+    else {
+      await tonConnectUI.sendTransaction(transaction, configuration)
+        .then(() => {
+          if (userData?.id) handlerPostDataBetDetailsPlayers()
 
-        // TODO: перенести в хук
-        const timer = setTimeout(() => {
-          function fadeOut(element: HTMLElement, duration = 1000) {
-            let opacity = 1;
+          // TODO: перенести в хук
+          const timer = setTimeout(() => {
+            function fadeOut(element: HTMLElement, duration = 1000) {
+              let opacity = 1;
 
-            // Установим начальную прозрачность
-            element.style.opacity = `${opacity}`;
-
-            // Вычислим, насколько уменьшить прозрачность на каждом шаге
-            const step = 10 / duration;
-
-            // Создаем таймер для постепенного уменьшения прозрачности
-            function fade() {
-              // Уменьшаем прозрачность элемента
-              opacity -= step;
-
+              // Установим начальную прозрачность
               element.style.opacity = `${opacity}`;
 
-              // Если прозрачность больше 0, продолжаем вызов функции
-              if (opacity > 0) requestAnimationFrame(fade);
-              else element.style.display = 'none';
+              // Вычислим, насколько уменьшить прозрачность на каждом шаге
+              const step = 10 / duration;
+
+              // Создаем таймер для постепенного уменьшения прозрачности
+              function fade() {
+                // Уменьшаем прозрачность элемента
+                opacity -= step;
+
+                element.style.opacity = `${opacity}`;
+
+                // Если прозрачность больше 0, продолжаем вызов функции
+                if (opacity > 0) requestAnimationFrame(fade);
+                else element.style.display = 'none';
+              }
+
+              // Запускаем функцию
+              fade();
             }
 
-            // Запускаем функцию
-            fade();
-          }
+            const element: HTMLElement | null = document.querySelector('[data-tc-modal]');
+            if (element) {
+              fadeOut(element, 500); // элемент исчезнет за 1 секунду
+            }
 
-          const element: HTMLElement | null = document.querySelector('[data-tc-modal]');
-          if (element) {
-            fadeOut(element, 500); // элемент исчезнет за 1 секунду
-          }
+            clearTimeout(timer)
+          }, 2000)
 
-          clearTimeout(timer)
-        }, 2000)
-
-      })
-      .catch((error) => console.error('Error sendTransaction: ', error))
+        })
+        .catch((error) => console.error('Error sendTransaction: ', error))
+    }
 
     setTxInProcess(false)
   }

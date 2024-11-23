@@ -6,9 +6,11 @@ import classNames from 'classnames/bind'
 import styles from './MainHeader.module.scss'
 
 import { AnimationContext, ModalContext, NotificationContext } from '../../app/contexts'
-import { AnimationContextTypes, ModalContextTypes, NotificationContextTypes } from '../../app/providers/types'
+import { IAnimationContextTypes, ModalContextTypes, NotificationContextTypes } from '../../app/providers/types'
 import { ButtonChangeMode, ButtonWallet, ButtonBurger } from '../../feature/'
-import {getWalletBet} from "../../app/api/user";
+import { getDemoBalance, getWalletBet } from '../../app/api/user'
+import { useUserData } from '../../hooks'
+import {isDemoMode} from "../../shared/constants.ts";
 
 const cx = classNames.bind(styles)
 
@@ -17,15 +19,29 @@ export const MainHeader = () => {
   const wallet = useTonWallet()
 	const { openHandler: openHandlerNotification, setTonsHandler } = useContext<NotificationContextTypes>(NotificationContext)
 	const { openHandler: openHandlerModal } = useContext<ModalContextTypes>(ModalContext)
-	const { openHandler: openHandlerAnimation } = useContext<AnimationContextTypes>(AnimationContext)
+	const { openHandler: openHandlerAnimation } = useContext<IAnimationContextTypes>(AnimationContext)
 	const { gamePhase } = useSelector((state: any) => state.gameStatus)
 	const { bet } = useSelector((state: any) => state.bets)
+	const { gameMode } = useSelector((state: any) => state.modeSettings)
+	const userData = useUserData()
 
 	useEffect(() => {
 		if (gamePhase === 2) {
-			openHandlerNotification('warning')
+			openHandlerNotification('warning', { text: 'Your an out of time to bet in this round, please wait for next round' })
 		}
 		if (gamePhase === 4 && address && bet) {
+			if (gameMode === isDemoMode && userData?.id) {
+				getDemoBalance(userData?.id)
+					.then((res) => {
+						console.log('res getDemoBalance', res)
+						if (res.data.error) {
+							throw new Error('Error getDemoBalance: res have error')
+						}
+					})
+					.catch((error) => {
+						console.log(error)
+					})
+			}
       if (address) {
         getWalletBet(address)
           .then((res) => {

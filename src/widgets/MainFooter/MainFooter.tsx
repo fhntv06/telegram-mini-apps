@@ -1,12 +1,12 @@
-import { useEffect } from 'react'
+import {useContext, useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import classNames from 'classnames/bind'
 import { useTonWallet, useTonAddress } from '@tonconnect/ui-react'
-import { getBalance } from '../../app/api'
+import { getBalance, getDemoBalance } from '../../app/api'
 import { setUserDataWallet } from '../../app/store/slices/user'
 import { BetPanel, PanelButtonsBet } from '../../widgets'
 import { ButtonConnectWallet } from '../../feature'
-import { useGetPhrases } from '../../hooks'
+import {useGetPhrases, useUserData} from '../../hooks'
 import { Icon, Rounds } from '../../shared'
 import { IRoundsType } from '../../shared/types'
 import { formatNumber } from '../../shared/utils'
@@ -14,6 +14,9 @@ import { formatNumber } from '../../shared/utils'
 import { getCorrectBalanceWithFormatNumber } from '../../shared/utils'
 
 import styles from './MainFooter.module.scss'
+import {isDemoMode} from "../../shared/constants.ts";
+import {NotificationContextTypes} from "../../app/providers/NotificationProvider/types.ts";
+import {NotificationContext} from "../../app/contexts";
 
 const cx = classNames.bind(styles)
 
@@ -29,6 +32,9 @@ export const MainFooter = () => {
   const wallet = useTonWallet()
 	const address = useTonAddress()
 	const { gamePhase } = useSelector((state: any) => state.gameStatus)
+	const { gameMode } = useSelector((state: any) => state.modeSettings)
+	const userData = useUserData()
+	const { openHandler: openHandlerNotification } = useContext<NotificationContextTypes>(NotificationContext)
 
   // @ts-ignore
   const { livePlayers, last3rounds, allTimeWins } = useGetPhrases(['livePlayers', 'last3rounds', 'allTimeWins'])
@@ -36,14 +42,31 @@ export const MainFooter = () => {
 	const setDataUser = async () => {
 		if (wallet) {
 			// TODO: Это убрать в кнопку подключения и перенести в отдельный хук
-			const balance = await getBalance(address)
-				.then(res => res.data.balance)
-				.then((balance) => balance)
-				.catch((error) => {
-					new Error(error)
+			let balance = 0
 
-					return 0
-				})
+			if (gameMode === isDemoMode && userData?.id) { // с ПК это работать не будет, нужно тестировать только с приложения ТГ
+				console.log('get getDemoBalance')
+				balance = await getDemoBalance(userData?.id)
+					.then(res => res.data.balance)
+					.then((balance) => balance)
+					.catch((error) => {
+						new Error(error)
+
+						openHandlerNotification('warning', { text: 'Not enough demo balance' })
+
+						return 0
+					})
+			} else {
+				console.log('get getBalance')
+				balance = await getBalance(address)
+					.then(res => res.data.balance)
+					.then((balance) => balance)
+					.catch((error) => {
+						new Error(error)
+
+						return 0
+					})
+			}
 
 			dispatch(
 				setUserDataWallet({
@@ -63,7 +86,7 @@ export const MainFooter = () => {
 
 	useEffect(() => {
 		setDataUser()
-	}, [wallet])
+	}, [wallet, gameMode])
 
 	useEffect(() => {
 		if (gamePhase === 3 || gamePhase === 0) setDataUser()

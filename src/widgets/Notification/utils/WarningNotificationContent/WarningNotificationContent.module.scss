@@ -1,0 +1,17 @@
+@import '../../../../shared/assets/styles/basics';
+
+.wrapper {
+  z-index: 10;
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.container {
+  display: flex;
+  align-items: center;
+}
+.container__icon-left {
+  margin-right: $offset16;
+}

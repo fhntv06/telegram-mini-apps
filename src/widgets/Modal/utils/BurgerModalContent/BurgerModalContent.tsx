@@ -5,7 +5,7 @@ import { Button, Select } from '../../../../shared'
 import classNames from 'classnames/bind'
 import { ButtonConnectWallet } from '../../../../feature'
 import {useGetPhrases, useSendMessageSocket} from '../../../../hooks'
-import { arLanguagesSite } from '../../../../shared/constants'
+import {arLanguagesSite, isDemoMode} from '../../../../shared/constants'
 
 import styles from './BurgerModalContent.module.scss'
 import { SelectHorizontal } from '../../../../shared/ui/SelectHorizontal'
@@ -34,7 +34,7 @@ export const BurgerModalContent = () => {
   const sendMessageSocket = useSendMessageSocket();
 
   // @ts-ignore
-  const { affiliate, technicalSupport, realMode, gameWithRealTONCoins, demoMode, learningWithNonRealCoins } = useGetPhrases([
+  const { affiliate, technicalSupport, realMode, demoMode } = useGetPhrases([
     'affiliate', 'technicalSupport', 'realMode',
     'gameWithRealTONCoins', 'demoMode', 'learningWithNonRealCoins'
   ])
@@ -75,12 +75,11 @@ export const BurgerModalContent = () => {
       </Button>
       <Select data={languages} />
       <SelectHorizontal
+        changeId={isDemoMode}
         textBtnLeft={realMode}
-        textDescrBtnLeft={gameWithRealTONCoins}
         textBtnRight={demoMode}
-        textDescrBtnRight={learningWithNonRealCoins}
         onClickLeftBtn={() => sendMessageSocket()}
-        onClickRightBtn={() => sendMessageSocket('DEMO')}
+        onClickRightBtn={() => sendMessageSocket(isDemoMode)}
       />
       <div className={cx('button__social')}>
         <Button

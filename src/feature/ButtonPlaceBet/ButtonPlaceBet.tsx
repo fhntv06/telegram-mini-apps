@@ -38,13 +38,13 @@ export const ButtonPlaceBet = ({
 		}
 	}
 
-	const disabled = !bet || !wallet && gamePhase === 1
+	const disabled = (!bet || !wallet) && gamePhase === 1
 	const textButton = txInProcess ? 'Loading ...' : type === 'up' ? goUp : goDown
 
 	return (
 		<Button
 			type='bet'
-			className={cx('button-placebet', type, 'p', { 'disabled': !bet })}
+			className={cx('button-placebet', type, 'p', { 'disabled': disabled })}
 			onClick={() => !wallet ? tonConnectUI.connectWallet() : handlerPlaceBet()}
 			disabled={disabled}
 		>
