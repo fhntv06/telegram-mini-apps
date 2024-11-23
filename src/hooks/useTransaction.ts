@@ -1,20 +1,22 @@
 import { ActionConfiguration, SendTransactionRequest, useTonConnectUI, CHAIN, useTonAddress } from '@tonconnect/ui-react'
 import { useContext, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { AnimationContext } from '../app/contexts'
-import { IAnimationContextTypes } from '../app/providers/types'
+import { AnimationContext, NotificationContext } from '../app/contexts'
+import { IAnimationContextTypes, INotificationContextTypes } from '../app/providers/types'
 import { postDataBetDetailsPlayers } from '../app/api/user'
-import { useUserData } from './useUserData.ts'
-import {isDemoMode} from "../shared/constants.ts";
+import { useGetPhrases, useUserData } from './'
+import { isDemoMode } from '../shared/constants'
 
 export const useTransaction = (amount: number) => {
   const tonAddress = useTonAddress()
   const [tonConnectUI] = useTonConnectUI()
   const [txInProcess, setTxInProcess] = useState<boolean>(false)
-  const { openHandler } = useContext<IAnimationContextTypes>(AnimationContext)
+  const { openHandler: openHandlerAnimation } = useContext<IAnimationContextTypes>(AnimationContext)
+	const { openHandler: openHandlerNotification } = useContext<INotificationContextTypes>(NotificationContext)
   const { ticker, gameMode } = useSelector((state: any) => state.modeSettings)
   const { address, mainnet } = useSelector((state: any) => state.bets)
   const userData = useUserData()
+  const { notEnoughDemoBalance } = useGetPhrases(['notEnoughDemoBalance'])
 
   const sendTransaction = async (placeBet: 'up' | 'down') => {
     setTxInProcess(true)
@@ -43,12 +45,22 @@ export const useTransaction = (amount: number) => {
       variantBet: placeBet
     }
 
-    const handlerPostDataBetDetailsPlayers= () => {
-      console.log(dataPlayer)
+    console.log(dataPlayer)
+
+    const handlerPostDataBetDetailsPlayers = () => (
       postDataBetDetailsPlayers(dataPlayer)
-        .then(() => openHandler('youAreIn'))
-        .catch((error) => console.error('Error postDataBetDetailsPlayers: ', error))
-    }
+        .then(() => openHandlerAnimation('youAreIn'))
+        .catch((error) => {
+          console.error('Error postDataBetDetailsPlayers: ', error)
+          
+          if (gameMode === isDemoMode) {
+            if (error.response.status === 400) {
+              openHandlerNotification('warning', { text: notEnoughDemoBalance })
+            }
+          }
+        })
+    )
+
     if (gameMode === isDemoMode) handlerPostDataBetDetailsPlayers()
     else {
       await tonConnectUI.sendTransaction(transaction, configuration)
