@@ -1,7 +1,7 @@
 import { createContext } from 'react'
-import { AnimationContextTypes } from '../providers/types'
+import { IAnimationContextTypes } from '../providers/types'
 
-export const AnimationContext = createContext<AnimationContextTypes>({
+export const AnimationContext = createContext<IAnimationContextTypes>({
   isOpen: false,
   openHandler: () => {},
   closeHandler: () => {},
