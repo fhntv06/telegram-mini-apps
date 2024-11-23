@@ -1,9 +1,11 @@
-import {PropsWithChildren, useEffect, useState} from 'react';
-import classnames from "classnames/bind";
+import { PropsWithChildren, useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
+import classnames from 'classnames/bind'
 import { motion } from 'framer-motion'
-import styles from './SelectHorizontal.module.scss';
+import styles from './SelectHorizontal.module.scss'
 
 interface IProps extends PropsWithChildren {
+	changeId: string,
 	textBtnLeft: string,
 	textDescrBtnLeft?: string,
 	textBtnRight: string,
@@ -20,6 +22,7 @@ const animation = {
 }
 
 export const SelectHorizontal = ({
+	changeId = '',
 	textBtnLeft,
 	textDescrBtnLeft = '',
 	textDescrBtnRight = '',
@@ -27,7 +30,8 @@ export const SelectHorizontal = ({
 	onClickLeftBtn,
 	onClickRightBtn
 }: IProps) => {
-	const [chosen, setChosen] = useState(false)
+	const { gameMode } = useSelector((state: any)=> state.modeSettings)
+	const [chosen, setChosen] = useState(changeId === gameMode)
 	const [totalDisabled, setTotalDisabled] = useState(false)
 
 	const handlerLeftBtn = () => {
@@ -56,7 +60,7 @@ export const SelectHorizontal = ({
 					exit={animation.initial}
 					transition={{
 						delay: .1,
-						duration: .3,
+						duration: changeId === gameMode ? 0 : .3,
 						ease: 'easeInOut',
 					}}
 					className={cx('select-horizontal__changes')}
