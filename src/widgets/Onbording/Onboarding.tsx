@@ -7,12 +7,12 @@ import {
   // IScreen
 } from './types'
 
-import { useGetPhrases, useSendMessageSocket } from '../../hooks'
+import { useGetPhrases, useChangeGameMode } from '../../hooks'
 import { Button, Icon } from '../../shared'
 
 import styles from './Onbording.module.scss'
 import { SelectHorizontal } from '../../shared/ui/SelectHorizontal'
-import {isDemoMode} from "../../shared/constants.ts";
+import { isDemoMode } from '../../shared/constants'
 
 const cx = classNames.bind(styles)
 
@@ -24,7 +24,7 @@ export const Onboarding = ({ handlerSkip, className }: IOnbording) => {
   const [startOnboarding, setStartOnboarding] = useState<boolean>(false)
   const [disabledPrevButton, setDisabledPrevButton] = useState<boolean>(true)
   const [indexSlideActive, setIndexSlideActive] = useState<number>(1)
-  const sendMessageSocket = useSendMessageSocket();
+  const changeGameMode = useChangeGameMode();
 
   const {
     // @ts-ignore
@@ -91,8 +91,8 @@ export const Onboarding = ({ handlerSkip, className }: IOnbording) => {
                               textDescrBtnLeft={gameWithRealTONCoins}
                               textBtnRight={demoMode}
                               textDescrBtnRight={learningWithNonRealCoins}
-                              onClickLeftBtn={() => sendMessageSocket()}
-                              onClickRightBtn={() => sendMessageSocket(isDemoMode)}
+                              onClickLeftBtn={() => changeGameMode()}
+                              onClickRightBtn={() => changeGameMode(isDemoMode)}
                             />
                             <p className={cx('text', 'p-reg')}>{onboarding[index]}</p>
                           </div>

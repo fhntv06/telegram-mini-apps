@@ -4,7 +4,7 @@ import { useTonWallet, useTonAddress } from '@tonconnect/ui-react'
 import { Button, Select } from '../../../../shared'
 import classNames from 'classnames/bind'
 import { ButtonConnectWallet } from '../../../../feature'
-import {useGetPhrases, useSendMessageSocket} from '../../../../hooks'
+import { useGetPhrases, useChangeGameMode } from '../../../../hooks'
 import {arLanguagesSite, isDemoMode} from '../../../../shared/constants'
 
 import styles from './BurgerModalContent.module.scss'
@@ -31,7 +31,7 @@ export const BurgerModalContent = () => {
   const wallet = useTonWallet()
 	const address = useTonAddress()
   const language= useSelector((state: any) => state.language)
-  const sendMessageSocket = useSendMessageSocket();
+  const changeGameMode = useChangeGameMode();
 
   // @ts-ignore
   const { affiliate, technicalSupport, realMode, demoMode } = useGetPhrases([
@@ -78,8 +78,8 @@ export const BurgerModalContent = () => {
         changeId={isDemoMode}
         textBtnLeft={realMode}
         textBtnRight={demoMode}
-        onClickLeftBtn={() => sendMessageSocket()}
-        onClickRightBtn={() => sendMessageSocket(isDemoMode)}
+        onClickLeftBtn={() => changeGameMode()}
+        onClickRightBtn={() => changeGameMode(isDemoMode)}
       />
       <div className={cx('button__social')}>
         <Button
