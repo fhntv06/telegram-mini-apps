@@ -8,6 +8,7 @@ import { isDemoMode } from '../shared/constants'
 export const useSetBalance = () => {
 	const userData = useUserData()
 	const dispatch = useDispatch()
+    const userDataWallet = useSelector((state: any) => state.userDataWallet)
 
     if (!userData) return 0
 
@@ -20,7 +21,7 @@ export const useSetBalance = () => {
 
     const updateBalance = async () => {
         console.log('updateBalance')
-    // @ts-ignore
+        // @ts-ignore
         const balance = await method(param)
             .then(res => res.data.balance)
             .catch((error) => {
@@ -31,7 +32,7 @@ export const useSetBalance = () => {
 
         dispatch(
             setUserDataWallet({
-                ...userData,
+                ...userDataWallet,
                 balance
             })
         )
