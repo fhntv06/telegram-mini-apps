@@ -2,16 +2,18 @@ import { useState, useEffect } from 'react'
 import { IGameStatus } from '../app/providers/types'
 import {
   // initialDataGameStatus,
-  gameSocket,
   urlSocket,
 } from '../shared/constants'
 
 const initTestData = false
 export const useGameSocket = () => {
-  const [socket, setSocket] = useState<WebSocket>(gameSocket)
+  const [socket, setSocket] = useState<WebSocket>()
   const [data, setData] = useState<IGameStatus>()
+  const [error, setError] = useState<boolean>(false)
 
   const handlerConnection = () => {
+    const socket = new WebSocket(urlSocket)
+
     socket.onopen = () => console.log("game socket connected")
     socket.onclose = (event) => {
       console.log(event.wasClean ? "Соединение закрыто чисто" : "Обрыв соединения");
@@ -19,7 +21,8 @@ export const useGameSocket = () => {
       console.log('Переподключение к сокету!')
 
       const timer = setTimeout(() => {
-        setSocket(new WebSocket(urlSocket))
+        setError((prev) => !prev)
+        setSocket(socket)
         clearTimeout(timer)
       }, 2000)
     }
@@ -75,7 +78,7 @@ export const useGameSocket = () => {
     } else {
       handlerConnection()
     }
-  }, [socket])
+  }, [error])
 
-  return data
+  return { data, socket }
 }
