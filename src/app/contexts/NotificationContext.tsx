@@ -1,7 +1,7 @@
 import { createContext } from 'react'
-import { NotificationContextTypes } from '../providers/NotificationProvider/types'
+import { INotificationContextTypes } from '../providers/NotificationProvider/types'
 
-export const NotificationContext = createContext<NotificationContextTypes>({
+export const NotificationContext = createContext<INotificationContextTypes>({
   isOpen: false,
   openHandler: () => {},
   closeHandler: () => {},
