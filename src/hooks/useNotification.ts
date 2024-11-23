@@ -5,10 +5,12 @@ export const useNotification = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [type, setType] = useState<INotificationTypes>('warning')
   const [tons, setTons] = useState<number>(0)
+  const [settings, setSettings] = useState<{ text: string }>({ text: '' })
 
-  const openHandler = (type: INotificationTypes = 'warning') => {
+  const openHandler = (type: INotificationTypes = 'warning', settings: { text: string } = { text: '' }) => {
     setIsOpen(true)
     setType(type)
+    setSettings(settings)
   };
 
   const closeHandler = () => {
@@ -18,8 +20,11 @@ export const useNotification = () => {
   const setTonsHandler = (tons: number = 0) => {
     setTons(tons)
   }
+  const setSettingsHandler = (settings: { text: string } = { text: ''}) => {
+    setSettings(settings)
+  }
 
   return {
-    tons, type, isOpen, openHandler, closeHandler, setTonsHandler
+    tons, type, settings, isOpen, openHandler, closeHandler, setTonsHandler, setSettingsHandler
   };
 };
