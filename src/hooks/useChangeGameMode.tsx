@@ -1,12 +1,9 @@
-import { useDispatch } from 'react-redux'
-import { useGameSocket } from './'
+import { useDispatch, useSelector } from 'react-redux'
 import { setModeSettings } from '../app/store/slices/mode'
 
 export const useChangeGameMode = () => {
   const dispatch = useDispatch()
-  const { socket } = useGameSocket()
-
-  console.log(socket)
+  const { socket } = useSelector((state: any) => state.socket)
 
   return (
     gameMode: 'ON_CHAIN' | 'DEMO' = 'ON_CHAIN',
