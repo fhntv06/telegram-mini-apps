@@ -1,18 +1,27 @@
 import { useState, useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 import { IGameStatus } from '../app/providers/types'
 import {
   // initialDataGameStatus,
   urlSocket,
 } from '../shared/constants'
+import { setSocket, closeSocket } from '../app/store/slices/socket'
 
 const initTestData = false
+
 export const useGameSocket = () => {
-  const [socket, setSocket] = useState<WebSocket>()
   const [data, setData] = useState<IGameStatus>()
   const [error, setError] = useState<boolean>(false)
+  const dispatch = useDispatch()
 
   const handlerConnection = () => {
     const socket = new WebSocket(urlSocket)
+
+    dispatch(
+      setSocket({
+        socket
+      })
+    )
 
     socket.onopen = () => console.log("game socket connected")
     socket.onclose = (event) => {
@@ -22,7 +31,7 @@ export const useGameSocket = () => {
 
       const timer = setTimeout(() => {
         setError((prev) => !prev)
-        setSocket(socket)
+        dispatch(closeSocket())
         clearTimeout(timer)
       }, 2000)
     }
@@ -80,5 +89,5 @@ export const useGameSocket = () => {
     }
   }, [error])
 
-  return { data, socket }
+  return data
 }
