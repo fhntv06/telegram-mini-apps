@@ -23,7 +23,7 @@ const cx = classNames.bind(styles)
 export const Main = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const dispatch = useDispatch()
-  const { data } = useGameSocket()
+  const data = useGameSocket()
   const priceHistory = usePriceHistory()
   const address = useTonAddress()
   const userData = useUserData()
