@@ -57,10 +57,9 @@ export const SelectHorizontal = ({
 				<motion.div
 					initial={animation.initial}
 					animate={chosen ? animation.animate : animation.initial}
-					exit={animation.initial}
 					transition={{
 						delay: .1,
-						duration: changeId === gameMode ? 0 : .3,
+						duration: .3,
 						ease: 'easeInOut',
 					}}
 					className={cx('select-horizontal__changes')}
