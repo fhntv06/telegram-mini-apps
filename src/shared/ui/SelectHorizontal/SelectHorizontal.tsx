@@ -55,7 +55,7 @@ export const SelectHorizontal = ({
 		<div className={cx('select-horizontal')}>
 			<div className={cx('select-horizontal__buttons')}>
 				<motion.div
-					initial={animation.initial}
+					initial={false}
 					animate={chosen ? animation.animate : animation.initial}
 					transition={{
 						delay: .1,

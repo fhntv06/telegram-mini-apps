@@ -90,7 +90,6 @@ export const MainFooter = () => {
 	// TODO: вынести код выше!
 	// не должно быть тут!
 	useEffect(() => {
-		console.log('userBalance ', userBalance)
 		setDataUser()
 	}, [wallet, gameMode])
 
