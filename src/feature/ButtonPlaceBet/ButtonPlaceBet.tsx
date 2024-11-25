@@ -18,7 +18,7 @@ export const ButtonPlaceBet = ({
 	onClick,
 	type = 'up',
 }: Props) => {
-  	const wallet = useTonWallet()
+	const wallet = useTonWallet()
 	const [tonConnectUI] = useTonConnectUI()
 	const { bet } = useSelector((state: any) => state.bets)
 	const { gamePhase } = useSelector((state: any) => state.gameStatus)
@@ -38,7 +38,7 @@ export const ButtonPlaceBet = ({
 		}
 	}
 
-	const disabled = (!bet || !wallet) && gamePhase === 1
+	const disabled = !bet || !wallet || (gamePhase !== 1 && gamePhase !== 0)
 	const textButton = txInProcess ? 'Loading ...' : type === 'up' ? goUp : goDown
 
 	return (
