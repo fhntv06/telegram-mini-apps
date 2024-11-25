@@ -7,7 +7,7 @@ import classNames from 'classnames/bind'
 import { useTonWallet, useTonAddress } from '@tonconnect/ui-react'
 import { setUserDataWallet } from '../../app/store/slices/user'
 import { BetPanel, PanelButtonsBet } from '../../widgets'
-import { ButtonConnectWallet } from '../../feature'
+import { ButtonConnectWallet, ButtonTopUp } from '../../feature'
 import { Icon, Rounds } from '../../shared'
 import { IRoundsType } from '../../shared/types'
 import { formatNumber } from '../../shared/utils'
@@ -31,13 +31,13 @@ export const MainFooter = () => {
 		livePlayers: livePlayersCount,
 		allTimeWins: allTimeWinsCount
 	} = useSelector((state: any) => state.gameStatus)
-  	const wallet = useTonWallet()
+	const wallet = useTonWallet()
 	const address = useTonAddress()
 	const { gamePhase } = useSelector((state: any) => state.gameStatus)
 	const { gameMode } = useSelector((state: any) => state.modeSettings)
 	const userData = useUserData()
 	const { openHandler: openHandlerNotification } = useContext<INotificationContextTypes>(NotificationContext)
-
+	const { balance: userBalance } = useSelector((state: any) => state.userDataWallet)
 
   // @ts-ignore
   const { livePlayers, last3rounds, allTimeWins } = useGetPhrases(['livePlayers', 'last3rounds', 'allTimeWins'])
@@ -82,7 +82,6 @@ export const MainFooter = () => {
 					maxProtocolVersion: wallet.device.maxProtocolVersion,
 					platform: wallet.device.platform,
 					balance,
-
 				})
 			)
 		}
@@ -91,6 +90,7 @@ export const MainFooter = () => {
 	// TODO: вынести код выше!
 	// не должно быть тут!
 	useEffect(() => {
+		console.log('userBalance ', userBalance)
 		setDataUser()
 	}, [wallet, gameMode])
 
@@ -124,7 +124,11 @@ export const MainFooter = () => {
 				<BetPanel data={downPoolData} type='down' />
 			</main>
 			<footer className={cx('footer__bets')}>
-				{wallet && <PanelButtonsBet/>}
+				{
+					(wallet && userBalance > 0)
+						? <PanelButtonsBet />
+						: wallet ? <ButtonTopUp sizeIcons='big' /> : null
+				}
 				<ButtonConnectWallet className={cx({ 'hide': wallet })} sizeIcons='big' />
 			</footer>
 		</footer>

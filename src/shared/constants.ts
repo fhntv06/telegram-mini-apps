@@ -108,6 +108,7 @@ export interface ILangPhrase {
 	alias: string
 	notEnoughDemoBalance: string
 	yourAnOutOfTime: string
+	topUpYourWallet: string
 }
 export interface ILanguage {
 	english: ILangPhrase
@@ -183,6 +184,7 @@ export const arLanguagesPhraseSite: ILanguage = {
 		alias: 'en',
 		notEnoughDemoBalance: 'Not enough demo balance',
 		yourAnOutOfTime: 'Your an out of time to bet in this round, please wait for next round',
+		topUpYourWallet: 'Top up your wallet'
 	},
 	spanish: {
 		gameInProcess: [
@@ -251,6 +253,7 @@ export const arLanguagesPhraseSite: ILanguage = {
 		alias: 'es',
 		notEnoughDemoBalance: 'No hay suficiente saldo de demostración',
 		yourAnOutOfTime: 'Te quedaste sin tiempo para apostar en esta ronda, espera a la próxima ronda',
+		topUpYourWallet: 'Recarga tu billetera',
 	},
 	chinese: {
 		gameInProcess: [
@@ -319,6 +322,7 @@ export const arLanguagesPhraseSite: ILanguage = {
 		alias: 'zh',
 		notEnoughDemoBalance:'没有足够的演示平衡',
 		yourAnOutOfTime: '你在这轮投注的时间已经用完了，请等待下一轮',
+		topUpYourWallet: '把你的钱包装满',
 	},
 	russian: {
 		gameInProcess: [
@@ -387,6 +391,7 @@ export const arLanguagesPhraseSite: ILanguage = {
 		alias: 'ru',
 		notEnoughDemoBalance: 'Недостаточно демо-баланса',
 		yourAnOutOfTime: 'У вас не хватило времени сделать ставку в этом раунде, пожалуйста, дождитесь следующего раунда',
+		topUpYourWallet: 'Пополните свой кошелек',
 	},
 }
 export const arLanguagesSite: ILang[] = [

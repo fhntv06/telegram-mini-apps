@@ -15,7 +15,7 @@ const cx = classNames.bind(styles)
 
 export const MainHeader = () => {
 	const address = useTonAddress()
-  	const wallet = useTonWallet()
+	const wallet = useTonWallet()
 	const { openHandler: openHandlerNotification, setTonsHandler } = useContext<INotificationContextTypes>(NotificationContext)
 	const { openHandler: openHandlerModal } = useContext<ModalContextTypes>(ModalContext)
 	const { openHandler: openHandlerAnimation } = useContext<IAnimationContextTypes>(AnimationContext)
