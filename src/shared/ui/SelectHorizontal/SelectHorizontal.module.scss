@@ -17,7 +17,7 @@
 	top: $offset12;
 	left: $offset12;
 	width: calc(50% - $offset12);
-	height: 60px;
+	height: calc(100% - $offset12 * 2);
 	background-color: $gray;
 	@include border('medium');
 }
