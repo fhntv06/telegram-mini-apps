@@ -4,7 +4,7 @@ import classNames from 'classnames/bind'
 import styles from './Modal.module.scss'
 
 import { IModalTypes } from './types'
-import { ButtonChangeMode, ButtonWallet, ButtonBurger } from '../../feature'
+import { ButtonSelectMode, ButtonWallet, ButtonBurger } from '../../feature'
 import { AnimatePresence, motion, useWillChange } from 'framer-motion'
 
 const cx = classNames.bind(styles)
@@ -42,7 +42,7 @@ export const Modal = ({
           >
             <header className={cx('modal__header')}>
               <div className={cx('modal__header__buttons', typeModal)}>
-                <ButtonChangeMode
+                <ButtonSelectMode
                   className={cx('modal__button-select__mode', {active: typeModal === 'select__mode'})}
                   isActive={typeModal === 'select__mode'}
                   onClick={closeHandler}

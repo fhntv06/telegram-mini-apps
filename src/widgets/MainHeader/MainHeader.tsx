@@ -7,7 +7,7 @@ import styles from './MainHeader.module.scss'
 
 import { AnimationContext, ModalContext, NotificationContext } from '../../app/contexts'
 import { IAnimationContextTypes, ModalContextTypes, INotificationContextTypes } from '../../app/providers/types'
-import { ButtonChangeMode, ButtonWallet, ButtonBurger } from '../../feature/'
+import { ButtonSelectMode, ButtonWallet, ButtonBurger } from '../../feature/'
 import { getWalletBet } from '../../app/api/user'
 import { useGetPhrases, useUserData } from '../../hooks'
 
@@ -57,7 +57,7 @@ export const MainHeader = () => {
 	return (
 		<header className={cx('header')}>
 			<div className={cx('header__button')}>
-				<ButtonChangeMode onClick={() => openHandlerModal('select__mode')} />
+				<ButtonSelectMode onClick={() => openHandlerModal('select__mode')} />
 				{wallet && <ButtonWallet onClick={() => openHandlerModal('wallet')} />}
 			</div>
 			<ButtonBurger onClick={() => openHandlerModal('burger')} />

@@ -24,7 +24,7 @@ export const Onboarding = ({ handlerSkip, className }: IOnbording) => {
   const [startOnboarding, setStartOnboarding] = useState<boolean>(false)
   const [disabledPrevButton, setDisabledPrevButton] = useState<boolean>(true)
   const [indexSlideActive, setIndexSlideActive] = useState<number>(1)
-  const changeGameMode = useChangeGameMode();
+  const changeGameMode = useChangeGameMode()
 
   const {
     // @ts-ignore
