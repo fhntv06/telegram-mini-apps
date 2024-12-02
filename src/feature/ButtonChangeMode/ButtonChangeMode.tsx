@@ -1,31 +1,49 @@
-import { Button } from '../../shared'
 import classNames from 'classnames/bind'
+import { IconNames, IconType } from '../../shared/ui/Icon/types'
+import {
+	useChangeGameMode,
+	// useGetPhrases
+} from '../../hooks'
+import { Button } from '../../shared'
+
 import styles from './ButtonChangeMode.module.scss'
 
 const cx = classNames.bind(styles)
 
 interface Props {
-	isActive?: boolean,
-	onClick?: (() => void)
-	className?: string
+	iconRightName?: IconNames,
+	sizeIcons?: IconType,
+	className?: string,
+	onClick?: () => void
 }
 
 export const ButtonChangeMode = ({
-	isActive = false,
-	onClick,
+	sizeIcons,
+	iconRightName,
 	className,
+	onClick,
 }: Props) => {
-	const textMode = '$BTC, 30s'
+  // @ts-ignore
+	// TODO: в будущем будет фраза
+  // const { goToRealMode } = useGetPhrases(['goToRealMode'])
+	const changeGameMode = useChangeGameMode()
 
-	return (
+	const handlerChangeGameMode = () => {
+		if (onClick) onClick()
+		changeGameMode()
+	}
+
+  return (
 		<Button
-			className={cx('button', className)}
+			className={cx('button', 'p', className)}
+			iconLeftName="plus"
+			iconRightName={iconRightName}
+			sizeIcons={sizeIcons}
 			type='gray'
-			iconLeftName='bitcoin-medium'
-			iconRightName={isActive ? 'arrow-up-medium' : 'arrow-down-medium'}
-			onClick={onClick}
+			onClick={handlerChangeGameMode}
 		>
-			{textMode}
+			{/*{goToRealMode}*/}
+			Go to real mode
 		</Button>
 	)
 }
