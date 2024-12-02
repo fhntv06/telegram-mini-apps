@@ -183,7 +183,7 @@ export const arLanguagesPhraseSite: ILanguage = {
 		begin: 'Begin',
 		alias: 'en',
 		notEnoughDemoBalance: 'Not enough demo balance',
-		yourAnOutOfTime: 'Your an out of time to bet in this round, please wait for next round',
+		yourAnOutOfTime: 'You’re out of time to bet in this round, please wait for the next round',
 		topUpYourWallet: 'Top up your wallet'
 	},
 	spanish: {
