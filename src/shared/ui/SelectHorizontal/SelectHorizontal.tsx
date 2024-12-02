@@ -1,4 +1,4 @@
-import { PropsWithChildren, useEffect, useState } from 'react'
+import { PropsWithChildren, useState } from 'react'
 import { useSelector } from 'react-redux'
 import classnames from 'classnames/bind'
 import { motion } from 'framer-motion'
@@ -32,24 +32,15 @@ export const SelectHorizontal = ({
 }: IProps) => {
 	const { gameMode } = useSelector((state: any)=> state.modeSettings)
 	const [chosen, setChosen] = useState(changeId === gameMode)
-	const [totalDisabled, setTotalDisabled] = useState(false)
 
 	const handlerLeftBtn = () => {
 		onClickLeftBtn()
 		setChosen(false)
-		setTotalDisabled(true)
 	}
 	const handlerRightBtn = () => {
 		onClickRightBtn()
 		setChosen(true)
-		setTotalDisabled(true)
 	}
-
-	useEffect(() => {
-		const timer = setTimeout(() => setTotalDisabled(false), 2000)
-
-		return () => clearTimeout(timer)
-	}, [totalDisabled])
 
 	return (
 		<div className={cx('select-horizontal')}>
@@ -64,10 +55,10 @@ export const SelectHorizontal = ({
 					}}
 					className={cx('select-horizontal__changes')}
 				/>
-				<button className={cx('select-horizontal__button', { 'deactive': totalDisabled })} onClick={handlerLeftBtn} disabled={!chosen || totalDisabled}>
+				<button className={cx('select-horizontal__button')} onClick={handlerLeftBtn} disabled={!chosen}>
 					{textBtnLeft}
 				</button>
-				<button className={cx('select-horizontal__button', { 'deactive': totalDisabled })} onClick={handlerRightBtn} disabled={chosen || totalDisabled}>
+				<button className={cx('select-horizontal__button')} onClick={handlerRightBtn} disabled={chosen}>
 					{textBtnRight}
 				</button>
 			</div>
