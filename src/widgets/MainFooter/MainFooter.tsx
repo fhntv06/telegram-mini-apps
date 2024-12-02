@@ -1,13 +1,13 @@
 import { useContext, useEffect } from 'react'
 import { getBalance, getDemoBalance } from '../../app/api'
-import {useGetPhrases, useUserData} from '../../hooks'
+import { useGetPhrases, useUserData } from '../../hooks'
 
 import { useDispatch, useSelector } from 'react-redux'
 import classNames from 'classnames/bind'
 import { useTonWallet, useTonAddress } from '@tonconnect/ui-react'
 import { setUserDataWallet } from '../../app/store/slices/user'
 import { BetPanel, PanelButtonsBet } from '../../widgets'
-import { ButtonConnectWallet, ButtonTopUp } from '../../feature'
+import { ButtonChangeMode, ButtonConnectWallet, ButtonTopUp } from '../../feature'
 import { Icon, Rounds } from '../../shared'
 import { IRoundsType } from '../../shared/types'
 import { formatNumber } from '../../shared/utils'
@@ -51,7 +51,6 @@ export const MainFooter = () => {
 				console.log('get getDemoBalance')
 				balance = await getDemoBalance(userData?.id)
 					.then(res => res.data.balance)
-					.then((balance) => balance)
 					.catch((error) => {
 						new Error(error)
 
@@ -63,7 +62,6 @@ export const MainFooter = () => {
 				console.log('get getBalance')
 				balance = await getBalance(address)
 					.then(res => res.data.balance)
-					.then((balance) => balance)
 					.catch((error) => {
 						new Error(error)
 
@@ -126,7 +124,7 @@ export const MainFooter = () => {
 				{
 					(wallet && userBalance > 0)
 						? <PanelButtonsBet />
-						: wallet ? <ButtonTopUp sizeIcons='big' /> : null
+						: (wallet && gameMode === isDemoMode) ? <ButtonChangeMode sizeIcons='big' /> : <ButtonTopUp sizeIcons='big' />
 				}
 				<ButtonConnectWallet className={cx({ 'hide': wallet })} sizeIcons='big' />
 			</footer>
