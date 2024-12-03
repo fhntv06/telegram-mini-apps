@@ -98,7 +98,7 @@ export const Onboarding = ({ handlerSkip, className }: IOnbording) => {
                           </div>
                         ) : (
                           <>
-                          <div className={cx('screen')}>
+                            <div className={cx('screen')}>
                               <div className={cx(`screen__${index}`)}/>
                             </div>
                             <p className={cx('text', 'p-reg')}>{onboarding[index]}</p>

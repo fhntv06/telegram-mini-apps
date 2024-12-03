@@ -1,4 +1,4 @@
-import { IGameStatus } from '../app/providers/types.ts';
+import { IGameStatus } from '../app/providers/types';
 import { ILang } from '../app/store/slices/types'
 export const urlSocket = `${import.meta.env.VITE_SOCKET_PROTOCOL}://${import.meta.env.VITE_DOMAIN}:${import.meta.env.VITE_PORT}`
 export const countPointsChart = 25
