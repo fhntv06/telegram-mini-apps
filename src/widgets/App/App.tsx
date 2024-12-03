@@ -7,6 +7,7 @@ import {
   Routes,
 } from 'react-router-dom'
 import { Provider } from 'react-redux';
+import { PostHogProvider } from '../../app/providers/'
 
 import { routes } from '../../app/routes'
 import store from '../../app/store'
@@ -25,13 +26,15 @@ function BackButtonManipulator() {
 }
 
 export const App: FC = () => (
-  <Provider store={store}>
-    <BrowserRouter>
-      <BackButtonManipulator/>
-      <Routes>
-        {routes.map((route) => <Route key={route.path} {...route} />)}
-        <Route path='*' element={<Navigate to='/'/>}/>
-      </Routes>
-    </BrowserRouter>
-  </Provider>
+  <PostHogProvider>
+    <Provider store={store}>
+      <BrowserRouter>
+        <BackButtonManipulator/>
+        <Routes>
+          {routes.map((route) => <Route key={route.path} {...route} />)}
+          <Route path='*' element={<Navigate to='/'/>}/>
+        </Routes>
+      </BrowserRouter>
+    </Provider>
+  </PostHogProvider>
 );
