@@ -1,4 +1,10 @@
+export { getPlayersBets } from './bets'
+export { getAddressContract, getGameBetsResult } from './game'
 export { getPriceHistory } from './prices'
-export { getBalance } from './user'
-export { getDemoBalance } from './user'
 export { postReferral } from './referral'
+export {
+  getBalance,
+  getDemoBalance,
+  getWalletBet,
+  postDataBetDetailsPlayers
+} from './user'
