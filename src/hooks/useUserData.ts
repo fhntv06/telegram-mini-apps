@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import WebApp from '@twa-dev/sdk';
 import { setUserDataTelegram } from '../app/store/slices/user'
-import { useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux'
 
 export const useUserData = () => {
   const initData = WebApp.initDataUnsafe;

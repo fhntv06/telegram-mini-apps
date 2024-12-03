@@ -8,7 +8,7 @@ import styles from './MainHeader.module.scss'
 import { AnimationContext, ModalContext, NotificationContext } from '../../app/contexts'
 import { IAnimationContextTypes, ModalContextTypes, INotificationContextTypes } from '../../app/providers/types'
 import { ButtonSelectMode, ButtonWallet, ButtonBurger } from '../../feature/'
-import { getWalletBet } from '../../app/api/user'
+import { getWalletBet } from '../../app/api/'
 import { useGetPhrases, useUserData } from '../../hooks'
 
 const cx = classNames.bind(styles)
