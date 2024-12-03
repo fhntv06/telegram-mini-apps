@@ -14,7 +14,7 @@ import { useGameSocket, usePriceHistory, useUserData } from '../../hooks/'
 import { setGameStatus } from '../../app/store/slices/game'
 import { LoaderSpinner } from '../../shared'
 
-import { getAddressContract } from '../../app/api/game'
+import { getAddressContract } from '../../app/api/'
 import { setDataTransaction } from '../../app/store/slices/bets'
 import { setUserDataTelegram } from '../../app/store/slices/user'
 
@@ -31,14 +31,16 @@ export const Main = () => {
   const willChange = useWillChange()
   const wallet = useTonWallet()
 
+  // TODO: переписать реализацию получения данных из контекста
+  // согласно видео: https://www.youtube.com/watch?v=k2g_Og3CFKU
   const handlerPostReferral = () => {
     new Promise((resolve) => resolve(null))
       .then(() => {
         if (userData) dispatch(setUserDataTelegram(userData))
 
         // For wait Telegram data
-        const data: { telegramId: string, walletAddress?: string, referral?: string } = {
-          telegramId: `${userData?.id}`,
+        const data: { initData: string, walletAddress?: string, referral?: string } = {
+          initData: WebApp.initData,
         }
 
         if (address) {
@@ -56,7 +58,7 @@ export const Main = () => {
 
   // for disconnect action
   useEffect(() => {
-    if (userData?.id && wallet) {
+    if (WebApp.initData && wallet) {
       handlerPostReferral()
     }
   }, [wallet])
@@ -71,7 +73,7 @@ export const Main = () => {
 
   // initial process app
   useEffect(() => {
-    if (userData?.id) handlerPostReferral()
+    if (WebApp.initData) handlerPostReferral()
     else new Error('Error: for postReferral dont have user telegram id!')
 
     getAddressContract()
