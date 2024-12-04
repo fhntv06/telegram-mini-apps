@@ -4,7 +4,7 @@ import { get, post } from '../core'
 export const getBalance = (address: string) => get(`/api/getBalance/${address}`)
 
 // Get balance in nano TON
-export const getDemoBalance = (telegramId: number) => get(`/api/getDemoBalance/${telegramId}`)
+export const getDemoBalance = (initData: string) => get(`/api/getDemoBalance/${initData}`)
 
 // Get wallet bet in nano TON
 export const getWalletBet = (data = {}) => post('/api/getWalletBet', data)
