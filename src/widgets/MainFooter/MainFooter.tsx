@@ -1,6 +1,7 @@
-import { useContext, useEffect } from 'react'
+import WebApp from '@twa-dev/sdk'
+import { useEffect } from 'react'
 import { getBalance, getDemoBalance } from '../../app/api'
-import { useGetPhrases, useUserData } from '../../hooks'
+import { useGetPhrases } from '../../hooks'
 
 import { useDispatch, useSelector } from 'react-redux'
 import classNames from 'classnames/bind'
@@ -8,15 +9,8 @@ import { useTonWallet, useTonAddress } from '@tonconnect/ui-react'
 import { setUserDataWallet } from '../../app/store/slices/user'
 import { BetPanel, PanelButtonsBet } from '../../widgets'
 import { ButtonChangeMode, ButtonConnectWallet, ButtonTopUp } from '../../feature'
-import { Icon, Rounds } from '../../shared'
+import { Icon, Rounds, isDemoMode, formatNumber, getCorrectBalanceWithFormatNumber } from '../../shared'
 import { IRoundsType } from '../../shared/types'
-import { formatNumber } from '../../shared/utils'
-
-import { isDemoMode } from "../../shared/constants.ts";
-import { INotificationContextTypes } from "../../app/providers/NotificationProvider/types.ts";
-import { NotificationContext } from "../../app/contexts";
-
-import { getCorrectBalanceWithFormatNumber } from '../../shared/utils'
 
 import styles from './MainFooter.module.scss'
 
@@ -35,65 +29,79 @@ export const MainFooter = () => {
 	const address = useTonAddress()
 	const { gamePhase } = useSelector((state: any) => state.gameStatus)
 	const { gameMode } = useSelector((state: any) => state.modeSettings)
-	const userData = useUserData()
-	const { openHandler: openHandlerNotification } = useContext<INotificationContextTypes>(NotificationContext)
-	const { balance: userBalance } = useSelector((state: any) => state.userDataWallet)
+	const userDataWallet = useSelector((state: any) => state.userDataWallet)
 
   // @ts-ignore
   const { livePlayers, last3rounds, allTimeWins } = useGetPhrases(['livePlayers', 'last3rounds', 'allTimeWins'])
 
-	const setDataUser = async () => {
-		if (wallet) {
+	const setDataUser = () => {
 			// TODO: Это убрать в кнопку подключения и перенести в отдельный хук
-			let balance = 0
 
-			if (gameMode === isDemoMode && userData?.id) { // с ПК это работать не будет, нужно тестировать только с приложения ТГ
-				console.log('get getDemoBalance')
-				balance = await getDemoBalance(userData?.id)
-					.then(res => res.data.balance)
-					.catch((error) => {
-						new Error(error)
-
-						openHandlerNotification('warning', { text: 'Not enough demo balance' })
-
-						return 0
-					})
-			} else {
-				console.log('get getBalance')
-				balance = await getBalance(address)
-					.then(res => res.data.balance)
-					.catch((error) => {
-						new Error(error)
-
-						return 0
-					})
-			}
-
-			dispatch(
-				setUserDataWallet({
-					wallet,
-					chain: wallet.account.chain,
-					publicKey: wallet.account.publicKey,
-					address,
-					appName: wallet.device.appName,
-					appVersion: wallet.device.appVersion,
-					maxProtocolVersion: wallet.device.maxProtocolVersion,
-					platform: wallet.device.platform,
-					balance,
+		if (gameMode === isDemoMode && WebApp.initData) { // с ПК это работать не будет, нужно тестировать только с приложения ТГ
+			console.log('execute getDemoBalance')
+			getDemoBalance(WebApp.initData)
+				.then(res => {
+					dispatch(
+						setUserDataWallet({
+							...userDataWallet,
+							balance: res.data.balance,
+						})
+					)
 				})
-			)
+				.catch((error) => {
+					new Error(error)
+
+					return 0
+				})
+		} else {
+			console.log('execute getBalance')
+			getBalance(address)
+				.then(res => {
+					dispatch(
+						setUserDataWallet({
+							...userDataWallet,
+							balance: res.data.balance,
+						})
+					)
+				})
+				.catch((error) => {
+					new Error(error)
+
+					return 0
+				})
+
 		}
 	}
 
 	// TODO: вынести код выше!
 	// не должно быть тут!
 	useEffect(() => {
-		setDataUser()
-	}, [wallet, gameMode])
+		if ((gamePhase === 3 || gamePhase === 4) && wallet) {
+			setDataUser()
+		}
+	}, [wallet, gameMode, gamePhase])
 
 	useEffect(() => {
-		if (gamePhase === 3 || gamePhase === 0) setDataUser()
-	}, [gamePhase])
+		if (wallet) {
+			setDataUser()
+		}
+	}, [gameMode]);
+
+	const FooterBetsButton = () => {
+		let content = null
+
+		if (wallet) {
+			if (userDataWallet.balance > 0) {
+				content = <PanelButtonsBet />
+			} else {
+				content = gameMode === isDemoMode
+					? <ButtonChangeMode sizeIcons='big' />
+					: <ButtonTopUp sizeIcons='big' />
+			}
+		}
+
+		return content
+	}
 
 	return (
 		<footer className={cx('footer')}>
@@ -121,11 +129,7 @@ export const MainFooter = () => {
 				<BetPanel data={downPoolData} type='down' />
 			</main>
 			<footer className={cx('footer__bets')}>
-				{
-					(wallet && userBalance > 0)
-						? <PanelButtonsBet />
-						: (wallet && gameMode === isDemoMode) ? <ButtonChangeMode sizeIcons='big' /> : <ButtonTopUp sizeIcons='big' />
-				}
+				<FooterBetsButton />
 				<ButtonConnectWallet className={cx({ 'hide': wallet })} sizeIcons='big' />
 			</footer>
 		</footer>
