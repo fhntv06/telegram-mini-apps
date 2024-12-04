@@ -1,10 +1,12 @@
-import { useState} from 'react'
+import {useContext, useState} from 'react'
 import { useSelector } from 'react-redux'
 import classNames from 'classnames/bind'
 import { AnimatePresence, motion, useWillChange } from 'framer-motion'
 import { Icon } from '../'
 import { useDisconnect, useSetLang } from '../../../hooks'
-import {ISelectOption, ISelect } from './types'
+import { ISelectOption, ISelect } from './types'
+import { ModalContextTypes } from '../../../app/providers/ModalProvider/types'
+import { ModalContext } from '../../../app/contexts'
 import { arLanguagesPhraseSite } from '../../constants'
 
 import styles from './Select.module.scss'
@@ -19,6 +21,7 @@ export const Select = ({ data, className = '', typeStyle = '' }: ISelect) => {
   const [disabled, setDisabled] = useState<boolean>(false)
   const [selectedOption, setSelectedOption] = useState<ISelectOption>(data.find((item) => item.active) || data[0]);
   const { name } = useSelector((state: any) => state.language)
+  const { openHandler: openHandlerModal } = useContext<ModalContextTypes>(ModalContext)
 
   const handleDropdownToggle = () => {
     if (data.length > 1 && !disabled) {
@@ -32,6 +35,7 @@ export const Select = ({ data, className = '', typeStyle = '' }: ISelect) => {
 
     if (option.action === 'disconnect') handlerDisconnect()
     if (option.action === 'set-lang') handlerSetLang(option)
+    if (option.action === 'topUp') openHandlerModal('wallet')
   }
 
   // @ts-ignore
