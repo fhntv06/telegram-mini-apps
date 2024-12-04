@@ -17,11 +17,7 @@ export const useGameSocket = () => {
   const handlerConnection = () => {
     const socket = new WebSocket(urlSocket)
 
-    dispatch(
-      setSocket({
-        socket
-      })
-    )
+    dispatch(setSocket({ socket }))
 
     socket.onopen = () => console.log("game socket connected")
     socket.onclose = (event) => {
@@ -29,11 +25,8 @@ export const useGameSocket = () => {
       console.log("Код: " + event.code + " причина: " + event.reason)
       console.log('Переподключение к сокету!')
 
-      const timer = setTimeout(() => {
-        setError((prev) => !prev)
-        dispatch(closeSocket())
-        clearTimeout(timer)
-      }, 2000)
+      setError((prev) => !prev)
+      dispatch(closeSocket())
     }
     socket.onmessage = (event) => setData(JSON.parse(event.data))
     socket.onerror = (event) => console.log("game socket error: ", event)
