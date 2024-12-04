@@ -52,7 +52,7 @@ export const Main = () => {
 
         postReferral(data)
           .then((res)=> console.log('Data post referral: ', res.data))
-          .catch((err) => console.log(err))
+          .catch(() => new Error('Error: for postReferral dont have data user!'))
       })
   }
 
@@ -73,9 +73,6 @@ export const Main = () => {
 
   // initial process app
   useEffect(() => {
-    if (WebApp.initData) handlerPostReferral()
-    else new Error('Error: for postReferral dont have user telegram id!')
-
     getAddressContract()
       .then(({ data: { address, mainnet } }) => dispatch(setDataTransaction({ address, mainnet })))
       .catch((error) => {
