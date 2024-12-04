@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { IModeSettings } from './types'
-import { isDemoMode } from '../../../../shared/constants'
+import { isDemoMode } from '../../../../shared/'
 
 export const initialState: IModeSettings = {
     coin: 'btc',

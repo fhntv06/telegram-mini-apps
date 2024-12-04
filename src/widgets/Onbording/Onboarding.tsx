@@ -8,11 +8,9 @@ import {
 } from './types'
 
 import { useGetPhrases, useChangeGameMode } from '../../hooks'
-import { Button, Icon } from '../../shared'
+import { Button, Icon, SelectHorizontal, isDemoMode } from '../../shared'
 
 import styles from './Onbording.module.scss'
-import { SelectHorizontal } from '../../shared/ui/SelectHorizontal'
-import { isDemoMode } from '../../shared/constants'
 
 const cx = classNames.bind(styles)
 

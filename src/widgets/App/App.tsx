@@ -22,7 +22,7 @@ function BackButtonManipulator() {
     return () => WebApp.BackButton.offClick(closeApp)
   }, []);
 
-  return null;
+  return null
 }
 
 export const App: FC = () => (

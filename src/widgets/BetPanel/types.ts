@@ -1,4 +1,4 @@
-import { IPerson } from '../../shared/blocks/Person/types'
+import { IPerson } from '../../shared/types'
 
 export interface IDataPanel {
   bets: IPerson[]

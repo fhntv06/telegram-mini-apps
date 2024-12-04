@@ -2,7 +2,7 @@ import { useTonConnectUI, Locales } from '@tonconnect/ui-react'
 import { useDispatch } from 'react-redux'
 import { setLang } from '../app/store/slices/language'
 import { ILang } from '../app/store/slices/language/types'
-import { arLanguagesPhraseSite } from '../shared/constants.ts'
+import { arLanguagesPhraseSite } from '../shared'
 
 export const useSetLang = () => {
   const dispatch = useDispatch()

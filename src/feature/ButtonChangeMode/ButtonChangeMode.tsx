@@ -1,10 +1,10 @@
 import classNames from 'classnames/bind'
-import { IconNames, IconType } from '../../shared/ui/Icon/types'
 import {
 	useChangeGameMode,
 	// useGetPhrases
 } from '../../hooks'
 import { Button } from '../../shared'
+import { IconNames, IconType } from '../../shared/types'
 
 import styles from './ButtonChangeMode.module.scss'
 

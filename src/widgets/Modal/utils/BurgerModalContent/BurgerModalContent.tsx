@@ -1,14 +1,13 @@
 import { useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import { useTonWallet, useTonAddress } from '@tonconnect/ui-react'
-import { Button, Select } from '../../../../shared'
+import { Button, Select, arLanguagesSite, isDemoMode } from '../../../../shared'
 import classNames from 'classnames/bind'
 import { ButtonConnectWallet } from '../../../../feature'
 import { useGetPhrases, useChangeGameMode } from '../../../../hooks'
-import {arLanguagesSite, isDemoMode} from '../../../../shared/constants'
 
 import styles from './BurgerModalContent.module.scss'
-import { SelectHorizontal } from '../../../../shared/ui/SelectHorizontal'
+import { SelectHorizontal } from '../../../../shared'
 
 const cx = classNames.bind(styles)
 
@@ -31,7 +30,7 @@ export const BurgerModalContent = () => {
   const wallet = useTonWallet()
 	const address = useTonAddress()
   const language= useSelector((state: any) => state.language)
-  const changeGameMode = useChangeGameMode();
+  const changeGameMode = useChangeGameMode()
 
   // @ts-ignore
   const { affiliate, technicalSupport, realMode, demoMode } = useGetPhrases([

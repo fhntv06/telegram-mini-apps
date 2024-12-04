@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux'
 import { motion } from 'framer-motion'
 import classNames from 'classnames/bind'
 import { useGetPhrases } from '../../hooks'
-import { differenceInSeconds } from '../../shared/utils'
+import { differenceInSeconds } from '../../shared'
 
 import styles from './ChartPanel.module.scss'
 

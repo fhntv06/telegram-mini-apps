@@ -1,7 +1,7 @@
 import { useTonConnectUI } from '@tonconnect/ui-react';
 import classNames from 'classnames/bind'
 import { Button } from '../../shared'
-import { IconNames, IconType } from '../../shared/ui/Icon/types'
+import { IconNames, IconType } from '../../shared/types'
 import { useGetPhrases } from '../../hooks'
 
 import styles from './ButtonConnectWallet.module.scss'

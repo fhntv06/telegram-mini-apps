@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { ChartData } from 'chart.js'
 import { useSelector } from 'react-redux'
-import { numberLastPoint } from '../shared/constants.ts'
+import { numberLastPoint } from '../shared'
 
 const createInitialData = (history: number[]) => ({
   // 4 '' for mobile

@@ -1,8 +1,8 @@
 import classNames from 'classnames/bind'
 import { useTonAddress } from '@tonconnect/ui-react'
+import { formatIntTonNumber } from '../../../../shared'
 
 import styles from './WinsOrLoseContent.module.scss'
-import {formatIntTonNumber} from "../../../../shared/utils";
 
 const cx = classNames.bind(styles)
 

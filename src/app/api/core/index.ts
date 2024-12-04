@@ -10,10 +10,10 @@ const headers: Headers = {
   'Content-Type': 'application/json',
 }
 
-export const get = async (handle: string) => (
+export const get = (handle: string) => (
   axios.get(`${url}${handle}`,{ headers: { ...headers }})
 )
 
-export const post = async (handle: string, data = {}) => (
+export const post = (handle: string, data = {}) => (
   axios.post(`${url}${handle}`, data, { headers: { ...headers }})
 );

@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux'
-import { arLanguagesPhraseSite, ILangPhrase } from '../shared/constants'
+import { arLanguagesPhraseSite, ILangPhrase } from '../shared'
 
 export const useGetPhrases = (data: string[]): ILangPhrase => {
   const { name } = useSelector((state: any) => state.language)

@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 import classNames from 'classnames/bind'
-import { IconNames, IconType } from '../../shared/ui/Icon/types'
+import { IconNames, IconType } from '../../shared/types'
 import { useGetPhrases } from '../../hooks'
 import { ModalContextTypes } from '../../app/providers/ModalProvider/types'
 import { ModalContext } from '../../app/contexts'

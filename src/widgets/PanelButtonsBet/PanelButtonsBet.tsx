@@ -1,7 +1,7 @@
 import { useState } from 'react'
+import { useSelector } from 'react-redux'
 import { ButtonBet } from '../../feature'
-import { arBets } from '../../shared/constants'
-import {useSelector} from "react-redux";
+import { arBets } from '../../shared'
 
 export const PanelButtonsBet = () => {
   const { bet } = useSelector((state: any) => state.bets)
