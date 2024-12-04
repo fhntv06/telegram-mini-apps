@@ -15,7 +15,7 @@ export const Counter = ({ value, direction = 'up', className }: ICounter) => {
     )
 
     return () => controls.stop()
-  }, [])
+  }, [value, direction,])
 
   return <motion.p className={className}>{rounded}</motion.p>
 }
