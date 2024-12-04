@@ -1,11 +1,13 @@
+import WebApp from '@twa-dev/sdk'
 import { ActionConfiguration, SendTransactionRequest, useTonConnectUI, CHAIN, useTonAddress } from '@tonconnect/ui-react'
 import { useContext, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { AnimationContext, NotificationContext } from '../app/contexts'
 import { IAnimationContextTypes, INotificationContextTypes } from '../app/providers/types'
-import { postDataBetDetailsPlayers } from '../app/api/user'
+import { postDataBetDetailsPlayers } from '../app/api/'
 import { useGetPhrases, useUserData } from './'
-import { isDemoMode } from '../shared/constants'
+import { isDemoMode } from '../shared/'
+import { useFadeOut } from './useFadeOut'
 
 export const useTransaction = (amount: number) => {
   const tonAddress = useTonAddress()
@@ -17,6 +19,7 @@ export const useTransaction = (amount: number) => {
   const { address, mainnet } = useSelector((state: any) => state.bets)
   const userData = useUserData()
   const { notEnoughDemoBalance } = useGetPhrases(['notEnoughDemoBalance'])
+  const { openFadeHandler } = useFadeOut()
 
   const sendTransaction = async (placeBet: 'up' | 'down') => {
     setTxInProcess(true)
@@ -36,72 +39,34 @@ export const useTransaction = (amount: number) => {
       ],
       network: mainnet ? CHAIN.MAINNET : CHAIN.TESTNET
     }
-    const dataPlayer = {
+    const data = {
       ticker,
       gameMode,
-      telegramId: userData?.id,
+      initData: WebApp.initData,
       walletAddress: tonAddress,
       betAmount: amount * 1e9,
       variantBet: placeBet
     }
 
-    console.log(dataPlayer)
-
     const handlerPostDataBetDetailsPlayers = () => (
-      postDataBetDetailsPlayers(dataPlayer)
+      postDataBetDetailsPlayers(data)
         .then(() => openHandlerAnimation('youAreIn'))
         .catch((error) => {
           console.error('Error postDataBetDetailsPlayers: ', error)
-          
-          if (gameMode === isDemoMode) {
-            if (error.response.status === 400) {
-              openHandlerNotification('warning', { text: notEnoughDemoBalance })
-            }
+
+          if (gameMode === isDemoMode && error.response.status === 400) {
+            openHandlerNotification('warning', { text: notEnoughDemoBalance })
           }
         })
     )
 
-    if (gameMode === isDemoMode) handlerPostDataBetDetailsPlayers()
+    if (gameMode === isDemoMode) await handlerPostDataBetDetailsPlayers()
     else {
       await tonConnectUI.sendTransaction(transaction, configuration)
         .then(() => {
           if (userData?.id) handlerPostDataBetDetailsPlayers()
 
-          // TODO: перенести в хук
-          const timer = setTimeout(() => {
-            function fadeOut(element: HTMLElement, duration = 1000) {
-              let opacity = 1;
-
-              // Установим начальную прозрачность
-              element.style.opacity = `${opacity}`;
-
-              // Вычислим, насколько уменьшить прозрачность на каждом шаге
-              const step = 10 / duration;
-
-              // Создаем таймер для постепенного уменьшения прозрачности
-              function fade() {
-                // Уменьшаем прозрачность элемента
-                opacity -= step;
-
-                element.style.opacity = `${opacity}`;
-
-                // Если прозрачность больше 0, продолжаем вызов функции
-                if (opacity > 0) requestAnimationFrame(fade);
-                else element.style.display = 'none';
-              }
-
-              // Запускаем функцию
-              fade();
-            }
-
-            const element: HTMLElement | null = document.querySelector('[data-tc-modal]');
-            if (element) {
-              fadeOut(element, 500); // элемент исчезнет за 1 секунду
-            }
-
-            clearTimeout(timer)
-          }, 2000)
-
+          openFadeHandler(document.querySelector('[data-tc-modal]'), 500)
         })
         .catch((error) => console.error('Error sendTransaction: ', error))
     }
