@@ -4,7 +4,7 @@ import { IGameStatus } from '../app/providers/types'
 import {
   // initialDataGameStatus,
   urlSocket,
-} from '../shared/constants'
+} from '../shared'
 import { setSocket, closeSocket } from '../app/store/slices/socket'
 
 const initTestData = false
