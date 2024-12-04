@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
-import {useSelector} from 'react-redux'
+import { useSelector } from 'react-redux'
 import classNames from 'classnames/bind'
+import { getGameBetsResult } from '../../app/api/'
 import { ButtonPlaceBet } from '../../feature'
 import { useGetPhrases } from '../../hooks'
 import { IDataPanel } from './types'
-import {Counter, Icon, Person} from '../../shared'
-import { formatIntTonNumber } from '../../shared/utils'
+import { Counter, Icon, Person, formatIntTonNumber } from '../../shared'
 
 import styles from './BetPanel.module.scss'
 
@@ -17,27 +17,29 @@ interface Props {
 }
 
 export const BetPanel = ({ data, type='up' }: Props) => {
-	const { gamePhase, gameResult, upPoolData, downPoolData } = useSelector((state: any) => state.gameStatus)
-	const [groupWins, setGroupWins] = useState<'up' | 'down'>(gameResult > 0 ? 'up' : 'down')
+	const { gamePhase } = useSelector((state: any) => state.gameStatus)
+	const [groupWins, setGroupWins] = useState<'up' | 'down'>('up')
 	const { bets, betPool } = data
 	const count = bets.length - 5
 	const [completedRound, setCompletedRound] = useState<boolean>(false)
-
+	const [betsWiningPool, setWiningPool] = useState<number>(0)
+	const { ticker, gameMode } = useSelector((state: any) => state.modeSettings)
 	// @ts-ignore
 	const { up, down, winners, losers } = useGetPhrases(['up', 'down', 'winners', 'losers'])
 
 	useEffect(() => {
 		if (gamePhase === 4) {
-			setGroupWins(gameResult > 0 ? 'up' : 'down')
+			getGameBetsResult(`ticker=${ticker}&gameMode=${gameMode}`)
+				.then((res) => {
+					setWiningPool(res.data.winingPoolEnd)
+					setGroupWins(res.data.gameResult > 0 ? 'up' : 'down')
+					setCompletedRound(true)
+				})
+				.catch((error) => new Error('Error: ' + error))
 		}
-	}, [gameResult])
+		if (gamePhase === 0) setCompletedRound(false)
+	}, [gamePhase])
 
-	useEffect(() => {
-		setCompletedRound(gamePhase === 4)
-	}, [gamePhase]);
-
-	// TODO: надписи вынести для перевода
-	// упростить использование условия type === groupWins
 	return (
 		<div className={cx('panel', { 'panel__result': completedRound, 'wins': type === groupWins, 'lose': type !== groupWins })}>
 			{
@@ -46,7 +48,7 @@ export const BetPanel = ({ data, type='up' }: Props) => {
 						<p className={cx('p-small')}>{`${type === 'up' ? up : down} ${type === groupWins ? winners : losers}`}</p>
 						<div className={cx('panel__result__text')}>
 							<Icon name='ton' size='big'/>
-							<Counter value={(upPoolData.betPool + downPoolData.betPool) * 0.95} className='h1' direction={type === groupWins ? 'up' : 'down'} />
+							<Counter value={betsWiningPool} className='h1' direction={type === groupWins ? 'up' : 'down'} />
 						</div>
 					</>
 				) : (
