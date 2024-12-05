@@ -9,22 +9,16 @@ const cx = classNames.bind(styles)
 interface Props {
 	bet: number,
 	className?: string,
-	onClick: () => void
 }
 
 export const ButtonBet = ({
 	bet,
 	className,
-	onClick,
 }: Props) => {
 	const dispatch = useDispatch()
 
 	const handlerBet = () => {
-		onClick()
-
-		dispatch(
-			setBet({ bet })
-		);
+		dispatch(setBet({ bet }))
 	}
 
 	return (<Button className={cx('button', 'p', className)} type='gray' onClick={handlerBet}>{bet}</Button>)
