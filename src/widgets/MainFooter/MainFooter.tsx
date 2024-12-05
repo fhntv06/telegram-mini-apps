@@ -87,22 +87,6 @@ export const MainFooter = () => {
 		}
 	}, [gameMode]);
 
-	const FooterBetsButton = () => {
-		let content = null
-
-		if (wallet) {
-			if (userDataWallet.balance > 0) {
-				content = <PanelButtonsBet />
-			} else {
-				content = gameMode === isDemoMode
-					? <ButtonChangeMode sizeIcons='big' />
-					: <ButtonTopUp sizeIcons='big' />
-			}
-		}
-
-		return content
-	}
-
 	return (
 		<footer className={cx('footer')}>
 			<header className={cx('footer__header')}>
@@ -129,7 +113,15 @@ export const MainFooter = () => {
 				<BetPanel data={downPoolData} type='down' />
 			</main>
 			<footer className={cx('footer__bets')}>
-				<FooterBetsButton />
+				{(
+					wallet
+					? userDataWallet.balance > 0
+						? <PanelButtonsBet />
+						: gameMode === isDemoMode
+							? <ButtonChangeMode sizeIcons='big' />
+							: <ButtonTopUp sizeIcons='big' />
+					: null
+				)}
 				<ButtonConnectWallet className={cx({ 'hide': wallet })} sizeIcons='big' />
 			</footer>
 		</footer>
