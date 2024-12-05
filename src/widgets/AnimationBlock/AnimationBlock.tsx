@@ -15,13 +15,14 @@ const defaultOptions = {
 }
 
 const styles = {
-  zIndex: 100,
+  zIndex: 90,
   position: 'absolute',
   top: '50%',
   left: '50%',
   width: '80%',
   height: '80%',
-  transform: 'translate(-50%, -50%)'
+  transform: 'translate(-50%, -50%)',
+  pointerEvents: 'none'
 }
 
 const listAnimates = {
