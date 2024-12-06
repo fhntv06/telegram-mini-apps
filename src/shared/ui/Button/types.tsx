@@ -3,3 +3,4 @@ export type ButtonTypes =
   | 'bet'
   | 'light'
   | 'white'
+	| 'blue'
