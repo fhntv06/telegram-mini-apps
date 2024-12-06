@@ -133,7 +133,7 @@ export const MainFooter = () => {
 					? userDataWallet.balance > 0
 						? <PanelButtonsBet />
 						: gameMode === isDemoMode
-							? <ButtonChangeMode sizeIcons='big' />
+							? <ButtonSwitchMode sizeIcons='big' />
 							: <ButtonTopUp sizeIcons='big' />
 					: null
 				)}
