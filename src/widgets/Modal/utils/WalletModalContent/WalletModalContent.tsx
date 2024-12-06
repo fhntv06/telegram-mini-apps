@@ -2,7 +2,11 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { useTonAddress } from '@tonconnect/ui-react'
 import classNames from 'classnames/bind'
-import { Select, Icon, Button } from '../../../../shared'
+import {
+  Select, Icon, Button, sourceCryptoBot, sourceWallet, sourceFastTransaction,
+  sourceBinance, sourceBybit, sourceKotleta,
+  sourceOnemoment, sourceAltinbit, sourceBitobmen, sourcePaybis
+} from '../../../../shared'
 
 import { useGetPhrases } from '../../../../hooks'
 
@@ -26,13 +30,13 @@ const marketData = [
     name: 'send',
     icon: sendIcon,
     blockSelect: true,
-    onClick: () => window.location.href = 'https://t.me/CryptoBot',
+    onClick: () => window.location.href = sourceCryptoBot,
   },
   {
     name: 'wallet',
     icon: walletIcon,
     blockSelect: true,
-    onClick: () => window.location.href = 'https://t.me/wallet',
+    onClick: () => window.location.href = sourceWallet,
   }
 ]
 const exchangeData = [
@@ -44,19 +48,61 @@ const exchangeData = [
     name: 'mexc',
     icon: 'mexc-market',
     blockSelect: true,
-    onClick: () => window.location.href = 'https://otc.mexc.com/ru-RU/fastTransaction',
+    onClick: () => window.location.href = sourceFastTransaction,
   },
   {
     name: 'binance',
     icon: 'binance-market',
     blockSelect: true,
-    onClick: () => window.location.href = 'https://www.binance.com/en-GB/crypto/buy/USD/TON',
+    onClick: () => window.location.href = sourceBinance,
   },
   {
     name: 'bybit',
     icon: 'bybit-market',
     blockSelect: true,
-    onClick: () => window.location.href = 'https://www.bybit.com/fiat/trade/express/home',
+    onClick: () => window.location.href = sourceBybit,
+  }
+]
+const TopUpByCardCIS = [
+  {
+    name: 'TopUpByCardCIS',
+    icon: 'card',
+  },
+  {
+    name: 'kotleta',
+    icon: 'kotleta',
+    blockSelect: true,
+    onClick: () => window.location.href = sourceKotleta,
+  },
+  {
+    name: 'oneMoment',
+    icon: 'oneMoment',
+    blockSelect: true,
+    onClick: () => window.location.href = sourceOnemoment,
+  },
+  {
+    name: 'altinBit',
+    icon: 'altinBit',
+    blockSelect: true,
+    onClick: () => window.location.href = sourceAltinbit,
+  },
+  {
+    name: 'bitObmen',
+    icon: 'bitObmen',
+    blockSelect: true,
+    onClick: () => window.location.href = sourceBitobmen,
+  }
+]
+const TopUpByCard = [
+  {
+    name: 'TopUpByCard',
+    icon: 'card',
+  },
+    {
+    name: 'paybis',
+    icon: 'paybis',
+    blockSelect: true,
+    onClick: () => window.location.href = sourcePaybis,
   }
 ]
 
@@ -76,10 +122,9 @@ export const WalletModalContent = ({ closeModalHandler }: IProps) => {
       })
       .catch((error) => {
         console.error("Error copying address to clipboard:", error);
-      });
-  };
+      })
+  }
 
-  // @ts-ignore
   const { topUpToContinue, yourWallet, copied } = useGetPhrases(['topUpToContinue', 'yourWallet', 'copied'])
 
   return (
@@ -92,6 +137,8 @@ export const WalletModalContent = ({ closeModalHandler }: IProps) => {
         <div className={cx('content')}>
           <Select data={marketData} typeStyle='light'/>
           <Select data={exchangeData} typeStyle='light'/>
+          <Select data={TopUpByCardCIS} typeStyle='light'/>
+          <Select data={TopUpByCard} typeStyle='light'/>
         </div>
       </div>
       <div className={cx('container')}>
