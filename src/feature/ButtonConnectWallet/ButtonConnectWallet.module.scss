@@ -1,9 +1,0 @@
-@import '../../shared/assets/styles/basics.scss';
-
-.button {
-  display: flex;
-  width: 100%;
-  background-color: $coins-ton;
-  column-gap: 8px;
-  @include border('medium');
-}

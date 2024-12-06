@@ -47,6 +47,6 @@ export const Button = ({
 	return (
 		href
 			? <a href={href} className={classNames}>{content}</a>
-			: <button  className={classNames} disabled={disabled} onClick={onClick}>{content}</button>
+			: <button className={classNames} disabled={disabled} onClick={onClick}>{content}</button>
 	)
 }

@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import WebApp from '@twa-dev/sdk';
-import { setUserDataTelegram } from '../app/store/slices/user'
+import { setUserDataTelegram } from '../app/store/slices'
 import { useDispatch } from 'react-redux'
 
 export const useUserData = () => {

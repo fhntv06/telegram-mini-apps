@@ -60,7 +60,7 @@ header {
   justify-content: flex-start;
 
   p {
-    font-weight: 400;
+    font-weight: $font-w-regular;
   }
   span:nth-child(2) {
     margin-left: $offset12;

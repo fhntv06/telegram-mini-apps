@@ -1,7 +1,7 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction } from 'react'
 
-export interface IOnbording {
-  handlerSkip:  Dispatch<SetStateAction<boolean>>
+export interface IOnboarding {
+  handlerSkip: Dispatch<SetStateAction<boolean>>
   className?:string
 }
 

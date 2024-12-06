@@ -23,9 +23,7 @@ export const ButtonPlaceBet = ({
 	const { gamePhase } = useSelector((state: any) => state.gameStatus)
 	const { txInProcess, sendTransaction } = useTransaction(bet)
 	const { balance } = useSelector((state: any) => state.userDataWallet)
-
-  // @ts-ignore
-  const { goUp, goDown } = useGetPhrases(['goUp', 'goDown'])
+	const { goUp, goDown } = useGetPhrases(['goUp', 'goDown'])
 
 	const handlerPlaceBet = () => {
 		sendTransaction(type)

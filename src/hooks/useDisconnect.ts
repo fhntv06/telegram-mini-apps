@@ -1,5 +1,5 @@
 import { useTonConnectUI } from '@tonconnect/ui-react'
-import { removeUserDataWallet } from '../app/store/slices/user'
+import { removeUserDataWallet } from '../app/store/slices'
 import { useDispatch } from 'react-redux'
 
 export const useDisconnect = () => {

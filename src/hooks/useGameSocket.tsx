@@ -5,7 +5,7 @@ import {
   // initialDataGameStatus,
   urlSocket,
 } from '../shared'
-import { setSocket, closeSocket } from '../app/store/slices/socket'
+import { setSocket, closeSocket } from '../app/store/slices'
 
 const initTestData = false
 

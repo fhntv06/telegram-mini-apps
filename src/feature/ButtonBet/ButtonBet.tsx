@@ -2,7 +2,7 @@ import { useDispatch } from 'react-redux';
 import { Button } from '../../shared'
 import classNames from 'classnames/bind'
 import styles from './ButtonBet.module.scss'
-import { setBet } from '../../app/store/slices/bets'
+import { setBet } from '../../app/store/slices'
 
 const cx = classNames.bind(styles)
 

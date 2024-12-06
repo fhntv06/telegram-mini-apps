@@ -1,12 +1,14 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { setModeSettings } from '../app/store/slices/mode'
+import { setModeSettings } from '../app/store/slices'
+import { typeDemoMode, typeOnChainMode } from '../shared/types'
+import { isOnChainMode } from '../shared'
 
 export const useChangeGameMode = () => {
   const dispatch = useDispatch()
   const { socket } = useSelector((state: any) => state.socket)
 
   return (
-    gameMode: 'ON_CHAIN' | 'DEMO' = 'ON_CHAIN',
+    gameMode: typeOnChainMode | typeDemoMode = isOnChainMode,
     ticker: 'BTC-30' = 'BTC-30'
   ): void => {
     if (socket && socket.readyState === WebSocket.OPEN) {
