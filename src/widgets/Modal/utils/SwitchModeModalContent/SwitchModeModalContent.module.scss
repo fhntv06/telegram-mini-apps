@@ -1,0 +1,16 @@
+@import '../../../../shared/assets/styles/basics';
+
+.modal__wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: $offset24;
+  padding: $offset24 $offset12 $offset12;
+  margin-top: $offset24;
+  background-color: $dark-gray;
+  @include border('large');
+
+  .description {
+    text-align: center;
+  }
+}

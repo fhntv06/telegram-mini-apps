@@ -54,13 +54,12 @@ export const Modal = ({
                 />
               </div>
               <ButtonBurger
-                className={cx('modal__button-burger', {active: typeModal === 'burger'})}
-                isActive={typeModal === 'burger'}
+                className={cx('modal__button-burger', {active: (typeModal === 'burger' || typeModal === 'switchMode')})}
+                isActive={(typeModal === 'burger' || typeModal === 'switchMode')}
                 onClick={closeHandler}
               />
             </header>
             {children}
-
           </motion.div>
           <motion.div
             className={cx('blur')}
