@@ -3,8 +3,7 @@ import { motion } from 'framer-motion'
 import { useTonAddress } from '@tonconnect/ui-react'
 import classNames from 'classnames/bind'
 import {
-  Select, Icon, Button, sourceCryptoBot, sourceWallet, sourceFastTransaction,
-  sourceBinance, sourceBybit, sourceKotleta,
+  Select, Icon, Button, sourceCryptoBot, sourceWallet, sourceKotleta,
   sourceOnemoment, sourceAltinbit, sourceBitobmen, sourcePaybis
 } from '../../../../shared'
 
@@ -37,30 +36,6 @@ const marketData = [
     icon: walletIcon,
     blockSelect: true,
     onClick: () => window.location.href = sourceWallet,
-  }
-]
-const exchangeData = [
-  {
-    name: 'centralisedExchange',
-    icon: 'exchange',
-  },
-  {
-    name: 'mexc',
-    icon: 'mexc-market',
-    blockSelect: true,
-    onClick: () => window.location.href = sourceFastTransaction,
-  },
-  {
-    name: 'binance',
-    icon: 'binance-market',
-    blockSelect: true,
-    onClick: () => window.location.href = sourceBinance,
-  },
-  {
-    name: 'bybit',
-    icon: 'bybit-market',
-    blockSelect: true,
-    onClick: () => window.location.href = sourceBybit,
   }
 ]
 const TopUpByCardCIS = [
@@ -136,7 +111,6 @@ export const WalletModalContent = ({ closeModalHandler }: IProps) => {
         </header>
         <div className={cx('content')}>
           <Select data={marketData} typeStyle='light'/>
-          <Select data={exchangeData} typeStyle='light'/>
           <Select data={TopUpByCardCIS} typeStyle='light'/>
           <Select data={TopUpByCard} typeStyle='light'/>
         </div>

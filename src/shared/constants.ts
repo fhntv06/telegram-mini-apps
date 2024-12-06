@@ -481,10 +481,6 @@ export const arLanguagesSite: ILang[] = [
 		action: 'set-lang',
 	}
 ]
-export const initialDataGameMode = {
-	ticker: 'BTC-30',
-	gameMode: 'ON_CHAIN',
-}
 export const isOnChainMode: typeOnChainMode = 'ON_CHAIN'
 export const isDemoMode: typeDemoMode = 'DEMO'
 
@@ -493,9 +489,6 @@ export const sourcePulseReferralBot: string = 'https://t.me/PulseReferralBot'
 export const sourcePulseSocial: string = 'https://t.me/pulse_social/7'
 export const sourceCryptoBot: string = 'https://t.me/CryptoBot'
 export const sourceWallet: string = 'https://t.me/wallet'
-export const sourceFastTransaction: string = 'https://otc.mexc.com/ru-RU/fastTransaction'
-export const sourceBinance: string = 'https://www.binance.com/en-GB/crypto/buy/USD/TON'
-export const sourceBybit: string = 'https://www.bybit.com/fiat/trade/express/home'
 export const sourceKotleta: string = 'https://kotleta.gg'
 export const sourceOnemoment: string = 'http://onemoment.cc/'
 export const sourceAltinbit: string = 'http://altinbit.com/'
