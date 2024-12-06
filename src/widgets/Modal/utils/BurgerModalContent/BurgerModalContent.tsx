@@ -6,7 +6,7 @@ import { ButtonConnectWallet } from '../../../../feature'
 import { useGetPhrases } from '../../../../hooks'
 import {
   Button, Select,
-  arLanguagesSite, sourcePulseReferralBot, sourcePulseSocial
+  arLanguagesSite, sourcePulseReferralBot, sourcePulseGameSupport
 } from '../../../../shared'
 
 import styles from './BurgerModalContent.module.scss'
@@ -68,7 +68,7 @@ export const BurgerModalContent = () => {
         iconLeftName='support'
         iconRightName='arrow-right'
         sizeIcons='big'
-        href={sourcePulseSocial}
+        href={sourcePulseGameSupport}
       >
         <p>{technicalSupport}</p>
       </Button>

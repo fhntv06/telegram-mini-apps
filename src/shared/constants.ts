@@ -486,7 +486,7 @@ export const isDemoMode: typeDemoMode = 'DEMO'
 
 // sources
 export const sourcePulseReferralBot: string = 'https://t.me/PulseReferralBot'
-export const sourcePulseSocial: string = 'https://t.me/pulse_social/7'
+export const sourcePulseGameSupport: string = 'https://t.me/pulse_game_support'
 export const sourceCryptoBot: string = 'https://t.me/CryptoBot'
 export const sourceWallet: string = 'https://t.me/wallet'
 export const sourceKotleta: string = 'https://kotleta.gg'
