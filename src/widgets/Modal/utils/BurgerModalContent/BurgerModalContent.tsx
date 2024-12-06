@@ -1,13 +1,15 @@
 import { useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import { useTonWallet, useTonAddress } from '@tonconnect/ui-react'
-import { Button, Select, arLanguagesSite, isDemoMode } from '../../../../shared'
 import classNames from 'classnames/bind'
 import { ButtonConnectWallet } from '../../../../feature'
-import { useGetPhrases, useChangeGameMode } from '../../../../hooks'
+import { useGetPhrases } from '../../../../hooks'
+import {
+  Button, Select,
+  arLanguagesSite, sourcePulseReferralBot, sourcePulseSocial
+} from '../../../../shared'
 
 import styles from './BurgerModalContent.module.scss'
-import { SelectHorizontal } from '../../../../shared'
 
 const cx = classNames.bind(styles)
 
@@ -30,10 +32,8 @@ export const BurgerModalContent = () => {
   const wallet = useTonWallet()
 	const address = useTonAddress()
   const language= useSelector((state: any) => state.language)
-  const changeGameMode = useChangeGameMode()
 
-  // @ts-ignore
-  const { affiliate, technicalSupport, realMode, demoMode } = useGetPhrases([
+  const { affiliate, technicalSupport } = useGetPhrases([
     'affiliate', 'technicalSupport', 'realMode',
     'gameWithRealTONCoins', 'demoMode', 'learningWithNonRealCoins'
   ])
@@ -59,7 +59,7 @@ export const BurgerModalContent = () => {
         iconLeftName='handshake'
         iconRightName='arrow-right'
         sizeIcons='big'
-        href='https://t.me/PulseReferralBot'
+        href={sourcePulseReferralBot}
       >
         <p>{affiliate}</p>
       </Button>
@@ -68,18 +68,11 @@ export const BurgerModalContent = () => {
         iconLeftName='support'
         iconRightName='arrow-right'
         sizeIcons='big'
-        href='https://t.me/pulse_social/7'
+        href={sourcePulseSocial}
       >
         <p>{technicalSupport}</p>
       </Button>
       <Select data={languages} />
-      <SelectHorizontal
-        changeId={isDemoMode}
-        textBtnLeft={realMode}
-        textBtnRight={demoMode}
-        onClickLeftBtn={() => changeGameMode()}
-        onClickRightBtn={() => changeGameMode(isDemoMode)}
-      />
       <div className={cx('button__social')}>
         <Button
           className={cx('button__social__item')}
