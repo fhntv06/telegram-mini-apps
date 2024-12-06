@@ -3,38 +3,29 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import classNames from 'classnames/bind'
 import { AnimatePresence, motion, useWillChange } from 'framer-motion'
 import {
-  IOnbording,
+  IOnboarding,
   // IScreen
 } from './types'
 
-import { useGetPhrases, useChangeGameMode } from '../../hooks'
-import { Button, Icon, SelectHorizontal, isDemoMode } from '../../shared'
+import { useGetPhrases } from '../../hooks'
+import { Button, Icon } from '../../shared'
 
 import styles from './Onbording.module.scss'
 
 const cx = classNames.bind(styles)
 
-const screens = [1, 2, 3, 4, 5, 6]
+const screens = [1, 2, 3, 4, 5]
 
-export const Onboarding = ({ handlerSkip, className }: IOnbording) => {
+export const Onboarding = ({ handlerSkip, className }: IOnboarding) => {
   const swiperRef = useRef(null)
   const willChange = useWillChange()
   const [startOnboarding, setStartOnboarding] = useState<boolean>(false)
   const [disabledPrevButton, setDisabledPrevButton] = useState<boolean>(true)
   const [indexSlideActive, setIndexSlideActive] = useState<number>(1)
-  const changeGameMode = useChangeGameMode()
 
   const {
-    // @ts-ignore
-    onboarding, start, prev, next, skip, begin,
-    // @ts-ignore
-    realMode, gameWithRealTONCoins, demoMode, learningWithNonRealCoins, selectGameMode
-  } = useGetPhrases([
-    'onboarding', 'start', 'prev',
-    'next', 'skip', 'begin',
-    'realMode', 'gameWithRealTONCoins', 'demoMode',
-    'learningWithNonRealCoins', 'selectGameMode'
-  ])
+    onboarding, start, prev, next, skip, startGame
+  } = useGetPhrases(['onboarding', 'start', 'prev', 'next', 'skip', 'startGame'])
 
   return (
     <div className={cx('onboarding', className)}>
@@ -80,47 +71,34 @@ export const Onboarding = ({ handlerSkip, className }: IOnbording) => {
                   <div key={`screen_${index}`} className={cx('onboarding__screen')}>
                     <SwiperSlide className={cx('onboarding__screen__main')}>
                       {
-                        (index === 6) ? (
-                          <div className={cx('onboarding__screen__custom-content')}>
-                            <h1>{selectGameMode}</h1>
-                            <SelectHorizontal
-                              changeId={isDemoMode}
-                              textBtnLeft={realMode}
-                              textDescrBtnLeft={gameWithRealTONCoins}
-                              textBtnRight={demoMode}
-                              textDescrBtnRight={learningWithNonRealCoins}
-                              onClickLeftBtn={() => changeGameMode()}
-                              onClickRightBtn={() => changeGameMode(isDemoMode)}
-                            />
-                            <p className={cx('text', 'p-reg')}>{onboarding[index]}</p>
+                        <>
+                          <div className={cx('screen')}>
+                            <div className={cx(`screen__${index}`)}/>
                           </div>
-                        ) : (
-                          <>
-                            <div className={cx('screen')}>
-                              <div className={cx(`screen__${index}`)}/>
-                            </div>
-                            <p className={cx('text', 'p-reg')}>{onboarding[index]}</p>
-                          </>
-                        )}
+                          <p className={cx('text', 'p-reg')}>{onboarding[index]}</p>
+                        </>
+                      }
                     </SwiperSlide>
                   </div>
                 ))}
               </Swiper>
               <div className={cx('onboarding__screen__footer')}>
                 <div className={cx('onboarding__screen__control')}>
-                  <Button
-                    className={cx('button', 'p')}
-                    iconLeftName='arrow-left'
-                    sizeIcons='big'
-                    onClick={() => {
-                      // @ts-ignore
-                      swiperRef.current.slidePrev()
-                    }}
-                    disabled={disabledPrevButton}
-                  >
-                    {prev}
-                  </Button>
-                  {indexSlideActive !== screens.length ? (
+                  {(indexSlideActive !== screens.length) && (
+                    <Button
+                      className={cx('button', 'p')}
+                      iconLeftName='arrow-left'
+                      sizeIcons='big'
+                      onClick={() => {
+                        // @ts-ignore
+                        swiperRef.current.slidePrev()
+                      }}
+                      disabled={disabledPrevButton}
+                    >
+                      {prev}
+                    </Button>
+                  )}
+                  {(indexSlideActive !== screens.length) ? (
                     <Button
                       className={cx('button', 'p')}
                       type='white'
@@ -144,7 +122,7 @@ export const Onboarding = ({ handlerSkip, className }: IOnbording) => {
                       type='white'
                       onClick={() => handlerSkip(true)}
                     >
-                      {begin}
+                      {startGame}
                     </Button>
                   )}
                 </div>
