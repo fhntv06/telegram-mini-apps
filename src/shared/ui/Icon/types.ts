@@ -38,6 +38,8 @@ export type IconNames =
     | 'nasdaq-coin'
     | 'sp500-coin'
     | 'logo-pulse'
+    | 'switch'
+    | '' // For skip icon if you need
 
     export type IconType =
     | 'small'

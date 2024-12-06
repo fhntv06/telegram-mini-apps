@@ -23,7 +23,6 @@ export const ButtonTopUp = ({
 	className,
 	onClick,
 }: Props) => {
-  // @ts-ignore
   const { topUpYourWallet } = useGetPhrases(['topUpYourWallet'])
 	const { openHandler: openHandlerModal } = useContext<ModalContextTypes>(ModalContext)
 
@@ -34,11 +33,11 @@ export const ButtonTopUp = ({
 
   return (
 		<Button
-			className={cx('button', 'p', className)}
+			className={cx('button', 'p font-w-semibold', className)}
 			iconLeftName="plus"
 			iconRightName={iconRightName}
 			sizeIcons={sizeIcons}
-			type='gray'
+			type='blue'
 			onClick={handlerConnectWallet}
 		>
 			{topUpYourWallet}

@@ -24,7 +24,6 @@ export const BetPanel = ({ data, type='up' }: Props) => {
 	const [completedRound, setCompletedRound] = useState<boolean>(false)
 	const [betsWiningPool, setWiningPool] = useState<number>(0)
 	const { ticker, gameMode } = useSelector((state: any) => state.modeSettings)
-	// @ts-ignore
 	const { up, down, winners, losers } = useGetPhrases(['up', 'down', 'winners', 'losers'])
 
 	useEffect(() => {

@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { useTonAddress } from '@tonconnect/ui-react'
 import { getBalance, getDemoBalance } from '../app/api'
-import { setUserDataWallet } from '../app/store/slices/user'
+import { setUserDataWallet } from '../app/store/slices'
 import { isDemoMode } from '../shared'
 import WebApp from "@twa-dev/sdk";
 

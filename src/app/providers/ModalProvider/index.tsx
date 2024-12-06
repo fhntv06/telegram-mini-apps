@@ -3,14 +3,19 @@ import { ModalContext } from '../../contexts'
 import { Modal } from '../../../widgets'
 import React from 'react'
 
-import { BurgerModalContent, WalletModalContent, SelectModeModalContent } from '../../../widgets/Modal/utils'
+import {
+	BurgerModalContent,
+	WalletModalContent,
+	SelectModeModalContent,
+	SwitchModeModalContent
+} from '../../../widgets/Modal/utils'
 
 interface IProps {
   children: React.ReactNode
 }
 
 export const ModalProvider = ({ children }: IProps) => {
-  const { typeModal, isOpen, openHandler, closeHandler, toggleHandler } = useModal();
+  const { typeModal, isOpen, openHandler, closeHandler, toggleHandler } = useModal()
 
   return (
     <ModalContext.Provider value={{ isOpen, openHandler, closeHandler, toggleHandler }}>
@@ -19,6 +24,7 @@ export const ModalProvider = ({ children }: IProps) => {
         {typeModal === 'select__mode' && <SelectModeModalContent closeModalHandler={closeHandler} />}
         {typeModal === 'wallet' && <WalletModalContent closeModalHandler={closeHandler} />}
         {typeModal === 'burger' && <BurgerModalContent />}
+        {typeModal === 'switchMode' && <SwitchModeModalContent closeModalHandler={closeHandler} />}
       </Modal>
     </ModalContext.Provider>
   )

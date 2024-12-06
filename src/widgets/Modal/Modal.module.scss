@@ -1,30 +1,20 @@
 @import '../../shared/assets/styles/basics.scss';
+@import '../../shared/assets/styles/components/Modal.module.scss';
 
-.modal {
-  z-index: 100;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: max-content;
-  padding: $offset8 $offset16;
-
-  * {
-    z-index: 1;
-  }
-}
 .modal__header {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	column-gap: $offset8;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  column-gap: $offset8;
 }
+
 .modal__header__buttons {
-	display: flex;
-	align-items: center;
-	column-gap: $offset8;
-	margin-right: $offset8;
+  display: flex;
+  align-items: center;
+  column-gap: $offset8;
+  margin-right: $offset8;
 }
+
 .modal__button-burger,
 .modal__button-select__mode,
 .modal__button-wallet {
@@ -36,14 +26,4 @@
     opacity: 1;
     pointer-events: all;
   }
-}
-.blur {
-  z-index: 2;
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  backdrop-filter: blur(5px);
-  background: #1C1C1E52;
 }

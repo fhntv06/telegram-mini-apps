@@ -22,7 +22,7 @@ const styles = {
   width: '80%',
   height: '80%',
   transform: 'translate(-50%, -50%)',
-  pointerEvents: 'none'
+  pointerEvents: 'none',
 }
 
 const listAnimates = {

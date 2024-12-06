@@ -1,0 +1,22 @@
+@import '../../shared/assets/styles/basics';
+
+.button {
+  transition: width .3s ease-out;
+
+  &.demo {
+    position: relative;
+    justify-content: end;
+    width: calc(177px); // 4px imitation offset between text 'DEMO' and content button
+
+    .demo-text {
+      position: absolute;
+      top: $offset12;
+      left: $offset12;
+      padding: 0 $offset4;
+      background-color: $black;
+      @include border('small');
+    }
+
+    transition: width .1s ease-in;
+  }
+}

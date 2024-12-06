@@ -1,12 +1,11 @@
 import classNames from 'classnames/bind'
 import {
 	useChangeGameMode,
-	// useGetPhrases
-} from '../../hooks'
-import { Button } from '../../shared'
+	useGetPhrases } from '../../hooks'
+import { Button, isOnChainMode } from '../../shared'
 import { IconNames, IconType } from '../../shared/types'
 
-import styles from './ButtonChangeMode.module.scss'
+import styles from './ButtonSwitchMode.module.scss'
 
 const cx = classNames.bind(styles)
 
@@ -17,33 +16,30 @@ interface Props {
 	onClick?: () => void
 }
 
-export const ButtonChangeMode = ({
+export const ButtonSwitchMode = ({
 	sizeIcons,
 	iconRightName,
 	className,
 	onClick,
 }: Props) => {
-  // @ts-ignore
-	// TODO: в будущем будет фраза
-  // const { goToRealMode } = useGetPhrases(['goToRealMode'])
+  const { switchToRealMode } = useGetPhrases(['switchToRealMode'])
 	const changeGameMode = useChangeGameMode()
 
 	const handlerChangeGameMode = () => {
 		if (onClick) onClick()
-		changeGameMode()
+		changeGameMode(isOnChainMode)
 	}
 
   return (
 		<Button
-			className={cx('button', 'p', className)}
-			iconLeftName="plus"
+			className={cx('button', 'p font-w-semibold', className)}
+			iconLeftName='switch'
 			iconRightName={iconRightName}
 			sizeIcons={sizeIcons}
-			type='gray'
+			type='blue'
 			onClick={handlerChangeGameMode}
 		>
-			{/*{goToRealMode}*/}
-			Go to real mode
+			{switchToRealMode}
 		</Button>
 	)
 }

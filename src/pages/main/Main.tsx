@@ -1,27 +1,24 @@
 import { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux'
 import { useTonAddress, useTonWallet } from '@tonconnect/ui-react'
-import WebApp from '@twa-dev/sdk';
+import WebApp from '@twa-dev/sdk'
 import classNames from 'classnames/bind'
 import { AnimatePresence, motion, useWillChange } from 'framer-motion'
-import { postReferral } from '../../app/api'
-import { MainHeader, MainFooter, Chart, Onboarding } from '../../widgets'
+import { postReferral, getAddressContract } from '../../app/api'
 import { ModalProvider, NotificationProvider, AnimationProvider } from '../../app/providers'
-
-import styles from './Main.module.scss'
-
+import { MainHeader, MainFooter, Chart, Onboarding, ModalSelectGameMode } from '../../widgets'
 import { useGameSocket, usePriceHistory, useUserData } from '../../hooks/'
-import { setGameStatus } from '../../app/store/slices/game'
+import { setGameStatus, setDataTransaction, setUserDataTelegram } from '../../app/store/slices'
+
 import { LoaderSpinner } from '../../shared'
 
-import { getAddressContract } from '../../app/api/'
-import { setDataTransaction } from '../../app/store/slices/bets'
-import { setUserDataTelegram } from '../../app/store/slices/user'
+import styles from './Main.module.scss'
 
 const cx = classNames.bind(styles)
 
 export const Main = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true)
+  const [hiddenModalSelectMode, setHiddenModalSelectMode] = useState<boolean>(true)
   const dispatch = useDispatch()
   const data = useGameSocket()
   const priceHistory = usePriceHistory()
@@ -73,6 +70,8 @@ export const Main = () => {
 
   // initial process app
   useEffect(() => {
+    setHiddenModalSelectMode(false)
+
     getAddressContract()
       .then(({ data: { address, mainnet } }) => dispatch(setDataTransaction({ address, mainnet })))
       .catch((error) => {
@@ -119,6 +118,9 @@ export const Main = () => {
                     <Chart/>
                     <MainFooter/>
                   </main>
+                  {!hiddenModalSelectMode && (
+                    <ModalSelectGameMode isOpen={!hiddenModalSelectMode} closeHandler={setHiddenModalSelectMode}/>
+                  )}
                 </AnimationProvider>
               </NotificationProvider>
             </ModalProvider>

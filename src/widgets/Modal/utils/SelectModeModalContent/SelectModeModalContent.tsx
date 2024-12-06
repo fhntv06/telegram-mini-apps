@@ -1,14 +1,13 @@
-// import { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useState } from 'react'
 import classNames from 'classnames/bind'
 // import { IModeSettings } from '../../../../app/store/slices/mode/types'
-import { IconNames } from '../../../../shared/types'
+import { IconNames, typeDemoMode, typeOnChainMode } from '../../../../shared/types'
+import { useChangeGameMode, useGetPhrases } from '../../../../hooks'
 import {
-  setModeSettings,
-  // initialState
-} from '../../../../app/store/slices/mode'
-import { useGetPhrases } from '../../../../hooks'
-import { Button, Icon, Select } from '../../../../shared'
+  Button, Icon, Select, SelectHorizontal,
+  isDemoMode, isOnChainMode
+} from '../../../../shared'
+
 import styles from './SelectModeModalContent.module.scss'
 
 const cx = classNames.bind(styles)
@@ -89,24 +88,16 @@ const coins: ICoins[] = [
 ]
 
 export const SelectModeModalContent = ({ closeModalHandler }: IProps) => {
-  // @ts-ignore
   // const [modeSettins, setStateModeSettings] = useState<IModeSettings>(initialState)
-  const dispatch = useDispatch()
+  const [mode, setMode] = useState<typeDemoMode | typeOnChainMode>(isDemoMode)
+  const changeGameMode = useChangeGameMode()
 
-  // @ts-ignore
-  const { selectMode, assets, confirm } = useGetPhrases(['selectMode', 'assets', 'confirm'])
+  const { selectMode, assets, gameMode,
+    realMode, demoMode, confirm
+  } = useGetPhrases(['selectMode', 'assets', 'gameMode', 'realMode', 'demoMode', 'confirm'])
 
   const confirmHandler = () => {
-    dispatch(
-      setModeSettings({
-        coin: 'btc',
-        time: {
-          text: '$BTC, 30s',
-          value: 30,
-          unit: 's'
-        },
-      })
-    )
+    changeGameMode(mode)
     closeModalHandler()
   }
   return (
@@ -114,9 +105,9 @@ export const SelectModeModalContent = ({ closeModalHandler }: IProps) => {
       <div className={cx('container')}>
         <header>
           <p>{selectMode}</p>
-          <span onClick={closeModalHandler}><Icon name='cross' size='big' /></span>
+          <span onClick={closeModalHandler}><Icon name='cross' size='big'/></span>
         </header>
-        <Select data={modeData} typeStyle='light' />
+        <Select data={modeData} typeStyle='light'/>
       </div>
       <div className={cx('container')}>
         <header>
@@ -126,19 +117,39 @@ export const SelectModeModalContent = ({ closeModalHandler }: IProps) => {
           {coins.map((coin: ICoins) => (
             <Button
               key={coin.icon}
-              className={cx('coin', { active: coin.choose, 'mask--disabled': coin.disabled })}
+              className={cx('coin', {active: coin.choose, 'mask--disabled': coin.disabled})}
               type='light'
               disabled={coin.disabled}
               // onClick={() => setStateModeSettings(coin)}
             >
-              <Icon name={coin.icon} size='big' />
+              <Icon name={coin.icon} size='big'/>
               {coin.disabled && <p className={cx('p-x-small')}>COMING SOON</p>}
             </Button>
           ))}
         </div>
       </div>
+      <div className={cx('container')}>
+        <header>
+          <p>{gameMode}</p>
+        </header>
+        <div className={cx('coins')}>
+          <SelectHorizontal
+            changeId={isDemoMode}
+            textBtnLeft={realMode}
+            textBtnRight={demoMode}
+            onClickLeftBtn={() => setMode(isOnChainMode)}
+            onClickRightBtn={() => setMode(isDemoMode)}
+          />
+        </div>
+      </div>
 
-      <Button className={cx('button__confirm')} onClick={confirmHandler} disabled>{confirm}</Button>
+      <Button
+        className={cx('button', 'p font-w-semibold')}
+        onClick={confirmHandler}
+        type='blue'
+      >
+        {confirm}
+      </Button>
     </div>
   )
 }

@@ -55,10 +55,10 @@ export const SelectHorizontal = ({
 					}}
 					className={cx('select-horizontal__changes')}
 				/>
-				<button className={cx('select-horizontal__button')} onClick={handlerLeftBtn} disabled={!chosen}>
+				<button className={cx('select-horizontal__button', 'font-w-semibold')} onClick={handlerLeftBtn} disabled={!chosen}>
 					{textBtnLeft}
 				</button>
-				<button className={cx('select-horizontal__button')} onClick={handlerRightBtn} disabled={chosen}>
+				<button className={cx('select-horizontal__button', 'font-w-semibold')} onClick={handlerRightBtn} disabled={chosen}>
 					{textBtnRight}
 				</button>
 			</div>

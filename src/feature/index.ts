@@ -1,6 +1,6 @@
 export { ButtonBet } from './ButtonBet'
 export { ButtonBurger } from './ButtonBurger'
-export { ButtonChangeMode } from './ButtonChangeMode'
+export { ButtonSwitchMode } from './ButtonSwitchMode'
 export { ButtonConnectWallet } from './ButtonConnectWallet'
 export { ButtonPlaceBet } from './ButtonPlaceBet'
 export { ButtonSelectMode } from './ButtonSelectMode'

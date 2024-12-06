@@ -15,7 +15,6 @@ export const ChartPanel = () => {
     winPercent: { downPercent, upPercent }
   } = useSelector((state: any) => state.gameStatus)
 
-  // @ts-ignore
   const { gameInProcess, upWins, downWins } = useGetPhrases(['gameInProcess', 'upWins', 'downWins'])
 
   return (

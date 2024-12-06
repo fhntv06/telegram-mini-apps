@@ -4,13 +4,13 @@
   display: flex;
   flex-direction: column;
   row-gap: $offset8;
-	margin-top: $offset12;
+  margin-top: $offset24;
 
   button {
     width: 100%;
 
     p {
-      font-weight: 400;
+      font-weight: $font-w-regular;
     }
 
     @include border('medium')
@@ -21,7 +21,7 @@
   justify-content: flex-start;
 
   p {
-    font-weight: 400;
+    font-weight: $font-w-regular;
   }
   span:nth-child(2) {
     margin-left: $offset12;

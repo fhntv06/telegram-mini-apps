@@ -23,7 +23,6 @@ export const ButtonConnectWallet = ({
 }: Props) => {
 	const [tonConnectUI] = useTonConnectUI()
 
-  // @ts-ignore
   const { connectWallet } = useGetPhrases(['connectWallet'])
 
 	const handlerConnectWallet = async () => {
@@ -33,11 +32,11 @@ export const ButtonConnectWallet = ({
 
   return (
 		<Button
-			className={cx('button', 'p', className)}
+			className={cx('button', 'p font-w-semibold', className)}
 			iconLeftName="wallet"
 			iconRightName={iconRightName}
 			sizeIcons={sizeIcons}
-			type='gray'
+			type='blue'
 			onClick={handlerConnectWallet}
 		>
 			{connectWallet}

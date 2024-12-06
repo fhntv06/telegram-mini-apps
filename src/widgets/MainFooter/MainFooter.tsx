@@ -1,15 +1,19 @@
 import WebApp from '@twa-dev/sdk'
-import { useEffect } from 'react'
-import { getBalance, getDemoBalance } from '../../app/api'
-import { useGetPhrases } from '../../hooks'
-
+import { useContext, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import classNames from 'classnames/bind'
 import { useTonWallet, useTonAddress } from '@tonconnect/ui-react'
-import { setUserDataWallet } from '../../app/store/slices/user'
+import classNames from 'classnames/bind'
+import { getBalance, getDemoBalance } from '../../app/api'
+import { setUserDataWallet } from '../../app/store/slices'
+import { ModalContextTypes } from '../../app/providers/ModalProvider/types'
+import { ModalContext } from '../../app/contexts'
 import { BetPanel, PanelButtonsBet } from '../../widgets'
-import { ButtonChangeMode, ButtonConnectWallet, ButtonTopUp } from '../../feature'
-import { Icon, Rounds, isDemoMode, formatNumber, getCorrectBalanceWithFormatNumber } from '../../shared'
+import { useGetPhrases } from '../../hooks'
+import { ButtonSwitchMode, ButtonConnectWallet, ButtonTopUp } from '../../feature'
+import {
+	Icon, Rounds, formatNumber, getCorrectBalanceWithFormatNumber, getStorage, setStorage,
+	maxCountTransactionForShowModalSwithcMode, isDemoMode
+} from '../../shared'
 import { IRoundsType } from '../../shared/types'
 
 import styles from './MainFooter.module.scss'
@@ -30,8 +34,8 @@ export const MainFooter = () => {
 	const { gamePhase } = useSelector((state: any) => state.gameStatus)
 	const { gameMode } = useSelector((state: any) => state.modeSettings)
 	const userDataWallet = useSelector((state: any) => state.userDataWallet)
+	const { openHandler: openHandlerModal } = useContext<ModalContextTypes>(ModalContext)
 
-  // @ts-ignore
   const { livePlayers, last3rounds, allTimeWins } = useGetPhrases(['livePlayers', 'last3rounds', 'allTimeWins'])
 
 	const setDataUser = () => {
@@ -86,6 +90,17 @@ export const MainFooter = () => {
 			setDataUser()
 		}
 	}, [gameMode]);
+
+	useEffect(() => {
+		if (gamePhase === 0) {
+			const countTransaction = (Number(getStorage('count')) + 1)
+
+			setStorage('count', countTransaction.toString())
+
+			if (countTransaction === maxCountTransactionForShowModalSwithcMode) openHandlerModal('switchMode')
+		}
+
+	}, [gamePhase]);
 
 	return (
 		<footer className={cx('footer')}>

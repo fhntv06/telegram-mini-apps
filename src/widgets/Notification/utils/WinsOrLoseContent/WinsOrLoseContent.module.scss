@@ -11,7 +11,7 @@
 
 
   p, h2 {
-    font-weight: 400;
+    font-weight: $font-w-regular;
 
     &.wins {
       color: $green100;
