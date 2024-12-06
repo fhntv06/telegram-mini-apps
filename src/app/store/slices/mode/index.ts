@@ -14,7 +14,7 @@ export const initialState: IModeSettings = {
 }
 
 const index = createSlice({
-    name: 'mode',
+    name: 'modeSettings',
     initialState,
     reducers: {
         setModeSettings(state, action) {
