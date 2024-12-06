@@ -1,8 +1,8 @@
 import { useSelector } from 'react-redux'
 import { useTonWallet, useTonConnectUI } from '@tonconnect/ui-react'
 import classNames from 'classnames/bind'
-import { useTransaction, useGetPhrases } from '../../hooks';
-import { Button, formatIntTonNumber } from '../../shared'
+import { useTransaction, useGetPhrases } from '../../hooks'
+import { Button, minBet } from '../../shared'
 
 import styles from './ButtonPlaceBet.module.scss'
 
@@ -34,7 +34,7 @@ export const ButtonPlaceBet = ({
 		}
 	}
 
-	const disabled = !wallet || (gamePhase !== 1 && gamePhase !== 0) || !(Number(formatIntTonNumber(balance)) > 0)
+	const disabled = !wallet || (gamePhase !== 1 && gamePhase !== 0) || !(balance >= minBet)
 	const textButton = txInProcess ? 'Loading ...' : type === 'up' ? goUp : goDown
 
 	return (

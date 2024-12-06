@@ -18,7 +18,7 @@ export const useTransaction = (amount: number) => {
   const { ticker, gameMode } = useSelector((state: any) => state.modeSettings)
   const { address, mainnet } = useSelector((state: any) => state.bets)
   const userData = useUserData()
-  const { notEnoughDemoBalance } = useGetPhrases(['notEnoughDemoBalance'])
+  const { notEnoughDemoBalance, yourAnOutOfTime } = useGetPhrases(['notEnoughDemoBalance', 'yourAnOutOfTime'])
   const { openFadeHandler } = useFadeOut()
 
   const sendTransaction = async (placeBet: 'up' | 'down') => {
@@ -50,7 +50,13 @@ export const useTransaction = (amount: number) => {
 
     const handlerPostDataBetDetailsPlayers = () => (
       postDataBetDetailsPlayers(data)
-        .then(() => openHandlerAnimation('youAreIn'))
+        .then((res) => {
+          console.log('res ', res)
+          if (res.status !== 200) {
+            openHandlerNotification('warning', { text: yourAnOutOfTime })
+          }
+          openHandlerAnimation('youAreIn')
+      })
         .catch((error) => {
           console.error('Error postDataBetDetailsPlayers: ', error)
 

@@ -9,7 +9,7 @@ import { AnimationContext, ModalContext, NotificationContext } from '../../app/c
 import { IAnimationContextTypes, ModalContextTypes, INotificationContextTypes } from '../../app/providers/types'
 import { ButtonSelectMode, ButtonWallet, ButtonBurger } from '../../feature/'
 import { getWalletBet } from '../../app/api/'
-import { useGetPhrases, useUserData } from '../../hooks'
+import { useUserData } from '../../hooks'
 
 const cx = classNames.bind(styles)
 
@@ -23,14 +23,10 @@ export const MainHeader = () => {
 	const { bet } = useSelector((state: any) => state.bets)
 	const { ticker, gameMode } = useSelector((state: any) => state.modeSettings)
 	const userData = useUserData()
-	const { yourAnOutOfTime } = useGetPhrases(['yourAnOutOfTime'])
 
 	// TODO: вынести код выше!
 	// не должно быть тут!
 	useEffect(() => {
-		if (gamePhase === 2) {
-			openHandlerNotification('warning', { text: yourAnOutOfTime })
-		}
 		if (gamePhase === 4 && address && bet && userData?.id) {
 			getWalletBet({ address, ticker, gameMode, demoTgId: userData.id })
 				.then((res) => {

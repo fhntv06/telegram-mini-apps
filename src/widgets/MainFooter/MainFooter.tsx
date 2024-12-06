@@ -12,7 +12,7 @@ import { useGetPhrases } from '../../hooks'
 import { ButtonSwitchMode, ButtonConnectWallet, ButtonTopUp } from '../../feature'
 import {
 	Icon, Rounds, formatNumber, getCorrectBalanceWithFormatNumber, getStorage, setStorage,
-	maxCountTransactionForShowModalSwithcMode, isDemoMode
+	maxCountTransactionForShowModalSwithcMode, isDemoMode, minBet
 } from '../../shared'
 import { IRoundsType } from '../../shared/types'
 
@@ -130,7 +130,7 @@ export const MainFooter = () => {
 			<footer className={cx('footer__bets')}>
 				{(
 					wallet
-					? userDataWallet.balance > 0
+					? userDataWallet.balance >= minBet
 						? <PanelButtonsBet />
 						: gameMode === isDemoMode
 							? <ButtonSwitchMode sizeIcons='big' />

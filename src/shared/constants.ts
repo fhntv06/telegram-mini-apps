@@ -1,6 +1,7 @@
-import { IGameStatus } from '../app/providers/types';
+import { IGameStatus } from '../app/providers/types'
 import { ILang, typeOnChainMode, typeDemoMode } from './types'
 export const urlSocket = `${import.meta.env.VITE_SOCKET_PROTOCOL}://${import.meta.env.VITE_DOMAIN}:${import.meta.env.VITE_PORT}`
+export const minBet = 0.5 * 1000000000
 export const countPointsChart = 25
 export const numberLastPoint = countPointsChart - 1
 export const initialDataPriceHistory: number[] = ((min = 61900, max = 62100) => {
