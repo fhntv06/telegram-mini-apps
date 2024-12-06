@@ -1,16 +1,16 @@
 import { IGameStatus } from '../app/providers/types';
-import { ILang } from '../app/store/slices/types'
+import { ILang, typeOnChainMode, typeDemoMode } from './types'
 export const urlSocket = `${import.meta.env.VITE_SOCKET_PROTOCOL}://${import.meta.env.VITE_DOMAIN}:${import.meta.env.VITE_PORT}`
 export const countPointsChart = 25
 export const numberLastPoint = countPointsChart - 1
 export const initialDataPriceHistory: number[] = ((min = 61900, max = 62100) => {
 	const array: number[] = [];
 	for (let i = 0; i < countPointsChart; i++) {
-		array.push((Math.random() * (max - min + 1)) + min);
+		array.push((Math.random() * (max - min + 1)) + min)
 		// array.push(min + i * 450);
 	}
-	return array;
-})();
+	return array
+})()
 export const initialDataGameStatus: IGameStatus = {
   upPoolData: {
 		bets: [
@@ -100,6 +100,7 @@ export interface ILangPhrase {
 	demoMode: string
 	learningWithNonRealCoins: string
 	selectGameMode: string
+	gameMode: string
 	start: string
 	prev: string
 	next: string
@@ -109,6 +110,18 @@ export interface ILangPhrase {
 	notEnoughDemoBalance: string
 	yourAnOutOfTime: string
 	topUpYourWallet: string
+	startGame: string
+	beforeStartingTheGame: string
+	switchToRealMode: string
+	youDoingWell: string
+	weSeeThatYou: string
+	TopUpByCardCIS: string
+	TopUpByCard: string
+	kotleta: string
+	oneMoment: string
+	altinBit: string
+	bitObmen: string
+	paybis: string
 }
 export interface ILanguage {
 	english: ILangPhrase
@@ -176,6 +189,7 @@ export const arLanguagesPhraseSite: ILanguage = {
 		demoMode: 'demo mode',
 		learningWithNonRealCoins: 'learning with non real coins',
 		selectGameMode: 'Select game mode',
+		gameMode: 'game mode',
 		start: 'Start',
 		prev: 'Prev',
 		next: 'Next',
@@ -184,7 +198,19 @@ export const arLanguagesPhraseSite: ILanguage = {
 		alias: 'en',
 		notEnoughDemoBalance: 'Not enough demo balance',
 		yourAnOutOfTime: 'You did not have enough time to bid in this round, please wait for the next round',
-		topUpYourWallet: 'Top up your wallet'
+		topUpYourWallet: 'Top up your wallet',
+		startGame: 'Start game',
+		beforeStartingTheGame: 'Before starting the game, select the mode. You can change your selection in the assets menu',
+		switchToRealMode: 'Switch to Real mode',
+		youDoingWell: "You're doing well",
+		weSeeThatYou: 'We see that you are already good at predicting the values of cryptocurrencies. Maybe you want to try your hand in Real mode?',
+		TopUpByCardCIS: 'Top up by card (CIS)',
+		TopUpByCard: 'Top up by card',
+		kotleta: 'Kotleta',
+		oneMoment: 'OneMoment',
+		altinBit: 'AltinBit',
+		bitObmen: 'BitObmen',
+		paybis: 'Paybis',
 	},
 	spanish: {
 		gameInProcess: [
@@ -197,6 +223,7 @@ export const arLanguagesPhraseSite: ILanguage = {
 		upWins: 'arriba Gana',
 		downWins: 'abajo gana',
 		selectMode: 'seleccionar Modo',
+		gameMode: 'Modo de juego',
 		assets: 'activos',
 		confirm: 'Confirmar',
 		topUpToContinue: 'recarga Para Continuar',
@@ -254,6 +281,18 @@ export const arLanguagesPhraseSite: ILanguage = {
 		notEnoughDemoBalance: 'No hay suficiente saldo de demostración',
 		yourAnOutOfTime: 'Te quedaste sin tiempo para apostar en esta ronda, espera a la próxima ronda',
 		topUpYourWallet: 'Recarga tu billetera',
+		startGame: 'Iniciar juego',
+		beforeStartingTheGame: 'Antes de comenzar el juego, selecciona el modo. Puede cambiar su selección en el menú activos',
+		switchToRealMode: 'Cambiar al modo real',
+		youDoingWell: 'Lo estás haciendo bien',
+		weSeeThatYou: 'Vemos que ya eres bueno prediciendo los valores de las criptomonedas. ¿Quizás quieras probar suerte en modo real?',
+		TopUpByCardCIS: 'Recarga con tarjeta (CIS)',
+		TopUpByCard: 'Recarga con tarjeta',
+		kotleta: 'Kotleta',
+		oneMoment: 'OneMoment',
+		altinBit: 'AltinBit',
+		bitObmen: 'BitObmen',
+		paybis: 'Paybis',
 	},
 	chinese: {
 		gameInProcess: [
@@ -266,6 +305,7 @@ export const arLanguagesPhraseSite: ILanguage = {
 		upWins: '胜出',
 		downWins: '胜利',
 		selectMode: '选择模式',
+		gameMode: '游戏模式',
 		assets: '资产',
 		confirm: '确认',
 		topUpToContinue: '顶起来继续',
@@ -323,6 +363,18 @@ export const arLanguagesPhraseSite: ILanguage = {
 		notEnoughDemoBalance:'没有足够的演示平衡',
 		yourAnOutOfTime: '你在这轮投注的时间已经用完了，请等待下一轮',
 		topUpYourWallet: '把你的钱包装满',
+		startGame: '开始游戏',
+		beforeStartingTheGame: '在开始游戏之前，选择模式。 您可以在资产菜单中更改选择',
+		switchToRealMode: '切换到真实模式',
+		youDoingWell: '你做得很好',
+		weSeeThatYou: '我们看到你已经擅长预测加密货币的价值。 也许你想试试你的手在真实模式？',
+		TopUpByCardCIS: '按卡充值(CIS)',
+		TopUpByCard: '按卡充值',
+		kotleta: 'Kotleta',
+		oneMoment: 'OneMoment',
+		altinBit: 'AltinBit',
+		bitObmen: 'BitObmen',
+		paybis: 'Paybis',
 	},
 	russian: {
 		gameInProcess: [
@@ -335,6 +387,7 @@ export const arLanguagesPhraseSite: ILanguage = {
 		upWins: 'Верхний пул',
 		downWins: 'Нижний пул',
 		selectMode: 'Выберите режим',
+		gameMode: 'Режимы игры',
 		assets: 'Активы',
 		confirm: 'Подтвердить',
 		topUpToContinue: 'Полполнение баланса:',
@@ -392,6 +445,18 @@ export const arLanguagesPhraseSite: ILanguage = {
 		notEnoughDemoBalance: 'Недостаточно демо-баланса',
 		yourAnOutOfTime: 'У вас не хватило времени сделать ставку в этом раунде, пожалуйста, дождитесь следующего раунда',
 		topUpYourWallet: 'Пополните свой кошелек',
+		startGame: 'Начать игру',
+		beforeStartingTheGame: 'Перед началом игры выберите режим. Вы можете изменить свой выбор в меню "Ресурсы".',
+		switchToRealMode: 'Переключиться в реальный режим',
+		youDoingWell: 'Отлично получается',
+		weSeeThatYou: 'Мы видим, что вы уже хорошо умеете предсказывать стоимость криптовалют. Может быть, вы хотите попробовать свои силы в реальном режиме?',
+		TopUpByCardCIS: 'Пополнение счета с помощью карты (СНГ)',
+		TopUpByCard: 'Пополнение счета с помощью карты',
+		kotleta: 'Kotleta',
+		oneMoment: 'OneMoment',
+		altinBit: 'AltinBit',
+		bitObmen: 'BitObmen',
+		paybis: 'Paybis',
 	},
 }
 export const arLanguagesSite: ILang[] = [
@@ -420,4 +485,21 @@ export const initialDataGameMode = {
 	ticker: 'BTC-30',
 	gameMode: 'ON_CHAIN',
 }
-export const isDemoMode = 'DEMO'
+export const isOnChainMode: typeOnChainMode = 'ON_CHAIN'
+export const isDemoMode: typeDemoMode = 'DEMO'
+
+// sources
+export const sourcePulseReferralBot: string = 'https://t.me/PulseReferralBot'
+export const sourcePulseSocial: string = 'https://t.me/pulse_social/7'
+export const sourceCryptoBot: string = 'https://t.me/CryptoBot'
+export const sourceWallet: string = 'https://t.me/wallet'
+export const sourceFastTransaction: string = 'https://otc.mexc.com/ru-RU/fastTransaction'
+export const sourceBinance: string = 'https://www.binance.com/en-GB/crypto/buy/USD/TON'
+export const sourceBybit: string = 'https://www.bybit.com/fiat/trade/express/home'
+export const sourceKotleta: string = 'https://kotleta.gg'
+export const sourceOnemoment: string = 'http://onemoment.cc/'
+export const sourceAltinbit: string = 'http://altinbit.com/'
+export const sourceBitobmen: string = 'http://bitobmen.net/'
+export const sourcePaybis: string = 'https://t.me/paybis_crypto_exchange_bot'
+
+export const maxCountTransactionForShowModalSwithcMode = 10

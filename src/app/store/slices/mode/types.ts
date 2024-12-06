@@ -1,8 +1,10 @@
+import { typeDemoMode, typeOnChainMode } from '../../../../shared/types'
+
 export interface IModeSettings {
   coin: string
   time: ITimeModeSettings
   ticker: 'BTC-30'
-  gameMode: 'ON_CHAIN' | 'DEMO'
+  gameMode: typeOnChainMode | typeDemoMode
 }
 
 export interface ITimeModeSettings {
