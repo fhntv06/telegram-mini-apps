@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { ILang } from './types'
+import { ILang } from '../../../../shared/types'
 
 const initialState: ILang = {
   name: 'english',
