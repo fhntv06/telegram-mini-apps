@@ -1,24 +1,27 @@
 @import '../../assets/styles/basics.scss';
 
+$varPaddingButtonsContainer: $offset4;
+
 .select-horizontal {
 	display: flex;
 	flex-direction: column;
 	row-gap: $offset12;
+	width: 100%;
 }
 .select-horizontal__buttons {
 	position: relative;
 	display: flex;
-	padding: $offset12;
-	background-color: $dark-gray;
-	@include border('large');
+	padding: $varPaddingButtonsContainer ;
+	background-color: $white-light;
+	@include border('medium');
 }
 .select-horizontal__changes {
 	position: absolute;
-	top: $offset12;
-	left: $offset12;
-	width: calc(50% - $offset12);
-	height: calc(100% - $offset12 * 2);
-	background-color: $gray;
+	top: $varPaddingButtonsContainer;
+	left: $varPaddingButtonsContainer;
+	width: calc(50% - $varPaddingButtonsContainer);
+	height: calc(100% - $varPaddingButtonsContainer * 2);
+	background-color: $black;
 	@include border('medium');
 }
 .select-horizontal__button {
@@ -26,7 +29,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	padding: $offset20 0;
+	padding: $offset16 0;
 	width: 50%;
 	text-transform: uppercase;
 }
