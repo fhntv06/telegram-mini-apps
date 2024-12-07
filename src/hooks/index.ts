@@ -1,5 +1,6 @@
 export { useAnimation } from './useAnimation'
 export { useBackendAuth } from './useBackendAuth'
+export { useCountStorageTransaction } from './useCountStorageTransaction'
 export { useChartData } from './useChartData'
 export { useDisconnect } from './useDisconnect'
 export { useGameSocket } from './useGameSocket'

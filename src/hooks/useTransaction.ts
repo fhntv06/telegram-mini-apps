@@ -8,6 +8,7 @@ import { postDataBetDetailsPlayers } from '../app/api/'
 import { useGetPhrases, useUserData } from './'
 import { isDemoMode } from '../shared/'
 import { useFadeOut } from './useFadeOut'
+import { useCountStorageTransaction } from '../hooks'
 
 export const useTransaction = (amount: number) => {
   const tonAddress = useTonAddress()
@@ -18,8 +19,12 @@ export const useTransaction = (amount: number) => {
   const { ticker, gameMode } = useSelector((state: any) => state.modeSettings)
   const { address, mainnet } = useSelector((state: any) => state.bets)
   const userData = useUserData()
-  const { notEnoughDemoBalance, yourAnOutOfTime } = useGetPhrases(['notEnoughDemoBalance', 'yourAnOutOfTime'])
+  const {
+    notEnoughDemoBalance,
+    // yourAnOutOfTime
+  } = useGetPhrases(['notEnoughDemoBalance', 'yourAnOutOfTime'])
   const { openFadeHandler } = useFadeOut()
+  const { calculateCountStorageTransactionHandler } = useCountStorageTransaction()
 
   const sendTransaction = async (placeBet: 'up' | 'down') => {
     setTxInProcess(true)
@@ -51,27 +56,33 @@ export const useTransaction = (amount: number) => {
     const handlerPostDataBetDetailsPlayers = () => (
       postDataBetDetailsPlayers(data)
         .then((res) => {
-          console.log('res ', res)
-          if (res.status !== 200) {
-            openHandlerNotification('warning', { text: yourAnOutOfTime })
-          }
+          // TODO: показываем уведомление yourAnOutOfTime (что пользователь не успел поставить)
+          // if (res.status !== 200) {
+          //   openHandlerNotification('warning', { text: yourAnOutOfTime })
+          // }
           openHandlerAnimation('youAreIn')
-      })
-        .catch((error) => {
-          console.error('Error postDataBetDetailsPlayers: ', error)
 
-          if (gameMode === isDemoMode && error.response.status === 400) {
-            openHandlerNotification('warning', { text: notEnoughDemoBalance })
-          }
+          return res
         })
     )
 
-    if (gameMode === isDemoMode) await handlerPostDataBetDetailsPlayers()
-    else {
+    if (gameMode === isDemoMode) {
+      await handlerPostDataBetDetailsPlayers()
+        .then(() => calculateCountStorageTransactionHandler())
+        .catch((error) => {
+          console.error('Error isDemoMode postDataBetDetailsPlayers: ', error)
+
+          if (error.response.status === 400) {
+            openHandlerNotification('warning', { text: notEnoughDemoBalance })
+          }
+        })
+    } else {
       await tonConnectUI.sendTransaction(transaction, configuration)
         .then(() => {
-          if (userData?.id) handlerPostDataBetDetailsPlayers()
-
+          if (userData?.id) {
+            handlerPostDataBetDetailsPlayers()
+              .catch((error) => console.error('Error isRealMode postDataBetDetailsPlayers: ', error))
+          }
           openFadeHandler(document.querySelector('[data-tc-modal]'), 500)
         })
         .catch((error) => console.error('Error sendTransaction: ', error))
