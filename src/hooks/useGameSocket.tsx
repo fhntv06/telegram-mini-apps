@@ -2,15 +2,15 @@ import { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { IGameStatus } from '../app/providers/types'
 import {
-  // initialDataGameStatus,
+  initialDataGameStatus,
   urlSocket,
 } from '../shared'
 import { setSocket, closeSocket } from '../app/store/slices'
 
-const initTestData = false
+const initTestData: boolean = import.meta.env.VITE_IS_DEV_MODE === 'true'
 
 export const useGameSocket = () => {
-  const [data, setData] = useState<IGameStatus>()
+  const [data, setData] = useState<IGameStatus | object>(initTestData ? initialDataGameStatus : {})
   const [error, setError] = useState<boolean>(false)
   const dispatch = useDispatch()
 

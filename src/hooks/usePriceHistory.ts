@@ -2,18 +2,19 @@ import { getPriceHistory } from '../app/api'
 import { useEffect, useState } from 'react'
 import { initialDataPriceHistory } from '../shared'
 
+const initTestData: boolean = import.meta.env.VITE_IS_DEV_MODE === 'true'
+
 export const usePriceHistory = () => {
-  const [priceHistory, setPriceHistory] = useState<number[]>([])
+  const [priceHistory, setPriceHistory] = useState<number[]>(initTestData ? initialDataPriceHistory : [])
 
   useEffect(() => {
     console.log('Запрос getPriceHistory!')
-    getPriceHistory()
+
+    if (!priceHistory.length) {
+      getPriceHistory()
       .then(async (res) => setPriceHistory(res.data))
-      .catch((error) => {
-        console.log('Error in getPriceHistory: ', error)
-        setPriceHistory(initialDataPriceHistory)
-        console.log('Подключение тестовых данных за место истории цен! Проверьте соединение с сервером!')
-      })
+      .catch((error) => console.log('Error in getPriceHistory: ', error))
+    }
   }, [])
 
 
