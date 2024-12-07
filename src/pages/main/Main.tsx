@@ -62,7 +62,7 @@ export const Main = () => {
 
   // update data backend
   useEffect(() => {
-    if (data && data.btcPrice && priceHistory.length) {
+    if (data && 'btcPrice' in data && data.btcPrice && priceHistory.length) {
       setIsLoading(false)
       dispatch(setGameStatus({ ...data, priceHistory}))
     }
