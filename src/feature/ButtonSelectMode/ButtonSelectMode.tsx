@@ -18,7 +18,7 @@ export const ButtonSelectMode = ({
 	className,
 }: Props) => {
 	const { gameMode } = useSelector((state: any) => state.modeSettings)
-	const textMode = '$BTC, 30s'
+	const textMode = '$BTC,\u00A030s'
 
 	return (
 		<Button
