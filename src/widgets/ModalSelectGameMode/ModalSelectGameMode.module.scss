@@ -2,6 +2,8 @@
 @import '../../shared/assets/styles/components/Modal.module.scss';
 
 .modal__wrapper {
+  position: relative;
+  top: 72px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -9,8 +11,11 @@
   padding: $offset24 $offset12 $offset12;
   background-color: $dark-gray;
   @include border('large');
-  transform: translateY(50%);
 
+  .title {
+    width: 100%;
+    text-align: center;
+  }
   .description {
     padding: 0 $offset12;
     text-align: center;
