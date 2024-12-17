@@ -1,6 +1,6 @@
-import {useContext, useEffect} from 'react';
+import {useContext, useEffect} from 'react'
 import { useSelector } from 'react-redux'
-import {useTonAddress, useTonWallet} from '@tonconnect/ui-react'
+import { useTonAddress, useTonWallet } from '@tonconnect/ui-react'
 import classNames from 'classnames/bind'
 
 import styles from './MainHeader.module.scss'

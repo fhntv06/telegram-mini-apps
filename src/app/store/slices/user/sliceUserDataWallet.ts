@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import { IUser } from './types.ts'
 
 const initialState: IUser = {
+  isConnected: false,
   wallet: null,
   chain: '',
   publicKey: '',
@@ -18,6 +19,7 @@ const sliceUserDataWallet = createSlice({
   initialState,
   reducers: {
     setUserDataWallet: (state, action) => {
+      state.isConnected = action.payload.isConnected;
       state.wallet = action.payload.wallet;
       state.chain = action.payload.chain;
       state.publicKey = action.payload.publicKey;

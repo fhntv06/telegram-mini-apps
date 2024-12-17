@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { useTonAddress, useTonWallet } from '@tonconnect/ui-react'
+import {useDispatch, useSelector} from 'react-redux'
+import { useTonAddress } from '@tonconnect/ui-react'
 import WebApp from '@twa-dev/sdk'
 import classNames from 'classnames/bind'
 import { AnimatePresence, motion, useWillChange } from 'framer-motion'
 import { postReferral, getAddressContract } from '../../app/api'
 import { ModalProvider, NotificationProvider, AnimationProvider } from '../../app/providers'
 import { MainHeader, MainFooter, Chart, Onboarding, ModalSelectGameMode } from '../../widgets'
-import { useGameSocket, usePriceHistory, useUserData } from '../../hooks/'
-import { setGameStatus, setDataTransaction, setUserDataTelegram } from '../../app/store/slices'
+import { useGameSocket, usePriceHistory } from '../../hooks/'
+import { setGameStatus, setDataTransaction } from '../../app/store/slices'
 
 import { LoaderSpinner } from '../../shared'
 
@@ -23,18 +23,15 @@ export const Main = () => {
   const data = useGameSocket()
   const priceHistory = usePriceHistory()
   const address = useTonAddress()
-  const userData = useUserData()
+  const { isConnected } = useSelector((state: any) => state.userDataWallet)
   const [skipOnBoarding, setSkipOnBoarding] = useState<boolean>(false)
   const willChange = useWillChange()
-  const wallet = useTonWallet()
 
   // TODO: переписать реализацию получения данных из контекста
   // согласно видео: https://www.youtube.com/watch?v=k2g_Og3CFKU
   const handlerPostReferral = () => {
     new Promise((resolve) => resolve(null))
       .then(() => {
-        if (userData) dispatch(setUserDataTelegram(userData))
-
         // For wait Telegram data
         const data: { initData: string, walletAddress?: string, referral?: string } = {
           initData: WebApp.initData,
@@ -55,10 +52,10 @@ export const Main = () => {
 
   // for disconnect action
   useEffect(() => {
-    if (WebApp.initData && wallet) {
+    if (WebApp.initData) {
       handlerPostReferral()
     }
-  }, [wallet])
+  }, [isConnected])
 
   // update data backend
   useEffect(() => {

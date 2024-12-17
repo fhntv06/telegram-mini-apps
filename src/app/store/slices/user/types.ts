@@ -1,4 +1,5 @@
 export interface IUser {
+    isConnected: boolean,
     wallet: unknown
     chain: string
     publicKey: string
