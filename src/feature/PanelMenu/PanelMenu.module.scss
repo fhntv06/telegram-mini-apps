@@ -1,0 +1,45 @@
+@import '../../shared/assets/styles/basics.scss';
+
+.panel {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  column-gap: $offset8;
+  justify-content: space-between;
+  width: 100%;
+  height: 58px;
+  padding: 0 $offset16;
+  background-color: $black;
+  border-top: 1px solid $dark-gray;
+}
+.item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  row-gap: 2px;
+  padding: $offset8 0;
+
+  p {
+    color: $gray;
+    transition: color .3s ease-out;
+  }
+
+  &.active {
+    p {
+      color: $coins-ton;
+      transition: color .5s ease-in;
+    }
+    .icon {
+      path {
+        fill: $coins-ton;
+      }
+    }
+  }
+}
+.icon {
+  path {
+    fill: $gray;
+  }
+}
