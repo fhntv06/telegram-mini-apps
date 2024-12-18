@@ -24,7 +24,6 @@ body {
   width: 100dvw;
   height: 100vh;
   height: 100dvh;
-  overflow: hidden;
 }
 #root {
   position: relative;
@@ -46,6 +45,12 @@ h2, .h2 {
   font-size: $h2-size;
   line-height: 16px;
   font-weight: $font-w-semibold;
+
+  &.h2-big {
+    font-size: calc($h2-size * 2);
+    font-weight: $font-w-regular;
+    line-height: 1.7;
+  }
 }
 p, .p {
   font-size: $p-size;
