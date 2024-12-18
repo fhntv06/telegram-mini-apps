@@ -6,4 +6,4 @@
 2) изменить значение переменной initTestData на true
 
 ## График
-график построен с помощью библиотеки cahrt.js - https://www.chartjs.org/docs/latest/
+график построен с помощью библиотеки chart.js - https://www.chartjs.org/docs/latest/
