@@ -123,6 +123,7 @@ export interface ILangPhrase {
 	altinBit: string
 	bitObmen: string
 	paybis: string
+	balance: string
 }
 export interface ILanguage {
 	english: ILangPhrase
@@ -149,7 +150,7 @@ export const arLanguagesPhraseSite: ILanguage = {
 		copied: 'copied',
 		P2PMarket: 'P2P Market',
 		centralisedExchange: 'centralised exchange',
-		topUp: 'Top Up',
+		topUp: 'Top up',
 		disconnect: 'Disconnect',
 		affiliate: 'Affiliate',
 		technicalSupport: 'Technical Support',
@@ -212,6 +213,7 @@ export const arLanguagesPhraseSite: ILanguage = {
 		altinBit: 'AltinBit',
 		bitObmen: 'BitObmen',
 		paybis: 'Paybis',
+		balance: 'Balance'
 	},
 	spanish: {
 		gameInProcess: [
@@ -294,6 +296,7 @@ export const arLanguagesPhraseSite: ILanguage = {
 		altinBit: 'AltinBit',
 		bitObmen: 'BitObmen',
 		paybis: 'Paybis',
+		balance: 'Saldo',
 	},
 	chinese: {
 		gameInProcess: [
@@ -376,6 +379,7 @@ export const arLanguagesPhraseSite: ILanguage = {
 		altinBit: 'AltinBit',
 		bitObmen: 'BitObmen',
 		paybis: 'Paybis',
+		balance: '平衡表',
 	},
 	russian: {
 		gameInProcess: [
@@ -458,6 +462,7 @@ export const arLanguagesPhraseSite: ILanguage = {
 		altinBit: 'AltinBit',
 		bitObmen: 'BitObmen',
 		paybis: 'Paybis',
+		balance: 'Баланс',
 	},
 }
 export const arLanguagesSite: ILang[] = [
