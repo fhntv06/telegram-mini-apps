@@ -15,5 +15,4 @@ export default defineConfig({
   build: {
     outDir: './build'
   },
-  base: '/telegram-mini-apps'
 })
