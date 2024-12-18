@@ -41,6 +41,7 @@ export type IconNames =
     | 'switch'
     | 'candles'
     | 'check-tasks'
+    | 'disconnect'
     | '' // For skip icon if you need
 
     export type IconType =
