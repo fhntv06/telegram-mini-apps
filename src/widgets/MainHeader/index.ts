@@ -1,1 +1,0 @@
-export { MainHeader } from './MainHeader';
