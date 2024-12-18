@@ -39,6 +39,8 @@ export type IconNames =
     | 'sp500-coin'
     | 'logo-pulse'
     | 'switch'
+    | 'candles'
+    | 'check-tasks'
     | '' // For skip icon if you need
 
     export type IconType =
