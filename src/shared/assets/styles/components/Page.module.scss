@@ -1,0 +1,9 @@
+@import '../basics';
+
+.page {
+  display: flex;
+  flex-direction: column;
+  height: calc(100% + 58px); // 58px - volume for component PanelMenu
+  width: 100%;
+  background-color: $black;
+}
