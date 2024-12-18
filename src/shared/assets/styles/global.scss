@@ -1,8 +1,8 @@
-@import '../shared/assets/styles/basics.scss';
+@import 'basics';
 
 @font-face {
   font-family: 'Inter';
-  src: url('../shared/assets/fonts/Inter.woff2') format('woff2')
+  src: url('../fonts/Inter.woff2') format('woff2')
 }
 
 * {
@@ -56,15 +56,19 @@ p, .p {
     font-weight: $font-w-regular;
   }
 
-  &.p-small {
-    font-size: $p-small-size;
+  &.p-medium {
+    font-size: $p-medium-size;
     line-height: 16px;
 
     &.p-reg {
       font-weight: $font-w-regular;
     }
   }
-
+  &.p-small {
+    font-size: $p-small-size;
+    line-height: 16px;
+    font-weight: $font-w-semibold;
+  }
   &.p-x-small {
     font-size: $p-x-small-size;
     line-height: 12px;
