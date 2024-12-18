@@ -1,40 +1,136 @@
+import { useTonAddress, useTonWallet } from '@tonconnect/ui-react'
 import WebApp from '@twa-dev/sdk'
-import { type FC, useEffect } from 'react'
+import { type FC, useContext, useEffect, useState } from 'react'
 import {
   Navigate,
   Route,
   BrowserRouter,
   Routes,
 } from 'react-router-dom'
-import { Provider } from 'react-redux';
-import { PostHogProvider } from '../../app/providers/'
+import { useDispatch, useSelector } from 'react-redux'
 
+import { getAddressContract, getWalletBet, postReferral } from '../../app/api'
 import { routes } from '../../app/routes'
-import store from '../../app/store'
+import { setDataTransaction, setGameStatus } from '../../app/store/slices'
+import { AnimationContext, NotificationContext } from '../../app/contexts'
 
-function BackButtonManipulator() {
+import { INotificationContextTypes, IAnimationContextTypes } from '../../app/providers/types'
+
+import { Onboarding } from '../'
+import { PanelMenu } from '../../feature'
+import { useGameSocket, usePriceHistory, useUserData } from '../../hooks'
+import { LoaderSpinner } from '../../shared'
+import { AnimationWrapper } from '../../shared/blocks/AnimationWrapper'
+
+export const App: FC = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(true)
+  const dispatch = useDispatch()
+  const data = useGameSocket()
+  const priceHistory = usePriceHistory()
+  const address = useTonAddress()
+  const [skipOnBoarding, setSkipOnBoarding] = useState<boolean>(false)
+  const wallet = useTonWallet()
+  const { openHandler: openHandlerNotification, setTonsHandler } = useContext<INotificationContextTypes>(NotificationContext)
+  const { openHandler: openHandlerAnimation } = useContext<IAnimationContextTypes>(AnimationContext)
+  const { gamePhase } = useSelector((state: any) => state.gameStatus)
+  const { bet } = useSelector((state: any) => state.bets)
+  const { ticker, gameMode } = useSelector((state: any) => state.modeSettings)
+  const userData = useUserData()
+
+  // TODO: переписать реализацию получения данных из контекста
+  // согласно видео: https://www.youtube.com/watch?v=k2g_Og3CFKU
+  const handlerPostReferral = () => {
+    new Promise((resolve) => resolve(null))
+    .then(() => {
+      // For wait Telegram data
+      const data: { initData: string, walletAddress?: string, referral?: string } = {
+        initData: WebApp.initData,
+      }
+
+      if (address) {
+        data['walletAddress'] = address
+      }
+      if (WebApp.initDataUnsafe.start_param) {
+        data['referral'] = WebApp.initDataUnsafe.start_param
+      }
+
+      postReferral(data)
+      .then((res)=> console.log('Data post referral: ', res.data))
+      .catch(() => new Error('Error: for postReferral dont have data user!'))
+    })
+  }
+
+  // for disconnect action
   useEffect(() => {
-    const closeApp = () => WebApp.close()
+    if (WebApp.initData && wallet) {
+      handlerPostReferral()
+    }
+  }, [wallet])
 
-    WebApp.expand()
-    WebApp.BackButton.onClick(closeApp)
+  // update data backend
+  useEffect(() => {
+    if (data && 'btcPrice' in data && data.btcPrice && priceHistory.length) {
+      setIsLoading(false)
+      dispatch(setGameStatus({ ...data, priceHistory}))
+    }
+  }, [data, priceHistory])
 
-    return () => WebApp.BackButton.offClick(closeApp)
-  }, []);
+  // TODO: вынести код выше!
+  // не должно быть тут!
+  useEffect(() => {
+    if (gamePhase === 4 && address && bet && userData?.id) {
+      getWalletBet({ address, ticker, gameMode, demoTgId: userData.id })
+      .then((res) => {
+        console.log('res getWalletBet', res)
+        if (res.data.error) {
+          throw new Error('Error getWalletBet: res have error')
+        }
+        if (res.data.winReward) {
+          openHandlerNotification('wins')
+          setTonsHandler(res.data.winReward)
+          openHandlerAnimation('wins')
+        } else if (res.data.loose) {
+          openHandlerNotification('lose')
+          setTonsHandler(res.data.loose)
+        } else if (res.data.refund) {
+          openHandlerNotification('refund')
+          setTonsHandler(res.data.refund)
+        }
+      })
+      .catch((error) => console.log(error))
+    }
+  }, [gamePhase])
 
-  return null
+  // initial process app
+  useEffect(() => {
+    getAddressContract()
+    .then(({ data: { address, mainnet } }) => dispatch(setDataTransaction({ address, mainnet })))
+    .catch((error) => {
+      new Error('Error in getAddressContract: ' + error)
+
+      dispatch(setDataTransaction({
+        address: import.meta.env.VITE_ADDRESS_TRANSACTION,
+        mainnet: true
+      }))
+    })
+  }, [])
+
+  return (
+    isLoading
+      ? <LoaderSpinner />
+      : skipOnBoarding
+        ? (
+          <AnimationWrapper style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+            <Onboarding handlerSkip={setSkipOnBoarding}/>
+          </AnimationWrapper>
+        ) : (
+        <BrowserRouter>
+          <Routes>
+            {routes.map((route) => <Route key={route.path} {...route} />)}
+            <Route path='*' element={<Navigate to='/'/>}/>
+          </Routes>
+          <PanelMenu />
+        </BrowserRouter>
+      )
+  )
 }
-
-export const App: FC = () => (
-  <PostHogProvider>
-    <Provider store={store}>
-      <BrowserRouter>
-        <BackButtonManipulator/>
-        <Routes>
-          {routes.map((route) => <Route key={route.path} {...route} />)}
-          <Route path='*' element={<Navigate to='/'/>}/>
-        </Routes>
-      </BrowserRouter>
-    </Provider>
-  </PostHogProvider>
-);

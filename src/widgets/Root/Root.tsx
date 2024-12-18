@@ -1,9 +1,11 @@
-import { TonConnectUIProvider } from '@tonconnect/ui-react';
-import { type FC, useEffect } from 'react';
-import WebApp from '@twa-dev/sdk';
+import { type FC, useEffect } from 'react'
+import React from 'react'
+import WebApp from '@twa-dev/sdk'
 
-import { App } from '../';
-import { ErrorBoundary } from '../';
+import { App } from '../'
+import { ErrorBoundary } from '../'
+
+import { Providers } from '../../app/providers'
 
 const ErrorBoundaryError: FC<{ error: unknown }> = ({ error }) => (
   <div>
@@ -28,11 +30,22 @@ export const Root: FC = () => {
       .then(() => WebApp.setHeaderColor('#1C1C1E'))
   }, [])
 
+  useEffect(() => {
+    const closeApp = () => WebApp.close()
+
+    WebApp.expand()
+    WebApp.BackButton.onClick(closeApp)
+
+    return () => WebApp.BackButton.offClick(closeApp)
+  }, [])
+
   return (
-    <ErrorBoundary fallback={ErrorBoundaryError}>
-      <TonConnectUIProvider manifestUrl='https://raw.githubusercontent.com/tonpulse/CryptoMarketManifest/refs/heads/main/tonconect-manifest.json'>
-        <App/>
-      </TonConnectUIProvider>
-    </ErrorBoundary>
+    <React.StrictMode>
+      <ErrorBoundary fallback={ErrorBoundaryError}>
+        <Providers>
+          <App />
+        </Providers>
+      </ErrorBoundary>
+    </React.StrictMode>
   )
 }
