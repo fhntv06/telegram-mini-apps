@@ -1,2 +1,16 @@
 @import '/src/shared/assets/styles/components/Page.module.scss';
 
+.page-wallet {
+  .container__buttons {
+    flex-direction: row;
+    column-gap: $offset8;
+  }
+  .page-wallet__header {
+    align-items: center;
+    padding: calc($offset20 * 2) 0;
+    margin-bottom: 0;
+  }
+  .page-wallet__header-balance {
+    display: flex;
+  }
+}
