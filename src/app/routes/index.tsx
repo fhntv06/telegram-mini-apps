@@ -1,6 +1,6 @@
 import type { ComponentType, JSX } from 'react';
 
-import { Main, TonConnect, UI } from '../../pages';
+import { Main, TonConnect, UI, Wallet, Tasks, Stats, Menu } from '../../pages';
 
 interface Route {
   path: string;
@@ -10,10 +10,14 @@ interface Route {
 }
 
 export const routes: Route[] = [
-  { path: '/telegram-mini-apps', Component: Main, title: 'Telegram mini apps' },
-  { path: '/telegram-mini-apps/ui', Component: UI, title: 'UI Page' },
+  { path: '/', Component: Main, title: 'Telegram mini apps' },
+  { path: '/ui', Component: UI, title: 'Wallet page' },
+  { path: '/wallet', Component: Wallet, title: 'Wallet page' },
+  { path: '/tasks', Component: Tasks, title: 'Menu page' },
+  { path: '/stats', Component: Stats, title: 'Menu page' },
+  { path: '/menu', Component: Menu, title: 'Menu page' },
   {
-    path: '/telegram-mini-apps/ton-connect',
+    path: `${import.meta.env.VITE_PATH_TO_DEV}/ton-connect`,
     Component: TonConnect,
     title: 'TON Connect',
     icon: (

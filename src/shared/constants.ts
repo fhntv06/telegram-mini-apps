@@ -16,7 +16,7 @@ export const initialDataGameStatus: IGameStatus = {
   upPoolData: {
 		bets: [
 			{
-				img: `/telegram-mini-apps/images/avatars/user_${Math.floor(Math.random() * (5 - 1 + 1) + 1)}.png`,
+				img: `/images/avatars/user_${Math.floor(Math.random() * (5 - 1 + 1) + 1)}.png`,
 				isPending: true
 			},
 		],
@@ -25,15 +25,15 @@ export const initialDataGameStatus: IGameStatus = {
 	downPoolData: {
 		bets: [
 			{
-				img: `/telegram-mini-apps/images/avatars/user_${Math.floor(Math.random() * (5 - 1 + 1) + 1)}.png`,
+				img: `/images/avatars/user_${Math.floor(Math.random() * (5 - 1 + 1) + 1)}.png`,
 				isPending: false
 			},
 			{
-				img: `/telegram-mini-apps/images/avatars/user_${Math.floor(Math.random() * (5 - 1 + 1) + 1)}.png`,
+				img: `/images/avatars/user_${Math.floor(Math.random() * (5 - 1 + 1) + 1)}.png`,
 				isPending: false
 			},
 			{
-				img: `/telegram-mini-apps/images/avatars/user_${Math.floor(Math.random() * (5 - 1 + 1) + 1)}.png`,
+				img: `/images/avatars/user_${Math.floor(Math.random() * (5 - 1 + 1) + 1)}.png`,
 				isPending: true
 			},
 		],

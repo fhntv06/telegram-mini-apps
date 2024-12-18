@@ -2,7 +2,7 @@ import { type Plugin } from 'chart.js'
 
 const imgFlag = new Image()
 const loadImgFlag = () => {
-  imgFlag.src = '/telegram-mini-apps/images/canvas/flag.svg'
+  imgFlag.src = '/images/canvas/flag.svg'
 }
 
 export const startTooltip: Plugin<"line"> = {
