@@ -44,7 +44,7 @@ export const BetPanel = ({ data, type='up' }: Props) => {
 			{
 				completedRound ? (
 					<>
-						<p className={cx('p-small')}>{`${type === 'up' ? up : down} ${type === groupWins ? winners : losers}`}</p>
+						<p className={cx('p-medium')}>{`${type === 'up' ? up : down} ${type === groupWins ? winners : losers}`}</p>
 						<div className={cx('panel__result__text')}>
 							<Icon name='ton' size='big'/>
 							<Counter value={betsWiningPool} className='h1' direction={type === groupWins ? 'up' : 'down'} />
@@ -54,11 +54,11 @@ export const BetPanel = ({ data, type='up' }: Props) => {
 					<>
 						<div className={cx('panel__data')}>
 							<div className={cx('panel__data__players')}>
-								<p className={cx('players__total', 'p p-small')}>
+								<p className={cx('players__total', 'p p-medium')}>
 									<Icon name='persons-medium'/>
 									{bets.length}
 								</p>
-								<p className={cx('players__total', 'p-small', type)}>
+								<p className={cx('players__total', 'p-medium', type)}>
 									<Icon name='ton-medium' size='medium' />
 									{formatIntTonNumber(betPool)}
 								</p>
