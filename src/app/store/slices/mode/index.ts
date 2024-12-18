@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { IModeSettings } from './types'
-import { isDemoMode } from '../../../../shared/'
+// import { isDemoMode } from '../../../../shared'
 
-export const initialState: IModeSettings = {
+const initialState: IModeSettings = {
     coin: 'btc',
     time: {
         text: '$BTC, 30s',
@@ -10,7 +10,7 @@ export const initialState: IModeSettings = {
         unit: 's'
     },
     ticker: 'BTC-30',
-    gameMode: isDemoMode
+    gameMode: 'DEMO'
 }
 
 const index = createSlice({

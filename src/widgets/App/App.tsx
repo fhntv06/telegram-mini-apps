@@ -37,8 +37,6 @@ export const App: FC = () => {
   const { ticker, gameMode } = useSelector((state: any) => state.modeSettings)
   const userData = useUserData()
 
-  // TODO: переписать реализацию получения данных из контекста
-  // согласно видео: https://www.youtube.com/watch?v=k2g_Og3CFKU
   const handlerPostReferral = () => {
     new Promise((resolve) => resolve(null))
     .then(() => {
@@ -75,8 +73,6 @@ export const App: FC = () => {
     }
   }, [data, priceHistory])
 
-  // TODO: вынести код выше!
-  // не должно быть тут!
   useEffect(() => {
     if (gamePhase === 4 && address && bet && userData?.id) {
       getWalletBet({ address, ticker, gameMode, demoTgId: userData.id })

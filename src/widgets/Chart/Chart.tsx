@@ -68,11 +68,9 @@ export const Chart = () => {
   const chartData = useChartData()
 
 	return (
-    chartData && (
-      <div className={cx('chart')}>
-        <ChartPanel/>
-        <LineChart data={chartData} />
-      </div>
-    )
+    <div className={cx('chart')}>
+      <ChartPanel/>
+      <LineChart data={chartData} />
+    </div>
   )
 }
