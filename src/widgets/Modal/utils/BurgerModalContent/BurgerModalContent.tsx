@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from 'react'
+import { useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import { useTonWallet, useTonAddress } from '@tonconnect/ui-react'
 import classNames from 'classnames/bind'
@@ -39,12 +39,6 @@ export const BurgerModalContent = () => {
   ])
 
   const languages = useMemo(() => [language].concat(arLanguagesSite.filter((item) => item.name != language.name)), [language.name])
-
-  useEffect(() => {
-    console.log({
-      address
-    })
-  }, [address]);
 
   return (
     <div className={cx('wrapper')}>

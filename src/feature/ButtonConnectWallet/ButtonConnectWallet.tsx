@@ -5,6 +5,7 @@ import { useGetPhrases, usePostReferral } from '../../hooks'
 import { Button } from '../../shared'
 
 import styles from './ButtonConnectWallet.module.scss'
+import {useEffect, useState} from "react";
 
 const cx = classNames.bind(styles)
 
@@ -23,6 +24,7 @@ export const ButtonConnectWallet = ({
 }: Props) => {
 	const [tonConnectUI] = useTonConnectUI()
 	const { handlerPostReferral } = usePostReferral()
+	const [isConnected, setIsConnected] = useState<boolean>(false)
 
   const { connectWallet } = useGetPhrases(['connectWallet'])
 
@@ -31,11 +33,17 @@ export const ButtonConnectWallet = ({
 			.then((res) => {
 				console.log('connectedWallet ', res)
 				if (onClick) onClick()
-				console.log('handlerPostReferral connecting to wallet')
-				handlerPostReferral()
+				setIsConnected(true)
 			})
 			.catch(error => console.error("Error connecting to wallet:", error))
 	}
+
+	useEffect(() => {
+		if(isConnected) {
+			console.log('handlerPostReferral connecting to wallet')
+			handlerPostReferral()
+		}
+	}, [isConnected])
 
   return (
 		<Button

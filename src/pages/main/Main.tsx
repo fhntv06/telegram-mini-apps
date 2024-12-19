@@ -11,6 +11,7 @@ import { setGameStatus, setDataTransaction } from '../../app/store/slices'
 import { LoaderSpinner } from '../../shared'
 
 import styles from './Main.module.scss'
+import {useTonWallet} from "@tonconnect/ui-react";
 
 const cx = classNames.bind(styles)
 
@@ -23,14 +24,11 @@ export const Main = () => {
   const [skipOnBoarding, setSkipOnBoarding] = useState<boolean>(false)
   const willChange = useWillChange()
   const { handlerPostReferral } = usePostReferral()
+  //@ts-ignore
+  const wallet = useTonWallet()
 
   // TODO: переписать реализацию получения данных из контекста
   // согласно видео: https://www.youtube.com/watch?v=k2g_Og3CFKU
-
-  useEffect(() => {
-    console.log('handlerPostReferral inside app')
-    handlerPostReferral()
-  }, [])
 
   // update data backend
   useEffect(() => {
@@ -43,6 +41,9 @@ export const Main = () => {
   // initial process app
   useEffect(() => {
     setHiddenModalSelectMode(false)
+
+    console.log('handlerPostReferral main')
+    handlerPostReferral()
 
     getAddressContract()
       .then(({ data: { address, mainnet } }) => dispatch(setDataTransaction({ address, mainnet })))
