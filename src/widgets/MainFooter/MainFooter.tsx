@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useTonWallet, useTonAddress } from '@tonconnect/ui-react'
 import classNames from 'classnames/bind'
 import { getBalance, getDemoBalance } from '../../app/api'
-import { setUserDataWallet } from '../../app/store/slices'
+import { setUserDataTelegram, setUserDataWallet } from '../../app/store/slices'
 import { BetPanel, PanelButtonsBet } from '../../widgets'
 import { useGetPhrases } from '../../hooks'
 import { ButtonSwitchMode, ButtonConnectWallet, ButtonTopUp } from '../../feature'
@@ -55,6 +55,7 @@ export const MainFooter = () => {
 							balance: res.data.balance,
 						})
 					)
+					dispatch(setUserDataTelegram(WebApp.initDataUnsafe))
 				})
 				.catch((error) => {
 					new Error(error)
@@ -71,6 +72,7 @@ export const MainFooter = () => {
 							balance: res.data.balance,
 						})
 					)
+					dispatch(setUserDataTelegram(WebApp.initDataUnsafe))
 				})
 				.catch((error) => {
 					new Error(error)

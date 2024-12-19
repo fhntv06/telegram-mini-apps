@@ -1,9 +1,7 @@
-import { useDispatch, useSelector } from 'react-redux'
 import { useTonConnectUI } from '@tonconnect/ui-react';
 import classNames from 'classnames/bind'
 import { IconNames, IconType } from '../../shared/types'
-import {useGetPhrases, useUserData} from '../../hooks'
-import { setUserDataTelegram, setUserDataWallet} from '../../app/store/slices'
+import { useGetPhrases, usePostReferral } from '../../hooks'
 import { Button } from '../../shared'
 
 import styles from './ButtonConnectWallet.module.scss'
@@ -24,9 +22,7 @@ export const ButtonConnectWallet = ({
 	onClick,
 }: Props) => {
 	const [tonConnectUI] = useTonConnectUI()
-	const dispatch = useDispatch()
-	const userDataWallet = useSelector((state: any) => state.userDataWallet)
-	const userDataTelegram = useUserData()
+	const { handlerPostReferral } = usePostReferral()
 
   const { connectWallet } = useGetPhrases(['connectWallet'])
 
@@ -34,22 +30,11 @@ export const ButtonConnectWallet = ({
 		tonConnectUI.connectWallet()
 			.then((res) => {
 				console.log('connectedWallet ', res)
-
-				if (onClick) {
-					onClick()
-				}
-
-				dispatch(setUserDataWallet({
-					...userDataWallet,
-					isConnected: true,
-				}))
-				if (userDataTelegram) dispatch(setUserDataTelegram(userDataTelegram))
-
+				if (onClick) onClick()
+				console.log('handlerPostReferral connecting to wallet')
+				handlerPostReferral()
 			})
-			.catch(error => {
-			console.error("Error connecting to wallet:", error)
-		})
-		// tonConnectUI.openModal()
+			.catch(error => console.error("Error connecting to wallet:", error))
 	}
 
   return (
