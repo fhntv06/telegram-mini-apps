@@ -103,7 +103,7 @@ export const WalletModalContent = ({ closeModalHandler }: IProps) => {
   const { topUpToContinue, yourWallet, copied } = useGetPhrases(['topUpToContinue', 'yourWallet', 'copied'])
 
   return (
-    <div className={cx('wrapper')}>
+    <div className={cx('modal-wallet', 'wrapper')}>
       <div className={cx('container')}>
         <header>
           <p>{topUpToContinue}</p>
