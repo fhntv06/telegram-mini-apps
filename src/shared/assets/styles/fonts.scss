@@ -9,3 +9,13 @@ $p-x-small-size: 8px;
 $font-w-regular: 400;
 $font-w-semibold: 500;
 $font-w-bold: 600;
+
+.font-w-regular {
+  font-weight: $font-w-regular !important;
+}
+.font-w-semibold {
+  font-weight: $font-w-semibold !important;
+}
+.font-w-bold {
+  font-weight: $font-w-bold !important;
+}

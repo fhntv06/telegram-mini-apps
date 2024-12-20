@@ -80,18 +80,6 @@ p, .p {
     font-weight: $font-w-semibold;
   }
 }
-.font-w-regular {
-  font-weight: $font-w-regular;
-}
-.font-w-semibold {
-  font-weight: $font-w-semibold;
-}
-.font-w-bold {
-  font-weight: $font-w-bold;
-}
-h1, h2, p, .h1, .h2, .p, a, button {
-  color: $white;
-}
 button {
   background-color: unset;
   outline: none;
@@ -101,4 +89,7 @@ button {
   &:disabled {
     pointer-events: none;
   }
+}
+.right-text {
+  text-align: right;
 }
