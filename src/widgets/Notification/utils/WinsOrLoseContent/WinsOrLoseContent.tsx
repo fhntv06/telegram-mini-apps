@@ -11,11 +11,11 @@ interface IProps {
   type: string
   data: {
     tons: number,
-    balls?: number
+    points?: number
   }
 }
 
-export const WinsOrLoseContent = ({ type, data: { tons, balls = 10 } }: IProps) => {
+export const WinsOrLoseContent = ({ type, data: { tons, points = 10 } }: IProps) => {
   const address = useTonAddress()
   const isWins = type === 'wins'
 
@@ -37,7 +37,7 @@ export const WinsOrLoseContent = ({ type, data: { tons, balls = 10 } }: IProps) 
         isWins && (
           <div className={cx('container')}>
             <h2 className='h2-big font-w-bold'>{pointsForWinning}</h2>
-            <Counter value={balls} className='h1 color-ton-coin font-w-bold' />
+            <Counter value={points} className='h1 color-ton-coin font-w-bold' />
           </div>
         )
       }
