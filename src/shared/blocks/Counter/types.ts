@@ -1,6 +1,7 @@
 export interface ICounter {
   value: number
   direction?: 'up' | 'down'
+  prefix?: string
   className?: string
 }
 
