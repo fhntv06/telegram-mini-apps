@@ -6,4 +6,5 @@ export const NotificationContext = createContext<INotificationContextTypes>({
   openHandler: () => {},
   closeHandler: () => {},
   setTonsHandler: () => {},
+  setBallsHandler: () => {},
 });
