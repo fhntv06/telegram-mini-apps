@@ -23,10 +23,10 @@ export const formatIntTonNumber = (number: number | string): string => (
     () => Number(number) / 1000000000
   )
 )
-export const roundToFixed = (number: number | string): string => (
+export const roundToFixed = (number: number | string, fixed: number = 2): string => (
   checker(
     number,
-    () => Number(number).toFixed(2)
+    () => Number(number).toFixed(fixed)
   )
 )
 export const getCorrectBalance = (number: number | string) => (
@@ -35,9 +35,9 @@ export const getCorrectBalance = (number: number | string) => (
     () => roundToFixed(formatIntTonNumber(number))
   )
 )
-export const getCorrectBalanceWithFormatNumber = (number: number | string) => (
+export const getCorrectBalanceWithFormatNumber = (number: number | string, fixed?: number) => (
   checker(
     number,
-    () => formatNumber(roundToFixed(formatIntTonNumber(number)))
+    () => formatNumber(roundToFixed(formatIntTonNumber(number), fixed))
   )
 )
