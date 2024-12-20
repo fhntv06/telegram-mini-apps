@@ -13,7 +13,7 @@ import { BetPanel, PanelButtonsBet } from '../../widgets'
 import { useGetPhrases } from '../../hooks'
 import { ButtonSwitchMode, ButtonConnectWallet, ButtonTopUp } from '../../feature'
 import {
-	Icon, Rounds, formatNumber, getCorrectBalanceWithFormatNumber,
+	Icon, Rounds, formatNumber, getCorrectBalance,
 	isDemoMode, minBet, setStorage, getStorage, removeStorage
 } from '../../shared'
 import { IRoundsType } from '../../shared/types'
@@ -31,7 +31,6 @@ export const MainFooter = () => {
 		downPoolData,
 		last3GamesRes,
 		livePlayers: livePlayersCount,
-		allTimeWins: allTimeWinsCount
 	} = useSelector((state: any) => state.gameStatus)
 	const wallet = useTonWallet()
 	const address = useTonAddress()
@@ -40,7 +39,9 @@ export const MainFooter = () => {
 	const userDataWallet = useSelector((state: any) => state.userDataWallet)
 	const { openHandler: openHandlerModal } = useContext<ModalContextTypes>(ModalContext)
 
-  const { livePlayers, last3rounds, allTimeWins } = useGetPhrases(['livePlayers', 'last3rounds', 'allTimeWins'])
+  const { players, multiplier, balance, lastGames } = useGetPhrases(['players', 'multiplier', 'balance', 'lastGames'])
+
+	const multiplierParam = 5.5
 
 	const setDataUser = () => {
 			// TODO: Это убрать в кнопку подключения и перенести в отдельный хук
@@ -119,33 +120,42 @@ export const MainFooter = () => {
 	return (
 		<footer className={cx('footer')}>
 			<header className={cx('footer__header')}>
-				<div>
-					<h2>{livePlayers}</h2>
-					<p>{formatNumber(livePlayersCount)}</p>
-				</div>
-				<div className={cx('footer__header__time-wins')}>
-					<h2>{allTimeWins}</h2>
-					<p>
-						<Icon name='ton-medium' size='medium' />
-						{getCorrectBalanceWithFormatNumber(allTimeWinsCount)}
+				<div className={cx('footer__header__items')}>
+					<h2>{players}</h2>
+					<p className='p-medium'>
+						<Icon name='persons-medium'/>
+						{formatNumber(livePlayersCount)}
 					</p>
 				</div>
-				<div>
-					<h2>{last3rounds}</h2>
+				<div className={cx('footer__header__items')}>
+					<h2>{lastGames}</h2>
 					<div className={cx('footer__header__rounds')}>
-						{last3GamesRes.map((countType: IRoundsType, index: number) => <Rounds key={`${countType}_${index}`} countType={countType} />)}
+						{last3GamesRes.map((countType: IRoundsType, index: number) => (
+							<Rounds key={`${countType}_${index}`} countType={countType}/>
+						))}
 					</div>
+				</div>
+				<div className={cx('footer__header__items')}>
+					<h2>{multiplier}</h2>
+					<p className='p-medium'>×{multiplierParam}</p>
+				</div>
+				<div className={cx('footer__header__items')}>
+					<h2>{balance}</h2>
+					<p className='p-medium'>
+						<Icon name='ton-medium' size='medium'/>
+						{getCorrectBalance(userDataWallet.balance)}
+					</p>
 				</div>
 			</header>
 			<main className={cx('footer__main')}>
-				<BetPanel data={upPoolData} />
-				<BetPanel data={downPoolData} type='down' />
+				<BetPanel data={upPoolData}/>
+				<BetPanel data={downPoolData} type='down'/>
 			</main>
 			<footer className={cx('footer__bets')}>
 				{(
 					wallet
-					? userDataWallet.balance >= minBet
-						? <PanelButtonsBet />
+						? userDataWallet.balance >= minBet
+							? <PanelButtonsBet />
 						: gameMode === isDemoMode
 							? getStorage('dontPayUser') ? <ButtonSwitchMode sizeIcons='big' /> : <PanelButtonsBet />
 							: <ButtonTopUp sizeIcons='big' />
