@@ -78,7 +78,9 @@ export interface ILangPhrase {
 	chinese: string
 	russian: string
 	livePlayers: string
+	players: string
 	last3rounds: string
+	lastGames: string
 	allTimeWins: string
 	goUp: string
 	goDown: string
@@ -124,6 +126,8 @@ export interface ILangPhrase {
 	bitObmen: string
 	paybis: string
 	balance: string
+	multiplier: string
+	pointsForWinning: string
 }
 export interface ILanguage {
 	english: ILangPhrase
@@ -160,7 +164,9 @@ export const arLanguagesPhraseSite: ILanguage = {
 		chinese: 'Chinese',
 		russian: 'Russian',
 		livePlayers: 'live players',
+		players: 'players',
 		last3rounds: 'last 3 rounds',
+		lastGames: 'last games',
 		allTimeWins: 'all time wins',
 		goUp: 'go up',
 		goDown: 'go down',
@@ -213,7 +219,9 @@ export const arLanguagesPhraseSite: ILanguage = {
 		altinBit: 'AltinBit',
 		bitObmen: 'BitObmen',
 		paybis: 'Paybis',
-		balance: 'Balance'
+		balance: 'Balance',
+		multiplier: 'Multiplier',
+		pointsForWinning: 'Points for winning',
 	},
 	spanish: {
 		gameInProcess: [
@@ -244,7 +252,9 @@ export const arLanguagesPhraseSite: ILanguage = {
 		chinese: 'Chino',
 		russian: 'Ruso',
 		livePlayers: 'jugadores en Vivo',
+		players: 'jugadores',
 		last3rounds: 'últimas 3 rondas',
+		lastGames: 'últimos juegos',
 		allTimeWins: 'todos los Tiempos Ganan',
 		goUp: 'sube',
 		goDown: 'bajar',
@@ -297,6 +307,8 @@ export const arLanguagesPhraseSite: ILanguage = {
 		bitObmen: 'BitObmen',
 		paybis: 'Paybis',
 		balance: 'Saldo',
+		multiplier: 'Multiplicador',
+		pointsForWinning: 'Puntos por ganar',
 	},
 	chinese: {
 		gameInProcess: [
@@ -327,7 +339,9 @@ export const arLanguagesPhraseSite: ILanguage = {
 		chinese: '中文',
 		russian: '俄语',
 		livePlayers: '现场玩家',
+		players: '球员',
 		last3rounds: '最后三轮',
+		lastGames: '最后一场比赛',
 		allTimeWins: '所有时间都赢',
 		goUp: '上去',
 		goDown: '下去',
@@ -380,6 +394,8 @@ export const arLanguagesPhraseSite: ILanguage = {
 		bitObmen: 'BitObmen',
 		paybis: 'Paybis',
 		balance: '平衡表',
+		multiplier: '乘数',
+		pointsForWinning: '获胜积分',
 	},
 	russian: {
 		gameInProcess: [
@@ -410,7 +426,9 @@ export const arLanguagesPhraseSite: ILanguage = {
 		chinese: 'Китайский',
 		russian: 'Русский',
 		livePlayers: 'Онлайн игроки',
+		players: 'Игроки',
 		last3rounds: 'Последние 3 раунда',
+		lastGames: 'Последние игры',
 		allTimeWins: 'Выйграно за все время',
 		goUp: 'Вверх',
 		goDown: 'Вниз',
@@ -463,6 +481,8 @@ export const arLanguagesPhraseSite: ILanguage = {
 		bitObmen: 'BitObmen',
 		paybis: 'Paybis',
 		balance: 'Баланс',
+		multiplier: 'Множитель',
+		pointsForWinning: 'Очки за выигрыша',
 	},
 }
 export const arLanguagesSite: ILang[] = [
