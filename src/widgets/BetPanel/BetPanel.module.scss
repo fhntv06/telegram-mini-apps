@@ -59,6 +59,14 @@
 	display: flex;
 	justify-content: center;
 	column-gap: $offset8;
+
+	.h1 {
+		color: $red100;
+
+		&.up {
+			color: $green100;
+		}
+	}
 }
 .panel__data {
 	z-index: 1;
