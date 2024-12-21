@@ -19,7 +19,7 @@
   align-items: center;
   justify-content: center;
   row-gap: 2px;
-  padding: $offset8 $offset16;
+  padding: $offset8;
 
   p {
     color: $gray;
@@ -39,10 +39,5 @@
       fill: $coins-ton;
       transition: fill .3s ease-in;
     }
-  }
-}
-.icon {
-  path {
-    fill: $gray;
   }
 }
