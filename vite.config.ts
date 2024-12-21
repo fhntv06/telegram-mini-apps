@@ -15,5 +15,5 @@ export default defineConfig({
   build: {
     outDir: './build'
   },
-  base: '/telegram-mini-apps/'
+  base: '/telegram-mini-apps' // for deploy github pages
 })
