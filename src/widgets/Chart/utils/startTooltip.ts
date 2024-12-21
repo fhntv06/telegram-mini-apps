@@ -2,7 +2,7 @@ import { type Plugin } from 'chart.js'
 
 const imgFlag = new Image()
 const loadImgFlag = () => {
-  imgFlag.src = '/images/canvas/flag.svg'
+  imgFlag.src = `${import.meta.env.VITE_PUBLIC_PATH_FOR_GITHUB_PAGES}/images/canvas/flag.svg`
 }
 
 export const startTooltip: Plugin<"line"> = {

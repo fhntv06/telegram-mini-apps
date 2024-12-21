@@ -3,7 +3,9 @@ import classNames from 'classnames/bind'
 // import { Icon } from '../../shared'
 
 import styles from './PanelMenu.module.scss'
-import { NavLink } from "react-router-dom";
+import { NavLink } from 'react-router-dom'
+
+import { pathsRoutes } from '../../app/routes'
 
 const cx = classNames.bind(styles)
 
@@ -17,7 +19,7 @@ export const PanelMenu = ({
 	return (
 		<div className={cx('panel', className)}>
 			<NavLink
-				to='/wallet'
+				to={pathsRoutes.wallet}
 				className={({ isActive }) => isActive ? cx('item', 'active') : cx('item')}
 			>
 				{/* <Icon name='wallet' size='big' /> */}
@@ -28,7 +30,7 @@ export const PanelMenu = ({
 				<p className={cx('p-small')}>Wallet</p>
 			</NavLink>
 			<NavLink
-				to='/tasks'
+				to={pathsRoutes.tasks}
 				className={({ isActive }) => isActive ? cx('item', 'active') : cx('item')}
 			>
 				{/* <Icon name='check-tasks' size='big' /> */}
@@ -38,7 +40,7 @@ export const PanelMenu = ({
 				<p className={cx('p-small')}>Tasks</p>
 			</NavLink>
 			<NavLink
-				to='/'
+				to={pathsRoutes.game}	
 				className={({ isActive }) => isActive ? cx('item', 'active') : cx('item')}
 			>
 				{/* <Icon name='candles' size='big' /> */}
@@ -53,7 +55,7 @@ export const PanelMenu = ({
 				<p className={cx('p-small')}>Game</p>
 			</NavLink>
 			<NavLink
-				to='/stats'
+				to={pathsRoutes.stats}
 				className={({ isActive }) => isActive ? cx('item', 'active') : cx('item')}
 			>
 				{/* <Icon name='persons' size='big' /> */}
@@ -66,7 +68,7 @@ export const PanelMenu = ({
 				<p className={cx('p-small')}>Stats</p>
 			</NavLink>
 			<NavLink
-				to='/menu'
+				to={pathsRoutes.menu}
 				className={({ isActive }) => isActive ? cx('item', 'active') : cx('item')}
 			>
 				{/* <Icon name='burger' size='big' /> */}
