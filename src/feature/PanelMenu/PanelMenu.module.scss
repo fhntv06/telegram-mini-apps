@@ -1,6 +1,7 @@
 @import '../../shared/assets/styles/basics.scss';
 
 .panel {
+  z-index: 99;
   position: fixed;
   bottom: 0;
   left: 0;
