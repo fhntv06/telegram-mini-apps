@@ -10,8 +10,10 @@
     padding: 0 0 calc($offset20 * 2);
     margin-bottom: 0;
   }
-  .page-wallet__header-balance {
+  .page-wallet__balance {
     display: flex;
+    align-items: center;
+    column-gap: $offset4;
   }
   .button__confirm {
     display: flex;

@@ -10,7 +10,7 @@ import {
 } from '../../shared'
 import sendIcon from '../../shared/assets/send.png'
 import walletIcon from '../../shared/assets/wallet.png'
-import { useDisconnect, useGetPhrases } from "../../hooks";
+import { useDisconnect, useGetPhrases } from '../../hooks'
 import { useTonAddress } from "@tonconnect/ui-react";
 import { motion } from "framer-motion";
 import { useState } from "react";
@@ -125,7 +125,7 @@ export const Wallet = () => {
       <header className={cx('page-wallet__header')}>
         <h2 className='h2-big'>{balance}</h2>
         <div className={cx('page-wallet__balance')}>
-          <Icon name='ton-medium' />
+          <Icon name='ton' size='big' />
           <h1>{balanseUser}</h1>
         </div>
       </header>
