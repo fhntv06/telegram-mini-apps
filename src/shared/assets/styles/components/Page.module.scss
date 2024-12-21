@@ -1,6 +1,8 @@
 @import '../basics';
 
 .page {
+  z-index: 91; // over for animation block
+  position: relative;
   display: flex;
   flex-direction: column;
   // 27px - volume for half height component PanelMenu
