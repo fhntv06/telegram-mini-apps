@@ -127,7 +127,7 @@ export const Wallet = () => {
     <div className={cx('page', 'page-wallet')}>
       <header className={cx('page-wallet__header')}>
         <h2 className='h2-big'>{balance}</h2>
-        <div className={cx('page-wallet__balance', { 'not-balance': address })}>
+        <div className={cx('page-wallet__balance', { 'not-balance': !address })}>
           {address && <Icon name='ton' size='big' />}
           <h1>{address ? balanseUser : '- -'}</h1>
         </div>
