@@ -1,2 +1,79 @@
 @import '/src/shared/assets/styles/components/Page.module.scss';
 
+.page-stats__header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    row-gap: $offset8;
+    margin-bottom: calc($offset12 * 2);
+}
+.page-stats__poinst {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    row-gap: $offset8;
+
+    p {
+        color: $gray;
+    }
+}
+.container__buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    row-gap: $offset4;
+    margin-bottom: calc($offset12 * 2);
+
+    button {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+    }
+}
+.page-stats__leaderboard {
+    display: flex;
+    flex-direction: column;
+    padding: $offset12;
+    background-color: $dark-gray;
+    @include border('medium');
+}
+.page-stats__leaderboard__item {
+    display: flex;
+    justify-content: space-between;
+
+    &:not(:first-child) {
+        padding-top: $offset12;
+    }
+    &:not(:last-child) {
+        padding-bottom: $offset12;
+        border-bottom: 1px solid $black;
+    }
+
+    &:nth-child(1) .page-stats__leaderboard__number {
+        background: linear-gradient(#FFAA00, #FFDD99);
+    }
+    &:nth-child(2) .page-stats__leaderboard__number {
+        background: linear-gradient(#817E7E, #CDCBCB);
+    }
+    &:nth-child(3) .page-stats__leaderboard__number {
+        background: linear-gradient(#A36629, #E0B285);
+    }
+}
+.page-stats__leaderboard__item__content {
+    display: flex;
+    column-gap: $offset12;
+}
+.page-stats__leaderboard__number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    @include border('large');
+}
+.page-stats__leaderboard__item__total {
+    color: $light-gray;
+}
