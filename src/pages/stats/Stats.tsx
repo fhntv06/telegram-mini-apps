@@ -83,7 +83,6 @@ export const Stats = () => {
       <main className={cx('page__main')}>
         <div className={cx('container', 'container__buttons')}>
           <Button
-            className={cx('button')}
             iconRightName='arrow-right'
             sizeIcons='big'
             disabled
@@ -91,7 +90,6 @@ export const Stats = () => {
             <p className='p-reg'>Multiplier</p>
           </Button>
           <Button
-            className={cx('button', 'p-reg')}
             iconRightName='arrow-right'
             sizeIcons='big'
             disabled
@@ -99,7 +97,6 @@ export const Stats = () => {
             <p className='p-reg'>Total bets</p>
           </Button>
           <Button
-            className={cx('button', 'p-reg')}
             iconRightName='arrow-right'
             sizeIcons='big'
             disabled
@@ -107,7 +104,6 @@ export const Stats = () => {
             <p className='p-reg'>Days in game in row</p>
           </Button>
           <Button
-            className={cx('button', 'p-reg')}
             iconRightName='arrow-right'
             sizeIcons='big'
             disabled
