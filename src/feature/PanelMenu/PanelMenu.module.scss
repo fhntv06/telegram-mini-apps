@@ -25,16 +25,19 @@
     color: $gray;
     transition: color .3s ease-out;
   }
+  svg path {
+    fill: $gray;
+    transition: fill .3s ease-out;
+  }
 
   &.active {
     p {
       color: $coins-ton;
       transition: color .5s ease-in;
     }
-    .icon {
-      path {
-        fill: $coins-ton;
-      }
+    svg path {
+      fill: $coins-ton;
+      transition: fill .3s ease-in;
     }
   }
 }
