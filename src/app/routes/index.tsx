@@ -17,7 +17,7 @@ export const pathsRoutes: {
   stats: string
   menu: string
 } = {
-  game: `${import.meta.env.VITE_PUBLIC_PATH_FOR_GITHUB_PAGES}`,
+  game: `${import.meta.env.VITE_PUBLIC_PATH_FOR_GITHUB_PAGES}/`,
   ui: `${import.meta.env.VITE_PUBLIC_PATH_FOR_GITHUB_PAGES}/ui`,
   wallet: `${import.meta.env.VITE_PUBLIC_PATH_FOR_GITHUB_PAGES}/wallet`,
   tasks: `${import.meta.env.VITE_PUBLIC_PATH_FOR_GITHUB_PAGES}/tasks`,
