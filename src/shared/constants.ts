@@ -128,6 +128,9 @@ export interface ILangPhrase {
 	balance: string
 	multiplier: string
 	pointsForWinning: string
+	pulsePoints: string
+	placeInLeaderboard: string,
+	leaderboard: string
 }
 export interface ILanguage {
 	english: ILangPhrase
@@ -222,6 +225,9 @@ export const arLanguagesPhraseSite: ILanguage = {
 		balance: 'Balance',
 		multiplier: 'Multiplier',
 		pointsForWinning: 'Points for winning',
+		pulsePoints: 'Pulse Points',
+		placeInLeaderboard: 'th place in the leaderboard',
+		leaderboard: 'Leaderboard',
 	},
 	spanish: {
 		gameInProcess: [
@@ -309,6 +315,9 @@ export const arLanguagesPhraseSite: ILanguage = {
 		balance: 'Saldo',
 		multiplier: 'Multiplicador',
 		pointsForWinning: 'Puntos por ganar',
+		pulsePoints: 'Puntos de pulso',
+		placeInLeaderboard: 'lugar en la tabla de clasificación',
+		leaderboard: 'Tabla de clasificación',
 	},
 	chinese: {
 		gameInProcess: [
@@ -396,6 +405,9 @@ export const arLanguagesPhraseSite: ILanguage = {
 		balance: '平衡表',
 		multiplier: '乘数',
 		pointsForWinning: '获胜积分',
+		pulsePoints: '脉冲点',
+		placeInLeaderboard: '在排行榜上的位置',
+		leaderboard: '排行榜',
 	},
 	russian: {
 		gameInProcess: [
@@ -483,6 +495,9 @@ export const arLanguagesPhraseSite: ILanguage = {
 		balance: 'Баланс',
 		multiplier: 'Множитель',
 		pointsForWinning: 'Очки за выигрыша',
+		pulsePoints: 'Точки пульса',
+		placeInLeaderboard: 'место в списке лидеров',
+		leaderboard: 'Таблица лидеров',
 	},
 }
 export const arLanguagesSite: ILang[] = [
