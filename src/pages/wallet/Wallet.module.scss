@@ -4,6 +4,13 @@
   .container__buttons {
     flex-direction: row;
     column-gap: $offset8;
+
+    button {
+      height: 48px;
+    }
+    .hide {
+			display: none !important;
+		}
   }
   .page-wallet__header {
     align-items: center;
@@ -14,17 +21,10 @@
     display: flex;
     align-items: center;
     column-gap: $offset4;
-  }
-  .button__confirm {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: $black;
-  }
-  .button__address,
-  .button__confirm {
-    justify-content: flex-start;
-    width: 100%;
+
+    &.not-balance h1 {
+      color: $gray;
+    }
   }
   .button__address {
     position: relative;
