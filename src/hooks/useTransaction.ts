@@ -16,8 +16,8 @@ export const useTransaction = (amount: number) => {
   const [txInProcess, setTxInProcess] = useState<boolean>(false)
   const { openHandler: openHandlerAnimation } = useContext<IAnimationContextTypes>(AnimationContext)
 	const { openHandler: openHandlerNotification } = useContext<INotificationContextTypes>(NotificationContext)
-  const { ticker, gameMode } = useSelector((state: any) => state.modeSettings)
-  const { address, mainnet } = useSelector((state: any) => state.bets)
+  const { ticker, gameMode } = useSelector((state) => state.modeSettings)
+  const { address, mainnet } = useSelector((state) => state.bets)
   const userData = useUserData()
   const {
     notEnoughDemoBalance,

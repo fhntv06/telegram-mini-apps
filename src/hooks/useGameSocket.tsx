@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch } from '../hooks'
 import { IGameStatus } from '../app/providers/types'
 import {
   initialDataGameStatus,
@@ -80,6 +80,7 @@ export const useGameSocket = () => {
     } else {
       handlerConnection()
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [error])
 
   return data

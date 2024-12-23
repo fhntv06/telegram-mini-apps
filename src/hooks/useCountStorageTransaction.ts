@@ -8,7 +8,7 @@ import { ModalContextTypes } from '../app/providers/types'
 import { ModalContext } from '../app/contexts'
 
 export const useCountStorageTransaction = () => {
-	const { gamePhase } = useSelector((state: any) => state.gameStatus)
+	const { gamePhase } = useSelector((state) => state.gameStatus)
 	const { openHandler: openHandlerModal } = useContext<ModalContextTypes>(ModalContext)
 
 	useEffect(() => {
@@ -16,7 +16,7 @@ export const useCountStorageTransaction = () => {
 			openHandlerModal('switchMode')
 			removeStorage('count')
 		}
-	}, [gamePhase])
+	}, [gamePhase, openHandlerModal])
 
 	const calculateCountStorageTransactionHandler = () => {
 		const countTransaction = (Number(getStorage('count')) + 1)

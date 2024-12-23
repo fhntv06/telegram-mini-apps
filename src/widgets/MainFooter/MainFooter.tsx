@@ -1,16 +1,11 @@
 import WebApp from '@twa-dev/sdk'
-import {
-	useContext,
-	// useContext,
-	useEffect
-} from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useContext, useCallback, useEffect } from 'react'
 import { useTonWallet, useTonAddress } from '@tonconnect/ui-react'
 import classNames from 'classnames/bind'
 import { getBalance, getDemoBalance } from '../../app/api'
 import { setUserDataWallet } from '../../app/store/slices'
 import { BetPanel, PanelButtonsBet } from '../../widgets'
-import { useGetPhrases } from '../../hooks'
+import { useGetPhrases, useDispatch, useSelector } from '../../hooks'
 import { ButtonSwitchMode, ButtonConnectWallet, ButtonTopUp } from '../../feature'
 import {
 	Icon, Rounds, formatNumber, getCorrectBalance,
@@ -31,19 +26,19 @@ export const MainFooter = () => {
 		downPoolData,
 		last3GamesRes,
 		livePlayers: livePlayersCount,
-	} = useSelector((state: any) => state.gameStatus)
+	} = useSelector((state) => state.gameStatus)
 	const wallet = useTonWallet()
 	const address = useTonAddress()
-	const { gamePhase } = useSelector((state: any) => state.gameStatus)
-	const { gameMode } = useSelector((state: any) => state.modeSettings)
-	const userDataWallet = useSelector((state: any) => state.userDataWallet)
+	const { gamePhase } = useSelector((state) => state.gameStatus)
+	const { gameMode } = useSelector((state) => state.modeSettings)
+	const userDataWallet = useSelector((state) => state.userDataWallet)
 	const { openHandler: openHandlerModal } = useContext<ModalContextTypes>(ModalContext)
 
   const { players, multiplier, balance, lastGames } = useGetPhrases(['players', 'multiplier', 'balance', 'lastGames'])
 
 	const multiplierParam = 5.5
 
-	const setDataUser = () => {
+	const setDataUser = useCallback(() => {
 			// TODO: Это убрать в кнопку подключения и перенести в отдельный хук
 
 		if (gameMode === isDemoMode && WebApp.initData) { // с ПК это работать не будет, нужно тестировать только с приложения ТГ
@@ -80,7 +75,7 @@ export const MainFooter = () => {
 				})
 
 		}
-	}
+	}, [address, dispatch, gameMode, userDataWallet])
 
 	// TODO: вынести код выше!
 	// не должно быть тут!
@@ -94,7 +89,7 @@ export const MainFooter = () => {
 		if (wallet) {
 			setDataUser()
 		}
-	}, [gameMode])
+	}, [gameMode, setDataUser, wallet])
 
 	// Когда уже в игре
 	useEffect(() => {
@@ -106,7 +101,7 @@ export const MainFooter = () => {
 		} else {
 			removeStorage('dontPayUser')
 		}
-	}, [gamePhase, userDataWallet.balance])
+	}, [gamePhase, openHandlerModal, userDataWallet.balance, wallet])
 
 	// Когда заходит в App
 	useEffect(() => {
@@ -115,7 +110,7 @@ export const MainFooter = () => {
 		} else {
 			removeStorage('dontPayUser')
 		}
-	}, [])
+	}, [userDataWallet.balance, wallet])
 
 	return (
 		<footer className={cx('footer')}>

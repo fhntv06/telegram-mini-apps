@@ -31,14 +31,14 @@ const walletData = [
 export const BurgerModalContent = () => {
   const wallet = useTonWallet()
 	const address = useTonAddress()
-  const language= useSelector((state: any) => state.language)
+  const language= useSelector((state) => state.language)
 
   const { affiliate, technicalSupport } = useGetPhrases([
     'affiliate', 'technicalSupport', 'realMode',
     'gameWithRealTONCoins', 'demoMode', 'learningWithNonRealCoins'
   ])
 
-  const languages = useMemo(() => [language].concat(arLanguagesSite.filter((item) => item.name != language.name)), [language.name])
+  const languages = useMemo(() => [language].concat(arLanguagesSite.filter((item) => item.name != language.name)), [language])
 
   return (
     <div className={cx('wrapper')}>

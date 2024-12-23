@@ -16,8 +16,8 @@ export const ButtonWallet = ({
 	onClick,
 	className
 }: Props) => {
-  const { balance } = useSelector((state: any) => state.userDataWallet)
-	const { gameMode } = useSelector((state: any) => state.modeSettings)
+  const { balance } = useSelector((state) => state.userDataWallet)
+	const { gameMode } = useSelector((state) => state.modeSettings)
 
 	const buttonWalletHandler = () => {
 		if (gameMode !== isDemoMode && onClick) {

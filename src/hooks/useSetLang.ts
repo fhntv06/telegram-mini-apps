@@ -1,5 +1,5 @@
 import { useTonConnectUI, Locales } from '@tonconnect/ui-react'
-import { useDispatch } from 'react-redux'
+import { useDispatch } from './'
 import { setLang } from '../app/store/slices'
 import { ILang } from '../shared/types'
 import { arLanguagesPhraseSite } from '../shared'

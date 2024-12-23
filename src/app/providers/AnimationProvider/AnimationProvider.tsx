@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
-import { useSelector } from 'react-redux'
-import { useAnimation } from '../../../hooks'
+import { useAnimation, useSelector } from '../../../hooks'
 import { AnimationContext } from '../../contexts'
 import { AnimationBlock } from '../../../widgets/'
 
@@ -10,7 +9,7 @@ interface IProps {
 
 export const AnimationProvider = ({ children }: IProps) => {
   const { type, isOpen, openHandler, closeHandler, toggleHandler } = useAnimation()
-  const { gamePhase } = useSelector((state: any) => state.gameStatus)
+  const { gamePhase } = useSelector((state) => state.gameStatus)
 
   useEffect(() => {
     if (gamePhase === 2) openHandler('consolidate')
@@ -19,7 +18,7 @@ export const AnimationProvider = ({ children }: IProps) => {
 
       return () => clearTimeout(timer)
     }
-  }, [type, gamePhase])
+  }, [type, gamePhase, openHandler])
 
   return (
     <AnimationContext.Provider value={{ isOpen, openHandler, closeHandler, toggleHandler }}>

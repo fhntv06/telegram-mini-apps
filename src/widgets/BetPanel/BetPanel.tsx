@@ -17,13 +17,13 @@ interface Props {
 }
 
 export const BetPanel = ({ data, type='up' }: Props) => {
-	const { gamePhase } = useSelector((state: any) => state.gameStatus)
+	const { gamePhase } = useSelector((state) => state.gameStatus)
 	const [groupWins, setGroupWins] = useState<'up' | 'down'>('up')
 	const { bets, betPool } = data
 	const count = bets.length - 5
 	const [completedRound, setCompletedRound] = useState<boolean>(false)
 	const [betsWiningPool, setWiningPool] = useState<number>(0)
-	const { ticker, gameMode } = useSelector((state: any) => state.modeSettings)
+	const { ticker, gameMode } = useSelector((state) => state.modeSettings)
 	const { up, down, winners, losers } = useGetPhrases(['up', 'down', 'winners', 'losers'])
 
 	useEffect(() => {
@@ -37,7 +37,7 @@ export const BetPanel = ({ data, type='up' }: Props) => {
 				.catch((error) => new Error('Error: ' + error))
 		}
 		if (gamePhase === 0) setCompletedRound(false)
-	}, [gamePhase])
+	}, [gameMode, gamePhase, ticker])
 
 	return (
 		<div className={cx('panel', { 'panel__result': completedRound, 'wins': type === groupWins, 'lose': type !== groupWins })}>

@@ -16,7 +16,7 @@ export const NotificationProvider = ({ children }: IProps) => {
     const timer = setTimeout(closeHandler, 5000)
 
     return () => clearTimeout(timer)
-  }, [isOpen])
+  }, [closeHandler, isOpen])
 
   return (
     <NotificationContext.Provider value={{ isOpen, openHandler, closeHandler, setTonsHandler, setBallsHandler }}>

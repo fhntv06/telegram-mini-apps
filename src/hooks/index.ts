@@ -1,6 +1,6 @@
 export { useAnimation } from './useAnimation'
-export { useBackendAuth } from './useBackendAuth'
 export { useCountStorageTransaction } from './useCountStorageTransaction'
+export { useDispatch, useSelector } from './useReduxHooks'
 export { useChartData } from './useChartData'
 export { useDisconnect } from './useDisconnect'
 export { useGameSocket } from './useGameSocket'

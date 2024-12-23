@@ -1,7 +1,7 @@
 import { PropsWithChildren, useState } from 'react'
-import { useSelector } from 'react-redux'
 import classnames from 'classnames/bind'
 import { motion } from 'framer-motion'
+import { useSelector } from '../../../hooks'
 import styles from './SelectHorizontal.module.scss'
 
 interface IProps extends PropsWithChildren {
@@ -30,7 +30,7 @@ export const SelectHorizontal = ({
 	onClickLeftBtn,
 	onClickRightBtn
 }: IProps) => {
-	const { gameMode } = useSelector((state: any)=> state.modeSettings)
+	const { gameMode } = useSelector((state)=> state.modeSettings)
 	const [chosen, setChosen] = useState(changeId === gameMode)
 
 	const handlerLeftBtn = () => {

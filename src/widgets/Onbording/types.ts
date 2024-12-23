@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from 'react'
+import { Dispatch, SetStateAction, ReactNode } from 'react'
 
 export interface IOnboarding {
   handlerSkip: Dispatch<SetStateAction<boolean>>
@@ -7,5 +7,5 @@ export interface IOnboarding {
 
 export interface IScreen {
   index: number
-  children: React.ReactNode
+  children: ReactNode
 }

@@ -1,7 +1,6 @@
-import { useSelector } from 'react-redux'
 import { motion } from 'framer-motion'
 import classNames from 'classnames/bind'
-import { useGetPhrases } from '../../hooks'
+import { useGetPhrases, useSelector } from '../../hooks'
 import { differenceInSeconds, getCorrectBalanceWithFormatNumber, Icon } from '../../shared'
 
 import styles from './ChartPanel.module.scss'
@@ -9,7 +8,7 @@ import styles from './ChartPanel.module.scss'
 const cx = classNames.bind(styles)
 
 export const ChartPanel = () => {
-  const { gamePhase, phaseTimeUntil, allTimeWins: allTimeWinsCount } = useSelector((state: any) => state.gameStatus)
+  const { gamePhase, phaseTimeUntil, allTimeWins: allTimeWinsCount } = useSelector((state) => state.gameStatus)
   const textMode = '$BTC,\u00A030s'
 
   const { gameMode, allTimeWins, gameInProcess } = useGetPhrases(['gameMode', 'allTimeWins', 'gameInProcess'])

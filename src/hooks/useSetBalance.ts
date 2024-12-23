@@ -1,14 +1,14 @@
-import { useDispatch, useSelector } from 'react-redux'
+import WebApp from '@twa-dev/sdk'
 import { useTonAddress } from '@tonconnect/ui-react'
 import { getBalance, getDemoBalance } from '../app/api'
 import { setUserDataWallet } from '../app/store/slices'
+import { useDispatch, useSelector } from './'
 import { isDemoMode } from '../shared'
-import WebApp from "@twa-dev/sdk";
 
 export const useSetBalance = () => {
 	const dispatch = useDispatch()
-  const userDataWallet = useSelector((state: any) => state.userDataWallet)
-  const { gameMode } = useSelector((state: any) => state.modeSettings)
+  const userDataWallet = useSelector((state) => state.userDataWallet)
+  const { gameMode } = useSelector((state) => state.modeSettings)
   const address = useTonAddress()
 
     // TODO: Это убрать в кнопку подключения и перенести в отдельный хук

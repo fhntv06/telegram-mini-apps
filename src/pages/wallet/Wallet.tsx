@@ -1,15 +1,13 @@
 import { useState } from 'react'
 import { useTonAddress } from '@tonconnect/ui-react'
 import { motion } from 'framer-motion'
-import { useSelector } from 'react-redux'
 import classNames from 'classnames/bind'
 
-import { useDisconnect, useGetPhrases } from '../../hooks'
+import { useDisconnect, useGetPhrases, useSelector } from '../../hooks'
 import { ButtonConnectWallet } from '../../feature'
 import {
-  Button,
-  Icon,
-  Select, sourceAltinbit, sourceBitobmen, sourceCryptoBot,
+  Button, Icon, Select,
+  sourceAltinbit, sourceBitobmen, sourceCryptoBot,
   sourceKotleta, sourceOnemoment, sourcePaybis, sourceWallet
 } from '../../shared'
 
@@ -103,7 +101,7 @@ const TopUpByCard = [
 
 export const Wallet = () => {
   const [isCopied, setIsCopied] = useState<boolean>(false)
-  const { balance: balanseUser } = useSelector((state: any) => state.userDataWallet)
+  const { balance: balanseUser } = useSelector((state) => state.userDataWallet)
   const { topUp, copied, balance } = useGetPhrases(['topUp', 'copied', 'balance'])
   const address = useTonAddress()
   const handlerDisconnect = useDisconnect()

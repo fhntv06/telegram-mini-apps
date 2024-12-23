@@ -19,14 +19,14 @@ export const ButtonPlaceBet = ({
 }: Props) => {
 	const wallet = useTonWallet()
 	const [tonConnectUI] = useTonConnectUI()
-	const { bet } = useSelector((state: any) => state.bets)
-	const { gamePhase } = useSelector((state: any) => state.gameStatus)
+	const { bet } = useSelector((state) => state.bets)
+	const { gamePhase } = useSelector((state) => state.gameStatus)
 	const { txInProcess, sendTransaction } = useTransaction(bet)
-	const { balance } = useSelector((state: any) => state.userDataWallet)
+	const { balance } = useSelector((state) => state.userDataWallet)
 	const { goUp, goDown } = useGetPhrases(['goUp', 'goDown'])
 
 	const handlerPlaceBet = () => {
-		sendTransaction(type)
+		sendTransaction(type).then(r => console.log('Success sendTransaction! ' + r)).catch((e) => console.log(new Error('Error in sendTransaction: ' + e)))
 		if (onClick) onClick()
 
 		if (navigator.vibrate !== undefined) {
@@ -41,7 +41,7 @@ export const ButtonPlaceBet = ({
 		<Button
 			type='bet'
 			className={cx('button-placebet', type, 'p', { 'disabled': disabled })}
-			onClick={() => !wallet ? tonConnectUI.connectWallet() : handlerPlaceBet()}
+			onClick={() => !wallet ? tonConnectUI.openModal() : handlerPlaceBet()}
 			disabled={disabled}
 		>
 			{textButton}

@@ -1,6 +1,5 @@
 export { Main } from './main'
 export { UI } from './ui'
-export { TonConnect } from './ton-connect'
 export { Wallet } from './wallet'
 export { Tasks } from './tasks'
 export { Stats } from './stats'

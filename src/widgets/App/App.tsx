@@ -7,7 +7,6 @@ import {
   BrowserRouter,
   Routes,
 } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
 
 import { getAddressContract, getWalletBet, postReferral } from '../../app/api'
 import { routes } from '../../app/routes'
@@ -18,7 +17,7 @@ import { INotificationContextTypes, IAnimationContextTypes } from '../../app/pro
 
 import { Onboarding } from '../'
 import { PanelMenu } from '../../feature'
-import { useGameSocket, usePriceHistory, useUserData } from '../../hooks'
+import { useGameSocket, usePriceHistory, useUserData, useDispatch, useSelector } from '../../hooks'
 import { LoaderSpinner } from '../../shared'
 import { AnimationWrapper } from '../../shared/blocks/AnimationWrapper'
 
@@ -32,11 +31,12 @@ export const App: FC = () => {
   const wallet = useTonWallet()
   const { openHandler: openHandlerNotification, setTonsHandler, setBallsHandler } = useContext<INotificationContextTypes>(NotificationContext)
   const { openHandler: openHandlerAnimation } = useContext<IAnimationContextTypes>(AnimationContext)
-  const { gamePhase } = useSelector((state: any) => state.gameStatus)
-  const { bet } = useSelector((state: any) => state.bets)
-  const { ticker, gameMode } = useSelector((state: any) => state.modeSettings)
+  const { gamePhase } = useSelector((state) => state.gameStatus)
+  const { bet } = useSelector((state) => state.bets)
+  const { ticker, gameMode } = useSelector((state) => state.modeSettings)
   const userData = useUserData()
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const handlerPostReferral = () => {
     new Promise((resolve) => resolve(null))
     .then(() => {
@@ -63,6 +63,7 @@ export const App: FC = () => {
     if (WebApp.initData && wallet) {
       handlerPostReferral()
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [wallet])
 
   // update data backend

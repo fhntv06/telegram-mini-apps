@@ -22,7 +22,7 @@ export const Person = ({
 	useEffect(() => {
 		if (isPending) openHandler('loadPerson')
 		else closeHandler()
-	}, [isPending])
+	}, [closeHandler, isPending, openHandler])
 
   return (
 		<div className={cx('person', className)}>

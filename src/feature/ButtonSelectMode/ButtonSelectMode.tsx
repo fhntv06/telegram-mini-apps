@@ -1,6 +1,6 @@
-import { useSelector } from 'react-redux'
-import { Button, isDemoMode } from '../../shared'
 import classNames from 'classnames/bind'
+import { useSelector } from '../../hooks'
+import { Button, isDemoMode } from '../../shared'
 
 import styles from './ButtonSelectMode.module.scss'
 
@@ -17,7 +17,7 @@ export const ButtonSelectMode = ({
 	onClick,
 	className,
 }: Props) => {
-	const { gameMode } = useSelector((state: any) => state.modeSettings)
+	const { gameMode } = useSelector((state) => state.modeSettings)
 	const textMode = '$BTC,\u00A030s'
 
 	return (

@@ -136,10 +136,10 @@ export interface ILangPhrase {
 	menu: string
 }
 export interface ILanguage {
-	english: ILangPhrase
-	spanish: ILangPhrase
-	chinese: ILangPhrase
-	russian: ILangPhrase
+	'english': ILangPhrase
+	'spanish': ILangPhrase
+	'chinese': ILangPhrase
+	'russian': ILangPhrase
 }
 export const arLanguagesPhraseSite: ILanguage = {
 	english: {

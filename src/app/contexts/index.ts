@@ -1,5 +1,4 @@
 export { AnimationContext } from './AnimationContext'
-export { BackendTokenContext } from './BackendTokenContext'
 export { PriceHistoryContext } from './PriceHistoryContext'
 export { ModalContext } from './ModalContext'
 export { NotificationContext } from './NotificationContext'

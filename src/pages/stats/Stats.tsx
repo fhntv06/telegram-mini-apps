@@ -3,7 +3,7 @@ import classNames from 'classnames/bind'
 import { useGetPhrases } from '../../hooks'
 import { Button } from '../../shared'
 
-import { formatNumber } from '../../shared/utils'
+import { formatNumber } from '../../shared'
 
 import styles from './Stats.module.scss'
 
@@ -70,7 +70,7 @@ const points = 112345644
 
 export const Stats = () => {
   const { pulsePoints, placeInLeaderboard: phrasePlaceInLeaderboard, leaderboard } = useGetPhrases(['pulsePoints', 'placeInLeaderboard', 'leaderboard'])
-  
+
   return (
     <div className={cx('page', 'page-stats')}>
       <div className={cx('page-stats__header')}>
