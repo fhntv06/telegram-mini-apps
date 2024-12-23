@@ -33,6 +33,11 @@
         width: 100%;
     }
 }
+.button-content {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
 .page-stats__leaderboard {
     display: flex;
     flex-direction: column;

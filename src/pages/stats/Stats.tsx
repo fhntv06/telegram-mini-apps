@@ -82,33 +82,29 @@ export const Stats = () => {
       </div>
       <main className={cx('page__main')}>
         <div className={cx('container', 'container__buttons')}>
-          <Button
-            iconRightName='arrow-right'
-            sizeIcons='big'
-            disabled
-          >
-            <p className='p-reg'>Multiplier</p>
+          <Button iconRightName='arrow-right' sizeIcons='big' disabled>
+            <div className={cx('button-content')}>
+              <p className='p-reg'>Multiplier</p>
+              <p className='p-reg color-ton-coin'>x 5.5</p>
+            </div>
           </Button>
-          <Button
-            iconRightName='arrow-right'
-            sizeIcons='big'
-            disabled
-          >
-            <p className='p-reg'>Total bets</p>
+          <Button iconRightName='arrow-right' sizeIcons='big' disabled>
+            <div className={cx('button-content')}>
+              <p className='p-reg'>Total bets</p>
+              <p className='p-reg color-ton-coin'>103</p>
+            </div>
           </Button>
-          <Button
-            iconRightName='arrow-right'
-            sizeIcons='big'
-            disabled
-          >
-            <p className='p-reg'>Days in game in row</p>
+          <Button iconRightName='arrow-right' sizeIcons='big' disabled>
+            <div className={cx('button-content')}>
+              <p className='p-reg'>Days in game in row</p>
+              <p className='p-reg color-ton-coin'>4</p>
+            </div>
           </Button>
-          <Button
-            iconRightName='arrow-right'
-            sizeIcons='big'
-            disabled
-          >
-            <p className='p-reg'>Referred friends</p>
+          <Button iconRightName='arrow-right' sizeIcons='big' disabled>
+            <div className={cx('button-content')}>
+              <p className='p-reg'>Referred friends</p>
+              <p className='p-reg color-ton-coin'>2</p>
+            </div>
           </Button>
         </div>
         <div className={cx('container')}>
