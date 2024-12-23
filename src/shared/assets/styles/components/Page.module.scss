@@ -10,7 +10,8 @@
   max-height: max-content;
   min-height: 100vh;
   width: 100%;
-  padding: calc($offset20 * 2) $offset16 calc(58px + 18px);
+  // 24px - volume for offset bottom component PanelMenu for iOS
+  padding: calc($offset20 * 2) $offset16 calc(58px + 18px + 24px);
   background-color: $black;
   overflow-y: scroll;
   overflow-x: hidden;

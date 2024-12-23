@@ -9,8 +9,8 @@
   column-gap: $offset8;
   justify-content: space-between;
   width: 100%;
-  height: 58px;
-  padding: 0 $offset16;
+  height: calc(58px + $offset24);
+  padding: 0 $offset16 $offset24;
   background-color: $black;
   border-top: 1px solid $dark-gray;
 }
@@ -25,6 +25,10 @@
   p {
     color: $gray;
     transition: color .3s ease-out;
+
+    &:first-letter {
+      text-transform: uppercase;
+    }
   }
   svg path {
     fill: $gray;
