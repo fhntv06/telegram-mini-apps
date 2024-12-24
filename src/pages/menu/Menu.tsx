@@ -1,8 +1,7 @@
 import { useMemo } from 'react'
-import { useSelector } from 'react-redux'
 import classNames from 'classnames/bind'
 
-import { useGetPhrases } from '../../hooks'
+import { useGetPhrases, useSelector } from '../../hooks'
 
 import {
   Button, Select,

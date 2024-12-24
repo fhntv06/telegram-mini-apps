@@ -134,6 +134,11 @@ export interface ILangPhrase {
 	tasks: string
 	game: string
 	menu: string
+	completeTasks: string
+	earnMorePoints: string
+	pulseMarket: string
+	partners: string
+	noAvailableTasks: string
 }
 export interface ILanguage {
 	'english': ILangPhrase
@@ -233,7 +238,12 @@ export const arLanguagesPhraseSite: ILanguage = {
 		leaderboard: 'Leaderboard',
 		tasks: 'tasks',
 		game: 'game',
-		menu: 'menu'
+		menu: 'menu',
+		completeTasks: 'Complete tasks',
+		earnMorePoints: 'earn more points',
+		pulseMarket: 'Pulse Market',
+		partners: 'Partners',
+		noAvailableTasks: 'No available tasks',
 	},
 	spanish: {
 		gameInProcess: [
@@ -326,7 +336,12 @@ export const arLanguagesPhraseSite: ILanguage = {
 		leaderboard: 'Tabla de clasificación',
 		tasks: 'tareas',
 		game: 'juego',
-		menu: 'menú'
+		menu: 'menú',
+		completeTasks: 'Complete tasks',
+		earnMorePoints: 'gane más puntos',
+		pulseMarket: 'Pulse Market',
+		partners: 'Socios',
+		noAvailableTasks: 'No hay tareas disponibles',
 	},
 	chinese: {
 		gameInProcess: [
@@ -419,7 +434,12 @@ export const arLanguagesPhraseSite: ILanguage = {
 		leaderboard: '排行榜',
 		tasks: '任务',
 		game: '游戏',
-		menu: '菜单'
+		menu: '菜单',
+		completeTasks: '完成任务',
+		earnMorePoints: '赚取更多积分',
+		pulseMarket: 'Pulse Market',
+		partners: '合作伙伴',
+		noAvailableTasks: '没有可用的任务',
 	},
 	russian: {
 		gameInProcess: [
@@ -512,7 +532,12 @@ export const arLanguagesPhraseSite: ILanguage = {
 		leaderboard: 'Таблица лидеров',
 		tasks: 'Задания',
 		game: 'Игра',
-		menu: 'Меню'
+		menu: 'Меню',
+		completeTasks: 'Выполняйте задания',
+		earnMorePoints: 'зарабатывайте больше очков',
+		pulseMarket: 'Pulse Market',
+		partners: 'Партнеры',
+		noAvailableTasks: 'Нет доступных задач',
 	},
 }
 export const arLanguagesSite: ILang[] = [

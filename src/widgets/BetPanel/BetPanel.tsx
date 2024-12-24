@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
 import classNames from 'classnames/bind'
 import { getGameBetsResult } from '../../app/api/'
 import { ButtonPlaceBet } from '../../feature'
-import { useGetPhrases } from '../../hooks'
+import { useGetPhrases, useSelector } from '../../hooks'
 import { IDataPanel } from './types'
 import { Counter, Icon, Person, formatIntTonNumber } from '../../shared'
 

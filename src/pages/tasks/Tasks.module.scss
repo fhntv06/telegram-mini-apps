@@ -1,2 +1,73 @@
 @import '/src/shared/assets/styles/components/Page.module.scss';
 
+.page-tasks {
+  button {
+    display: flex;
+    column-gap: $offset12;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: $offset12;
+    @include border('medium');
+    text-align: left;
+
+    &:disabled {
+      opacity: 0.64;
+    }
+  }
+  .button-content {
+    display: flex;
+    flex-direction: column;
+    row-gap: $offset4;
+
+    p:first-child {
+      text-overflow: ellipsis;
+      width: 200px;
+    }
+  }
+}
+.page-tasks__header {
+  margin-bottom: calc($offset20 * 2);
+
+  h1 {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+}
+.page-tasks__items {
+  display: flex;
+  flex-direction: column;
+  row-gap: $offset8;
+
+  .item {
+    display: flex;
+    align-items: center;
+    column-gap: $offset12;
+    width: 100%;
+  }
+
+  .item__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 52px;
+    max-width: 52px;
+    min-height: 52px;
+    max-height: 52px;
+    background-color: $black;
+    border-radius: 50%;
+  }
+}
+.page-tasks__items-clear {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 76px;
+  @include border('medium');
+  background-color: $dark-gray;
+
+  p {
+    color: $gray;
+  }
+}

@@ -3,7 +3,7 @@ import {
 	getStorage, removeStorage,
 	maxCountTransactionForShowModalSwithcMode, setStorage
 } from '../shared'
-import { useSelector } from 'react-redux'
+import { useSelector } from './'
 import { ModalContextTypes } from '../app/providers/types'
 import { ModalContext } from '../app/contexts'
 

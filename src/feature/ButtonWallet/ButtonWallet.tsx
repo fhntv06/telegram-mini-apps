@@ -1,8 +1,7 @@
-import { useSelector } from 'react-redux'
-import { Button, isDemoMode } from '../../shared'
 import classNames from 'classnames/bind'
 import styles from './ButtonWallet.module.scss'
-import { getCorrectBalance } from '../../shared'
+import { useSelector } from '../../hooks'
+import { getCorrectBalance, Button, isDemoMode } from '../../shared'
 
 const cx = classNames.bind(styles)
 

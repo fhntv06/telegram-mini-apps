@@ -18,6 +18,7 @@ export type IconNames =
     | 'arrow-left-black'
     | 'persons'
     | 'persons-medium'
+    | 'persons-large'
     | 'wallet'
     | 'refund'
     | 'refund-medium'
@@ -40,7 +41,7 @@ export type IconNames =
     | 'logo-pulse'
     | 'switch'
     | 'candles'
-    | 'check-tasks'
+    | 'check'
     | 'disconnect'
     | '' // For skip icon if you need
 
@@ -48,6 +49,7 @@ export type IconNames =
     | 'small'
     | 'medium'
     | 'big'
+    | 'large'
     | 'custom'
     | 'logo'
 

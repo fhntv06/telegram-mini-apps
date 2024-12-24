@@ -1,15 +1,21 @@
 import { useState, useEffect, useCallback } from 'react'
 import { ChartData } from 'chart.js'
-import { useSelector } from 'react-redux'
+import { useSelector } from './'
 import { numberLastPoint } from '../shared'
 
-const createInitialData = (history: number[]) => ({
-  // 4 '' for mobile
-  labels: [...history, '', '', '', ''].map(() => ''), // added label for create offset x-axis
-  datasets: [
-    { data: history.map((el: number) => el) },
-  ],
-})
+const createInitialData = (history: number[] | undefined) => (
+  (history && history?.length)
+    ? {
+      // 4 '' for mobile
+      labels: [...history, '', '', '', ''].map(() => ''), // added label for create offset x-axis
+      datasets: [
+        { data: history.map((el: number) => el) },
+      ],
+    } : {
+      labels: [],
+      datasets: [ { data: [] } ]
+    }
+)
 
 export const useChartData = () => {
   const { btcPrice, priceHistory } = useSelector((state) => state.gameStatus)

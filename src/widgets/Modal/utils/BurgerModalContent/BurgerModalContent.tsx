@@ -1,9 +1,8 @@
 import { useMemo } from 'react'
-import { useSelector } from 'react-redux'
 import { useTonWallet, useTonAddress } from '@tonconnect/ui-react'
 import classNames from 'classnames/bind'
 import { ButtonConnectWallet } from '../../../../feature'
-import { useGetPhrases } from '../../../../hooks'
+import { useGetPhrases, useSelector } from '../../../../hooks'
 import {
   Button, Select,
   arLanguagesSite, sourcePulseReferralBot, sourcePulseGameSupport

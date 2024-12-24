@@ -1,7 +1,6 @@
-import { useSelector } from 'react-redux'
 import { useTonWallet, useTonConnectUI } from '@tonconnect/ui-react'
 import classNames from 'classnames/bind'
-import { useTransaction, useGetPhrases } from '../../hooks'
+import { useTransaction, useGetPhrases, useSelector } from '../../hooks'
 import { Button, minBet } from '../../shared'
 
 import styles from './ButtonPlaceBet.module.scss'
