@@ -8,10 +8,11 @@ import {
   Routes,
 } from 'react-router-dom'
 
-import { getAddressContract, getWalletBet, postReferral } from '../../app/api'
+import { getAddressContract, getWalletBet, postReferral, getRetrievesData } from '../../app/api'
 import { routes } from '../../app/routes'
 import { setDataTransaction, setGameStatus } from '../../app/store/slices'
 import { AnimationContext, NotificationContext } from '../../app/contexts'
+import { setUserRetrievesData } from '../../app/store/slices/user'
 
 import { INotificationContextTypes, IAnimationContextTypes } from '../../app/providers/types'
 
@@ -36,7 +37,6 @@ export const App: FC = () => {
   const { ticker, gameMode } = useSelector((state) => state.modeSettings)
   const userData = useUserData()
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const handlerPostReferral = () => {
     new Promise((resolve) => resolve(null))
     .then(() => {
@@ -53,8 +53,10 @@ export const App: FC = () => {
       }
 
       postReferral(data)
-      .then((res)=> console.log('Data post referral: ', res.data))
-      .catch(() => new Error('Error: for postReferral dont have data user!'))
+        .then((res)=> console.log('Data post referral: ', res.data))
+        .then(() => getRetrievesData(WebApp.initData))
+        .then((retrievesData) => dispatch(setUserRetrievesData(retrievesData.data)))
+        .catch(() => new Error('Error: for postReferral dont have data user!'))
     })
   }
 
