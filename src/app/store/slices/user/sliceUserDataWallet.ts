@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { IUser } from './types.ts'
+import { IUser } from './types'
 
 const initialState: IUser = {
   isConnected: false,
