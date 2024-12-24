@@ -1,14 +1,76 @@
+import WebApp from '@twa-dev/sdk'
 import classNames from 'classnames/bind'
-
-import { useGetPhrases } from '../../hooks'
-import { Button, Icon } from '../../shared'
+import { ITask } from '../../app/store/slices/game/types'
+import { useGetPhrases, useSelector } from '../../hooks'
+import { Button } from '../../shared'
 
 import styles from './Tasks.module.scss'
+import { claimTask } from '../../app/api/game'
+import { setClaimTasks } from '../../app/store/slices'
 
 const cx = classNames.bind(styles)
 
+const ButtonsTask = (
+  { tasks, phrase }: {
+    tasks: ITask[]
+    phrase: {
+      points: string,
+      multiplier: string,
+      noAvailableTasks: string
+    }
+  }
+) => {
+  const conditionTaskHandler = (href: string) => {
+    window.location.href = href
+  }
+  const tasksEventHandler = (task: ITask) => {
+    if (task.playerStatus === 2 && task.conditions && task.conditions.externalLink) {
+      conditionTaskHandler(task.conditions.externalLink)
+    }
+
+    claimTask({ taskId: task.id, initData: WebApp.initData })
+      .then(res => setClaimTasks(res.data))
+      .catch((e) => console.log(new Error('Error in clamTasks: ' + e)))
+  }
+
+  return (tasks && tasks.length)
+    ? (
+      tasks.map((task, index) => (
+        <Button
+          key={task.title + index}
+          iconRightName={task?.playerStatus === 0 ? 'check' : 'arrow-right'}
+          sizeIcons='big'
+          disabled={task?.playerStatus === 0}
+          onClick={() => task?.playerStatus !== 0 && tasksEventHandler(task)}
+        >
+          <div className={cx('item')}>
+            <img src={task.image}  alt={task.title} title={task.title} />
+            <div className={cx('button-content')}>
+              <p className='p-reg p-small'>{task.title}</p>
+              <p className='p-reg p-medium color-ton-coin'>
+                +
+                {task?.coinsReward || task?.multiplier}
+                {' '}
+                {task?.coinsReward ? phrase.points : phrase.multiplier}
+              </p>
+            </div>
+          </div>
+        </Button>
+      ))
+    ) : (
+      <div className={cx('page-tasks__items-clear')}>
+        <p className='p-reg'>{phrase.noAvailableTasks}</p>
+      </div>
+    )
+}
+
 export const Tasks = () => {
-  const { completeTasks, earnMorePoints, pulseMarket, partners, noAvailableTasks } = useGetPhrases(['completeTasks', 'earnMorePoints', 'pulseMarket', 'partners', 'noAvailableTasks'])
+  const {
+    completeTasks, earnMorePoints, pulseMarket,
+    partners, noAvailableTasks, points, multiplier } = useGetPhrases(
+      ['completeTasks', 'earnMorePoints', 'pulseMarket', 'partners', 'noAvailableTasks', 'points', 'multiplier']
+  )
+  const { partners: partnersTasks, hints, tasks } = useSelector((state) => state.tasks)
 
   return (
     <div className={cx('page', 'page-tasks')}>
@@ -21,24 +83,8 @@ export const Tasks = () => {
             <p>{pulseMarket}</p>
           </header>
           <div className={cx('page-tasks__items')}>
-            <Button iconRightName='arrow-right' sizeIcons='big'>
-              <div className={cx('item')}>
-                <Icon name='calendar' size='large' className={cx('item__icon')} />
-                <div className={cx('button-content')}>
-                  <p className='p-reg p-small'>Visit the game every day</p>
-                  <p className='p-reg p-medium color-ton-coin'>+1000 Points</p>
-                </div>
-              </div>
-            </Button>
-            <Button iconRightName='arrow-right' sizeIcons='big'>
-              <div className={cx('item')}>
-                <Icon name='persons-large' size='large' className={cx('item__icon')} />
-                <div className={cx('button-content')}>
-                  <p className='p-reg p-small'>Invite friends</p>
-                  <p className='p-reg p-medium color-ton-coin'>+0.5 Multiplier</p>
-                </div>
-              </div>
-            </Button>
+            {<ButtonsTask tasks={[...hints, ...tasks]} phrase={{ points, multiplier, noAvailableTasks }}
+            />}
           </div>
         </div>
         <div className={cx('container')}>
@@ -46,57 +92,10 @@ export const Tasks = () => {
             <p>{partners}</p>
           </header>
           <div className={cx('page-tasks__items')}>
-            <div className={cx('page-tasks__items-clear')}>
-              <p className='p-reg'>{noAvailableTasks}</p>
-            </div>
-            <Button iconRightName='check' sizeIcons='big' disabled>
-              <div className={cx('item')}>
-                <Icon name='calendar' size='big' className={cx('item__icon')} />
-                <div className={cx('button-content')}>
-                  <p className='p-reg p-small'>Subscribe Crypto Punks on X</p>
-                  <p className='p-reg p-medium color-ton-coin'>+0.5 Multiplier</p>
-                </div>
-              </div>
-            </Button>
-            <Button iconRightName='arrow-right' sizeIcons='big'>
-              <div className={cx('item')}>
-                <Icon name='persons-large' size='big' className={cx('item__icon')} />
-                <div className={cx('button-content')}>
-                  <p className='p-reg p-small'>Subscribe Humster Kombat on X и вторая оооочень длинная строка для теста отображения</p>
-                  <p className='p-reg p-medium color-ton-coin'>+1000 Points</p>
-                </div>
-              </div>
-            </Button>
-            <Button iconRightName='arrow-right' sizeIcons='big'>
-              <div className={cx('item')}>
-                <Icon name='persons-large' size='big' className={cx('item__icon')} />
-                <div className={cx('button-content')}>
-                  <p className='p-reg p-small'>Subscribe Crypto Punks on X</p>
-                  <p className='p-reg p-medium color-ton-coin'>+1000 Points</p>
-                </div>
-              </div>
-            </Button>
-            <Button iconRightName='arrow-right' sizeIcons='big'>
-              <div className={cx('item')}>
-                <Icon name='persons-large' size='big' className={cx('item__icon')} />
-                <div className={cx('button-content')}>
-                  <p className='p-reg p-small'>Subscribe Crypto Punks on 2X</p>
-                  <p className='p-reg p-medium color-ton-coin'>+1000 Points</p>
-                </div>
-              </div>
-            </Button>
-            <Button iconRightName='arrow-right' sizeIcons='big'>
-              <div className={cx('item')}>
-                <Icon name='persons-large' size='big' className={cx('item__icon')} />
-                <div className={cx('button-content')}>
-                  <p className='p-reg p-small'>Subscribe Crypto Punks on 3X</p>
-                  <p className='p-reg p-medium color-ton-coin'>+1000 Points</p>
-                </div>
-              </div>
-            </Button>
+            {<ButtonsTask tasks={partnersTasks} phrase={{ points, multiplier, noAvailableTasks }} />}
           </div>
         </div>
       </main>
     </div>
-)
+  )
 }

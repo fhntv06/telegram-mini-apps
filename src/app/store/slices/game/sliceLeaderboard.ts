@@ -22,4 +22,5 @@ const sliceLeaderboard = createSlice({
 })
 
 export const { setLeaderboards } = sliceLeaderboard.actions
+
 export const leaderboardsReducer = sliceLeaderboard.reducer

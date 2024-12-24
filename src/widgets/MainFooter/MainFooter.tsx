@@ -32,11 +32,10 @@ export const MainFooter = () => {
 	const { gamePhase } = useSelector((state) => state.gameStatus)
 	const { gameMode } = useSelector((state) => state.modeSettings)
 	const userDataWallet = useSelector((state) => state.userDataWallet)
+	const { multiplier: multiplierParam } = useSelector((state) => state.retrievesData)
 	const { openHandler: openHandlerModal } = useContext<ModalContextTypes>(ModalContext)
 
   const { players, multiplier, balance, lastGames } = useGetPhrases(['players', 'multiplier', 'balance', 'lastGames'])
-
-	const multiplierParam = 5.5
 
 	const setDataUser = useCallback(() => {
 			// TODO: Это убрать в кнопку подключения и перенести в отдельный хук

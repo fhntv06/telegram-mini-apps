@@ -5,7 +5,9 @@ const initialState: IUserRetrievesData = {
   multiplier: 1.5,
   invitedFriends: 5,
   daysInRow: 7,
-  totalBets: 10.5
+  totalBets: 10.5,
+  placeInLeaderboard: 8,
+  points: 12932938128,
 }
 
 const sliceUserRetrievesData = createSlice({
@@ -17,6 +19,8 @@ const sliceUserRetrievesData = createSlice({
       state.invitedFriends = action.payload.invitedFriends
       state.daysInRow = action.payload.daysInRow
       state.totalBets = action.payload.totalBets
+      state.placeInLeaderboard = action.payload.placeInLeaderboard
+      state.points = action.payload.points
     }
   }
 })

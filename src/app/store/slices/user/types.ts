@@ -15,7 +15,9 @@ export interface IUserRetrievesData {
     multiplier: number,
     invitedFriends: number,
     daysInRow: number,
-    totalBets: number
+    totalBets: number,
+    placeInLeaderboard: number
+    points: number
 }
 
 export interface IUserDataTelegram {

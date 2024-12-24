@@ -6,7 +6,7 @@ export { betsReducer, setDataTransaction, setBet, removeBet } from './bets'
 export {
 	gameStatusReducer, setGameStatus,
 	leaderboardsReducer, setLeaderboards,
-	tasksReducer, setTasks
+	tasksReducer, setPartnersTasks, setHintTasks, setDefaultTasks, setClaimTasks
 } from './game'
 export { langReducer, setLang } from './language'
 export { modeReducer, setModeSettings } from './mode'

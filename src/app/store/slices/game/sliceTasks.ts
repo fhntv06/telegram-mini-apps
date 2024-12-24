@@ -1,17 +1,18 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { ITasks } from './types'
+import { ITask, ITasks } from './types'
 
 const initialState: ITasks = {
-  tasks: [
+  hints: [
     {
       id: 1,
       title: 'inviteHint',
       multiplier: 0.5,
       image: 'https://nemitor.ru:3000/image/hints/inviteHint.png',
-      type: 'hint'
-    },
+    }
+  ],
+  tasks: [
     {
-      id: 1,
+      id: 10,
       title: 'defaultTaskWithStatus1',
       coinsReward: 1500,
       image: 'https://nemitor.ru:3000/image/tasks/defaultTaskWithStatus1.png',
@@ -19,16 +20,16 @@ const initialState: ITasks = {
         externalLink: 'https://t.me/pulse_dpm_chat'
       },
       playerStatus: 1,
-      type: 'default'
     },
     {
-      id: 2,
+      id: 22,
       title: 'defaultTaskWithStatus2',
       coinsReward: 1000,
       image: 'https://nemitor.ru:3000/image/tasks/defaultTaskWithStatus2.png',
       playerStatus: 2,
-      type: 'default'
-    },
+    }
+  ],
+  partners: [
     {
       id: 3,
       title: 'partnerTaskWithStatus1',
@@ -37,8 +38,7 @@ const initialState: ITasks = {
       playerStatus: 1,
       conditions: {
         externalLink: 'https://t.me/partnerTaskWithStatus1'
-      },
-      type: 'partner'
+      }
     },
     {
       id: 4,
@@ -46,7 +46,6 @@ const initialState: ITasks = {
       coinsReward: 1500,
       image: 'https://nemitor.ru:3000/image/tasks/partnerTaskWithStatus2.png',
       playerStatus: 2,
-      type: 'partner'
     }
   ]
 }
@@ -55,11 +54,43 @@ const sliceTasks = createSlice({
   name: 'userTasks',
   initialState,
   reducers: {
-    setTasks: (state, action) => {
+    setDefaultTasks: (state, action) => {
       state.tasks = action.payload.tasks
+    },
+    setPartnersTasks: (state, action) => {
+      state.partners = action.payload.partners
+    },
+    setHintTasks: (state, action) => {
+      state.hints = action.payload.hints
+    },
+    setClaimTasks: (state, action) => {
+      // action.payload.success
+      // action.payload.task
+      // action.payload.task.type
+
+      const changeTaskPlayerStatus = (tasks: ITask[], targetId: number, success: boolean) => (
+        tasks.map((task: ITask) => {
+          if (task.id === targetId) {
+            task.playerStatus = success ? 0 : 2
+          }
+
+          return task
+        })
+      )
+
+      switch (action.payload.task.type) {
+        case action.payload.task.type === 'partner':
+          state.partners = changeTaskPlayerStatus(action.payload.partners, action.payload.task.id, action.payload.success)
+          break
+        case action.payload.task.type === 'hint':
+          state.hints = changeTaskPlayerStatus(action.payload.hints, action.payload.task.id, action.payload.success)
+          break
+        default:
+          state.tasks = changeTaskPlayerStatus(action.payload.tasks, action.payload.task.id, action.payload.success)
+      }
     }
   }
 })
 
-export const { setTasks } = sliceTasks.actions
+export const { setDefaultTasks, setPartnersTasks, setHintTasks, setClaimTasks } = sliceTasks.actions
 export const tasksReducer = sliceTasks.reducer

@@ -19,10 +19,13 @@
     display: flex;
     flex-direction: column;
     row-gap: $offset4;
+    max-width: 234px;
 
     p:first-child {
+      max-width: 234px;
+      overflow: hidden;
+      white-space: nowrap;
       text-overflow: ellipsis;
-      width: 200px;
     }
   }
 }
@@ -47,7 +50,7 @@
     width: 100%;
   }
 
-  .item__icon {
+  img {
     display: flex;
     align-items: center;
     justify-content: center;

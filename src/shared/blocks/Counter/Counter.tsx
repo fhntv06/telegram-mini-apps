@@ -3,9 +3,9 @@ import { motion, animate, useMotionValue, useTransform } from 'framer-motion'
 import { ICounter } from './types'
 import { getCorrectBalanceWithFormatNumber } from '../../utils'
 
-export const Counter = ({ value, direction = 'up', prefix = '', className }: ICounter) => {
+export const Counter = ({ value, direction = 'up', prefix = '', fixedNumber = 0, className }: ICounter) => {
   const count = useMotionValue(direction === 'up' ? 0 : value)
-  const rounded = useTransform(count, latest => getCorrectBalanceWithFormatNumber(latest, 0))
+  const rounded = useTransform(count, latest => getCorrectBalanceWithFormatNumber(latest, fixedNumber))
 
   useEffect(() => {
     const controls = animate(

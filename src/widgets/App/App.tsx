@@ -8,11 +8,17 @@ import {
   Routes,
 } from 'react-router-dom'
 
-import { getAddressContract, getWalletBet, postReferral, getRetrievesData } from '../../app/api'
+import {
+  getAddressContract, getWalletBet, postReferral,
+  getRetrievesData, getTasks, getLeaderboard
+} from '../../app/api'
 import { routes } from '../../app/routes'
-import { setDataTransaction, setGameStatus } from '../../app/store/slices'
+import {
+  setDataTransaction, setDefaultTasks, setGameStatus,
+  setHintTasks, setLeaderboards, setPartnersTasks
+} from '../../app/store/slices'
 import { AnimationContext, NotificationContext } from '../../app/contexts'
-import { setUserRetrievesData } from '../../app/store/slices/user'
+import { setUserRetrievesData } from '../../app/store/slices'
 
 import { INotificationContextTypes, IAnimationContextTypes } from '../../app/providers/types'
 
@@ -37,6 +43,7 @@ export const App: FC = () => {
   const { ticker, gameMode } = useSelector((state) => state.modeSettings)
   const userData = useUserData()
 
+  // TODO: вынести все методы по получению данные при первом рендере в отдельный компонент
   const handlerPostReferral = () => {
     new Promise((resolve) => resolve(null))
     .then(() => {
@@ -104,15 +111,27 @@ export const App: FC = () => {
   // initial process app
   useEffect(() => {
     getAddressContract()
-    .then(({ data: { address, mainnet } }) => dispatch(setDataTransaction({ address, mainnet })))
-    .catch((error) => {
-      new Error('Error in getAddressContract: ' + error)
+      .then(({ data: { address, mainnet } }) => dispatch(setDataTransaction({ address, mainnet })))
+      .catch((error) => {
+        new Error('Error in getAddressContract: ' + error)
 
-      dispatch(setDataTransaction({
-        address: import.meta.env.VITE_ADDRESS_TRANSACTION,
-        mainnet: true
-      }))
-    })
+        dispatch(setDataTransaction({
+          address: import.meta.env.VITE_ADDRESS_TRANSACTION,
+          mainnet: true
+        }))
+      })
+
+    getTasks(WebApp.initData)
+      .then((res) => {
+        dispatch(setHintTasks(res.data.hints))
+        dispatch(setPartnersTasks(res.data.partners))
+        dispatch(setDefaultTasks(res.data.tasks))
+      })
+      .catch((error) => new Error('Error in getTasks: ' + error))
+
+    getLeaderboard()
+      .then((res) => dispatch(setLeaderboards(res.data)))
+      .catch((error) => new Error('Error in getTasks: ' + error))
   }, [])
 
   return (

@@ -129,6 +129,7 @@ export interface ILangPhrase {
 	multiplier: string
 	pointsForWinning: string
 	pulsePoints: string
+	points: string,
 	placeInLeaderboard: string
 	leaderboard: string
 	tasks: string
@@ -234,6 +235,7 @@ export const arLanguagesPhraseSite: ILanguage = {
 		multiplier: 'Multiplier',
 		pointsForWinning: 'Points for winning',
 		pulsePoints: 'Pulse Points',
+		points: 'Points',
 		placeInLeaderboard: 'th place in the leaderboard',
 		leaderboard: 'Leaderboard',
 		tasks: 'tasks',
@@ -332,6 +334,7 @@ export const arLanguagesPhraseSite: ILanguage = {
 		multiplier: 'Multiplicador',
 		pointsForWinning: 'Puntos por ganar',
 		pulsePoints: 'Puntos de pulso',
+		points: 'Puntos',
 		placeInLeaderboard: 'lugar en la tabla de clasificación',
 		leaderboard: 'Tabla de clasificación',
 		tasks: 'tareas',
@@ -430,6 +433,7 @@ export const arLanguagesPhraseSite: ILanguage = {
 		multiplier: '乘数',
 		pointsForWinning: '获胜积分',
 		pulsePoints: '脉冲点',
+		points: '积分',
 		placeInLeaderboard: '在排行榜上的位置',
 		leaderboard: '排行榜',
 		tasks: '任务',
@@ -527,6 +531,7 @@ export const arLanguagesPhraseSite: ILanguage = {
 		balance: 'Баланс',
 		multiplier: 'Множитель',
 		pointsForWinning: 'Очки за выигрыша',
+		points: 'Очки',
 		pulsePoints: 'Точки пульса',
 		placeInLeaderboard: 'место в списке лидеров',
 		leaderboard: 'Таблица лидеров',
