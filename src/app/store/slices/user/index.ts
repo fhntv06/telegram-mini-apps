@@ -1,5 +1,3 @@
-export { setUserDataWallet, removeUserDataWallet } from './sliceUserDataWallet'
-export { setUserDataTelegram } from './sliceUserDataTelegram'
-
-export { userDataWalletReducer } from './sliceUserDataWallet'
-export { userDataTelegramReducer } from './sliceUserDataTelegram'
+export { setUserDataWallet, removeUserDataWallet, userDataWalletReducer } from './sliceUserDataWallet'
+export { setUserDataTelegram, userDataTelegramReducer } from './sliceUserDataTelegram'
+export { setUserRetrievesData, userRetrievesDataReducer } from './sliceUserRetrievesData'

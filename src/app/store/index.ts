@@ -1,5 +1,9 @@
-import { configureStore } from '@reduxjs/toolkit';
-import { userDataWalletReducer, userDataTelegramReducer, betsReducer, gameStatusReducer, langReducer, modeReducer, socketReducer } from './slices'
+import { configureStore } from '@reduxjs/toolkit'
+import {
+  userDataWalletReducer, userDataTelegramReducer, betsReducer,
+  gameStatusReducer, langReducer, modeReducer,
+  socketReducer, userRetrievesDataReducer, leaderboardsReducer, tasksReducer
+} from './slices'
 
 const store = configureStore({
     reducer: {
@@ -9,8 +13,11 @@ const store = configureStore({
         gameStatus: gameStatusReducer,
         language: langReducer,
         modeSettings: modeReducer,
-        socket: socketReducer
+        socket: socketReducer,
+        retrievesData: userRetrievesDataReducer,
+        leaderboards: leaderboardsReducer,
+        tasks: tasksReducer,
     }
-});
+})
 
-export default store;
+export default store
