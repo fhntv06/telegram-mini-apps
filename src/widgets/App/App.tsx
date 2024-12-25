@@ -121,9 +121,11 @@ export const App: FC = () => {
 
     getTasks(WebApp.initData)
       .then((res) => {
-        dispatch(setHintTasks(res.data.hints))
-        dispatch(setPartnersTasks(res.data.partners))
-        dispatch(setDefaultTasks(res.data.tasks))
+        const { hints, partners, tasks } = res.data
+
+        dispatch(setHintTasks({ hints }))
+        dispatch(setPartnersTasks({ partners }))
+        dispatch(setDefaultTasks({ tasks }))
       })
       .catch((error) => new Error('Error in getTasks: ' + error))
 
