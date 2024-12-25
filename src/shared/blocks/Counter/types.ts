@@ -4,6 +4,7 @@ export interface ICounter {
   direction?: 'up' | 'down'
   prefix?: string
   className?: string
+  animation?: boolean
 }
 
 export interface INumbers {
