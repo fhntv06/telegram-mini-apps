@@ -140,6 +140,8 @@ export interface ILangPhrase {
 	pulseMarket: string
 	partners: string
 	noAvailableTasks: string
+	connectYourTON: string
+	theRoundHasAlready: string
 }
 export interface ILanguage {
 	'english': ILangPhrase
@@ -218,7 +220,7 @@ export const arLanguagesPhraseSite: ILanguage = {
 		alias: 'en',
 		notEnoughDemoBalance: 'Not enough demo balance',
 		yourAnOutOfTime: 'You did not have enough time to bid in this round, please wait for the next round',
-		topUpYourWallet: 'Top up your wallet',
+		topUpYourWallet: 'Top up your wallet to place a bet',
 		startGame: 'Start game',
 		beforeStartingTheGame: 'Before starting the game, select the mode. You can change your selection in the assets menu',
 		switchToRealMode: 'Switch to Real mode',
@@ -246,6 +248,8 @@ export const arLanguagesPhraseSite: ILanguage = {
 		pulseMarket: 'Pulse Market',
 		partners: 'Partners',
 		noAvailableTasks: 'No available tasks',
+		connectYourTON: 'Connect your TON wallet to place a bet',
+		theRoundHasAlready: 'The round has already started, wait for a new round'
 	},
 	spanish: {
 		gameInProcess: [
@@ -317,7 +321,7 @@ export const arLanguagesPhraseSite: ILanguage = {
 		alias: 'es',
 		notEnoughDemoBalance: 'No hay suficiente saldo de demostración',
 		yourAnOutOfTime: 'Te quedaste sin tiempo para apostar en esta ronda, espera a la próxima ronda',
-		topUpYourWallet: 'Recarga tu billetera',
+		topUpYourWallet: 'Recarga tu billetera para hacer una apuesta',
 		startGame: 'Iniciar juego',
 		beforeStartingTheGame: 'Antes de comenzar el juego, selecciona el modo. Puede cambiar su selección en el menú activos',
 		switchToRealMode: 'Cambiar al modo real',
@@ -345,6 +349,8 @@ export const arLanguagesPhraseSite: ILanguage = {
 		pulseMarket: 'Pulse Market',
 		partners: 'Socios',
 		noAvailableTasks: 'No hay tareas disponibles',
+		connectYourTON: 'Conecte su billetera TON para hacer una apuesta',
+		theRoundHasAlready: 'La ronda ya ha comenzado, espere una nueva ronda',
 	},
 	chinese: {
 		gameInProcess: [
@@ -416,7 +422,7 @@ export const arLanguagesPhraseSite: ILanguage = {
 		alias: 'zh',
 		notEnoughDemoBalance:'没有足够的演示平衡',
 		yourAnOutOfTime: '你在这轮投注的时间已经用完了，请等待下一轮',
-		topUpYourWallet: '把你的钱包装满',
+		topUpYourWallet: '充值你的钱包下注',
 		startGame: '开始游戏',
 		beforeStartingTheGame: '在开始游戏之前，选择模式。 您可以在资产菜单中更改选择',
 		switchToRealMode: '切换到真实模式',
@@ -444,6 +450,8 @@ export const arLanguagesPhraseSite: ILanguage = {
 		pulseMarket: 'Pulse Market',
 		partners: '合作伙伴',
 		noAvailableTasks: '没有可用的任务',
+		connectYourTON: '连接你的吨钱包下注',
+		theRoundHasAlready: '回合已经开始，等待新一轮',
 	},
 	russian: {
 		gameInProcess: [
@@ -515,7 +523,7 @@ export const arLanguagesPhraseSite: ILanguage = {
 		alias: 'ru',
 		notEnoughDemoBalance: 'Недостаточно демо-баланса',
 		yourAnOutOfTime: 'У вас не хватило времени сделать ставку в этом раунде, пожалуйста, дождитесь следующего раунда',
-		topUpYourWallet: 'Пополните свой кошелек',
+		topUpYourWallet: 'Пополните свой кошелек, чтобы сделать ставку',
 		startGame: 'Начать игру',
 		beforeStartingTheGame: 'Перед началом игры выберите режим. Вы можете изменить свой выбор в меню "Ресурсы".',
 		switchToRealMode: 'Переключиться в реальный режим',
@@ -543,6 +551,8 @@ export const arLanguagesPhraseSite: ILanguage = {
 		pulseMarket: 'Pulse Market',
 		partners: 'Партнеры',
 		noAvailableTasks: 'Нет доступных задач',
+		connectYourTON: 'Подключите свой кошелек TON, чтобы сделать ставку',
+		theRoundHasAlready: 'Раунд уже начался, ждите нового раунда',
 	},
 }
 export const arLanguagesSite: ILang[] = [
