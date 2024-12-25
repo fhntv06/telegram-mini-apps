@@ -6,7 +6,6 @@ import { Button } from '../../shared'
 
 import styles from './Tasks.module.scss'
 import { claimTask } from '../../app/api/game'
-import { setClaimTasks } from '../../app/store/slices'
 
 const cx = classNames.bind(styles)
 
@@ -20,16 +19,14 @@ const ButtonsTask = (
     }
   }
 ) => {
-  const conditionTaskHandler = (href: string) => {
-    window.location.href = href
-  }
+  const conditionTaskHandler = (href: string) => window.location.href = href
   const tasksEventHandler = (task: ITask) => {
-    if (task.playerStatus === 2 && task.conditions && task.conditions.externalLink) {
-      conditionTaskHandler(task.conditions.externalLink)
-    }
-
     claimTask({ taskId: task.id, initData: WebApp.initData })
-      .then(res => setClaimTasks(res.data))
+      .then((res) => {
+        if (res.data.task.playerStatus === 1) {
+          conditionTaskHandler(res.data.task.conditions.externalLink)
+        }
+      })
       .catch((e) => console.log(new Error('Error in clamTasks: ' + e)))
   }
 
