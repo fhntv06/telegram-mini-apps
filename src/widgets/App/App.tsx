@@ -36,7 +36,7 @@ export const App: FC = () => {
   const address = useTonAddress()
   const [skipOnBoarding, setSkipOnBoarding] = useState<boolean>(false)
   const wallet = useTonWallet()
-  const { openHandler: openHandlerNotification, setTonsHandler, setBallsHandler } = useContext<INotificationContextTypes>(NotificationContext)
+  const { openHandler: openHandlerNotification, setTonsHandler, setPointsHandler } = useContext<INotificationContextTypes>(NotificationContext)
   const { openHandler: openHandlerAnimation } = useContext<IAnimationContextTypes>(AnimationContext)
   const { gamePhase } = useSelector((state) => state.gameStatus)
   const { bet } = useSelector((state) => state.bets)
@@ -92,7 +92,7 @@ export const App: FC = () => {
         if (res.data.winReward) {
           openHandlerNotification('wins')
           setTonsHandler(res.data.winReward.tons)
-          setBallsHandler(res.data.winReward.points)
+          setPointsHandler(res.data.winReward.points)
           openHandlerAnimation('wins')
         } else if (res.data.loose) {
           openHandlerNotification('lose')

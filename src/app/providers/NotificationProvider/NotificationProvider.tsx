@@ -10,9 +10,11 @@ interface IProps {
 }
 
 export const NotificationProvider = ({ children }: IProps) => {
-  const { points, tons, type, settings, isOpen, openHandler, closeHandler, setTonsHandler, setBallsHandler } = useNotification()
+  const { points, tons, type, settings, isOpen, openHandler, closeHandler, setTonsHandler, setPointsHandler } = useNotification()
 
   useEffect(() => {
+   // openHandler('wins')
+
     const timer = setTimeout(closeHandler, 5000)
 
     return () => clearTimeout(timer)
@@ -20,7 +22,7 @@ export const NotificationProvider = ({ children }: IProps) => {
   }, [isOpen])
 
   return (
-    <NotificationContext.Provider value={{ isOpen, openHandler, closeHandler, setTonsHandler, setBallsHandler }}>
+    <NotificationContext.Provider value={{ isOpen, openHandler, closeHandler, setTonsHandler, setPointsHandler }}>
       {children}
       <Notification isOpen={isOpen} type={type}>
         {type === 'warning' && <WarningNotificationContent text={settings.text} closeHandler={closeHandler} />}
