@@ -16,7 +16,8 @@ export const useCountStorageTransaction = () => {
 			openHandlerModal('switchMode')
 			removeStorage('count')
 		}
-	}, [gamePhase, openHandlerModal])
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [gamePhase])
 
 	const calculateCountStorageTransactionHandler = () => {
 		const countTransaction = (Number(getStorage('count')) + 1)

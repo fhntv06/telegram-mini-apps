@@ -64,10 +64,6 @@ const sliceTasks = createSlice({
       state.hints = action.payload.hints
     },
     setClaimTasks: (state, action) => {
-      // action.payload.success
-      // action.payload.task
-      // action.payload.task.type
-
       const changeTaskPlayerStatus = (tasks: ITask[], targetId: number, success: boolean) => (
         tasks.map((task: ITask) => {
           if (task.id === targetId) {

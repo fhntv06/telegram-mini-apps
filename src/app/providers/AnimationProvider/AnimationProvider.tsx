@@ -14,11 +14,12 @@ export const AnimationProvider = ({ children }: IProps) => {
   useEffect(() => {
     if (gamePhase === 2) openHandler('consolidate')
     else {
-      const timer = setTimeout(() => openHandler(null), 2000)
+      const timer = setTimeout(() => openHandler(), 2000)
 
       return () => clearTimeout(timer)
     }
-  }, [type, gamePhase, openHandler])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [type, gamePhase])
 
   return (
     <AnimationContext.Provider value={{ isOpen, openHandler, closeHandler, toggleHandler }}>

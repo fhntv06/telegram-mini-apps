@@ -100,7 +100,8 @@ export const MainFooter = () => {
 		} else {
 			removeStorage('dontPayUser')
 		}
-	}, [gamePhase, openHandlerModal, userDataWallet.balance, wallet])
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [gamePhase, userDataWallet.balance, wallet])
 
 	// Когда заходит в App
 	useEffect(() => {

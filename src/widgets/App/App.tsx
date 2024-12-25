@@ -69,9 +69,7 @@ export const App: FC = () => {
 
   // for disconnect action
   useEffect(() => {
-    if (WebApp.initData && wallet) {
-      handlerPostReferral()
-    }
+    if (WebApp.initData) handlerPostReferral()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [wallet])
 

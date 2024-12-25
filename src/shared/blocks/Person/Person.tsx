@@ -22,7 +22,8 @@ export const Person = ({
 	useEffect(() => {
 		if (isPending) openHandler('loadPerson')
 		else closeHandler()
-	}, [closeHandler, isPending, openHandler])
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [isPending])
 
   return (
 		<div className={cx('person', className)}>
