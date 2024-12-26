@@ -12,7 +12,7 @@ export const Counter = ({
   value,
   direction = 'up',
   prefix = '',
-  fixedNumber = 0,
+  fixedNumber = 1,
   animation = false,
   className
 }: ICounter) => {
