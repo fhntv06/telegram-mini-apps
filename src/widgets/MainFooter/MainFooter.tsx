@@ -6,7 +6,7 @@ import { getBalance, getDemoBalance } from '../../app/api'
 import { setUserDataWallet } from '../../app/store/slices'
 import { BetPanel, PanelButtonsBet } from '../../widgets'
 import { useGetPhrases, useDispatch, useSelector } from '../../hooks'
-import { ButtonSwitchMode, ButtonConnectWallet, ButtonTopUp } from '../../feature'
+import { ButtonConnectWallet, ButtonTopUp } from '../../feature'
 import {
 	Icon, Rounds, formatNumber, getCorrectBalance,
 	isDemoMode, minBet, setStorage, getStorage, removeStorage
