@@ -1,14 +1,16 @@
 @import '../../shared/assets/styles/basics.scss';
 
 .panel {
-  z-index: 99;
-  position: fixed;
+  z-index: 1;
+  position: absolute;
   bottom: 0;
   left: 0;
   display: flex;
   column-gap: $offset8;
   justify-content: space-between;
   width: 100%;
+  min-width: 320px;
+  max-width: 576px;
   height: calc(58px + $offset24);
   padding: 0 $offset16 $offset24;
   background-color: $black;

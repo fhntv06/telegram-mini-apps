@@ -1,6 +1,8 @@
 @import '/src/shared/assets/styles/basics.scss';
 
 .main {
+    z-index: 0;
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: space-between;

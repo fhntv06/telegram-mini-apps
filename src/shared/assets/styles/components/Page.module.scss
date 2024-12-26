@@ -1,7 +1,7 @@
 @import '../basics';
 
 .page {
-  z-index: 91; // over for animation block
+  z-index: 0;
   position: relative;
   display: flex;
   flex-direction: column;
