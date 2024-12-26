@@ -32,7 +32,7 @@ export const MainFooter = () => {
 	const { gamePhase } = useSelector((state) => state.gameStatus)
 	const { gameMode } = useSelector((state) => state.modeSettings)
 	const userDataWallet = useSelector((state) => state.userDataWallet)
-	const { multiplier: multiplierParam } = useSelector((state) => state.retrievesData)
+	const { multiplierData: { totalMultiplier } } = useSelector((state) => state.retrievesData)
 	const { openHandler: openHandlerModal } = useContext<ModalContextTypes>(ModalContext)
 
   const { players, multiplier, balance, lastGames } = useGetPhrases(['players', 'multiplier', 'balance', 'lastGames'])
@@ -132,7 +132,7 @@ export const MainFooter = () => {
 				</div>
 				<div className={cx('footer__header__items')}>
 					<h2>{multiplier}</h2>
-					<p className='p-medium'>×{multiplierParam}</p>
+					<p className='p-medium'>×{totalMultiplier}</p>
 				</div>
 				<div className={cx('footer__header__items')}>
 					<h2>{balance}</h2>
@@ -149,11 +149,9 @@ export const MainFooter = () => {
 			<footer className={cx('footer__bets')}>
 				{(
 					wallet
-						? userDataWallet.balance >= minBet
-							? <PanelButtonsBet />
-						: gameMode === isDemoMode
-							? getStorage('dontPayUser') ? <ButtonSwitchMode sizeIcons='big' /> : <PanelButtonsBet />
-							: <ButtonTopUp sizeIcons='big' />
+						? getStorage('dontPayUser')
+							? <ButtonTopUp sizeIcons='big' />
+							: <PanelButtonsBet />
 					: null
 				)}
 				<ButtonConnectWallet className={cx({ 'hide': wallet })} sizeIcons='big' />

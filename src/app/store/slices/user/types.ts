@@ -11,13 +11,20 @@ export interface IUser {
     balance: number
 }
 
+export interface IUserRetrievesMultiplierData {
+    daily: number,
+    bets: number,
+    refs: number,
+    totalMultiplier: number,
+}
+
 export interface IUserRetrievesData {
-    multiplier: number,
     invitedFriends: number,
     daysInRow: number,
     totalBets: number,
     placeInLeaderboard: number
     points: number
+    multiplierData: IUserRetrievesMultiplierData
 }
 
 export interface IUserDataTelegram {

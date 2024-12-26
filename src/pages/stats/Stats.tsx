@@ -14,7 +14,7 @@ export const Stats = () => {
     pulsePoints, placeInLeaderboard: phrasePlaceInLeaderboard,
     leaderboard: phraseLeaderboard, multiplier: phraseMultiplier
   } = useGetPhrases(['pulsePoints', 'placeInLeaderboard', 'leaderboard', 'multiplier'])
-  const { multiplier, totalBets, daysInRow, invitedFriends, placeInLeaderboard, points } = useSelector((state) => state.retrievesData)
+  const { totalBets, daysInRow, invitedFriends, placeInLeaderboard, points, multiplierData } = useSelector((state) => state.retrievesData)
   const { leaderBord } = useSelector((state) => state.leaderboards)
 
   return (
@@ -31,7 +31,7 @@ export const Stats = () => {
           <Button iconRightName='arrow-right' sizeIcons='big' disabled>
             <div className={cx('button-content')}>
               <p className='p-reg'>{phraseMultiplier}</p>
-              <p className='p-reg color-ton-coin'>x{multiplier}</p>
+              <p className='p-reg color-ton-coin'>x{multiplierData.totalMultiplier}</p>
             </div>
           </Button>
           <Button iconRightName='arrow-right' sizeIcons='big' disabled>
