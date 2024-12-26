@@ -40,6 +40,9 @@ h1, .h1 {
   &.h1-reg {
     font-weight: 400;
   }
+  &.h1-large {
+    font-size: $h1-large-size;
+  }
 }
 h2, .h2 {
   font-size: $h2-size;
@@ -60,7 +63,14 @@ p, .p {
   &.p-reg {
     font-weight: $font-w-regular;
   }
-
+  &.p-large {
+    font-size: $p-large-size;
+    line-height: 28px;
+  }
+  &.p-big {
+    font-size: $p-big-size;
+    line-height: 28px;
+  }
   &.p-medium {
     font-size: $p-medium-size;
     line-height: 16px;
@@ -89,6 +99,9 @@ button {
   &:disabled {
     pointer-events: none;
   }
+}
+.center-text {
+  text-align: center;
 }
 .right-text {
   text-align: right;
