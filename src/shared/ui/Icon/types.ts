@@ -43,6 +43,7 @@ export type IconNames =
     | 'candles'
     | 'check'
     | 'disconnect'
+    | 'book'
     | '' // For skip icon if you need
 
     export type IconType =
