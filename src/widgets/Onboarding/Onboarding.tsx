@@ -10,11 +10,12 @@ import {
 import { useGetPhrases } from '../../hooks'
 import { Button, Icon } from '../../shared'
 
-import styles from './Onbording.module.scss'
+import styles from './Onboarding.module.scss'
 
 const cx = classNames.bind(styles)
 
 const screens = [1, 2, 3, 4, 5]
+const abc = ['a', 'b', 'c', 'd', 'e']
 
 export const Onboarding = ({ handlerSkip, className }: IOnboarding) => {
   const swiperRef = useRef(null)
@@ -67,15 +68,15 @@ export const Onboarding = ({ handlerSkip, className }: IOnboarding) => {
                 centeredSlides={true}
                 spaceBetween={16}
               >
-                {screens.map((index) => (
-                  <div key={`screen_${index}`} className={cx('onboarding__screen')}>
+                {screens.map((item, index) => (
+                  <div key={`onboarding-screen_${abc[index]}`} className={cx('onboarding__screen')}>
                     <SwiperSlide className={cx('onboarding__screen__main')}>
                       {
                         <>
                           <div className={cx('screen')}>
-                            <div className={cx(`screen__${index}`)}/>
+                            <div className={cx(`screen__${item}`)}/>
                           </div>
-                          <p className={cx('text', 'p-reg')}>{onboarding[index]}</p>
+                          <p className={cx('text', 'p-reg')}>{onboarding[item]}</p>
                         </>
                       }
                     </SwiperSlide>
