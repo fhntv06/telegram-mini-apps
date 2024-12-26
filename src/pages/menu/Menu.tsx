@@ -14,13 +14,8 @@ const cx = classNames.bind(styles)
 
 export const Menu = () => {
   const language= useSelector((state) => state.language)
-
-  const { affiliate, technicalSupport } = useGetPhrases([
-    'affiliate', 'technicalSupport', 'realMode',
-    'gameWithRealTONCoins', 'demoMode', 'learningWithNonRealCoins'
-  ])
-
   const languages = useMemo(() => [language].concat(arLanguagesSite.filter((item) => item.name != language.name)), [language])
+  const { affiliate, technicalSupport, instruction } = useGetPhrases(['affiliate', 'technicalSupport', 'instruction'])
 
   return (
     <div className={cx('page', 'page-menu')}>
@@ -41,6 +36,15 @@ export const Menu = () => {
         href={sourcePulseGameSupport}
       >
         <p>{technicalSupport}</p>
+      </Button>
+      <Button
+        className={cx('button__menu')}
+        iconLeftName='book'
+        iconRightName='arrow-right'
+        sizeIcons='big'
+        href={'/instruction'}
+      >
+        <p>{instruction}</p>
       </Button>
       <Select data={languages} />
       <div className={cx('button__social')}>
