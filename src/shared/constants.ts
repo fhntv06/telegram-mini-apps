@@ -142,6 +142,16 @@ export interface ILangPhrase {
 	noAvailableTasks: string
 	connectYourTON: string
 	theRoundHasAlready: string
+	daysInTheGame: string
+	multiplierToday: string
+	logInToTheGame: string
+	totalBets: string
+	daysInARow: string
+	yourMultiplier: string
+	continue: string
+	inviteFriends: string
+	invitedFriends: string
+	instruction: string
 }
 export interface ILanguage {
 	'english': ILangPhrase
@@ -249,7 +259,17 @@ export const arLanguagesPhraseSite: ILanguage = {
 		partners: 'Partners',
 		noAvailableTasks: 'No available tasks',
 		connectYourTON: 'Connect your TON wallet to place a bet',
-		theRoundHasAlready: 'The round has already started, wait for a new round'
+		theRoundHasAlready: 'The round has already started, wait for a new round',
+		daysInTheGame: 'days in the game in a row',
+		multiplierToday: 'multiplier today',
+		logInToTheGame: 'Log in to the game every day and make your',
+		totalBets: 'Total bets',
+		daysInARow: 'Days in a row',
+		yourMultiplier: 'Your multiplier will be even higher tomorrow. But if you miss it, all progress will be reset to zero',
+		continue: 'Continue',
+		inviteFriends: 'Invite friends',
+		invitedFriends: 'Invited friends',
+		instruction: 'Instruction',
 	},
 	spanish: {
 		gameInProcess: [
@@ -351,6 +371,16 @@ export const arLanguagesPhraseSite: ILanguage = {
 		noAvailableTasks: 'No hay tareas disponibles',
 		connectYourTON: 'Conecte su billetera TON para hacer una apuesta',
 		theRoundHasAlready: 'La ronda ya ha comenzado, espere una nueva ronda',
+		daysInTheGame: 'días seguidos en el juego',
+		multiplierToday: 'multiplicador hoy',
+		logInToTheGame: 'Inicia sesión en el juego todos los días y aumenta tu multiplicador',
+		totalBets: 'Apuestas totales',
+		daysInARow: 'Días seguidos',
+		yourMultiplier: 'Tu multiplicador será aún mayor mañana. Pero si te lo pierdes, todo el progreso se restablecerá a cero',
+		continue: 'Continuar',
+		inviteFriends: 'Invitar amigos',
+		invitedFriends: 'Amigos invitados',
+		instruction: 'Instrucción',
 	},
 	chinese: {
 		gameInProcess: [
@@ -452,6 +482,16 @@ export const arLanguagesPhraseSite: ILanguage = {
 		noAvailableTasks: '没有可用的任务',
 		connectYourTON: '连接你的吨钱包下注',
 		theRoundHasAlready: '回合已经开始，等待新一轮',
+		daysInTheGame: '连续几天在比赛中',
+		multiplierToday: '今天乘数',
+		logInToTheGame: '每天登录游戏，让你的乘数变大',
+		totalBets: '总赌注',
+		daysInARow: '连续几天',
+		yourMultiplier: '明天你的乘数会更高。 但是，如果你错过了它，所有的进展将被重置为零',
+		continue: '继续',
+		inviteFriends: '邀请朋友',
+		invitedFriends: '邀请朋友',
+		instruction: '教育指引',
 	},
 	russian: {
 		gameInProcess: [
@@ -553,6 +593,16 @@ export const arLanguagesPhraseSite: ILanguage = {
 		noAvailableTasks: 'Нет доступных задач',
 		connectYourTON: 'Подключите свой кошелек TON, чтобы сделать ставку',
 		theRoundHasAlready: 'Раунд уже начался, ждите нового раунда',
+		daysInTheGame: 'заходили дней подряд',
+		multiplierToday: 'ваш множитель сегодня',
+		logInToTheGame: 'Заходите в игру каждый день и увеличивайте свой множитель',
+		totalBets: 'Общая сумма ставок',
+		daysInARow: 'Дни подряд',
+		yourMultiplier: 'Завтра ваш множитель будет еще больше. Но если вы не зайдете, прогресс будет потерян',
+		continue: 'Продолжить',
+		inviteFriends: 'Пригласить друзей',
+		invitedFriends: 'Приглашено друзей',
+		instruction: 'Инструкция',
 	},
 }
 export const arLanguagesSite: ILang[] = [
