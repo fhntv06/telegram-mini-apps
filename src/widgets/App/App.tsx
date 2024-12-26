@@ -22,11 +22,9 @@ import { setUserRetrievesData } from '../../app/store/slices'
 
 import { INotificationContextTypes, IAnimationContextTypes } from '../../app/providers/types'
 
-import { Onboarding } from '../'
 import { PanelMenu } from '../../feature'
 import { useGameSocket, usePriceHistory, useUserData, useDispatch, useSelector } from '../../hooks'
-import { LoaderSpinner } from '../../shared'
-import { AnimationWrapper } from '../../shared/blocks/AnimationWrapper'
+import { LoaderSpinner, removeStorage } from '../../shared'
 
 export const App: FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true)
@@ -34,7 +32,6 @@ export const App: FC = () => {
   const data = useGameSocket()
   const priceHistory = usePriceHistory()
   const address = useTonAddress()
-  const [skipOnBoarding, setSkipOnBoarding] = useState<boolean>(false)
   const wallet = useTonWallet()
   const { openHandler: openHandlerNotification, setTonsHandler, setPointsHandler } = useContext<INotificationContextTypes>(NotificationContext)
   const { openHandler: openHandlerAnimation } = useContext<IAnimationContextTypes>(AnimationContext)
@@ -132,17 +129,14 @@ export const App: FC = () => {
     getLeaderboard()
       .then((res) => dispatch(setLeaderboards(res.data)))
       .catch((error) => new Error('Error in getTasks: ' + error))
+
+    return () => removeStorage('visibleOnboarding')
   }, [])
 
   return (
     isLoading
       ? <LoaderSpinner />
-      : skipOnBoarding
-        ? (
-          <AnimationWrapper style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-            <Onboarding handlerSkip={setSkipOnBoarding}/>
-          </AnimationWrapper>
-        ) : (
+      : (
         <BrowserRouter>
           <Routes>
             {routes.map((route) => <Route key={route.path} {...route} />)}
