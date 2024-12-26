@@ -6,36 +6,36 @@ const checker = (
 
   if (number || number === 0) {
     res = callback()
-  } else throw new Error(`formatNumber func , number is ${number}, typeof: ${typeof number}`);
+  } else throw new Error(`checker func , number is ${number}, typeof: ${typeof number}`);
 
   return res.toString()
 }
 
-export const formatNumber = (number: number | string): string => (
+export const formatNumber = (number: number | string = 0): string => (
   checker(
     number,
     () => number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")
   )
 )
-export const formatIntTonNumber = (number: number | string): string => (
+export const formatIntTonNumber = (number: number | string = 0): string => (
   checker(
     number,
     () => Number(number) / 1000000000
   )
 )
-export const roundToFixed = (number: number | string, fixed: number = 2): string => (
+export const roundToFixed = (number: number | string = 0, fixed: number = 2): string => (
   checker(
     number,
     () => Number(number).toFixed(fixed)
   )
 )
-export const getCorrectBalance = (number: number | string) => (
+export const getCorrectBalance = (number: number | string = 0) => (
   checker(
     number,
     () => roundToFixed(formatIntTonNumber(number))
   )
 )
-export const getCorrectBalanceWithFormatNumber = (number: number | string, fixed?: number) => (
+export const getCorrectBalanceWithFormatNumber = (number: number | string = 0, fixed?: number) => (
   checker(
     number,
     () => formatNumber(roundToFixed(formatIntTonNumber(number), fixed))
