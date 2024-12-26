@@ -26,7 +26,7 @@ export const ModalSelectGameMode = ({
 
   const confirmGameModeHandler = () => {
     changeGameMode(mode)
-    closeHandler(true)
+    closeHandler()
   }
 
   return (
