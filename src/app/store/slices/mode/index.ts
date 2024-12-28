@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { IModeSettings } from './types'
-import { isOnChainMode } from '../../../../shared'
 
 const initialState: IModeSettings = {
     coin: 'btc',
@@ -10,7 +9,7 @@ const initialState: IModeSettings = {
         unit: 's'
     },
     ticker: 'BTC-30',
-    gameMode: isOnChainMode
+    gameMode: 'ON_CHAIN'
 }
 
 const index = createSlice({
