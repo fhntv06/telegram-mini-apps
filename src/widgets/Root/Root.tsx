@@ -1,5 +1,4 @@
 import { type FC, useEffect } from 'react'
-import React from 'react'
 import WebApp from '@twa-dev/sdk'
 
 import { App } from '../'
@@ -40,12 +39,10 @@ export const Root: FC = () => {
   }, [])
 
   return (
-    <React.StrictMode>
-      <ErrorBoundary fallback={ErrorBoundaryError}>
-        <Providers>
-          <App />
-        </Providers>
-      </ErrorBoundary>
-    </React.StrictMode>
+    <ErrorBoundary fallback={ErrorBoundaryError}>
+      <Providers>
+        <App />
+      </Providers>
+    </ErrorBoundary>
   )
 }
