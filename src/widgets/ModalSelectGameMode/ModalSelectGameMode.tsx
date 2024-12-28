@@ -1,84 +1,68 @@
-import { useState } from 'react'
-import { AnimatePresence, motion, useWillChange } from 'framer-motion'
+import { useWillChange } from 'framer-motion'
 import classNames from 'classnames/bind'
 
 import { useGetPhrases, useChangeGameMode } from '../../hooks'
-import { SelectHorizontal, isOnChainMode, isDemoMode, Button } from '../../shared'
-import { typeDemoMode, typeOnChainMode } from '../../shared/types'
+import {
+	isOnChainMode, isDemoMode, Button, AnimationWrapper
+} from '../../shared'
 import { IModalSelectGameMode } from './types'
 
 import styles from './ModalSelectGameMode.module.scss'
 
 const cx = classNames.bind(styles)
 
+const propsAnimation = {
+	initial: { opacity: 0 },
+  animate: { opacity: 1 },
+  exit: { opacity: 0 },
+  transition: {
+    delay: .1,
+    duration: .3,
+    ease: 'easeInOut',
+  }
+}
+
 export const ModalSelectGameMode = ({
   isOpen = false,
   className = '',
-  closeHandler
+  closeHandler,
+	initialGameMode
 }: IModalSelectGameMode) => {
-  const [mode, setMode] = useState<typeDemoMode | typeOnChainMode>(isDemoMode)
-  const changeGameMode = useChangeGameMode()
-  const willChange = useWillChange()
+	const changeGameMode = useChangeGameMode()
+	const willChange = useWillChange()
+	const {
+		confirm, testMode, realMode, nowYouWillHave, greatYouveTried, letSGo,
+	} = useGetPhrases([
+		'confirm', 'realMode', 'testMode', 'beforeStartingTheGame',
+		'nowYouWillHave', 'greatYouveTried', 'letSGo'
+	])
 
-  const {
-    confirm, realMode, demoMode, selectGameMode, beforeStartingTheGame
-  } = useGetPhrases(['confirm', 'realMode', 'demoMode', 'selectGameMode', 'beforeStartingTheGame'])
+	const confirmGameModeHandler = () => {
+		changeGameMode(initialGameMode === isDemoMode ? isDemoMode : isOnChainMode)
+		closeHandler()
+	}
 
-  const confirmGameModeHandler = () => {
-    changeGameMode(mode)
-    closeHandler()
-  }
-
-  return (
-    // TODO: вынести это в отдельный компонент обертку
-    <AnimatePresence>
-      {isOpen && (
-        <>
-          <motion.div
-            className={cx('modal')}
-            initial={{opacity: 0}}
-            animate={{opacity: 1}}
-            exit={{opacity: 0}}
-            transition={{
-              delay: .1,
-              duration: .3,
-              ease: 'easeInOut',
-            }}
-            style={{willChange}}
-          >
-            <div className={cx('modal__wrapper', className)}>
-              <p className={cx('title', 'h1')}>{selectGameMode}</p>
-              <p className={cx('description', 'p-reg')}>{beforeStartingTheGame}</p>
-              <SelectHorizontal
-                changeId={isDemoMode}
-                textBtnLeft={realMode}
-                textBtnRight={demoMode}
-                onClickLeftBtn={() => setMode(isOnChainMode)}
-                onClickRightBtn={() => setMode(isDemoMode)}
-              />
-              <Button
-                className={cx('button', 'button__confirm', 'p font-w-semibold')}
-                onClick={confirmGameModeHandler}
-                type='blue'
-              >
-                {confirm}
-              </Button>
-            </div>
-          </motion.div>
-          <motion.div
-            className={cx('blur')}
-            initial={{opacity: 0}}
-            animate={{opacity: 1}}
-            exit={{opacity: 0}}
-            transition={{
-              delay: .1,
-              duration: .3,
-              ease: 'easeInOut',
-            }}
-            style={{willChange}}
-          />
-        </>
-      )}
-    </AnimatePresence>
-  )
+	return (
+		// TODO: вынести это в отдельный компонент обертку
+		<AnimationWrapper
+			isOpen={isOpen}
+			style={{willChange}}
+			className={cx('blur')}
+			{...propsAnimation}
+		>
+			<div className={cx('modal')}>
+				<div className={cx('modal__wrapper', className)}>
+					<p className={cx('title', 'h1')}>{initialGameMode === isDemoMode ? testMode : realMode}</p>
+					<p className={cx('description', 'p-reg')}>{initialGameMode === isDemoMode ? nowYouWillHave : greatYouveTried}</p>
+					<Button
+						className={cx('button', 'button__confirm', 'p font-w-semibold')}
+						onClick={confirmGameModeHandler}
+						type='blue'
+					>
+						{initialGameMode === isDemoMode ? confirm : letSGo}
+					</Button>
+				</div>
+			</div>
+		</AnimationWrapper>
+	)
 }
