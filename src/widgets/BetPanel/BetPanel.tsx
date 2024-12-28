@@ -36,7 +36,7 @@ export const BetPanel = ({ data, type='up' }: Props) => {
 				.catch((error) => new Error('Error: ' + error))
 		}
 		if (gamePhase === 0) setCompletedRound(false)
-	}, [gameMode, gamePhase, ticker])
+	}, [gamePhase])
 
 	return (
 		<div className={cx('panel', { 'panel__result': completedRound, 'wins': type === groupWins, 'lose': type !== groupWins })}>

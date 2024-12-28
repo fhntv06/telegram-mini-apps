@@ -36,7 +36,6 @@ export const App: FC = () => {
   const { openHandler: openHandlerNotification, setTonsHandler, setPointsHandler } = useContext<INotificationContextTypes>(NotificationContext)
   const { openHandler: openHandlerAnimation } = useContext<IAnimationContextTypes>(AnimationContext)
   const { gamePhase } = useSelector((state) => state.gameStatus)
-  const { bet } = useSelector((state) => state.bets)
   const { ticker, gameMode } = useSelector((state) => state.modeSettings)
   const userData = useUserData()
 
@@ -79,27 +78,27 @@ export const App: FC = () => {
   }, [data, priceHistory])
 
   useEffect(() => {
-    if (gamePhase === 4 && address && bet && userData?.id) {
+    if (gamePhase === 4 && address && userData?.id) {
       getWalletBet({ address, ticker, gameMode, demoTgId: userData.id })
-      .then((res) => {
-        console.log('res getWalletBet', res)
-        if (res.data.error) {
-          throw new Error('Error getWalletBet: res have error')
-        }
-        if (res.data.winReward) {
-          openHandlerNotification('wins')
-          setTonsHandler(res.data.winReward.tons)
-          setPointsHandler(res.data.winReward.points)
-          openHandlerAnimation('wins')
-        } else if (res.data.loose) {
-          openHandlerNotification('lose')
-          setTonsHandler(res.data.loose)
-        } else if (res.data.refund) {
-          openHandlerNotification('refund')
-          setTonsHandler(res.data.refund)
-        }
-      })
-      .catch((error) => console.log(error))
+        .then((res) => {
+          console.log('res getWalletBet', res)
+          if (res.data.error) {
+            throw new Error('Error getWalletBet: res have error')
+          }
+          if (res.data.winReward) {
+            openHandlerNotification('wins')
+            setTonsHandler(res.data.winReward.tons)
+            setPointsHandler(res.data.winReward.points)
+            openHandlerAnimation('wins')
+          } else if (res.data.loose) {
+            openHandlerNotification('lose')
+            setTonsHandler(res.data.loose)
+          } else if (res.data.refund) {
+            openHandlerNotification('refund')
+            setTonsHandler(res.data.refund)
+          }
+        })
+        .catch((error) => console.log(error))
     }
   }, [gamePhase])
 
