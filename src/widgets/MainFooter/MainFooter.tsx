@@ -1,5 +1,5 @@
 import WebApp from '@twa-dev/sdk'
-import { useContext, useCallback, useEffect } from 'react'
+import { useCallback, useContext, useEffect } from 'react'
 import { useTonWallet, useTonAddress } from '@tonconnect/ui-react'
 import classNames from 'classnames/bind'
 import { getBalance, getDemoBalance } from '../../app/api'
@@ -8,14 +8,14 @@ import { BetPanel, PanelButtonsBet } from '../../widgets'
 import { useGetPhrases, useDispatch, useSelector } from '../../hooks'
 import { ButtonConnectWallet, ButtonTopUp } from '../../feature'
 import {
-	Icon, Rounds, formatNumber, getCorrectBalance,
+	Icon, Rounds, formatNumber,
 	isDemoMode, minBet, setStorage, getStorage, removeStorage
 } from '../../shared'
 import { IRoundsType } from '../../shared/types'
-import { ModalContextTypes } from '../../app/providers/ModalProvider/types'
-import { ModalContext } from '../../app/contexts'
 
 import styles from './MainFooter.module.scss'
+import { ModalContextTypes } from "../../app/providers/ModalProvider/types.ts";
+import { ModalContext } from "../../app/contexts";
 
 const cx = classNames.bind(styles)
 
@@ -33,12 +33,13 @@ export const MainFooter = () => {
 	const { gameMode } = useSelector((state) => state.modeSettings)
 	const userDataWallet = useSelector((state) => state.userDataWallet)
 	const { multiplierData: { totalMultiplier } } = useSelector((state) => state.retrievesData)
+	const { isNewPlayer } = useSelector((state) => state.retrievesData)
 	const { openHandler: openHandlerModal } = useContext<ModalContextTypes>(ModalContext)
 
   const { players, multiplier, balance, lastGames } = useGetPhrases(['players', 'multiplier', 'balance', 'lastGames'])
 
 	const setDataUser = useCallback(() => {
-			// TODO: Это убрать в кнопку подключения и перенести в отдельный хук
+		// TODO: Это убрать в кнопку подключения и перенести в отдельный хук
 
 		if (gameMode === isDemoMode && WebApp.initData) { // с ПК это работать не будет, нужно тестировать только с приложения ТГ
 			console.log('execute getDemoBalance')
@@ -72,9 +73,14 @@ export const MainFooter = () => {
 
 					return 0
 				})
-
 		}
-	}, [address, dispatch, gameMode, userDataWallet])
+	}, [gameMode])
+
+	useEffect(() => {
+		if (wallet && isNewPlayer && !getStorage('visibleTestModeModalSelectGameMode')) {
+			openHandlerModal('switchMode')
+		}
+	}, [gamePhase, wallet])
 
 	// TODO: вынести код выше!
 	// не должно быть тут!
@@ -92,25 +98,24 @@ export const MainFooter = () => {
 
 	// Когда уже в игре
 	useEffect(() => {
-		if (wallet && userDataWallet.balance < minBet) {
+		if (wallet && Number(userDataWallet.balance) < minBet) {
 			if (gamePhase === 0 && !getStorage('dontPayUser')) {
 				setStorage('dontPayUser', '1')
-				openHandlerModal('switchMode')
 			}
 		} else {
 			removeStorage('dontPayUser')
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [gamePhase, userDataWallet.balance, wallet])
+	}, [gamePhase, wallet])
 
 	// Когда заходит в App
 	useEffect(() => {
-		if (wallet && userDataWallet.balance < minBet) {
+		if (wallet && Number(userDataWallet.balance) < minBet) {
 			setStorage('dontPayUser', '1')
 		} else {
 			removeStorage('dontPayUser')
 		}
-	}, [userDataWallet.balance, wallet])
+	}, [wallet])
 
 	return (
 		<footer className={cx('footer')}>
@@ -138,7 +143,7 @@ export const MainFooter = () => {
 					<h2>{balance}</h2>
 					<p className='p-medium'>
 						<Icon name='ton-medium' size='medium'/>
-						{getCorrectBalance(userDataWallet.balance)}
+						{userDataWallet.balance}
 					</p>
 				</div>
 			</header>
