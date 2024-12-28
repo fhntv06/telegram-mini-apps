@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { IUserRetrievesData } from './types.ts'
+import { IUserRetrievesData } from './types'
 
 const initialState: IUserRetrievesData = {
   invitedFriends: 5,
@@ -12,7 +12,8 @@ const initialState: IUserRetrievesData = {
     bets: 1.1,
     refs: 2.5,
     totalMultiplier: 4.7,
-  }
+  },
+  isNewPlayer: true
 }
 
 const sliceUserRetrievesData = createSlice({
@@ -26,6 +27,7 @@ const sliceUserRetrievesData = createSlice({
       state.placeInLeaderboard = action.payload.placeInLeaderboard
       state.points = action.payload.points
       state.multiplierData = action.payload.multiplierData
+      state.isNewPlayer = action.payload.isNewPlayer
     }
   }
 })
