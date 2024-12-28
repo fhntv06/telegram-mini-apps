@@ -68,6 +68,7 @@ const listAnimates = {
       ...styles,
       width: '100%',
       height: '100%',
+      zIndex: 2
     },
     animation: loadPerson,
     settings: {
