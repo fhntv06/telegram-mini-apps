@@ -1,9 +1,7 @@
 import { useState } from 'react'
 import classNames from 'classnames/bind'
 import { AnimationProvider, ModalProvider } from '../../app/providers'
-import { MainFooter, Chart,
-  // ModalSelectGameMode,
-  OnboardingStats } from '../../widgets'
+import { MainFooter, Chart, OnboardingStats } from '../../widgets'
 import { AnimationWrapper, getStorage } from '../../shared'
 
 import styles from './Main.module.scss'
