@@ -1,12 +1,13 @@
+import { useContext } from 'react'
 import { useTonWallet, useTonConnectUI } from '@tonconnect/ui-react'
 import classNames from 'classnames/bind'
 import { useTransaction, useGetPhrases, useSelector } from '../../hooks'
 import { Button, minBet } from '../../shared'
 
+import { INotificationContextTypes } from '../../app/providers/types'
+import { NotificationContext } from '../../app/contexts'
+
 import styles from './ButtonPlaceBet.module.scss'
-import { useContext } from "react";
-import { INotificationContextTypes } from "../../app/providers/NotificationProvider/types.ts";
-import { NotificationContext } from "../../app/contexts";
 
 const cx = classNames.bind(styles)
 
@@ -37,7 +38,7 @@ export const ButtonPlaceBet = ({
 			tonConnectUI.openModal()
 					.then(() => openHandlerNotification('warning', { text: connectYourTON }))
 		}
-		else if (!(balance >= minBet)) openHandlerNotification('warning', { text: topUpYourWallet })
+		else if (!(Number(balance) >= minBet)) openHandlerNotification('warning', { text: topUpYourWallet })
 		else if ((gamePhase !== 1 && gamePhase !== 0)) openHandlerNotification('warning', { text: theRoundHasAlready })
 		else {
 			sendTransaction(type)

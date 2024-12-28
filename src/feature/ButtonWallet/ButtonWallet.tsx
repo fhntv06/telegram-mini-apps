@@ -1,7 +1,7 @@
 import classNames from 'classnames/bind'
 import styles from './ButtonWallet.module.scss'
 import { useSelector } from '../../hooks'
-import { getCorrectBalance, Button, isDemoMode } from '../../shared'
+import { Button, isDemoMode } from '../../shared'
 
 const cx = classNames.bind(styles)
 
@@ -33,7 +33,7 @@ export const ButtonWallet = ({
 			sizeIcons='medium'
 			onClick={buttonWalletHandler}
 		>
-			{getCorrectBalance(balance)}
+			{balance}
 		</Button>
 	)
 }

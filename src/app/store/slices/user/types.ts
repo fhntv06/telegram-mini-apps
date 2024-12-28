@@ -8,7 +8,7 @@ export interface IUser {
     appVersion: string
     maxProtocolVersion: string
     platform: string
-    balance: number
+    balance: string
 }
 
 export interface IUserRetrievesMultiplierData {
@@ -25,6 +25,7 @@ export interface IUserRetrievesData {
     placeInLeaderboard: number
     points: number
     multiplierData: IUserRetrievesMultiplierData
+    isNewPlayer: boolean
 }
 
 export interface IUserDataTelegram {
