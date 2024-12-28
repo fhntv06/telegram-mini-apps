@@ -101,7 +101,7 @@ const TopUpByCard = [
 
 export const Wallet = () => {
   const [isCopied, setIsCopied] = useState<boolean>(false)
-  const { balance: balanseUser } = useSelector((state) => state.userDataWallet)
+  const { balance: balanceUser } = useSelector((state) => state.userDataWallet)
   const { topUp, copied, balance } = useGetPhrases(['topUp', 'copied', 'balance'])
   const address = useTonAddress()
   const handlerDisconnect = useDisconnect()
@@ -127,7 +127,7 @@ export const Wallet = () => {
         <h2 className='h2-big'>{balance}</h2>
         <div className={cx('page-wallet__balance', { 'not-balance': !address })}>
           {address && <Icon name='ton' size='big' />}
-          <h1>{address ? balanseUser : '- -'}</h1>
+          <h1>{address ? balanceUser : '- -'}</h1>
         </div>
       </header>
       <main className={cx('page__main')}>

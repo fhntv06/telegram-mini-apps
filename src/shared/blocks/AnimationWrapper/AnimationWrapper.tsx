@@ -9,6 +9,7 @@ interface IProps {
   animate?: object
   exit?: object
   transition?: object
+  className?: string
 }
 
 export const AnimationWrapper = ({
@@ -18,7 +19,8 @@ export const AnimationWrapper = ({
   initial = { opacity: 0 },
   animate = { opacity: 1 },
   exit = { opacity: 0 },
-  transition = { delay: .1, duration: .3, ease: 'easeIn' }
+  transition = { delay: .1, duration: .3, ease: 'easeIn' },
+  className
 }: IProps) => {
   const willChange = useWillChange()
 
@@ -31,6 +33,7 @@ export const AnimationWrapper = ({
           exit={exit}
           transition={transition}
           style={{ ...style, willChange }}
+          className={className}
         >
           {children}
         </motion.div>

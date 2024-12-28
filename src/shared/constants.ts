@@ -1,7 +1,7 @@
 import { IGameStatus } from '../app/providers/types'
 import { ILang, typeOnChainMode, typeDemoMode } from './types'
 export const urlSocket = `${import.meta.env.VITE_SOCKET_PROTOCOL}://${import.meta.env.VITE_DOMAIN}:${import.meta.env.VITE_PORT}`
-export const minBet = 0.5 * 1000000000
+export const minBet = 0.5
 export const countPointsChart = 25
 export const numberLastPoint = countPointsChart - 1
 export const initialDataPriceHistory: number[] = ((min = 61900, max = 62100) => {
@@ -42,7 +42,7 @@ export const initialDataGameStatus: IGameStatus = {
 	totalBets: 50 * 10**9,
 	btcPrice: (Math.floor(Math.random() * (62100 - 62000 + 1))) + 62000,
 	startBtcPrice: 62000,
-	gamePhase: 3,
+	gamePhase: 0,
 	phaseTimeUntil: Date.now() + 30 * 1000,
 	gameResult: 0,
 	last3GamesRes: [Math.floor(Math.random() * (2 - 1 + 1)) + 1, Math.floor(Math.random() * (2 - 1 + 1)) + 1, Math.floor(Math.random() * (2 - 1 + 1)) + 1],
@@ -98,7 +98,6 @@ export interface ILangPhrase {
 	'30 Minutes': string
 	commingSoon: string
 	onboarding: string[]
-	realMode: string
 	gameWithRealTONCoins: string
 	demoMode: string
 	learningWithNonRealCoins: string
@@ -152,6 +151,11 @@ export interface ILangPhrase {
 	inviteFriends: string
 	invitedFriends: string
 	instruction: string
+	testMode: string
+	realMode: string
+	nowYouWillHave: string
+	greatYouveTried: string
+	letSGo: string
 }
 export interface ILanguage {
 	'english': ILangPhrase
@@ -216,7 +220,6 @@ export const arLanguagesPhraseSite: ILanguage = {
 			'You can change the mode by pressing the button in the upper left corner of the screen and selecting the desired parameters',
 			'Now select a game mode, and start predicting. You can change your choice at any time in the menu'
 		],
-		realMode: 'real mode',
 		gameWithRealTONCoins: 'game with real ton coins',
 		demoMode: 'demo mode',
 		learningWithNonRealCoins: 'learning with non real coins',
@@ -230,7 +233,7 @@ export const arLanguagesPhraseSite: ILanguage = {
 		alias: 'en',
 		notEnoughDemoBalance: 'Not enough demo balance',
 		yourAnOutOfTime: 'You did not have enough time to bid in this round, please wait for the next round',
-		topUpYourWallet: 'Top up your wallet to place a bet',
+		topUpYourWallet: 'Top up your wallet',
 		startGame: 'Start game',
 		beforeStartingTheGame: 'Before starting the game, select the mode. You can change your selection in the assets menu',
 		switchToRealMode: 'Switch to Real mode',
@@ -270,6 +273,11 @@ export const arLanguagesPhraseSite: ILanguage = {
 		inviteFriends: 'Invite friends',
 		invitedFriends: 'Invited friends',
 		instruction: 'Instruction',
+		testMode: 'Test mode',
+		realMode: 'Real mode',
+		nowYouWillHave: 'Now you will have a test game so that you can familiarize yourself with the game',
+		greatYouveTried: "Great, you've tried to make test lets - try it on real mode now",
+		letSGo: 'Let’s go',
 	},
 	spanish: {
 		gameInProcess: [
@@ -328,7 +336,6 @@ export const arLanguagesPhraseSite: ILanguage = {
 			'Puede cambiar el modo presionando el botón en la esquina superior izquierda de la pantalla y seleccionando los parámetros deseados',
 			'Ahora selecciona un modo de juego y comienza a predecir. Puedes cambiar tu elección en cualquier momento en el menú.'
 		],
-		realMode: 'modo real',
 		gameWithRealTONCoins: 'juego con monedas de toneladas reales',
 		demoMode: 'modo de demostración',
 		learningWithNonRealCoins: 'aprender con monedas no reales',
@@ -341,7 +348,7 @@ export const arLanguagesPhraseSite: ILanguage = {
 		alias: 'es',
 		notEnoughDemoBalance: 'No hay suficiente saldo de demostración',
 		yourAnOutOfTime: 'Te quedaste sin tiempo para apostar en esta ronda, espera a la próxima ronda',
-		topUpYourWallet: 'Recarga tu billetera para hacer una apuesta',
+		topUpYourWallet: 'Recarga tu billetera',
 		startGame: 'Iniciar juego',
 		beforeStartingTheGame: 'Antes de comenzar el juego, selecciona el modo. Puede cambiar su selección en el menú activos',
 		switchToRealMode: 'Cambiar al modo real',
@@ -381,6 +388,11 @@ export const arLanguagesPhraseSite: ILanguage = {
 		inviteFriends: 'Invitar amigos',
 		invitedFriends: 'Amigos invitados',
 		instruction: 'Instrucción',
+		testMode: 'Modo de prueba',
+		realMode: 'Modo real',
+		nowYouWillHave: 'Ahora tendrás un juego de prueba para que puedas familiarizarte con el juego',
+		greatYouveTried: "Genial, has intentado hacer una prueba, pruébalo en modo real ahora",
+		letSGo: 'Vamos',
 	},
 	chinese: {
 		gameInProcess: [
@@ -439,7 +451,6 @@ export const arLanguagesPhraseSite: ILanguage = {
 			'您可以通过按下屏幕左上角的按钮并选择所需的参数来更改模式',
 			'现在选择游戏模式并开始预测。您可以随时在菜单中更改您的选择'
 		],
-		realMode: '实模式',
 		gameWithRealTONCoins: '使用真吨硬币的游戏',
 		demoMode: '演示模式',
 		learningWithNonRealCoins: '用非真实硬币学习',
@@ -452,7 +463,7 @@ export const arLanguagesPhraseSite: ILanguage = {
 		alias: 'zh',
 		notEnoughDemoBalance:'没有足够的演示平衡',
 		yourAnOutOfTime: '你在这轮投注的时间已经用完了，请等待下一轮',
-		topUpYourWallet: '充值你的钱包下注',
+		topUpYourWallet: '把你的钱包装满',
 		startGame: '开始游戏',
 		beforeStartingTheGame: '在开始游戏之前，选择模式。 您可以在资产菜单中更改选择',
 		switchToRealMode: '切换到真实模式',
@@ -492,6 +503,11 @@ export const arLanguagesPhraseSite: ILanguage = {
 		inviteFriends: '邀请朋友',
 		invitedFriends: '邀请朋友',
 		instruction: '教育指引',
+		testMode: '测试模式',
+		realMode: '真实模式',
+		nowYouWillHave: '现在你将有一个测试游戏，这样你就可以熟悉游戏',
+		greatYouveTried: "很好，你已经试过测试了--现在就在真实模式上试试吧",
+		letSGo: '我们走吧',
 	},
 	russian: {
 		gameInProcess: [
@@ -550,7 +566,6 @@ export const arLanguagesPhraseSite: ILanguage = {
 			'Вы можете изменить режим, нажав кнопку в левом верхнем углу экрана и выбрав нужные параметры',
 			'Теперь выберите режим игры и приступайте к прогнозированию. Вы можете изменить свой выбор в любой момент в меню.'
 		],
-		realMode: 'реальный режим',
 		gameWithRealTONCoins: 'игра с реальными тоннами монет',
 		demoMode: 'деморежим',
 		learningWithNonRealCoins: 'обучение с ненастоящими монетами',
@@ -563,7 +578,7 @@ export const arLanguagesPhraseSite: ILanguage = {
 		alias: 'ru',
 		notEnoughDemoBalance: 'Недостаточно демо-баланса',
 		yourAnOutOfTime: 'У вас не хватило времени сделать ставку в этом раунде, пожалуйста, дождитесь следующего раунда',
-		topUpYourWallet: 'Пополните свой кошелек, чтобы сделать ставку',
+		topUpYourWallet: 'Пополните свой кошелек',
 		startGame: 'Начать игру',
 		beforeStartingTheGame: 'Перед началом игры выберите режим. Вы можете изменить свой выбор в меню "Ресурсы".',
 		switchToRealMode: 'Переключиться в реальный режим',
@@ -603,6 +618,11 @@ export const arLanguagesPhraseSite: ILanguage = {
 		inviteFriends: 'Пригласить друзей',
 		invitedFriends: 'Приглашено друзей',
 		instruction: 'Инструкция',
+		testMode: 'Тестовый режим',
+		realMode: 'Реальный режим',
+		nowYouWillHave: 'Теперь у вас будет тестовая игра, чтобы вы могли ознакомиться с игрой',
+		greatYouveTried: "Отлично, вы попробовали сделать тест, давайте попробуем это на практике\". режим сейчас",
+		letSGo: 'Поехали',
 	},
 }
 export const arLanguagesSite: ILang[] = [
@@ -641,4 +661,4 @@ export const sourceAltinbit: string = 'http://altinbit.com/'
 export const sourceBitobmen: string = 'http://bitobmen.net/'
 export const sourcePaybis: string = 'https://t.me/paybis_crypto_exchange_bot'
 
-export const maxCountTransactionForShowModalSwithcMode = 10
+export const maxCountTransactionForShowModalSwitchMode = 5
