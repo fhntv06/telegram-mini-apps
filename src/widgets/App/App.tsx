@@ -73,7 +73,6 @@ export const App: FC = () => {
     // TODO: Вынести в Main
     if (data && 'btcPrice' in data && data.btcPrice && priceHistory.length) {
       dispatch(setGameStatus({ ...data, priceHistory}))
-      setIsLoading(false)
 
       if (isLoading && WebApp.initData) {
         handlerPostReferral()
