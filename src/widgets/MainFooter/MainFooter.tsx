@@ -8,7 +8,11 @@ import {useGetPhrases,
 import { ButtonConnectWallet, ButtonTopUp } from '../../feature'
 import {
 	Icon, Rounds, formatNumber,
-	minBet, setStorage, getStorage, removeStorage, getCorrectBalance
+	minBet,
+	// setStorage,
+	getStorage,
+	// removeStorage,
+	getCorrectBalance
 } from '../../shared'
 import { IRoundsType } from '../../shared/types'
 
@@ -56,26 +60,26 @@ export const MainFooter = () => {
 		}
 	}, [gameMode, wallet])
 
-	// Когда уже в игре
-	useEffect(() => {
-		if (wallet && Number(userBalance / 1000000000) < minBet) {
-			if (gamePhase === 0 && !getStorage('dontPayUser')) {
-				setStorage('dontPayUser', '1')
-			}
-		} else {
-			removeStorage('dontPayUser')
-		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [gamePhase, wallet])
-
-	// Когда заходит в App
-	useEffect(() => {
-		if (wallet && Number(userBalance / 1000000000) < minBet) {
-			setStorage('dontPayUser', '1')
-		} else {
-			removeStorage('dontPayUser')
-		}
-	}, [wallet])
+	// // Когда уже в игре
+	// useEffect(() => {
+	// 	if (wallet && Number(userBalance / 1000000000) < minBet) {
+	// 		if (gamePhase === 0 && !getStorage('dontPayUser')) {
+	// 			setStorage('dontPayUser', '1')
+	// 		}
+	// 	} else {
+	// 		removeStorage('dontPayUser')
+	// 	}
+	// // eslint-disable-next-line react-hooks/exhaustive-deps
+	// }, [gamePhase, wallet])
+	//
+	// // Когда заходит в App
+	// useEffect(() => {
+	// 	if (wallet && Number(userBalance / 1000000000) < minBet) {
+	// 		setStorage('dontPayUser', '1')
+	// 	} else {
+	// 		removeStorage('dontPayUser')
+	// 	}
+	// }, [wallet])
 
 	return (
 		<footer className={cx('footer')}>
@@ -114,7 +118,7 @@ export const MainFooter = () => {
 			<footer className={cx('footer__bets')}>
 				{(
 					wallet
-						? getStorage('dontPayUser')
+						? Number(userBalance / 1000000000) < minBet
 							? <ButtonTopUp sizeIcons='big' />
 							: <PanelButtonsBet />
 					: null

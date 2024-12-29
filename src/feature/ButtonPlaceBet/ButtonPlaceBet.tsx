@@ -42,7 +42,7 @@ export const ButtonPlaceBet = ({
 		else if ((gamePhase !== 1 && gamePhase !== 0)) openHandlerNotification('warning', { text: theRoundHasAlready })
 		else {
 			sendTransaction(type)
-				.then(r => console.log('Success sendTransaction! ' + r))
+				.then(() => console.log('Success sendTransaction!'))
 				.catch((e) => console.log(new Error('Error in sendTransaction: ' + e)))
 
 			if (onClick) onClick()

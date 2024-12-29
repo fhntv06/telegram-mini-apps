@@ -18,8 +18,6 @@ export const useSetBalance = () => {
     const param = gameMode === isDemoMode ? WebApp.initData : address
 
     const updateBalance = () => {
-      console.log('updateBalance')
-
       method(param)
         .then(res => setBalance(res.data.balance))
         .catch((error) => {
