@@ -14,8 +14,8 @@ export const Main = () => {
   const [skipOnBoarding, setSkipOnBoarding] = useState<boolean>(false)
   const [visibleOnboarding, setCheckConditionToVisibleOnboarding] = useState<boolean>(false)
 
-  const visibleOnboardingHandler = () => {
-    setCheckConditionToVisibleOnboarding(true)
+  const skipOnboardingHandler = () => {
+    setSkipOnBoarding(true)
     setStorage('visibleOnboarding', new Date().getTime().toString())
   }
 
@@ -25,12 +25,11 @@ export const Main = () => {
     if (timeStampLastVisibleOnboarding) {
       if ((new Date().getTime() - timeStampLastVisibleOnboarding) > 1000 * 30) {
         // setCheckConditionToVisibleOnboarding((new Date().getTime() - timeStampLastVisibleOnboarding) > msInDay)
-        visibleOnboardingHandler()
+        setCheckConditionToVisibleOnboarding(true)
       }
     } else {
-      visibleOnboardingHandler()
+      setCheckConditionToVisibleOnboarding(true)
     }
-
   }, [])
 
   return (
@@ -47,7 +46,7 @@ export const Main = () => {
           animate={{}}
           exit={{ translateX: '-100%' }}
         >
-          <OnboardingStats handlerSkip={setSkipOnBoarding} />
+          <OnboardingStats handlerSkip={skipOnboardingHandler} />
         </AnimationWrapper>
       </AnimationProvider>
     </ModalProvider>
