@@ -16,11 +16,13 @@ export const Main = () => {
     const timeStampLastVisibleOnboarding = Number(getStorage('visibleOnboarding'))
 
     if (timeStampLastVisibleOnboarding) {
-      setCheckConditionToVisibleOnboarding((new Date().getTime() - timeStampLastVisibleOnboarding) > msInDay)
+      // setCheckConditionToVisibleOnboarding((new Date().getTime() - timeStampLastVisibleOnboarding) > msInDay)
+      setCheckConditionToVisibleOnboarding((new Date().getTime() - timeStampLastVisibleOnboarding) > 1000 * 10)
     } else {
       setCheckConditionToVisibleOnboarding(true)
-      setStorage('visibleOnboarding', new Date().getTime().toString())
     }
+
+    setStorage('visibleOnboarding', new Date().getTime().toString())
   }, [])
 
   return (

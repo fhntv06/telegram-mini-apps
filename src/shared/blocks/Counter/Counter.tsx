@@ -14,7 +14,7 @@ export function Counter({
   fixedNumber = 1,
   animation = false,
   from = 0,
-  to,
+  to = 0,
   className
 }: ICounter) {
   const ref = useRef<HTMLHeadingElement>(null);
@@ -46,7 +46,7 @@ export function Counter({
   return (
     <div className={cx('counter', {'animation': animation})}>
       {prefix && <h1 className={className}>{prefix}</h1>}
-      <h1 className={className} ref={ref} />
+      {(from === 0 && to === 0) ? <h1 className={className}>0</h1> : <h1 className={className} ref={ref} />}
     </div>
   )
 }
