@@ -23,7 +23,7 @@ import { setUserRetrievesData } from '../../app/store/slices'
 import { INotificationContextTypes, IAnimationContextTypes } from '../../app/providers/types'
 
 import { PanelMenu } from '../../feature'
-import { useGameSocket, usePriceHistory, useUserData, useDispatch, useSelector } from '../../hooks'
+import {useGameSocket, usePriceHistory, useUserData, useDispatch, useSelector, useSetBalance} from '../../hooks'
 import { LoaderSpinner, removeStorage } from '../../shared'
 
 export const App: FC = () => {
@@ -38,6 +38,7 @@ export const App: FC = () => {
   const { gamePhase } = useSelector((state) => state.gameStatus)
   const { ticker, gameMode } = useSelector((state) => state.modeSettings)
   const userData = useUserData()
+  const { updateBalance } = useSetBalance()
 
   // TODO: вынести все методы по получению данные при первом рендере в отдельный компонент
   const handlerPostReferral = () => {
@@ -128,6 +129,8 @@ export const App: FC = () => {
     getLeaderboard()
       .then((res) => dispatch(setLeaderboards(res.data)))
       .catch((error) => new Error('Error in getTasks: ' + error))
+
+    updateBalance()
 
     return () => removeStorage('visibleOnboarding')
   }, [])
