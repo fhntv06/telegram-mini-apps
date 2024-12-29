@@ -27,7 +27,9 @@ import {useGameSocket, usePriceHistory, useUserData, useDispatch, useSelector, u
 import { LoaderSpinner, removeStorage } from '../../shared'
 
 export const App: FC = () => {
-  const [isLoading, setIsLoading] = useState<boolean>(true)
+  const [isLoading, setIsLoading] = useState
+    <{ gameSocketDataIsLoaded: boolean, userRetrievesDataIsLoaded: boolean} >
+    ({ gameSocketDataIsLoaded: false, userRetrievesDataIsLoaded: false })
   const dispatch = useDispatch()
   const data = useGameSocket()
   const priceHistory = usePriceHistory()
@@ -59,7 +61,10 @@ export const App: FC = () => {
       postReferral(data)
         .then((res)=> console.log('Data post referral: ', res.data))
         .then(() => getRetrievesData(WebApp.initData))
-        .then((retrievesData) => dispatch(setUserRetrievesData(retrievesData.data)))
+        .then((retrievesData) => {
+          dispatch(setUserRetrievesData(retrievesData.data))
+          setIsLoading({ ...isLoading, userRetrievesDataIsLoaded: true })
+        })
         .catch(() => new Error('Error: for postReferral dont have data user!'))
     })
   }
@@ -73,7 +78,7 @@ export const App: FC = () => {
   // update data backend
   useEffect(() => {
     if (data && 'btcPrice' in data && data.btcPrice && priceHistory.length) {
-      setIsLoading(false)
+      setIsLoading({ ...isLoading, gameSocketDataIsLoaded: true })
       dispatch(setGameStatus({ ...data, priceHistory}))
     }
   }, [data, priceHistory])
@@ -132,11 +137,14 @@ export const App: FC = () => {
 
     updateBalance()
 
-    return () => removeStorage('visibleOnboarding')
+    return () => {
+      removeStorage('dontPayUser')
+      removeStorage('visibleOnboarding')
+    }
   }, [])
 
   return (
-    isLoading
+    (!isLoading.userRetrievesDataIsLoaded || !isLoading.gameSocketDataIsLoaded)
       ? <LoaderSpinner />
       : (
         <BrowserRouter>
