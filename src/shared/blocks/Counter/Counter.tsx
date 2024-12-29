@@ -46,7 +46,7 @@ export function Counter({
   return (
     <div className={cx('counter', {'animation': animation})}>
       {prefix && <h1 className={className}>{prefix}</h1>}
-      {(from === 0 && to === 0) ? <h1 className={className}>0</h1> : <h1 className={className} style={{ color: "black" }} ref={ref} />}
+      {(from === 0 && to === 0) ? <h1 className={className}>0</h1> : <h1 className={className} ref={ref} />}
     </div>
   )
 }
