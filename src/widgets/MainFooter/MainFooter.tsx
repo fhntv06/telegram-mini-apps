@@ -143,7 +143,7 @@ export const MainFooter = () => {
 					<h2>{balance}</h2>
 					<p className='p-medium'>
 						<Icon name='ton-medium' size='medium'/>
-						{userDataWallet.balance}
+						{address ? userDataWallet.balance : '- -'}
 					</p>
 				</div>
 			</header>
