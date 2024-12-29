@@ -6,8 +6,7 @@ import classNames from 'classnames/bind'
 import { IOnboardingStats } from './types'
 import { AnimationBlock } from '../'
 import { useAnimation, useGetPhrases, useSelector } from '../../hooks'
-import { Button, Counter, setStorage
-} from '../../shared'
+import { Button, Counter } from '../../shared'
 
 import styles from './OnboardingStats.module.scss'
 
