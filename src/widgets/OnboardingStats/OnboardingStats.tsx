@@ -103,10 +103,6 @@ export const OnboardingStats = ({ handlerSkip, className }: IOnboardingStats) =>
   ])
   const { type, openHandler } = useAnimation()
 
-  const continueHandler = () => {
-    handlerSkip()
-  }
-
   useEffect(() => {
     const timer1 = setTimeout(() => {
       setDaysInRowSlide((prev) => prev + 1)
@@ -142,12 +138,7 @@ export const OnboardingStats = ({ handlerSkip, className }: IOnboardingStats) =>
       counter: invitedFriends,
       multiplier: multiplierData.refs,
     }
-  ], [daysInARow, daysInRow, invitedFriends, multiplierData.bets, multiplierData.daily, multiplierData.refs, totalBets])
-
-  useEffect(() => {
-    console.log({ceilParamsData})
-  }, []);
-
+  ], [daysInARow, daysInRow, invitedFriends, multiplierData.bets, multiplierData.daily, multiplierData.refs, phraseInvitedFriends, phraseTotalBets, totalBets])
 
   // TODO: переделать концепцию без слайдера просто на двух экранах!
   return (
@@ -178,44 +169,42 @@ export const OnboardingStats = ({ handlerSkip, className }: IOnboardingStats) =>
           allowTouchMove={false}
         >
           {screens.map((item) => (
-            <div key={`onboarding-stats-screen_${item.id}`} className={cx('onboarding-stats__screen')}>
-              <SwiperSlide className={cx('onboarding-stats__screen__slide')}>
-                <header>
-                  <div className={cx('onboarding-stats__screen__counter')}>
-                    {
-                      (item.type === 'daysInRow') ? (
-                        <h1 className={cx('h1-large', { 'color-ton-coin': daysInRow === daysInRowSlide })}>{daysInRowSlide}</h1>
-                      ) : (
-                        <Counter
-                          className={'h1-large color-ton-coin font-w-regular'}
-                          to={multiplierData.totalMultiplier}
-                          prefix={item.type === 'multiplier' ? '×' : ''}
-                          animation={indexSlider === 1}
-                          fixedNumber={2}
-                        />
-                      )
-                    }
-                    <p className='p-large p-reg'>{item.type === 'daysInRow' ? daysInTheGame : multiplierToday}</p>
-                  </div>
-                  {item.type === 'multiplier' && <CeilParams data={ceilParamsData} />}
-                  <p className={cx('onboarding-stats__screen__text', 'text', 'p-big p-reg')}>{item.type === 'daysInRow' ? logInToTheGame : yourMultiplier}</p>
-                </header>
-                {
-                  (item.type === 'multiplier') && (
-                    <footer>
-                      <Button
-                        className={cx('onboarding-stats-screen__button-continue')}
-                        type='blue'
-                        onClick={() => continueHandler()}
-                      >
-                        <p>{phraseContinue}</p>
-                      </Button>
-                    </footer>
-                  )
-                }
-                {(item.type === 'daysInRow') && <AnimationBlock animation={type}/>}
-              </SwiperSlide>
-            </div>
+            <SwiperSlide key={item.id} className={cx('onboarding-stats__screen__slide')}>
+              <header>
+                <div className={cx('onboarding-stats__screen__counter')}>
+                  {
+                    (item.type === 'daysInRow') ? (
+                      <h1 className={cx('h1-large', { 'color-ton-coin': daysInRow === daysInRowSlide })}>{daysInRowSlide}</h1>
+                    ) : (
+                      <Counter
+                        className={'h1-large color-ton-coin font-w-regular'}
+                        to={multiplierData.totalMultiplier}
+                        prefix={item.type === 'multiplier' ? '×' : ''}
+                        animation={indexSlider === 1}
+                        fixedNumber={2}
+                      />
+                    )
+                  }
+                  <p className='p-large p-reg'>{item.type === 'daysInRow' ? daysInTheGame : multiplierToday}</p>
+                </div>
+                {item.type === 'multiplier' && <CeilParams data={ceilParamsData} />}
+                <p className={cx('onboarding-stats__screen__text', 'text', 'p-big p-reg')}>{item.type === 'daysInRow' ? logInToTheGame : yourMultiplier}</p>
+              </header>
+              {
+                (item.type === 'multiplier') && (
+                  <footer>
+                    <Button
+                      className={cx('onboarding-stats-screen__button-continue')}
+                      type='blue'
+                      onClick={() => handlerSkip()}
+                    >
+                      <p>{phraseContinue}</p>
+                    </Button>
+                  </footer>
+                )
+              }
+              {(item.type === 'daysInRow') && <AnimationBlock animation={type}/>}
+            </SwiperSlide>
           ))}
         </Swiper>
       </div>
