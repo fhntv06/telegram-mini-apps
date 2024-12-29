@@ -29,7 +29,7 @@ export const BetPanel = ({ data, type='up' }: Props) => {
 		if (gamePhase === 4) {
 			getGameBetsResult(`ticker=${ticker}&gameMode=${gameMode}`)
 				.then((res) => {
-					setWiningPool(res.data.winingPoolEnd)
+					setWiningPool(res.data.winingPoolEnd / 1000000000)
 					setGroupWins(res.data.gameResult > 0 ? 'up' : 'down')
 					setCompletedRound(true)
 				})
@@ -47,7 +47,7 @@ export const BetPanel = ({ data, type='up' }: Props) => {
 						<div className={cx('panel__result__text')}>
 							<Icon name='ton' size='big'/>
 							<Counter
-								value={betsWiningPool}
+								to={betsWiningPool}
 								fixedNumber={2}
 								className={cx('h1', { 'up': type === groupWins })}
 								direction={type === groupWins ? 'up' : 'down'} />
