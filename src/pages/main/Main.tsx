@@ -1,8 +1,10 @@
-import {useEffect, useState} from 'react'
+import { useEffect, useState } from 'react'
 import classNames from 'classnames/bind'
 import { AnimationProvider, ModalProvider } from '../../app/providers'
 import { MainFooter, Chart, OnboardingStats } from '../../widgets'
-import {AnimationWrapper, getStorage, msInDay, setStorage} from '../../shared'
+import { AnimationWrapper, getStorage,
+  // msInDay,
+  setStorage } from '../../shared'
 
 import styles from './Main.module.scss'
 
@@ -12,17 +14,23 @@ export const Main = () => {
   const [skipOnBoarding, setSkipOnBoarding] = useState<boolean>(false)
   const [visibleOnboarding, setCheckConditionToVisibleOnboarding] = useState<boolean>(false)
 
+  const visibleOnboardingHandler = () => {
+    setCheckConditionToVisibleOnboarding(true)
+    setStorage('visibleOnboarding', new Date().getTime().toString())
+  }
+
   useEffect(() => {
     const timeStampLastVisibleOnboarding = Number(getStorage('visibleOnboarding'))
 
     if (timeStampLastVisibleOnboarding) {
-      // setCheckConditionToVisibleOnboarding((new Date().getTime() - timeStampLastVisibleOnboarding) > msInDay)
-      setCheckConditionToVisibleOnboarding((new Date().getTime() - timeStampLastVisibleOnboarding) > 1000 * 10)
+      if ((new Date().getTime() - timeStampLastVisibleOnboarding) > 1000 * 30) {
+        // setCheckConditionToVisibleOnboarding((new Date().getTime() - timeStampLastVisibleOnboarding) > msInDay)
+        visibleOnboardingHandler()
+      }
     } else {
-      setCheckConditionToVisibleOnboarding(true)
+      visibleOnboardingHandler()
     }
 
-    setStorage('visibleOnboarding', new Date().getTime().toString())
   }, [])
 
   return (
