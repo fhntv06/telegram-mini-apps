@@ -91,7 +91,7 @@ const CeilParams = ({ data }: ICeilParams) => {
 export const OnboardingStats = ({ handlerSkip, className }: IOnboardingStats) => {
   const swiperRef = useRef(null)
   const { totalBets, daysInRow, invitedFriends, multiplierData } = useSelector((state) => state.retrievesData)
-  const [daysInRowSlide, setDaysInRowSlide] = useState<number>(daysInRow)
+  const [daysInRowSlide, setDaysInRowSlide] = useState<number>(daysInRow - 1)
   const [indexSlider, setIndexSlider] = useState<number>(0)
 
   const {
@@ -184,7 +184,7 @@ export const OnboardingStats = ({ handlerSkip, className }: IOnboardingStats) =>
                   <div className={cx('onboarding-stats__screen__counter')}>
                     {
                       (item.type === 'daysInRow') ? (
-                        <h1 className={cx('h1-large', { 'color-ton-coin': daysInRow + 1 === daysInRowSlide })}>{daysInRowSlide}</h1>
+                        <h1 className={cx('h1-large', { 'color-ton-coin': daysInRow === daysInRowSlide })}>{daysInRowSlide}</h1>
                       ) : (
                         <Counter
                           className={'h1-large color-ton-coin font-w-regular'}
