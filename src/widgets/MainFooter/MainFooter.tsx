@@ -1,26 +1,25 @@
-import WebApp from '@twa-dev/sdk'
-import { useCallback, useContext, useEffect } from 'react'
+// import WebApp from '@twa-dev/sdk'
+import { useContext, useEffect } from 'react'
 import { useTonWallet, useTonAddress } from '@tonconnect/ui-react'
 import classNames from 'classnames/bind'
-import { getBalance, getDemoBalance } from '../../app/api'
-import { setUserDataWallet } from '../../app/store/slices'
 import { BetPanel, PanelButtonsBet } from '../../widgets'
-import { useGetPhrases, useDispatch, useSelector } from '../../hooks'
+import {useGetPhrases,
+	useSelector, useSetBalance} from '../../hooks'
 import { ButtonConnectWallet, ButtonTopUp } from '../../feature'
 import {
 	Icon, Rounds, formatNumber,
-	isDemoMode, minBet, setStorage, getStorage, removeStorage
+	minBet, setStorage, getStorage, removeStorage, getCorrectBalance
 } from '../../shared'
 import { IRoundsType } from '../../shared/types'
 
 import styles from './MainFooter.module.scss'
-import { ModalContextTypes } from "../../app/providers/ModalProvider/types.ts";
-import { ModalContext } from "../../app/contexts";
+import { ModalContextTypes } from '../../app/providers/ModalProvider/types'
+import { ModalContext } from '../../app/contexts'
+import { roundToFixed } from '../../shared/utils/formatNumber'
 
 const cx = classNames.bind(styles)
 
 export const MainFooter = () => {
-	const dispatch = useDispatch()
 	const {
 		upPoolData,
 		downPoolData,
@@ -31,50 +30,11 @@ export const MainFooter = () => {
 	const address = useTonAddress()
 	const { gamePhase } = useSelector((state) => state.gameStatus)
 	const { gameMode } = useSelector((state) => state.modeSettings)
-	const userDataWallet = useSelector((state) => state.userDataWallet)
 	const { multiplierData: { totalMultiplier } } = useSelector((state) => state.retrievesData)
 	const { isNewPlayer } = useSelector((state) => state.retrievesData)
 	const { openHandler: openHandlerModal } = useContext<ModalContextTypes>(ModalContext)
-
   const { players, multiplier, balance, lastGames } = useGetPhrases(['players', 'multiplier', 'balance', 'lastGames'])
-
-	const setDataUser = useCallback(() => {
-		// TODO: Это убрать в кнопку подключения и перенести в отдельный хук
-
-		if (gameMode === isDemoMode && WebApp.initData) { // с ПК это работать не будет, нужно тестировать только с приложения ТГ
-			console.log('execute getDemoBalance')
-			getDemoBalance(WebApp.initData)
-				.then(res => {
-					dispatch(
-						setUserDataWallet({
-							...userDataWallet,
-							balance: res.data.balance,
-						})
-					)
-				})
-				.catch((error) => {
-					new Error(error)
-
-					return 0
-				})
-		} else {
-			console.log('execute getBalance')
-			getBalance(address)
-				.then(res => {
-					dispatch(
-						setUserDataWallet({
-							...userDataWallet,
-							balance: res.data.balance,
-						})
-					)
-				})
-				.catch((error) => {
-					new Error(error)
-
-					return 0
-				})
-		}
-	}, [gameMode])
+	const { balance: userBalance, updateBalance } = useSetBalance()
 
 	useEffect(() => {
 		if (wallet && isNewPlayer && !getStorage('visibleTestModeModalSelectGameMode')) {
@@ -86,19 +46,19 @@ export const MainFooter = () => {
 	// не должно быть тут!
 	useEffect(() => {
 		if ((gamePhase === 3 || gamePhase === 4) && wallet) {
-			setDataUser()
+			updateBalance()
 		}
 	}, [wallet, gameMode, gamePhase])
 
 	useEffect(() => {
 		if (wallet) {
-			setDataUser()
+			updateBalance()
 		}
-	}, [gameMode, setDataUser, wallet])
+	}, [gameMode, wallet])
 
 	// Когда уже в игре
 	useEffect(() => {
-		if (wallet && Number(userDataWallet.balance) < minBet) {
+		if (wallet && Number(userBalance / 1000000000) < minBet) {
 			if (gamePhase === 0 && !getStorage('dontPayUser')) {
 				setStorage('dontPayUser', '1')
 			}
@@ -110,7 +70,7 @@ export const MainFooter = () => {
 
 	// Когда заходит в App
 	useEffect(() => {
-		if (wallet && Number(userDataWallet.balance) < minBet) {
+		if (wallet && Number(userBalance / 1000000000) < minBet) {
 			setStorage('dontPayUser', '1')
 		} else {
 			removeStorage('dontPayUser')
@@ -137,13 +97,13 @@ export const MainFooter = () => {
 				</div>
 				<div className={cx('footer__header__items')}>
 					<h2>{multiplier}</h2>
-					<p className='p-medium'>×{totalMultiplier}</p>
+					<p className='p-medium'>×{roundToFixed(totalMultiplier)}</p>
 				</div>
 				<div className={cx('footer__header__items')}>
 					<h2>{balance}</h2>
 					<p className='p-medium'>
 						<Icon name='ton-medium' size='medium'/>
-						{address ? userDataWallet.balance : '- -'}
+						{address ? getCorrectBalance(userBalance) : '- -'}
 					</p>
 				</div>
 			</header>
