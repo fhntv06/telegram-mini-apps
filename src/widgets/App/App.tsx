@@ -43,27 +43,27 @@ export const App: FC = () => {
   // TODO: вынести все методы по получению данные при первом рендере в отдельный компонент
   const handlerPostReferral = () => {
     new Promise((resolve) => resolve(null))
-    .then(() => {
-      // For wait Telegram data
-      const data: { initData: string, walletAddress?: string, referral?: string } = {
-        initData: WebApp.initData,
-      }
+      .then(() => {
+        // For wait Telegram data
+        const data: { initData: string, walletAddress?: string, referral?: string } = {
+          initData: WebApp.initData,
+        }
 
-      if (address) {
-        data['walletAddress'] = address
-      }
-      if (WebApp.initDataUnsafe.start_param) {
-        data['referral'] = WebApp.initDataUnsafe.start_param
-      }
+        if (address) {
+          data['walletAddress'] = address
+        }
+        if (WebApp.initDataUnsafe.start_param) {
+          data['referral'] = WebApp.initDataUnsafe.start_param
+        }
 
-      postReferral(data)
-        .then((res)=> console.log('Data post referral: ', res.data))
-        .then(() => getRetrievesData(WebApp.initData))
-        .then((retrievesData) => {
-          dispatch(setUserRetrievesData(retrievesData.data))
-          setIsLoading(false)
-        })
-        .catch(() => new Error('Error: for postReferral dont have data user!'))
+        postReferral(data)
+          .then((res)=> console.log('Data post referral: ', res.data))
+          .then(() => getRetrievesData(WebApp.initData))
+          .then((retrievesData) => {
+            dispatch(setUserRetrievesData(retrievesData.data))
+            setIsLoading(false)
+          })
+          .catch(() => new Error('Error: for postReferral dont have data user!'))
     })
   }
 
