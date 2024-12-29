@@ -104,7 +104,7 @@ export const OnboardingStats = ({ handlerSkip, className }: IOnboardingStats) =>
   const { type, openHandler } = useAnimation()
 
   const continueHandler = () => {
-    handlerSkip(true)
+    handlerSkip()
   }
 
   useEffect(() => {

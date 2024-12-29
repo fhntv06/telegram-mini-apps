@@ -1,7 +1,7 @@
-import { Dispatch, SetStateAction, ReactNode } from 'react'
+import { ReactNode } from 'react'
 
 export interface IOnboardingStats {
-  handlerSkip: Dispatch<SetStateAction<boolean>>
+  handlerSkip: () => void
   className?:string
 }
 
