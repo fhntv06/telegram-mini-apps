@@ -1,12 +1,12 @@
-import { useState } from 'react'
-import { useTonAddress } from '@tonconnect/ui-react'
+import {useEffect, useState} from 'react'
+import {useTonAddress, useTonWallet} from '@tonconnect/ui-react'
 import { motion } from 'framer-motion'
 import classNames from 'classnames/bind'
 
-import { useDisconnect, useGetPhrases, useSelector } from '../../hooks'
+import { useDisconnect, useGetPhrases, useSetBalance } from '../../hooks'
 import { ButtonConnectWallet } from '../../feature'
 import {
-  Button, Icon, Select,
+  Button, getCorrectBalance, Icon, Select,
   sourceAltinbit, sourceBitobmen, sourceCryptoBot,
   sourceKotleta, sourceOnemoment, sourcePaybis, sourceWallet
 } from '../../shared'
@@ -101,25 +101,30 @@ const TopUpByCard = [
 
 export const Wallet = () => {
   const [isCopied, setIsCopied] = useState<boolean>(false)
-  const { balance: balanceUser } = useSelector((state) => state.userDataWallet)
   const { topUp, copied, balance } = useGetPhrases(['topUp', 'copied', 'balance'])
   const address = useTonAddress()
+  const wallet = useTonWallet()
   const handlerDisconnect = useDisconnect()
+  const { balance: balanceUser, updateBalance } = useSetBalance()
 
   const handlerCopyAddress = () => {
     navigator.clipboard
-    .writeText(address)
-    .then(() => {
-      setIsCopied(true);
-      const timer = setTimeout(() => {
-        setIsCopied(false)
-        clearTimeout(timer)
-      }, 3000);
-    })
-    .catch((error) => {
-      console.error("Error copying address to clipboard:", error);
-    })
+      .writeText(address)
+      .then(() => {
+        setIsCopied(true);
+        const timer = setTimeout(() => {
+          setIsCopied(false)
+          clearTimeout(timer)
+        }, 3000);
+      })
+      .catch((error) => {
+        console.error("Error copying address to clipboard:", error);
+      })
   }
+
+  useEffect(() => {
+    updateBalance()
+  }, [wallet])
 
   return (
     <div className={cx('page', 'page-wallet')}>
@@ -127,7 +132,7 @@ export const Wallet = () => {
         <h2 className='h2-big'>{balance}</h2>
         <div className={cx('page-wallet__balance', { 'not-balance': !address })}>
           {address && <Icon name='ton' size='big' />}
-          <h1>{address ? balanceUser : '- -'}</h1>
+          <h1>{address ? getCorrectBalance(balanceUser) : '- -'}</h1>
         </div>
       </header>
       <main className={cx('page__main')}>
@@ -144,8 +149,8 @@ export const Wallet = () => {
               >
                 <motion.h2
                   className={cx('copy_text')}
-                  initial={{opacity: 0}}
-                  animate={isCopied ? {opacity: 1} : {opacity: 0}}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: Number(isCopied) }}
                 >
                   {copied}
                 </motion.h2>
