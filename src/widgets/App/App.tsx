@@ -69,11 +69,13 @@ export const App: FC = () => {
 
   // TODO: переписать на промисы
   useEffect(() => {
-    if (isLoading) {
-      if (data && 'btcPrice' in data && data.btcPrice && priceHistory.length) {
-        dispatch(setGameStatus({ ...data, priceHistory}))
+    // запись данных от сокета
+    // TODO: Вынести в Main
+    if (data && 'btcPrice' in data && data.btcPrice && priceHistory.length) {
+      dispatch(setGameStatus({ ...data, priceHistory}))
 
-        if (WebApp.initData) handlerPostReferral()
+      if (isLoading && WebApp.initData) {
+        handlerPostReferral()
       }
     }
   }, [data, priceHistory, wallet])
