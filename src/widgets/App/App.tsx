@@ -27,9 +27,7 @@ import {useGameSocket, usePriceHistory, useUserData, useDispatch, useSelector, u
 import { LoaderSpinner, removeStorage } from '../../shared'
 
 export const App: FC = () => {
-  const [isLoading, setIsLoading] = useState
-    <{ gameSocketDataIsLoaded: boolean, userRetrievesDataIsLoaded: boolean} >
-    ({ gameSocketDataIsLoaded: false, userRetrievesDataIsLoaded: false })
+  const [isLoading, setIsLoading] = useState<boolean>(true)
   const dispatch = useDispatch()
   const data = useGameSocket()
   const priceHistory = usePriceHistory()
@@ -63,25 +61,22 @@ export const App: FC = () => {
         .then(() => getRetrievesData(WebApp.initData))
         .then((retrievesData) => {
           dispatch(setUserRetrievesData(retrievesData.data))
-          setIsLoading({ ...isLoading, userRetrievesDataIsLoaded: true })
+          setIsLoading(false)
         })
         .catch(() => new Error('Error: for postReferral dont have data user!'))
     })
   }
 
-  // for disconnect action
+  // TODO: переписать на промисы
   useEffect(() => {
-    if (WebApp.initData) handlerPostReferral()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [wallet])
+    if (isLoading) {
+      if (data && 'btcPrice' in data && data.btcPrice && priceHistory.length) {
+        dispatch(setGameStatus({ ...data, priceHistory}))
 
-  // update data backend
-  useEffect(() => {
-    if (data && 'btcPrice' in data && data.btcPrice && priceHistory.length) {
-      setIsLoading({ ...isLoading, gameSocketDataIsLoaded: true })
-      dispatch(setGameStatus({ ...data, priceHistory}))
+        if (WebApp.initData) handlerPostReferral()
+      }
     }
-  }, [data, priceHistory])
+  }, [data, priceHistory, wallet])
 
   useEffect(() => {
     if (gamePhase === 4 && address && userData?.id) {
@@ -144,7 +139,7 @@ export const App: FC = () => {
   }, [])
 
   return (
-    (!isLoading.userRetrievesDataIsLoaded || !isLoading.gameSocketDataIsLoaded)
+    isLoading
       ? <LoaderSpinner />
       : (
         <BrowserRouter>
