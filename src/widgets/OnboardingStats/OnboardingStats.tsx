@@ -65,7 +65,7 @@ const CeilParams = ({ data }: ICeilParams) => {
                 ease: 'easeIn',
               }}
             >
-              <Counter className='color-ton-coin font-w-regular' to={item.multiplier} prefix={'×'} />
+              <Counter className='color-ton-coin font-w-regular' to={item.multiplier} prefix={'×'} fixedNumber={2} />
             </motion.div>
             <div className={cx('ceil-params__ceil')}>
               <p className='p-medium center-text'>{item.phrase}</p>
