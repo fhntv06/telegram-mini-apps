@@ -21,8 +21,8 @@ export function Counter({
   const motionValue = useMotionValue(direction === "down" ? to : from)
   const springValue = useSpring(motionValue, {
     damping: 100,
-    stiffness: 100,
-  });
+    stiffness: 190, // примерно длительность в 4 секунды
+  })
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
   useEffect(() => {
