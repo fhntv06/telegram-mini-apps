@@ -662,3 +662,4 @@ export const sourceBitobmen: string = 'http://bitobmen.net/'
 export const sourcePaybis: string = 'https://t.me/paybis_crypto_exchange_bot'
 
 export const maxCountTransactionForShowModalSwitchMode = 5
+export const msInDay = 1000 * 60 * 60 * 24 // ms * s * m * h

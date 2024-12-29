@@ -74,6 +74,10 @@
   row-gap: $offset12;
   text-align: center;
   margin-bottom: calc($offset16 * 4);
+
+  h1 {
+    transition: color .3s;
+  }
 }
 .onboarding-stats__screen__text {
   margin-top: auto;

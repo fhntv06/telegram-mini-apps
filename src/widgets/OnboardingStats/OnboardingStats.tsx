@@ -6,7 +6,8 @@ import classNames from 'classnames/bind'
 import { IOnboardingStats } from './types'
 import { AnimationBlock } from '../'
 import { useAnimation, useGetPhrases, useSelector } from '../../hooks'
-import { Button, Counter, setStorage } from '../../shared'
+import { Button, Counter, setStorage
+} from '../../shared'
 
 import styles from './OnboardingStats.module.scss'
 
@@ -64,7 +65,7 @@ const CeilParams = ({ data }: ICeilParams) => {
                 ease: 'easeIn',
               }}
             >
-              <Counter className='color-ton-coin font-w-regular' value={item.multiplier} prefix={'×'} />
+              <Counter className='color-ton-coin font-w-regular' to={item.multiplier} prefix={'×'} />
             </motion.div>
             <div className={cx('ceil-params__ceil')}>
               <p className='p-medium center-text'>{item.phrase}</p>
@@ -77,7 +78,7 @@ const CeilParams = ({ data }: ICeilParams) => {
                   ease: 'easeIn',
                 }}
               >
-                <Counter className='p p-big color-ton-coin font-w-regular' value={item.counter} fixedNumber={0} />
+                <Counter className='p p-big color-ton-coin font-w-regular' to={item.counter} fixedNumber={0} />
               </motion.div>
             </div>
           </motion.div>
@@ -103,7 +104,6 @@ export const OnboardingStats = ({handlerSkip, className }: IOnboardingStats) => 
   const { type, openHandler } = useAnimation()
 
   const continueHandler = () => {
-    setStorage('visibleOnboarding', '1')
     handlerSkip(true)
   }
 
@@ -183,7 +183,7 @@ export const OnboardingStats = ({handlerSkip, className }: IOnboardingStats) => 
                       ) : (
                         <Counter
                           className={'h1-large color-ton-coin font-w-regular'}
-                          value={multiplierData.totalMultiplier}
+                          to={multiplierData.totalMultiplier}
                           prefix={item.type === 'multiplier' ? '×' : ''}
                           animation={indexSlider === 1}
                         />
