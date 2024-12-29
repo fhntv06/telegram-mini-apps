@@ -1,38 +1,52 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import classNames from 'classnames/bind'
-import { motion, animate, useMotionValue, useTransform } from 'framer-motion'
+import { useMotionValue, useInView, useSpring } from 'framer-motion'
+
 import { ICounter } from './types'
-import { getCorrectBalanceWithFormatNumber } from '../../utils'
 
 import styles from './Counter.module.scss'
 
 const cx = classNames.bind(styles)
 
-export const Counter = ({
-  value,
+export function Counter({
   direction = 'up',
   prefix = '',
   fixedNumber = 1,
   animation = false,
+  from = 0,
+  to,
   className
-}: ICounter) => {
-  const count = useMotionValue(direction === 'up' ? 0 : value)
-  const rounded = useTransform(count, latest => getCorrectBalanceWithFormatNumber(latest, fixedNumber))
+}: ICounter) {
+  const ref = useRef<HTMLHeadingElement>(null);
+  const motionValue = useMotionValue(direction === "down" ? to : from)
+  const springValue = useSpring(motionValue, {
+    damping: 100,
+    stiffness: 100,
+  });
+  const isInView = useInView(ref, { once: true, margin: "-100px" })
 
   useEffect(() => {
-    const controls = animate(
-      count,
-      direction === 'up' ? value : 0,
-      { duration: 3 }
-    )
+    if (isInView) {
+      motionValue.set(direction === "down" ? from : to)
+    }
+  }, [motionValue, isInView])
 
-    return () => controls.stop()
-  }, [value, direction, count])
+  useEffect(
+    () =>
+      springValue.on("change", (latest) => {
+        if (ref.current) {
+          ref.current.textContent = Intl.NumberFormat("en-US").format(
+            Number(latest.toFixed(fixedNumber))
+          )
+        }
+      }),
+    [springValue]
+  )
 
   return (
-    <div className={cx('counter', { 'animation': animation })}>
+    <div className={cx('counter', {'animation': animation})}>
       {prefix && <h1 className={className}>{prefix}</h1>}
-      <motion.h1 className={className}>{rounded}</motion.h1>
+      <h1 className={className} ref={ref} />
     </div>
   )
 }

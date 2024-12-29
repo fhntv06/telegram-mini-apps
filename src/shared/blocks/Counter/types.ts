@@ -1,13 +1,9 @@
 export interface ICounter {
-  value: number
   fixedNumber?: number
   direction?: 'up' | 'down'
   prefix?: string
   className?: string
   animation?: boolean
-}
-
-export interface INumbers {
-  from: number
+  from?: number
   to: number
 }
