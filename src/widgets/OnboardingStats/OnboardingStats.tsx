@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react'
+import {useState, useRef, useEffect, useMemo} from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { motion } from 'framer-motion'
 import { EffectCreative } from 'swiper/modules'
@@ -16,6 +16,7 @@ interface ICeilParam {
   phrase: string
   counter: number
   multiplier: number
+  fixedNumber?: number
 }
 
 interface ICeilParams {
@@ -77,7 +78,7 @@ const CeilParams = ({ data }: ICeilParams) => {
                   ease: 'easeIn',
                 }}
               >
-                <Counter className='p p-big color-ton-coin font-w-regular' to={item.counter} fixedNumber={0} />
+                <Counter className='p p-big color-ton-coin font-w-regular' to={item.counter} fixedNumber={item?.fixedNumber || 0} />
               </motion.div>
             </div>
           </motion.div>
@@ -87,7 +88,7 @@ const CeilParams = ({ data }: ICeilParams) => {
   )
 }
 
-export const OnboardingStats = ({handlerSkip, className }: IOnboardingStats) => {
+export const OnboardingStats = ({ handlerSkip, className }: IOnboardingStats) => {
   const swiperRef = useRef(null)
   const { totalBets, daysInRow, invitedFriends, multiplierData } = useSelector((state) => state.retrievesData)
   const [daysInRowSlide, setDaysInRowSlide] = useState<number>(daysInRow)
@@ -124,11 +125,12 @@ export const OnboardingStats = ({handlerSkip, className }: IOnboardingStats) => 
     }
   }, [])
 
-  const ceilParamsData = [
+  const ceilParamsData = useMemo(() => [
     {
       phrase: phraseTotalBets,
       counter: totalBets,
       multiplier: multiplierData.bets,
+      fixedNumber: 1
     },
     {
       phrase: daysInARow,
@@ -140,7 +142,11 @@ export const OnboardingStats = ({handlerSkip, className }: IOnboardingStats) => 
       counter: invitedFriends,
       multiplier: multiplierData.refs,
     }
-  ]
+  ], [daysInARow, daysInRow, invitedFriends, multiplierData.bets, multiplierData.daily, multiplierData.refs, totalBets])
+
+  useEffect(() => {
+    console.log({ceilParamsData})
+  }, []);
 
 
   // TODO: переделать концепцию без слайдера просто на двух экранах!
@@ -185,6 +191,7 @@ export const OnboardingStats = ({handlerSkip, className }: IOnboardingStats) => 
                           to={multiplierData.totalMultiplier}
                           prefix={item.type === 'multiplier' ? '×' : ''}
                           animation={indexSlider === 1}
+                          fixedNumber={2}
                         />
                       )
                     }
