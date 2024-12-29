@@ -87,8 +87,8 @@ export const App: FC = () => {
           }
           if (res.data.winReward) {
             openHandlerNotification('wins')
-            setTonsHandler(res.data.winReward.tons)
-            setPointsHandler(res.data.winReward.points)
+            setTonsHandler(res.data.winReward)
+            setPointsHandler(res.data.points)
             openHandlerAnimation('wins')
           } else if (res.data.loose) {
             openHandlerNotification('lose')
