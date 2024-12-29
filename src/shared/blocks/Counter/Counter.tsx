@@ -23,7 +23,7 @@ export function Counter({
     damping: 100,
     stiffness: 190, // примерно длительность в 4 секунды
   })
-  const isInView = useInView(ref, { once: true, margin: "-100px" })
+  const isInView = useInView(ref, { once: true })
 
   useEffect(() => {
     if (isInView) {
@@ -46,7 +46,7 @@ export function Counter({
   return (
     <div className={cx('counter', {'animation': animation})}>
       {prefix && <h1 className={className}>{prefix}</h1>}
-      {(from === 0 && to === 0) ? <h1 className={className}>0</h1> : <h1 className={className} ref={ref} />}
+      {(from === 0 && to === 0) ? <h1 className={className}>0</h1> : <h1 className={className} style={{ color: "black" }} ref={ref} />}
     </div>
   )
 }
