@@ -37,7 +37,7 @@ export const WinsOrLoseContent = ({ type, data: { tons, points = 10 } }: IProps)
         isWins && (
           <div className={cx('container')}>
             <h2 className='h2-big font-w-bold'>{pointsForWinning}</h2>
-            <Counter value={points} className='h1 color-ton-coin font-w-bold' prefix='+' animation />
+            <Counter to={points} className='h1 color-ton-coin font-w-bold' prefix='+' animation />
           </div>
         )
       }
