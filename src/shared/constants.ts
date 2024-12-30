@@ -156,6 +156,9 @@ export interface ILangPhrase {
 	nowYouWillHave: string
 	greatYouveTried: string
 	letSGo: string
+	inviteYourFriends: string
+	visitGameEveryDay: string
+	subscribeToOurChannel: string
 }
 export interface ILanguage {
 	'english': ILangPhrase
@@ -278,6 +281,9 @@ export const arLanguagesPhraseSite: ILanguage = {
 		nowYouWillHave: 'Now you will have a test game so that you can familiarize yourself with the game',
 		greatYouveTried: "Great, you've tried to make test lets - try it on real mode now",
 		letSGo: 'Let’s go',
+		inviteYourFriends: 'Invite your friends',
+		visitGameEveryDay: 'Visit game every day',
+		subscribeToOurChannel: 'Subscribe to our channel',
 	},
 	spanish: {
 		gameInProcess: [
@@ -393,6 +399,9 @@ export const arLanguagesPhraseSite: ILanguage = {
 		nowYouWillHave: 'Ahora tendrás un juego de prueba para que puedas familiarizarte con el juego',
 		greatYouveTried: "Genial, has intentado hacer una prueba, pruébalo en modo real ahora",
 		letSGo: 'Vamos',
+		inviteYourFriends: 'Invita a tus amigos',
+		visitGameEveryDay: 'Visita el juego todos los días',
+		subscribeToOurChannel: 'Suscríbete a nuestro canal',
 	},
 	chinese: {
 		gameInProcess: [
@@ -508,6 +517,9 @@ export const arLanguagesPhraseSite: ILanguage = {
 		nowYouWillHave: '现在你将有一个测试游戏，这样你就可以熟悉游戏',
 		greatYouveTried: "很好，你已经试过测试了--现在就在真实模式上试试吧",
 		letSGo: '我们走吧',
+		inviteYourFriends: '邀请你的朋友',
+		visitGameEveryDay: '每天访问游戏',
+		subscribeToOurChannel: '订阅我们的频道',
 	},
 	russian: {
 		gameInProcess: [
@@ -623,6 +635,9 @@ export const arLanguagesPhraseSite: ILanguage = {
 		nowYouWillHave: 'Теперь у вас будет тестовая игра, чтобы вы могли ознакомиться с игрой',
 		greatYouveTried: "Отлично, вы попробовали сделать тест, давайте попробуем это на практике\". режим сейчас",
 		letSGo: 'Поехали',
+		inviteYourFriends: 'Приглашайте своих друзей',
+		visitGameEveryDay: 'Посещайте игру каждый день',
+		subscribeToOurChannel: 'Подписывайтесь на наш канал',
 	},
 }
 export const arLanguagesSite: ILang[] = [
