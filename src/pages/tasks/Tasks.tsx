@@ -39,12 +39,14 @@ const ButtonTask = ({task}: { task: ITask }) => {
       .catch((e) => console.log(new Error('Error in clamTasks: ' + e)))
   }
 
+  const taskIsCompleted = (task?.playerStatus === 0 || taskClaimId === task.id)
+
   return (
     <Button
       key={task.id}
-      iconRightName={taskClaimId === task.id ? 'check' : 'arrow-right'}
+      iconRightName={taskIsCompleted ? 'check' : 'arrow-right'}
       sizeIcons='big'
-      disabled={taskClaimId === task.id}
+      disabled={taskIsCompleted}
       onClick={() => task?.playerStatus !== 0 && claimTaskHandler(task)}
     >
       <div className={cx('item')}>
