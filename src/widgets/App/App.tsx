@@ -9,7 +9,7 @@ import {
 } from 'react-router-dom'
 
 import {
-  getAddressContract, getWalletBet, postReferral,
+  getAddressContract, getWalletBet,
   getRetrievesData, getTasks, getLeaderboard
 } from '../../app/api'
 import { routes } from '../../app/routes'
@@ -23,7 +23,15 @@ import { setUserRetrievesData } from '../../app/store/slices'
 import { INotificationContextTypes, IAnimationContextTypes } from '../../app/providers/types'
 
 import { PanelMenu } from '../../feature'
-import {useGameSocket, usePriceHistory, useUserData, useDispatch, useSelector, useSetBalance} from '../../hooks'
+import {
+  useGameSocket,
+  usePriceHistory,
+  useUserData,
+  useDispatch,
+  useSelector,
+  useSetBalance,
+  usePostReferral
+} from '../../hooks'
 import { LoaderSpinner, removeStorage } from '../../shared'
 
 export const App: FC = () => {
@@ -39,36 +47,7 @@ export const App: FC = () => {
   const { ticker, gameMode } = useSelector((state) => state.modeSettings)
   const userData = useUserData()
   const { updateBalance } = useSetBalance()
-  const [counterPostReferral, setCounterPostReferral] = useState<number>(0)
-
-  // TODO: вынести все методы по получению данные при первом рендере в отдельный компонент
-  const handlerPostReferral = () => {
-    new Promise((resolve) => resolve(null))
-      .then(() => {
-        // For wait Telegram data
-        const data: { initData: string, walletAddress?: string, referral?: string } = {
-          initData: WebApp.initData,
-        }
-
-        if (address) {
-          data['walletAddress'] = address
-        }
-        if (WebApp.initDataUnsafe.start_param) {
-          data['referral'] = WebApp.initDataUnsafe.start_param
-        }
-
-        // костыль
-        setCounterPostReferral((prev) => prev + 1)
-        postReferral(data)
-          .then((res)=> console.log('Data post referral: ', res.data))
-          .then(() => getRetrievesData(WebApp.initData))
-          .then((retrievesData) => {
-            dispatch(setUserRetrievesData(retrievesData.data))
-            setIsLoading(false)
-          })
-          .catch(() => new Error('Error: for postReferral dont have data user!'))
-    })
-  }
+  const { handlerPostReferral } = usePostReferral()
 
   // TODO: переписать на промисы
   useEffect(() => {
@@ -76,10 +55,6 @@ export const App: FC = () => {
     // TODO: Вынести в Main
     if (data && 'btcPrice' in data && data.btcPrice && priceHistory.length) {
       dispatch(setGameStatus({ ...data, priceHistory}))
-
-      if (isLoading && WebApp.initData) {
-        handlerPostReferral()
-      }
     }
   }, [data, priceHistory, wallet])
 
@@ -108,8 +83,28 @@ export const App: FC = () => {
     }
   }, [gamePhase])
 
-  // initial process app
+  // TODO: Вынести в отельный компонент запросы при initial process app
   useEffect(() => {
+    if (isLoading && WebApp.initData) {
+      console.log('handlerPostReferral App!')
+      handlerPostReferral()
+        .then(() => getTasks(WebApp.initData))
+        .then((res) => {
+          const { hints, partners, tasks } = res.data
+
+          dispatch(setHintTasks({ hints }))
+          dispatch(setPartnersTasks({ partners }))
+          dispatch(setDefaultTasks({ tasks }))
+        })
+        .catch((error) => new Error('Error in getTasks: ' + error))
+        .then(() => getRetrievesData(WebApp.initData))
+        .then((retrievesData) => {
+          dispatch(setUserRetrievesData(retrievesData.data))
+          setIsLoading(false)
+        })
+        .catch((error) => new Error('Error in getRetrievesData: ' + error))
+    }
+
     getAddressContract()
       .then(({ data: { address, mainnet } }) => dispatch(setDataTransaction({ address, mainnet })))
       .catch((error) => {
@@ -120,16 +115,6 @@ export const App: FC = () => {
           mainnet: true
         }))
       })
-
-    getTasks(WebApp.initData)
-      .then((res) => {
-        const { hints, partners, tasks } = res.data
-
-        dispatch(setHintTasks({ hints }))
-        dispatch(setPartnersTasks({ partners }))
-        dispatch(setDefaultTasks({ tasks }))
-      })
-      .catch((error) => new Error('Error in getTasks: ' + error))
 
     getLeaderboard()
       .then((res) => dispatch(setLeaderboards(res.data)))

@@ -1,7 +1,7 @@
 import { useTonConnectUI } from '@tonconnect/ui-react'
 import classNames from 'classnames/bind'
 import { IconNames, IconType } from '../../shared/types'
-import { useGetPhrases, useUserData, useDispatch, useSelector } from '../../hooks'
+import { useGetPhrases, useUserData, useDispatch, useSelector, usePostReferral } from '../../hooks'
 import { setUserDataTelegram, setUserDataWallet} from '../../app/store/slices'
 import { Button } from '../../shared'
 
@@ -28,13 +28,17 @@ export const ButtonConnectWallet = ({
 	const userDataTelegram = useUserData()
 
   const { connectWallet } = useGetPhrases(['connectWallet'])
+	const { handlerPostReferral } = usePostReferral()
 
 	const handlerConnectWallet = () => {
-		tonConnectUI.openModal()
-			.then(() => {
+		tonConnectUI.connectWallet()
+			.then(async (res) => {
+				console.log('connectedWallet ', res)
 				if (onClick) {
 					onClick()
 				}
+				console.log('handlerPostReferral connecting to wallet')
+				await handlerPostReferral()
 
 				dispatch(setUserDataWallet({
 					...userDataWallet,
