@@ -1,84 +1,94 @@
+import { useEffect, useState } from 'react'
 import WebApp from '@twa-dev/sdk'
 import classNames from 'classnames/bind'
+import { claimTask,
+  getTasks
+} from '../../app/api/game'
 import { ITask } from '../../app/store/slices/game/types'
-import { useGetPhrases, useSelector } from '../../hooks'
-import { Button, arLanguagesPhraseSite } from '../../shared'
+import { setDefaultTasks, setHintTasks, setPartnersTasks } from '../../app/store/slices'
+import { useDispatch, useGetPhrases, useSelector } from '../../hooks'
+import { Button} from '../../shared'
 
 import styles from './Tasks.module.scss'
-import { claimTask } from '../../app/api/game'
 
 const cx = classNames.bind(styles)
 
-const ButtonsTask = (
-  { tasks, phrase }: {
-    tasks: ITask[]
-    phrase: {
-      points: string,
-      multiplier: string,
-      noAvailableTasks: string
-    }
-  }
-) => {
-  // export arLanguagesPhraseSite
-  // const { connectWallet } = useGetPhrases(['connectWallet'])
+const NoAvailableTasks = () => {
+  const { noAvailableTasks } = useGetPhrases(['noAvailableTasks'])
 
-  const conditionTaskHandler = (href: string) => window.location.href = href
-  const tasksEventHandler = (task: ITask) => {
+  return (
+    <div className={cx('page-tasks__items-clear')}>
+      <p className='p-reg'>{noAvailableTasks}</p>
+    </div>
+  )
+}
+
+const ButtonTask = ({task}: { task: ITask }) => {
+  const [taskClaimId, setTaskClaimId] = useState<number>(0)
+  const phrases = useGetPhrases([task.title, 'points', 'multiplier'])
+
+  const claimTaskHandler = (task: ITask) => {
     claimTask({ taskId: task.id, initData: WebApp.initData })
       .then((res) => {
-        if (res.data.task.playerStatus === 1) {
-          conditionTaskHandler(res.data.task.conditions.externalLink)
+        if (res.data.task?.playerStatus === 0) {
+          setTaskClaimId(task.id) // update list task and him status
+        } else if (res.data.task?.playerStatus === 1) {
+          window.location.href = res.data.task.conditions.externalLink
         }
       })
       .catch((e) => console.log(new Error('Error in clamTasks: ' + e)))
   }
 
-  return (tasks && tasks.length)
-    ? (
-      tasks.map((task, index) => (
-        <Button
-          key={task.title + index}
-          iconRightName={task?.playerStatus === 0 ? 'check' : 'arrow-right'}
-          sizeIcons='big'
-          disabled={task?.playerStatus === 0}
-          onClick={() => task?.playerStatus !== 0 && tasksEventHandler(task)}
-        >
-          <div className={cx('item')}>
-            <img
-              src={task.image}
-              // @ts-ignore
-              alt={arLanguagesPhraseSite[task.title]}
-              // @ts-ignore
-              title={arLanguagesPhraseSite[task.title]} />
-            <div className={cx('button-content')}>
-              <p className='p-reg p-small'>{
-                // @ts-ignore
-                arLanguagesPhraseSite[task.title]
-              }</p>
-              <p className='p-reg p-medium color-ton-coin'>
-                +
-                {task?.coinsReward || task?.multiplier}
-                {' '}
-                {task?.coinsReward ? phrase.points : phrase.multiplier}
-              </p>
-            </div>
-          </div>
-        </Button>
-      ))
-    ) : (
-      <div className={cx('page-tasks__items-clear')}>
-        <p className='p-reg'>{phrase.noAvailableTasks}</p>
+  return (
+    <Button
+      key={task.id}
+      iconRightName={taskClaimId === task.id ? 'check' : 'arrow-right'}
+      sizeIcons='big'
+      disabled={taskClaimId === task.id}
+      onClick={() => task?.playerStatus !== 0 && claimTaskHandler(task)}
+    >
+      <div className={cx('item')}>
+        <img
+          src={task.image}
+          // @ts-ignore
+          alt={phrases[task.title]}
+          // @ts-ignore
+          title={phrases[task.title]} />
+        <div className={cx('button-content')}>
+          <p className='p-reg p-small'>{
+            // @ts-ignore
+            phrases[task.title]
+          }</p>
+          <p className='p-reg p-medium color-ton-coin'>
+            +
+            {task?.coinsReward || task?.multiplier}
+            {' '}
+            {task?.coinsReward ? phrases.points : phrases.multiplier}
+          </p>
+        </div>
       </div>
+    </Button>
     )
 }
 
 export const Tasks = () => {
   const {
-    completeTasks, earnMorePoints, pulseMarket,
-    partners, noAvailableTasks, points, multiplier } = useGetPhrases(
-      ['completeTasks', 'earnMorePoints', 'pulseMarket', 'partners', 'noAvailableTasks', 'points', 'multiplier']
-  )
+    completeTasks, earnMorePoints, pulseMarket, partners
+  } = useGetPhrases(['completeTasks', 'earnMorePoints', 'pulseMarket', 'partners'])
   const { partners: partnersTasks, hints, tasks } = useSelector((state) => state.tasks)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    getTasks(WebApp.initData)
+      .then((res) => {
+        const { hints, partners, tasks } = res.data
+
+        dispatch(setHintTasks({ hints }))
+        dispatch(setPartnersTasks({ partners }))
+        dispatch(setDefaultTasks({ tasks }))
+      })
+      .catch((error) => new Error('Error in getTasks: ' + error))
+  }, [])
 
   return (
     <div className={cx('page', 'page-tasks')}>
@@ -91,7 +101,11 @@ export const Tasks = () => {
             <p>{pulseMarket}</p>
           </header>
           <div className={cx('page-tasks__items')}>
-            {<ButtonsTask tasks={[...hints, ...tasks]} phrase={{ points, multiplier, noAvailableTasks }} />}
+            {
+              (tasks && tasks.length) && (hints && hints.length)
+                ? [...hints, ...tasks].map((task) => (<ButtonTask task={task} />))
+                : <NoAvailableTasks />
+            }
           </div>
         </div>
         <div className={cx('container')}>
@@ -99,7 +113,11 @@ export const Tasks = () => {
             <p>{partners}</p>
           </header>
           <div className={cx('page-tasks__items')}>
-            {<ButtonsTask tasks={partnersTasks} phrase={{ points, multiplier, noAvailableTasks }} />}
+            {
+              (partnersTasks && partnersTasks.length)
+                ? partnersTasks.map((task) => (<ButtonTask task={task} />))
+                : <NoAvailableTasks />
+            }
           </div>
         </div>
       </main>
