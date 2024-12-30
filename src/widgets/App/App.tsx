@@ -39,6 +39,7 @@ export const App: FC = () => {
   const { ticker, gameMode } = useSelector((state) => state.modeSettings)
   const userData = useUserData()
   const { updateBalance } = useSetBalance()
+  const [counterPostReferral, setCounterPostReferral] = useState<number>(0)
 
   // TODO: вынести все методы по получению данные при первом рендере в отдельный компонент
   const handlerPostReferral = () => {
@@ -56,6 +57,8 @@ export const App: FC = () => {
           data['referral'] = WebApp.initDataUnsafe.start_param
         }
 
+        // костыль
+        setCounterPostReferral((prev) => prev + 1)
         postReferral(data)
           .then((res)=> console.log('Data post referral: ', res.data))
           .then(() => getRetrievesData(WebApp.initData))
