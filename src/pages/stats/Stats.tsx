@@ -6,6 +6,7 @@ import { Button } from '../../shared'
 import { formatNumber } from '../../shared'
 
 import styles from './Stats.module.scss'
+import {roundToFixed} from "../../shared/utils/formatNumber.ts";
 
 const cx = classNames.bind(styles)
 
@@ -31,7 +32,7 @@ export const Stats = () => {
           <Button iconRightName='arrow-right' sizeIcons='big' disabled>
             <div className={cx('button-content')}>
               <p className='p-reg'>{phraseMultiplier}</p>
-              <p className='p-reg color-ton-coin'>x{multiplierData.totalMultiplier}</p>
+              <p className='p-reg color-ton-coin'>x{roundToFixed(multiplierData.totalMultiplier)}</p>
             </div>
           </Button>
           <Button iconRightName='arrow-right' sizeIcons='big' disabled>
