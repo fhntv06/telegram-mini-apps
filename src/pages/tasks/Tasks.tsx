@@ -2,7 +2,7 @@ import WebApp from '@twa-dev/sdk'
 import classNames from 'classnames/bind'
 import { ITask } from '../../app/store/slices/game/types'
 import { useGetPhrases, useSelector } from '../../hooks'
-import { Button } from '../../shared'
+import { Button, arLanguagesPhraseSite } from '../../shared'
 
 import styles from './Tasks.module.scss'
 import { claimTask } from '../../app/api/game'
@@ -19,6 +19,9 @@ const ButtonsTask = (
     }
   }
 ) => {
+  // export arLanguagesPhraseSite
+  // const { connectWallet } = useGetPhrases(['connectWallet'])
+
   const conditionTaskHandler = (href: string) => window.location.href = href
   const tasksEventHandler = (task: ITask) => {
     claimTask({ taskId: task.id, initData: WebApp.initData })
@@ -41,9 +44,10 @@ const ButtonsTask = (
           onClick={() => task?.playerStatus !== 0 && tasksEventHandler(task)}
         >
           <div className={cx('item')}>
-            <img src={task.image}  alt={task.title} title={task.title} />
+            // @ts-ignore
+            <img src={task.image}  alt={arLanguagesPhraseSite[task.title]} title={arLanguagesPhraseSite[task.title]} />
             <div className={cx('button-content')}>
-              <p className='p-reg p-small'>{task.title}</p>
+              <p className='p-reg p-small'>{arLanguagesPhraseSite[task.title]}</p>
               <p className='p-reg p-medium color-ton-coin'>
                 +
                 {task?.coinsReward || task?.multiplier}
@@ -80,8 +84,7 @@ export const Tasks = () => {
             <p>{pulseMarket}</p>
           </header>
           <div className={cx('page-tasks__items')}>
-            {<ButtonsTask tasks={[...hints, ...tasks]} phrase={{ points, multiplier, noAvailableTasks }}
-            />}
+            {<ButtonsTask tasks={[...hints, ...tasks]} phrase={{ points, multiplier, noAvailableTasks }} />}
           </div>
         </div>
         <div className={cx('container')}>
