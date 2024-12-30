@@ -44,10 +44,17 @@ const ButtonsTask = (
           onClick={() => task?.playerStatus !== 0 && tasksEventHandler(task)}
         >
           <div className={cx('item')}>
-            // @ts-ignore
-            <img src={task.image}  alt={arLanguagesPhraseSite[task.title]} title={arLanguagesPhraseSite[task.title]} />
+            <img
+              src={task.image}
+              // @ts-ignore
+              alt={arLanguagesPhraseSite[task.title]}
+              // @ts-ignore
+              title={arLanguagesPhraseSite[task.title]} />
             <div className={cx('button-content')}>
-              <p className='p-reg p-small'>{arLanguagesPhraseSite[task.title]}</p>
+              <p className='p-reg p-small'>{
+                // @ts-ignore
+                arLanguagesPhraseSite[task.title]
+              }</p>
               <p className='p-reg p-medium color-ton-coin'>
                 +
                 {task?.coinsReward || task?.multiplier}
