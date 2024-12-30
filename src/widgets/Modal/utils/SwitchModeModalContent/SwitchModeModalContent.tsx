@@ -29,8 +29,15 @@ export const SwitchModeModalContent = ({ closeModalHandler }: IProps) => {
     changeGameMode(isTestMode ? isDemoMode : isOnChainMode)
     closeModalHandler()
 
-    if (isTestMode && !getStorage('visibleTestModeModalSelectGameMode')) {
+    // только поадет в стадию Test mode
+    // первое нажатие кнопки
+    if (!getStorage('visibleTestModeModalSelectGameMode')) {
       setStorage('visibleTestModeModalSelectGameMode', '1')
+    }
+    // когда прошел стадию Test mode
+    // второе нажатие кнопки
+    if (getStorage('visibleTestModeModalSelectGameMode')) {
+      setStorage('visibleRealModeModalSelectGameMode', '1')
     }
   }
 

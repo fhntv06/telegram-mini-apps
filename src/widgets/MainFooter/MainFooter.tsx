@@ -12,7 +12,7 @@ import {
 	// setStorage,
 	getStorage,
 	// removeStorage,
-	getCorrectBalance
+	getCorrectBalance, maxCountTransactionForShowModalSwitchMode
 } from '../../shared'
 import { IRoundsType } from '../../shared/types'
 
@@ -34,15 +34,20 @@ export const MainFooter = () => {
 	const address = useTonAddress()
 	const { gamePhase } = useSelector((state) => state.gameStatus)
 	const { gameMode } = useSelector((state) => state.modeSettings)
-	const { multiplierData: { totalMultiplier } } = useSelector((state) => state.retrievesData)
-	const { isNewPlayer } = useSelector((state) => state.retrievesData)
+	const { multiplierData: { totalMultiplier }, isNewPlayer } = useSelector((state) => state.retrievesData)
 	const { openHandler: openHandlerModal } = useContext<ModalContextTypes>(ModalContext)
   const { players, multiplier, balance, lastGames } = useGetPhrases(['players', 'multiplier', 'balance', 'lastGames'])
 	const { balance: userBalance, updateBalance } = useSetBalance()
 
 	useEffect(() => {
-		if (wallet && isNewPlayer && !getStorage('visibleTestModeModalSelectGameMode')) {
-			openHandlerModal('switchMode')
+		if (wallet) {
+			if (
+				(isNewPlayer && !getStorage('visibleTestModeModalSelectGameMode')) // для Test mode
+				|| (gamePhase === 0 && Number(getStorage('count')) == maxCountTransactionForShowModalSwitchMode && !getStorage('visibleRealModeModalSelectGameMode')) // для Real mode
+			) {
+				console.log('openHandlerModal switchMode')
+				openHandlerModal('switchMode')
+			}
 		}
 	}, [gamePhase, wallet])
 
