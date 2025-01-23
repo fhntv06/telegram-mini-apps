@@ -48,7 +48,7 @@ export const BetPanel = ({ data, type='up' }: Props) => {
 							<Icon name='ton' size='big'/>
 							<Counter
 								to={betsWiningPool}
-								fixedNumber={2}
+								fixedNumber={0}
 								className={cx('h1', { 'up': type === groupWins })}
 								direction={type === groupWins ? 'up' : 'down'} />
 						</div>
