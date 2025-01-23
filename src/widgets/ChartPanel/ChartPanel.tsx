@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import classNames from 'classnames/bind'
 import { useGetPhrases, useSelector } from '../../hooks'
-import { differenceInSeconds, getCorrectBalanceWithFormatNumber, Icon } from '../../shared'
+import { differenceInSeconds, Icon } from '../../shared'
 
 import styles from './ChartPanel.module.scss'
 
@@ -36,7 +36,7 @@ export const ChartPanel = () => {
         <h2 className='right-text'>{allTimeWins}</h2>
         <p className='p-medium'>
           <Icon name='ton-medium' />
-          {getCorrectBalanceWithFormatNumber(allTimeWinsCount)}
+          {allTimeWinsCount}
         </p>
       </div>
     </div>

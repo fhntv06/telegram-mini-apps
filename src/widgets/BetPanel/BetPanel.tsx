@@ -4,7 +4,7 @@ import { getGameBetsResult } from '../../app/api/'
 import { ButtonPlaceBet } from '../../feature'
 import { useGetPhrases, useSelector } from '../../hooks'
 import { IDataPanel } from './types'
-import { Counter, Icon, Person, formatIntTonNumber } from '../../shared'
+import { Counter, Icon, Person } from '../../shared'
 
 import styles from './BetPanel.module.scss'
 
@@ -29,7 +29,7 @@ export const BetPanel = ({ data, type='up' }: Props) => {
 		if (gamePhase === 4) {
 			getGameBetsResult(`ticker=${ticker}&gameMode=${gameMode}`)
 				.then((res) => {
-					setWiningPool(res.data.winingPoolEnd / 1000000000)
+					setWiningPool(res.data.winingPoolEnd)
 					setGroupWins(res.data.gameResult > 0 ? 'up' : 'down')
 					setCompletedRound(true)
 				})
@@ -63,7 +63,7 @@ export const BetPanel = ({ data, type='up' }: Props) => {
 								</p>
 								<p className={cx('players__total', 'p-medium', type)}>
 									<Icon name='ton-medium' size='medium' />
-									{formatIntTonNumber(betPool)}
+									{betPool}
 								</p>
 							</div>
 							<div className={cx('panel__data__persons')}>

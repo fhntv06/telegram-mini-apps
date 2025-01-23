@@ -12,7 +12,7 @@ import {
 	// setStorage,
 	getStorage,
 	// removeStorage,
-	getCorrectBalance, maxCountTransactionForShowModalSwitchMode
+	maxCountTransactionForShowModalSwitchMode
 } from '../../shared'
 import { IRoundsType } from '../../shared/types'
 
@@ -112,7 +112,7 @@ export const MainFooter = () => {
 					<h2>{balance}</h2>
 					<p className='p-medium'>
 						<Icon name='ton-medium' size='medium'/>
-						{address ? getCorrectBalance(userBalance) : '- -'}
+						{address ? userBalance : '- -'}
 					</p>
 				</div>
 			</header>

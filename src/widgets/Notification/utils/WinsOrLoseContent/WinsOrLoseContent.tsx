@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind'
 import { useTonAddress } from '@tonconnect/ui-react'
-import { Counter, formatIntTonNumber } from '../../../../shared'
+import { Counter } from '../../../../shared'
 
 import styles from './WinsOrLoseContent.module.scss'
 import { useGetPhrases } from "../../../../hooks";
@@ -30,7 +30,7 @@ export const WinsOrLoseContent = ({ type, data: { tons, points = 10 } }: IProps)
         </div>
         <div className={cx('container__text', 'right-text', type)}>
           <h2 className={cx(type)}>{isWins ? 'received' : 'spent'}</h2>
-          <p className={cx(type)}>{isWins ? '+' : '-'} {formatIntTonNumber(tons)} TON</p>
+          <p className={cx(type)}>{isWins ? '+' : '-'} {tons} TON</p>
         </div>
       </div>
       {
