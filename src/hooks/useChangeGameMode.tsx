@@ -1,11 +1,11 @@
-import { useDispatch, useSelector } from 'react-redux'
 import { setModeSettings } from '../app/store/slices'
+import { useDispatch, useSelector } from '../hooks'
 import { typeDemoMode, typeOnChainMode } from '../shared/types'
 import { isOnChainMode } from '../shared'
 
 export const useChangeGameMode = () => {
   const dispatch = useDispatch()
-  const { socket } = useSelector((state: any) => state.socket)
+  const { socket } = useSelector((state) => state.socket)
 
   return (
     gameMode: typeOnChainMode | typeDemoMode = isOnChainMode,

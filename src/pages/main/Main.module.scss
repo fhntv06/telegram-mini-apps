@@ -1,11 +1,13 @@
 @import '/src/shared/assets/styles/basics.scss';
 
 .main {
+    z-index: 0;
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 100%;
+    height: calc(100vh - 58px - 24px); // 58px - volume for component PanelMenu
     margin: 0 auto;
-    padding: $offset8 0;
     background-color: $black;
+    overflow: hidden;
 }

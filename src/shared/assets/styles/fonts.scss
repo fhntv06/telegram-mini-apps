@@ -1,10 +1,24 @@
 // sizes
+$h1-large-size: 64px;
 $h1-size: 32px;
 $h2-size: 10px;
+$p-large-size: 32px;
+$p-big-size: 20px;
 $p-size: 16px;
-$p-small-size: 14px;
+$p-medium-size: 14px;
+$p-small-size: 12px;
 $p-x-small-size: 8px;
 
 $font-w-regular: 400;
 $font-w-semibold: 500;
 $font-w-bold: 600;
+
+.font-w-regular {
+  font-weight: $font-w-regular !important;
+}
+.font-w-semibold {
+  font-weight: $font-w-semibold !important;
+}
+.font-w-bold {
+  font-weight: $font-w-bold !important;
+}

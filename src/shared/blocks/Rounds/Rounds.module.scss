@@ -1,7 +1,6 @@
 @import '../../assets/styles/basics.scss';
 
 .rounds {
-	padding: 2px;
 	@include border('small');
 
 	&.up {

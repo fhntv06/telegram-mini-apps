@@ -8,7 +8,24 @@ export interface IUser {
     appVersion: string
     maxProtocolVersion: string
     platform: string
-    balance: number
+    balance: string
+}
+
+export interface IUserRetrievesMultiplierData {
+    daily: number,
+    bets: number,
+    refs: number,
+    totalMultiplier: number,
+}
+
+export interface IUserRetrievesData {
+    invitedFriends: number,
+    daysInRow: number,
+    totalBets: number,
+    placeInLeaderboard: number
+    points: number
+    multiplierData: IUserRetrievesMultiplierData
+    isNewPlayer: boolean
 }
 
 export interface IUserDataTelegram {

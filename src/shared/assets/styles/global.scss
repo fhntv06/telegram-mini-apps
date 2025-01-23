@@ -1,0 +1,108 @@
+@import 'basics';
+
+@font-face {
+  font-family: 'Inter';
+  src: url('../fonts/Inter.woff2') format('woff2')
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -ms-overflow-style: none; /* for Internet Explorer, Edge */
+  scrollbar-width: none; /* for Firefox */
+
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  color: $white;
+
+  &::-webkit-scrollbar {
+    display: none; /* for Chrome, Safari, and Opera */
+  }
+}
+body {
+  width: 100vw;
+  width: 100dvw;
+  height: 100vh;
+  height: 100dvh;
+}
+#root {
+  position: relative;
+  margin: 0 auto;
+  min-width: 320px;
+  max-width: 576px;
+  height: 100%;
+}
+h1, .h1 {
+  font-size: $h1-size;
+  line-height: 1;
+  font-weight: $font-w-bold;
+
+  &.h1-reg {
+    font-weight: 400;
+  }
+  &.h1-large {
+    font-size: $h1-large-size;
+  }
+}
+h2, .h2 {
+  font-size: $h2-size;
+  line-height: 16px;
+  font-weight: $font-w-semibold;
+
+  &.h2-big {
+    font-size: calc($h2-size * 2);
+    font-weight: $font-w-regular;
+    line-height: 1.7;
+  }
+}
+p, .p {
+  font-size: $p-size;
+  line-height: 1.5;
+  font-weight: $font-w-bold;
+
+  &.p-reg {
+    font-weight: $font-w-regular;
+  }
+  &.p-large {
+    font-size: $p-large-size;
+    line-height: 28px;
+  }
+  &.p-big {
+    font-size: $p-big-size;
+    line-height: 28px;
+  }
+  &.p-medium {
+    font-size: $p-medium-size;
+    line-height: 16px;
+
+    &.p-reg {
+      font-weight: $font-w-regular;
+    }
+  }
+  &.p-small {
+    font-size: $p-small-size;
+    line-height: 16px;
+    font-weight: $font-w-semibold;
+  }
+  &.p-x-small {
+    font-size: $p-x-small-size;
+    line-height: 12px;
+    font-weight: $font-w-semibold;
+  }
+}
+button {
+  background-color: unset;
+  outline: none;
+  border: none;
+  cursor: pointer;
+
+  &:disabled {
+    pointer-events: none;
+  }
+}
+.center-text {
+  text-align: center;
+}
+.right-text {
+  text-align: right;
+}

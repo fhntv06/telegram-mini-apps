@@ -22,6 +22,7 @@ export const Person = ({
 	useEffect(() => {
 		if (isPending) openHandler('loadPerson')
 		else closeHandler()
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [isPending])
 
   return (

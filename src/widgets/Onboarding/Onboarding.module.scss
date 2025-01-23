@@ -1,0 +1,121 @@
+@import '../../shared/assets/styles/components/Onboarding.module.scss';
+
+.onboarding__screen {
+  padding: $offset16 $offset16 $offset24;
+
+  &__header {
+    &.main {
+      margin-top: 160px;
+    }
+  }
+  &__pagination {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: $offset16;
+  }
+  &__footer {
+    margin-top: auto;
+
+    &.main .text {
+      margin-bottom: 84px;
+    }
+  }
+  &__header,
+  &__footer {
+    display: flex;
+    flex-direction: column;
+  }
+  &__control {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    column-gap: $offset16;
+    margin-top: auto;
+
+    button {
+      display: flex;
+      justify-content: space-between;
+
+      &.button-begin {
+        justify-content: center;
+      }
+    }
+  }
+  &__custom-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    row-gap: calc($offset16 * 2);
+    width: calc(100vw - 16px - 16px);
+    max-width: 100%;
+    height: 100%;
+    padding-top: 120px;
+
+    h1 {
+      text-align: center;
+    }
+  }
+}
+.onboarding__slider {
+  //height: 100%;
+
+  &.screen {
+    margin-bottom: $offset24;
+  }
+}
+.screen {
+  display: flex;
+  justify-content: center;
+
+  &.main {
+    z-index: -1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('/images/onboarding/bg_education_screen.png');
+    background-size: cover;
+  }
+  .screen__1 {
+    background-image: url('/images/onboarding/onboarding_screen_1.png');
+  }
+  .screen__2 {
+    background-image: url('/images/onboarding/onboarding_screen_2.png');
+  }
+  .screen__3 {
+    background-image: url('/images/onboarding/onboarding_screen_3.png');
+  }
+  .screen__4 {
+    background-image: url('/images/onboarding/onboarding_screen_4.png');
+  }
+  .screen__5 {
+    background-image: url('/images/onboarding/onboarding_screen_5.png');
+  }
+  .screen__1,
+  .screen__2,
+  .screen__3,
+  .screen__4,
+  .screen__5 {
+    margin-bottom: $offset24;
+    width: calc(100vw - 16px - 16px);
+    height: calc(100vh * .5);
+    background-size: contain;
+  }
+
+  .screen__1,
+  .screen__2,
+  .screen__3,
+  .screen__4,
+  .screen__5, &.main {
+    background-repeat: no-repeat;
+    background-position: center center;
+  }
+}
+.button {
+  width: 100%;
+  padding: $offset8 $offset12;
+  font-weight: $font-w-bold;
+}

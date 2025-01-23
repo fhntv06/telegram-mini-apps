@@ -1,156 +1,131 @@
-import WebApp from '@twa-dev/sdk'
-import {
-	useContext,
-	// useContext,
-	useEffect
-} from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+// import WebApp from '@twa-dev/sdk'
+import { useContext, useEffect } from 'react'
 import { useTonWallet, useTonAddress } from '@tonconnect/ui-react'
 import classNames from 'classnames/bind'
-import { getBalance, getDemoBalance } from '../../app/api'
-import { setUserDataTelegram, setUserDataWallet } from '../../app/store/slices'
 import { BetPanel, PanelButtonsBet } from '../../widgets'
-import { useGetPhrases } from '../../hooks'
-import { ButtonSwitchMode, ButtonConnectWallet, ButtonTopUp } from '../../feature'
+import {useGetPhrases,
+	useSelector, useSetBalance} from '../../hooks'
+import { ButtonConnectWallet, ButtonTopUp } from '../../feature'
 import {
-	Icon, Rounds, formatNumber, getCorrectBalanceWithFormatNumber,
-	isDemoMode, minBet, setStorage, getStorage, removeStorage
+	Icon, Rounds, formatNumber,
+	minBet,
+	// setStorage,
+	getStorage,
+	// removeStorage,
+	getCorrectBalance, maxCountTransactionForShowModalSwitchMode
 } from '../../shared'
 import { IRoundsType } from '../../shared/types'
-import { ModalContextTypes } from '../../app/providers/ModalProvider/types'
-import { ModalContext } from '../../app/contexts'
 
 import styles from './MainFooter.module.scss'
+import { ModalContextTypes } from '../../app/providers/ModalProvider/types'
+import { ModalContext } from '../../app/contexts'
+import { roundToFixed } from '../../shared/utils/formatNumber'
 
 const cx = classNames.bind(styles)
 
 export const MainFooter = () => {
-	const dispatch = useDispatch()
 	const {
 		upPoolData,
 		downPoolData,
 		last3GamesRes,
 		livePlayers: livePlayersCount,
-		allTimeWins: allTimeWinsCount
-	} = useSelector((state: any) => state.gameStatus)
+	} = useSelector((state) => state.gameStatus)
 	const wallet = useTonWallet()
 	const address = useTonAddress()
-	const { gamePhase } = useSelector((state: any) => state.gameStatus)
-	const { gameMode } = useSelector((state: any) => state.modeSettings)
-	const userDataWallet = useSelector((state: any) => state.userDataWallet)
+	const { gamePhase } = useSelector((state) => state.gameStatus)
+	const { gameMode } = useSelector((state) => state.modeSettings)
+	const { multiplierData: { totalMultiplier }, isNewPlayer } = useSelector((state) => state.retrievesData)
 	const { openHandler: openHandlerModal } = useContext<ModalContextTypes>(ModalContext)
+  const { players, multiplier, balance, lastGames } = useGetPhrases(['players', 'multiplier', 'balance', 'lastGames'])
+	const { balance: userBalance, updateBalance } = useSetBalance()
 
-  const { livePlayers, last3rounds, allTimeWins } = useGetPhrases(['livePlayers', 'last3rounds', 'allTimeWins'])
-
-	const setDataUser = () => {
-			// TODO: Это убрать в кнопку подключения и перенести в отдельный хук
-
-		if (gameMode === isDemoMode && WebApp.initData) { // с ПК это работать не будет, нужно тестировать только с приложения ТГ
-			console.log('execute getDemoBalance')
-			getDemoBalance(WebApp.initData)
-				.then(res => {
-					dispatch(
-						setUserDataWallet({
-							...userDataWallet,
-							balance: res.data.balance,
-						})
-					)
-					dispatch(setUserDataTelegram(WebApp.initDataUnsafe))
-				})
-				.catch((error) => {
-					new Error(error)
-
-					return 0
-				})
-		} else {
-			console.log('execute getBalance')
-			getBalance(address)
-				.then(res => {
-					dispatch(
-						setUserDataWallet({
-							...userDataWallet,
-							balance: res.data.balance,
-						})
-					)
-					dispatch(setUserDataTelegram(WebApp.initDataUnsafe))
-				})
-				.catch((error) => {
-					new Error(error)
-
-					return 0
-				})
-
+	useEffect(() => {
+		if (wallet) {
+			if (
+				(isNewPlayer && !getStorage('visibleTestModeModalSelectGameMode')) // для Test mode
+				|| (gamePhase === 0 && Number(getStorage('count')) == maxCountTransactionForShowModalSwitchMode && !getStorage('visibleRealModeModalSelectGameMode')) // для Real mode
+			) {
+				console.log('openHandlerModal switchMode')
+				openHandlerModal('switchMode')
+			}
 		}
-	}
+	}, [gamePhase, wallet])
 
 	// TODO: вынести код выше!
 	// не должно быть тут!
 	useEffect(() => {
 		if ((gamePhase === 3 || gamePhase === 4) && wallet) {
-			setDataUser()
+			updateBalance()
 		}
 	}, [wallet, gameMode, gamePhase])
 
 	useEffect(() => {
 		if (wallet) {
-			setDataUser()
+			updateBalance()
 		}
-	}, [gameMode])
+	}, [gameMode, wallet])
 
-	// Когда уже в игре
-	useEffect(() => {
-		if (wallet && userDataWallet.balance < minBet) {
-			if (gamePhase === 0 && !getStorage('dontPayUser')) {
-				setStorage('dontPayUser', '1')
-				openHandlerModal('switchMode')
-			}
-		} else {
-			removeStorage('dontPayUser')
-		}
-	}, [gamePhase, userDataWallet.balance])
-
-	// Когда заходит в App
-	useEffect(() => {
-		if (wallet && userDataWallet.balance < minBet) {
-			setStorage('dontPayUser', '1')
-		} else {
-			removeStorage('dontPayUser')
-		}
-	}, [])
+	// // Когда уже в игре
+	// useEffect(() => {
+	// 	if (wallet && Number(userBalance / 1000000000) < minBet) {
+	// 		if (gamePhase === 0 && !getStorage('dontPayUser')) {
+	// 			setStorage('dontPayUser', '1')
+	// 		}
+	// 	} else {
+	// 		removeStorage('dontPayUser')
+	// 	}
+	// // eslint-disable-next-line react-hooks/exhaustive-deps
+	// }, [gamePhase, wallet])
+	//
+	// // Когда заходит в App
+	// useEffect(() => {
+	// 	if (wallet && Number(userBalance / 1000000000) < minBet) {
+	// 		setStorage('dontPayUser', '1')
+	// 	} else {
+	// 		removeStorage('dontPayUser')
+	// 	}
+	// }, [wallet])
 
 	return (
 		<footer className={cx('footer')}>
 			<header className={cx('footer__header')}>
-				<div>
-					<h2>{livePlayers}</h2>
-					<p>{formatNumber(livePlayersCount)}</p>
-				</div>
-				<div className={cx('footer__header__time-wins')}>
-					<h2>{allTimeWins}</h2>
-					<p>
-						<Icon name='ton-medium' size='medium' />
-						{getCorrectBalanceWithFormatNumber(allTimeWinsCount)}
+				<div className={cx('footer__header__items')}>
+					<h2>{players}</h2>
+					<p className='p-medium'>
+						<Icon name='persons-medium'/>
+						{formatNumber(livePlayersCount)}
 					</p>
 				</div>
-				<div>
-					<h2>{last3rounds}</h2>
+				<div className={cx('footer__header__items')}>
+					<h2>{lastGames}</h2>
 					<div className={cx('footer__header__rounds')}>
-						{last3GamesRes.map((countType: IRoundsType, index: number) => <Rounds key={`${countType}_${index}`} countType={countType} />)}
+						{last3GamesRes.map((countType: IRoundsType, index: number) => (
+							<Rounds key={`${countType}_${index}`} countType={countType}/>
+						))}
 					</div>
+				</div>
+				<div className={cx('footer__header__items')}>
+					<h2>{multiplier}</h2>
+					<p className='p-medium'>×{roundToFixed(totalMultiplier)}</p>
+				</div>
+				<div className={cx('footer__header__items')}>
+					<h2>{balance}</h2>
+					<p className='p-medium'>
+						<Icon name='ton-medium' size='medium'/>
+						{address ? getCorrectBalance(userBalance) : '- -'}
+					</p>
 				</div>
 			</header>
 			<main className={cx('footer__main')}>
-				<BetPanel data={upPoolData} />
-				<BetPanel data={downPoolData} type='down' />
+				<BetPanel data={upPoolData}/>
+				<BetPanel data={downPoolData} type='down'/>
 			</main>
 			<footer className={cx('footer__bets')}>
 				{(
 					wallet
-					? userDataWallet.balance >= minBet
-						? <PanelButtonsBet />
-						: gameMode === isDemoMode
-							? getStorage('dontPayUser') ? <ButtonSwitchMode sizeIcons='big' /> : <PanelButtonsBet />
-							: <ButtonTopUp sizeIcons='big' />
+						? Number(userBalance / 1000000000) < minBet
+							? <ButtonTopUp sizeIcons='big' />
+							: <PanelButtonsBet />
 					: null
 				)}
 				<ButtonConnectWallet className={cx({ 'hide': wallet })} sizeIcons='big' />

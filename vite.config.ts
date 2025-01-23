@@ -4,6 +4,10 @@ import basicSsl from '@vitejs/plugin-basic-ssl';
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  server: {
+    /*here*/
+    hmr: { overlay: false }
+  },
   css: {
     preprocessorOptions: {
       scss: {
@@ -15,5 +19,5 @@ export default defineConfig({
   build: {
     outDir: './build'
   },
-  base: '/telegram-mini-apps'
+  base: '/telegram-mini-apps' // for deploy github pages
 })

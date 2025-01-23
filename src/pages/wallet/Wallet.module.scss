@@ -1,0 +1,51 @@
+@import '/src/shared/assets/styles/components/Page.module.scss';
+
+.page-wallet {
+  .container__buttons {
+    flex-direction: row;
+    column-gap: $offset8;
+
+    button {
+      height: 48px;
+    }
+    .hide {
+			display: none !important;
+		}
+  }
+  .page-wallet__header {
+    align-items: center;
+    padding: 0 0 calc($offset20 * 2);
+    margin-bottom: 0;
+  }
+  .page-wallet__balance {
+    display: flex;
+    align-items: center;
+    column-gap: $offset4;
+
+    &.not-balance h1 {
+      color: $gray;
+    }
+  }
+  .button__address {
+    position: relative;
+    width: 100%;
+    justify-content: flex-start;
+
+    p {
+      font-weight: $font-w-regular;
+    }
+    span:nth-child(2) {
+      margin-left: $offset12;
+    }
+    span:nth-child(3) {
+      margin-left: auto;
+    }
+    .copy_text {
+      position: absolute;
+      top: $offset16;
+      right: calc($offset24 + $offset24 + $offset4);
+      color: $light-gray;
+      text-transform: uppercase;
+    }
+  }
+}

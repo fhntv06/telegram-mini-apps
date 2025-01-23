@@ -30,7 +30,7 @@ export const useFadeOut = () => {
         clearTimeout(timer)
       }, 2000)
     }
-  }, [element])
+  }, [duration, element])
 
   return { openFadeHandler }
 }

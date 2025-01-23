@@ -1,102 +1,54 @@
 import { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
 import classNames from 'classnames/bind'
-import { AnimatePresence, motion, useWillChange } from 'framer-motion'
-import { getAddressContract } from '../../app/api'
-import { ModalProvider, NotificationProvider, AnimationProvider } from '../../app/providers'
-import { MainHeader, MainFooter, Chart, Onboarding, ModalSelectGameMode } from '../../widgets'
-import { useGameSocket, usePriceHistory, usePostReferral } from '../../hooks/'
-import { setGameStatus, setDataTransaction } from '../../app/store/slices'
-
-import { LoaderSpinner } from '../../shared'
+import { AnimationProvider, ModalProvider } from '../../app/providers'
+import { MainFooter, Chart, OnboardingStats } from '../../widgets'
+import { AnimationWrapper, getStorage,
+  // msInDay,
+  setStorage } from '../../shared'
 
 import styles from './Main.module.scss'
-import {useTonWallet} from "@tonconnect/ui-react";
 
 const cx = classNames.bind(styles)
 
 export const Main = () => {
-  const [isLoading, setIsLoading] = useState<boolean>(true)
-  const [hiddenModalSelectMode, setHiddenModalSelectMode] = useState<boolean>(true)
-  const dispatch = useDispatch()
-  const data = useGameSocket()
-  const priceHistory = usePriceHistory()
   const [skipOnBoarding, setSkipOnBoarding] = useState<boolean>(false)
-  const willChange = useWillChange()
-  const { handlerPostReferral } = usePostReferral()
-  //@ts-ignore
-  const wallet = useTonWallet()
+  const [visibleOnboarding, setCheckConditionToVisibleOnboarding] = useState<boolean>(false)
 
-  // TODO: переписать реализацию получения данных из контекста
-  // согласно видео: https://www.youtube.com/watch?v=k2g_Og3CFKU
+  const skipOnboardingHandler = () => {
+    setSkipOnBoarding(true)
+    setStorage('visibleOnboarding', new Date().getTime().toString())
+  }
 
-  // update data backend
   useEffect(() => {
-    if (data && 'btcPrice' in data && data.btcPrice && priceHistory.length) {
-      setIsLoading(false)
-      dispatch(setGameStatus({ ...data, priceHistory}))
+    const timeStampLastVisibleOnboarding = Number(getStorage('visibleOnboarding'))
+
+    if (timeStampLastVisibleOnboarding) {
+      if ((new Date().getTime() - timeStampLastVisibleOnboarding) > 1000 * 30) {
+        // setCheckConditionToVisibleOnboarding((new Date().getTime() - timeStampLastVisibleOnboarding) > msInDay)
+        setCheckConditionToVisibleOnboarding(true)
+      }
+    } else {
+      setCheckConditionToVisibleOnboarding(true)
     }
-  }, [data, priceHistory])
-
-  // initial process app
-  useEffect(() => {
-    setHiddenModalSelectMode(false)
-
-    console.log('handlerPostReferral main')
-    handlerPostReferral()
-
-    getAddressContract()
-      .then(({ data: { address, mainnet } }) => dispatch(setDataTransaction({ address, mainnet })))
-      .catch((error) => {
-        new Error('Error in getAddressContract: ' + error)
-
-        dispatch(setDataTransaction({
-          address: import.meta.env.VITE_ADDRESS_TRANSACTION,
-          mainnet: true
-        }))
-      })
   }, [])
 
   return (
-    isLoading
-      ? <LoaderSpinner />
-      : skipOnBoarding
-        ? (
-          <AnimatePresence>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{
-                delay: .1,
-                duration: .3,
-                ease: 'easeIn',
-              }}
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                willChange,
-                height: '100%',
-              }}
-            >
-              <Onboarding handlerSkip={setSkipOnBoarding}/>
-            </motion.div>
-          </AnimatePresence>
-        ) : (
-          <ModalProvider>
-            <NotificationProvider>
-              <AnimationProvider>
-                <main className={cx('main')}>
-                  <MainHeader/>
-                  <Chart/>
-                  <MainFooter/>
-                </main>
-                {hiddenModalSelectMode && (
-                  <ModalSelectGameMode isOpen={!hiddenModalSelectMode} closeHandler={setHiddenModalSelectMode}/>
-                )}
-              </AnimationProvider>
-            </NotificationProvider>
-          </ModalProvider>
-        )
+    <ModalProvider>
+      <AnimationProvider>
+        <main className={cx('main')}>
+          <Chart/>
+          <MainFooter/>
+        </main>
+        <AnimationWrapper
+          isOpen={!skipOnBoarding && visibleOnboarding}
+          style={{ zIndex: 100, position: 'absolute', top: 0, left: 0, height: '100%', width: '100%' }}
+          initial={{ translateX: 0 }}
+          animate={{}}
+          exit={{ translateX: '-100%' }}
+        >
+          <OnboardingStats handlerSkip={skipOnboardingHandler} />
+        </AnimationWrapper>
+      </AnimationProvider>
+    </ModalProvider>
   )
 }

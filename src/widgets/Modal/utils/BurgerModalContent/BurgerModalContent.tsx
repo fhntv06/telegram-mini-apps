@@ -1,9 +1,8 @@
 import { useMemo } from 'react'
-import { useSelector } from 'react-redux'
 import { useTonWallet, useTonAddress } from '@tonconnect/ui-react'
 import classNames from 'classnames/bind'
 import { ButtonConnectWallet } from '../../../../feature'
-import { useGetPhrases } from '../../../../hooks'
+import { useGetPhrases, useSelector } from '../../../../hooks'
 import {
   Button, Select,
   arLanguagesSite, sourcePulseReferralBot, sourcePulseGameSupport
@@ -31,14 +30,14 @@ const walletData = [
 export const BurgerModalContent = () => {
   const wallet = useTonWallet()
 	const address = useTonAddress()
-  const language= useSelector((state: any) => state.language)
+  const language= useSelector((state) => state.language)
 
   const { affiliate, technicalSupport } = useGetPhrases([
     'affiliate', 'technicalSupport', 'realMode',
     'gameWithRealTONCoins', 'demoMode', 'learningWithNonRealCoins'
   ])
 
-  const languages = useMemo(() => [language].concat(arLanguagesSite.filter((item) => item.name != language.name)), [language.name])
+  const languages = useMemo(() => [language].concat(arLanguagesSite.filter((item) => item.name != language.name)), [language])
 
   return (
     <div className={cx('wrapper')}>

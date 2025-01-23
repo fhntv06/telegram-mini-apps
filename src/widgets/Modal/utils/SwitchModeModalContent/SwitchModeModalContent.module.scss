@@ -1,5 +1,8 @@
 @import '../../../../shared/assets/styles/basics';
 
+.modal {
+  padding: calc($offset24 * 3) $offset16 0;
+}
 .modal__wrapper {
   display: flex;
   flex-direction: column;

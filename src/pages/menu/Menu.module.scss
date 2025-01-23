@@ -1,0 +1,30 @@
+@import '/src/shared/assets/styles/components/Page.module.scss';
+
+.page-menu {
+  row-gap: $offset8;
+}
+.button__menu {
+  width: 100%;
+  justify-content: flex-start;
+
+  p {
+    font-weight: $font-w-regular;
+  }
+  span:nth-child(2) {
+    margin-left: $offset12;
+  }
+  span:nth-child(3) {
+    margin-left: auto;
+  }
+}
+.button__social {
+  display: flex;
+  justify-content: space-between;
+  margin-top: $offset12;
+  column-gap: $offset8;
+
+  .button__social__item {
+    flex: 1;
+    max-width: 85px;
+  }
+}

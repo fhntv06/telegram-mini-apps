@@ -1,8 +1,11 @@
-import { useSelector } from 'react-redux'
+import { useContext } from 'react'
 import { useTonWallet, useTonConnectUI } from '@tonconnect/ui-react'
 import classNames from 'classnames/bind'
-import { useTransaction, useGetPhrases } from '../../hooks'
+import { useTransaction, useGetPhrases, useSelector } from '../../hooks'
 import { Button, minBet } from '../../shared'
+
+import { INotificationContextTypes } from '../../app/providers/types'
+import { NotificationContext } from '../../app/contexts'
 
 import styles from './ButtonPlaceBet.module.scss'
 
@@ -19,30 +22,44 @@ export const ButtonPlaceBet = ({
 }: Props) => {
 	const wallet = useTonWallet()
 	const [tonConnectUI] = useTonConnectUI()
-	const { bet } = useSelector((state: any) => state.bets)
-	const { gamePhase } = useSelector((state: any) => state.gameStatus)
+	const { bet } = useSelector((state) => state.bets)
+	const { gamePhase } = useSelector((state) => state.gameStatus)
 	const { txInProcess, sendTransaction } = useTransaction(bet)
-	const { balance } = useSelector((state: any) => state.userDataWallet)
-	const { goUp, goDown } = useGetPhrases(['goUp', 'goDown'])
+	const { balance } = useSelector((state) => state.userDataWallet)
+	const {
+		goUp, goDown, topUpYourWallet, connectYourTON, theRoundHasAlready
+	} = useGetPhrases([
+		'goUp', 'goDown', 'topUpYourWallet', 'connectYourTON', 'theRoundHasAlready'
+	])
+	const { openHandler: openHandlerNotification } = useContext<INotificationContextTypes>(NotificationContext)
 
 	const handlerPlaceBet = () => {
-		sendTransaction(type)
-		if (onClick) onClick()
+		if (!wallet) {
+			tonConnectUI.openModal()
+					.then(() => openHandlerNotification('warning', { text: connectYourTON }))
+		}
+		else if (!(Number(balance) >= minBet)) openHandlerNotification('warning', { text: topUpYourWallet })
+		else if ((gamePhase !== 1 && gamePhase !== 0)) openHandlerNotification('warning', { text: theRoundHasAlready })
+		else {
+			sendTransaction(type)
+				.then(() => console.log('Success sendTransaction!'))
+				.catch((e) => console.log(new Error('Error in sendTransaction: ' + e)))
 
-		if (navigator.vibrate !== undefined) {
-			navigator.vibrate(500)
+			if (onClick) onClick()
+
+			if (navigator.vibrate !== undefined) {
+				navigator.vibrate(500)
+			}
 		}
 	}
 
-	const disabled = !wallet || (gamePhase !== 1 && gamePhase !== 0) || !(balance >= minBet)
 	const textButton = txInProcess ? 'Loading ...' : type === 'up' ? goUp : goDown
 
 	return (
 		<Button
 			type='bet'
-			className={cx('button-placebet', type, 'p', { 'disabled': disabled })}
-			onClick={() => !wallet ? tonConnectUI.connectWallet() : handlerPlaceBet()}
-			disabled={disabled}
+			className={cx('button-placebet', type, 'p', { 'disabled': (gamePhase !== 1 && gamePhase !== 0) })}
+			onClick={handlerPlaceBet}
 		>
 			{textButton}
 		</Button>

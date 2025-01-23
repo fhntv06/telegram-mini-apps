@@ -1,29 +1,30 @@
-import { useRef } from 'react';
+import { useRef } from 'react'
 import {
-  CategoryScale,
-  Chart as ChartJS,
-  Filler,
-  Legend,
-  LinearScale,
-  LineElement,
-  PointElement,
-  Title,
-  Tooltip,
-  ChartData,
+	CategoryScale,
+	Chart as ChartJS,
+	Filler,
+	Legend,
+	LinearScale,
+	LineElement,
+	PointElement,
+	Title,
+	Tooltip,
+	ChartData, type ChartOptions,
 } from 'chart.js';
-import { Line } from 'react-chartjs-2';
+import { Line } from 'react-chartjs-2'
+//@ts-ignore
+import { TypedChartComponent } from 'react-chartjs-2/types'
 import {
 	backgroundSplitPlugin,
 	getOptions,
 	showTooltip,
 	startTooltip,
 } from './utils';
-import { useChartData } from '../../hooks';
+import { useChartData, useSelector } from '../../hooks'
 import { ChartPanel } from '../'
 
 import classNames from 'classnames/bind'
 import styles from './Chart.module.scss'
-import { useSelector } from 'react-redux';
 
 const cx = classNames.bind(styles)
 
@@ -44,10 +45,10 @@ interface ILineChartProps {
 }
 
 const LineChart = ({ data }: ILineChartProps) => {
-  const { startBtcPrice, btcPrice, gamePhase } = useSelector((state: any) => state.gameStatus)
-	const chartRef = useRef<any>(null);
+  const { startBtcPrice, btcPrice, gamePhase } = useSelector((state) => state.gameStatus)
+	const chartRef = useRef<TypedChartComponent<"line">>(null);
 
-  const options: any = getOptions(
+  const options: ChartOptions = getOptions(
     btcPrice,
     startBtcPrice,
     gamePhase
@@ -57,6 +58,7 @@ const LineChart = ({ data }: ILineChartProps) => {
     <Line
       ref={chartRef}
       className={cx('chart__line')}
+      //@ts-ignore
       options={options}
       plugins={[showTooltip, startTooltip]}
       data={data}
@@ -68,11 +70,9 @@ export const Chart = () => {
   const chartData = useChartData()
 
 	return (
-    chartData && (
-      <div className={cx('chart')}>
-        <ChartPanel/>
-        <LineChart data={chartData} />
-      </div>
-    )
+    <div className={cx('chart')}>
+      <ChartPanel/>
+      <LineChart data={chartData} />
+    </div>
   )
 }

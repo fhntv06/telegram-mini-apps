@@ -13,7 +13,7 @@ export const Icon = ({
   return (
     <span className={cx('icon', className)}>
       <svg role='image' className={cx(size)} >
-        <use xlinkHref={`/telegram-mini-apps/images/icons.svg#${name}`} />
+        <use xlinkHref={`${import.meta.env.VITE_PUBLIC_PATH_FOR_GITHUB_PAGES}/images/icons.svg#${name}`} />
       </svg>
     </span>
   );

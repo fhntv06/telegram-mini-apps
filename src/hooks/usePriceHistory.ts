@@ -8,14 +8,12 @@ export const usePriceHistory = () => {
   const [priceHistory, setPriceHistory] = useState<number[]>(initTestData ? initialDataPriceHistory : [])
 
   useEffect(() => {
-    console.log('Запрос getPriceHistory!')
-
     if (!priceHistory.length) {
       getPriceHistory()
-      .then(async (res) => setPriceHistory(res.data))
-      .catch((error) => console.log('Error in getPriceHistory: ', error))
+        .then(async (res) => setPriceHistory(res.data))
+        .catch((error) => console.log('Error in getPriceHistory: ', error))
     }
-  }, [])
+  }, [priceHistory.length])
 
 
   return priceHistory

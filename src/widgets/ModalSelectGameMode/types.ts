@@ -1,7 +1,8 @@
-import { Dispatch, SetStateAction } from 'react'
+import { typeDemoMode, typeOnChainMode } from '../../shared/types'
 
 export interface IModalSelectGameMode {
 	isOpen?: boolean
-	closeHandler: Dispatch<SetStateAction<boolean>>
+	closeHandler: () => void
 	className?: string
+	initialGameMode?: typeDemoMode | typeOnChainMode
 }

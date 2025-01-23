@@ -1,8 +1,7 @@
-import { useSelector } from 'react-redux'
-import { Button, isDemoMode } from '../../shared'
 import classNames from 'classnames/bind'
 import styles from './ButtonWallet.module.scss'
-import { getCorrectBalance } from '../../shared'
+import { useSelector } from '../../hooks'
+import { Button, isDemoMode } from '../../shared'
 
 const cx = classNames.bind(styles)
 
@@ -16,8 +15,8 @@ export const ButtonWallet = ({
 	onClick,
 	className
 }: Props) => {
-  const { balance } = useSelector((state: any) => state.userDataWallet)
-	const { gameMode } = useSelector((state: any) => state.modeSettings)
+  const { balance } = useSelector((state) => state.userDataWallet)
+	const { gameMode } = useSelector((state) => state.modeSettings)
 
 	const buttonWalletHandler = () => {
 		if (gameMode !== isDemoMode && onClick) {
@@ -34,7 +33,7 @@ export const ButtonWallet = ({
 			sizeIcons='medium'
 			onClick={buttonWalletHandler}
 		>
-			{getCorrectBalance(balance)}
+			{balance}
 		</Button>
 	)
 }

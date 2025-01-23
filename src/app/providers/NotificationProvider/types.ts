@@ -5,4 +5,5 @@ export interface INotificationContextTypes {
   openHandler: ((type: INotificationTypes, settings?: { text: string }) => void),
   closeHandler: (() => void),
   setTonsHandler: ((tons: number) => void),
+  setPointsHandler: ((points: number) => void),
 }

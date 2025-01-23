@@ -101,7 +101,7 @@ export const SelectModeModalContent = ({ closeModalHandler }: IProps) => {
     closeModalHandler()
   }
   return (
-    <div className={cx('wrapper')}>
+    <div className={cx('modal-select-mode', 'wrapper')}>
       <div className={cx('container')}>
         <header>
           <p>{selectMode}</p>

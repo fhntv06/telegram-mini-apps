@@ -1,7 +1,7 @@
 import { IGameStatus } from '../app/providers/types'
 import { ILang, typeOnChainMode, typeDemoMode } from './types'
 export const urlSocket = `${import.meta.env.VITE_SOCKET_PROTOCOL}://${import.meta.env.VITE_DOMAIN}:${import.meta.env.VITE_PORT}`
-export const minBet = 0.5 * 1000000000
+export const minBet = 0.5
 export const countPointsChart = 25
 export const numberLastPoint = countPointsChart - 1
 export const initialDataPriceHistory: number[] = ((min = 61900, max = 62100) => {
@@ -16,7 +16,7 @@ export const initialDataGameStatus: IGameStatus = {
   upPoolData: {
 		bets: [
 			{
-				img: `/telegram-mini-apps/images/avatars/user_${Math.floor(Math.random() * (5 - 1 + 1) + 1)}.png`,
+				img: `${import.meta.env.VITE_PUBLIC_PATH_FOR_GITHUB_PAGES}/images/avatars/user_${Math.floor(Math.random() * (5 - 1 + 1) + 1)}.png`,
 				isPending: true
 			},
 		],
@@ -25,15 +25,15 @@ export const initialDataGameStatus: IGameStatus = {
 	downPoolData: {
 		bets: [
 			{
-				img: `/telegram-mini-apps/images/avatars/user_${Math.floor(Math.random() * (5 - 1 + 1) + 1)}.png`,
+				img: `${import.meta.env.VITE_PUBLIC_PATH_FOR_GITHUB_PAGES}/images/avatars/user_${Math.floor(Math.random() * (5 - 1 + 1) + 1)}.png`,
 				isPending: false
 			},
 			{
-				img: `/telegram-mini-apps/images/avatars/user_${Math.floor(Math.random() * (5 - 1 + 1) + 1)}.png`,
+				img: `${import.meta.env.VITE_PUBLIC_PATH_FOR_GITHUB_PAGES}/images/avatars/user_${Math.floor(Math.random() * (5 - 1 + 1) + 1)}.png`,
 				isPending: false
 			},
 			{
-				img: `/telegram-mini-apps/images/avatars/user_${Math.floor(Math.random() * (5 - 1 + 1) + 1)}.png`,
+				img: `${import.meta.env.VITE_PUBLIC_PATH_FOR_GITHUB_PAGES}/images/avatars/user_${Math.floor(Math.random() * (5 - 1 + 1) + 1)}.png`,
 				isPending: true
 			},
 		],
@@ -42,7 +42,7 @@ export const initialDataGameStatus: IGameStatus = {
 	totalBets: 50 * 10**9,
 	btcPrice: (Math.floor(Math.random() * (62100 - 62000 + 1))) + 62000,
 	startBtcPrice: 62000,
-	gamePhase: 3,
+	gamePhase: 0,
 	phaseTimeUntil: Date.now() + 30 * 1000,
 	gameResult: 0,
 	last3GamesRes: [Math.floor(Math.random() * (2 - 1 + 1)) + 1, Math.floor(Math.random() * (2 - 1 + 1)) + 1, Math.floor(Math.random() * (2 - 1 + 1)) + 1],
@@ -78,7 +78,9 @@ export interface ILangPhrase {
 	chinese: string
 	russian: string
 	livePlayers: string
+	players: string
 	last3rounds: string
+	lastGames: string
 	allTimeWins: string
 	goUp: string
 	goDown: string
@@ -96,7 +98,6 @@ export interface ILangPhrase {
 	'30 Minutes': string
 	commingSoon: string
 	onboarding: string[]
-	realMode: string
 	gameWithRealTONCoins: string
 	demoMode: string
 	learningWithNonRealCoins: string
@@ -123,12 +124,47 @@ export interface ILangPhrase {
 	altinBit: string
 	bitObmen: string
 	paybis: string
+	balance: string
+	multiplier: string
+	pointsForWinning: string
+	pulsePoints: string
+	points: string,
+	placeInLeaderboard: string
+	leaderboard: string
+	tasks: string
+	game: string
+	menu: string
+	completeTasks: string
+	earnMorePoints: string
+	pulseMarket: string
+	partners: string
+	noAvailableTasks: string
+	connectYourTON: string
+	theRoundHasAlready: string
+	daysInTheGame: string
+	multiplierToday: string
+	logInToTheGame: string
+	totalBets: string
+	daysInARow: string
+	yourMultiplier: string
+	continue: string
+	inviteFriends: string
+	invitedFriends: string
+	instruction: string
+	testMode: string
+	realMode: string
+	nowYouWillHave: string
+	greatYouveTried: string
+	letSGo: string
+	inviteYourFriends: string
+	visitGameEveryDay: string
+	subscribeToOurChannel: string
 }
 export interface ILanguage {
-	english: ILangPhrase
-	spanish: ILangPhrase
-	chinese: ILangPhrase
-	russian: ILangPhrase
+	'english': ILangPhrase
+	'spanish': ILangPhrase
+	'chinese': ILangPhrase
+	'russian': ILangPhrase
 }
 export const arLanguagesPhraseSite: ILanguage = {
 	english: {
@@ -149,7 +185,7 @@ export const arLanguagesPhraseSite: ILanguage = {
 		copied: 'copied',
 		P2PMarket: 'P2P Market',
 		centralisedExchange: 'centralised exchange',
-		topUp: 'Top Up',
+		topUp: 'Top up',
 		disconnect: 'Disconnect',
 		affiliate: 'Affiliate',
 		technicalSupport: 'Technical Support',
@@ -159,7 +195,9 @@ export const arLanguagesPhraseSite: ILanguage = {
 		chinese: 'Chinese',
 		russian: 'Russian',
 		livePlayers: 'live players',
+		players: 'players',
 		last3rounds: 'last 3 rounds',
+		lastGames: 'last games',
 		allTimeWins: 'all time wins',
 		goUp: 'go up',
 		goDown: 'go down',
@@ -185,7 +223,6 @@ export const arLanguagesPhraseSite: ILanguage = {
 			'You can change the mode by pressing the button in the upper left corner of the screen and selecting the desired parameters',
 			'Now select a game mode, and start predicting. You can change your choice at any time in the menu'
 		],
-		realMode: 'real mode',
 		gameWithRealTONCoins: 'game with real ton coins',
 		demoMode: 'demo mode',
 		learningWithNonRealCoins: 'learning with non real coins',
@@ -212,6 +249,41 @@ export const arLanguagesPhraseSite: ILanguage = {
 		altinBit: 'AltinBit',
 		bitObmen: 'BitObmen',
 		paybis: 'Paybis',
+		balance: 'Balance',
+		multiplier: 'Multiplier',
+		pointsForWinning: 'Points for winning',
+		pulsePoints: 'Pulse Points',
+		points: 'Points',
+		placeInLeaderboard: 'th place in the leaderboard',
+		leaderboard: 'Leaderboard',
+		tasks: 'tasks',
+		game: 'game',
+		menu: 'menu',
+		completeTasks: 'Complete tasks',
+		earnMorePoints: 'earn more points',
+		pulseMarket: 'Pulse Market',
+		partners: 'Partners',
+		noAvailableTasks: 'No available tasks',
+		connectYourTON: 'Connect your TON wallet to place a bet',
+		theRoundHasAlready: 'The round has already started, wait for a new round',
+		daysInTheGame: 'days in the game in a row',
+		multiplierToday: 'multiplier today',
+		logInToTheGame: 'Log in to the game every day and make your',
+		totalBets: 'Total bets',
+		daysInARow: 'Days in a row',
+		yourMultiplier: 'Your multiplier will be even higher tomorrow. But if you miss it, all progress will be reset to zero',
+		continue: 'Continue',
+		inviteFriends: 'Invite friends',
+		invitedFriends: 'Invited friends',
+		instruction: 'Instruction',
+		testMode: 'Test mode',
+		realMode: 'Real mode',
+		nowYouWillHave: 'Now you will have a test game so that you can familiarize yourself with the game',
+		greatYouveTried: "Great, you've tried to make test lets - try it on real mode now",
+		letSGo: 'Let’s go',
+		inviteYourFriends: 'Invite your friends',
+		visitGameEveryDay: 'Visit game every day',
+		subscribeToOurChannel: 'Subscribe to our channel',
 	},
 	spanish: {
 		gameInProcess: [
@@ -242,7 +314,9 @@ export const arLanguagesPhraseSite: ILanguage = {
 		chinese: 'Chino',
 		russian: 'Ruso',
 		livePlayers: 'jugadores en Vivo',
+		players: 'jugadores',
 		last3rounds: 'últimas 3 rondas',
+		lastGames: 'últimos juegos',
 		allTimeWins: 'todos los Tiempos Ganan',
 		goUp: 'sube',
 		goDown: 'bajar',
@@ -268,7 +342,6 @@ export const arLanguagesPhraseSite: ILanguage = {
 			'Puede cambiar el modo presionando el botón en la esquina superior izquierda de la pantalla y seleccionando los parámetros deseados',
 			'Ahora selecciona un modo de juego y comienza a predecir. Puedes cambiar tu elección en cualquier momento en el menú.'
 		],
-		realMode: 'modo real',
 		gameWithRealTONCoins: 'juego con monedas de toneladas reales',
 		demoMode: 'modo de demostración',
 		learningWithNonRealCoins: 'aprender con monedas no reales',
@@ -294,6 +367,41 @@ export const arLanguagesPhraseSite: ILanguage = {
 		altinBit: 'AltinBit',
 		bitObmen: 'BitObmen',
 		paybis: 'Paybis',
+		balance: 'Saldo',
+		multiplier: 'Multiplicador',
+		pointsForWinning: 'Puntos por ganar',
+		pulsePoints: 'Puntos de pulso',
+		points: 'Puntos',
+		placeInLeaderboard: 'lugar en la tabla de clasificación',
+		leaderboard: 'Tabla de clasificación',
+		tasks: 'tareas',
+		game: 'juego',
+		menu: 'menú',
+		completeTasks: 'Complete tasks',
+		earnMorePoints: 'gane más puntos',
+		pulseMarket: 'Pulse Market',
+		partners: 'Socios',
+		noAvailableTasks: 'No hay tareas disponibles',
+		connectYourTON: 'Conecte su billetera TON para hacer una apuesta',
+		theRoundHasAlready: 'La ronda ya ha comenzado, espere una nueva ronda',
+		daysInTheGame: 'días seguidos en el juego',
+		multiplierToday: 'multiplicador hoy',
+		logInToTheGame: 'Inicia sesión en el juego todos los días y aumenta tu multiplicador',
+		totalBets: 'Apuestas totales',
+		daysInARow: 'Días seguidos',
+		yourMultiplier: 'Tu multiplicador será aún mayor mañana. Pero si te lo pierdes, todo el progreso se restablecerá a cero',
+		continue: 'Continuar',
+		inviteFriends: 'Invitar amigos',
+		invitedFriends: 'Amigos invitados',
+		instruction: 'Instrucción',
+		testMode: 'Modo de prueba',
+		realMode: 'Modo real',
+		nowYouWillHave: 'Ahora tendrás un juego de prueba para que puedas familiarizarte con el juego',
+		greatYouveTried: "Genial, has intentado hacer una prueba, pruébalo en modo real ahora",
+		letSGo: 'Vamos',
+		inviteYourFriends: 'Invita a tus amigos',
+		visitGameEveryDay: 'Visita el juego todos los días',
+		subscribeToOurChannel: 'Suscríbete a nuestro canal',
 	},
 	chinese: {
 		gameInProcess: [
@@ -324,7 +432,9 @@ export const arLanguagesPhraseSite: ILanguage = {
 		chinese: '中文',
 		russian: '俄语',
 		livePlayers: '现场玩家',
+		players: '球员',
 		last3rounds: '最后三轮',
+		lastGames: '最后一场比赛',
 		allTimeWins: '所有时间都赢',
 		goUp: '上去',
 		goDown: '下去',
@@ -350,7 +460,6 @@ export const arLanguagesPhraseSite: ILanguage = {
 			'您可以通过按下屏幕左上角的按钮并选择所需的参数来更改模式',
 			'现在选择游戏模式并开始预测。您可以随时在菜单中更改您的选择'
 		],
-		realMode: '实模式',
 		gameWithRealTONCoins: '使用真吨硬币的游戏',
 		demoMode: '演示模式',
 		learningWithNonRealCoins: '用非真实硬币学习',
@@ -376,6 +485,41 @@ export const arLanguagesPhraseSite: ILanguage = {
 		altinBit: 'AltinBit',
 		bitObmen: 'BitObmen',
 		paybis: 'Paybis',
+		balance: '平衡表',
+		multiplier: '乘数',
+		pointsForWinning: '获胜积分',
+		pulsePoints: '脉冲点',
+		points: '积分',
+		placeInLeaderboard: '在排行榜上的位置',
+		leaderboard: '排行榜',
+		tasks: '任务',
+		game: '游戏',
+		menu: '菜单',
+		completeTasks: '完成任务',
+		earnMorePoints: '赚取更多积分',
+		pulseMarket: 'Pulse Market',
+		partners: '合作伙伴',
+		noAvailableTasks: '没有可用的任务',
+		connectYourTON: '连接你的吨钱包下注',
+		theRoundHasAlready: '回合已经开始，等待新一轮',
+		daysInTheGame: '连续几天在比赛中',
+		multiplierToday: '今天乘数',
+		logInToTheGame: '每天登录游戏，让你的乘数变大',
+		totalBets: '总赌注',
+		daysInARow: '连续几天',
+		yourMultiplier: '明天你的乘数会更高。 但是，如果你错过了它，所有的进展将被重置为零',
+		continue: '继续',
+		inviteFriends: '邀请朋友',
+		invitedFriends: '邀请朋友',
+		instruction: '教育指引',
+		testMode: '测试模式',
+		realMode: '真实模式',
+		nowYouWillHave: '现在你将有一个测试游戏，这样你就可以熟悉游戏',
+		greatYouveTried: "很好，你已经试过测试了--现在就在真实模式上试试吧",
+		letSGo: '我们走吧',
+		inviteYourFriends: '邀请你的朋友',
+		visitGameEveryDay: '每天访问游戏',
+		subscribeToOurChannel: '订阅我们的频道',
 	},
 	russian: {
 		gameInProcess: [
@@ -406,7 +550,9 @@ export const arLanguagesPhraseSite: ILanguage = {
 		chinese: 'Китайский',
 		russian: 'Русский',
 		livePlayers: 'Онлайн игроки',
+		players: 'Игроки',
 		last3rounds: 'Последние 3 раунда',
+		lastGames: 'Последние игры',
 		allTimeWins: 'Выйграно за все время',
 		goUp: 'Вверх',
 		goDown: 'Вниз',
@@ -432,7 +578,6 @@ export const arLanguagesPhraseSite: ILanguage = {
 			'Вы можете изменить режим, нажав кнопку в левом верхнем углу экрана и выбрав нужные параметры',
 			'Теперь выберите режим игры и приступайте к прогнозированию. Вы можете изменить свой выбор в любой момент в меню.'
 		],
-		realMode: 'реальный режим',
 		gameWithRealTONCoins: 'игра с реальными тоннами монет',
 		demoMode: 'деморежим',
 		learningWithNonRealCoins: 'обучение с ненастоящими монетами',
@@ -458,6 +603,41 @@ export const arLanguagesPhraseSite: ILanguage = {
 		altinBit: 'AltinBit',
 		bitObmen: 'BitObmen',
 		paybis: 'Paybis',
+		balance: 'Баланс',
+		multiplier: 'Множитель',
+		pointsForWinning: 'Очки за выигрыша',
+		points: 'Очки',
+		pulsePoints: 'Точки пульса',
+		placeInLeaderboard: 'место в списке лидеров',
+		leaderboard: 'Таблица лидеров',
+		tasks: 'Задания',
+		game: 'Игра',
+		menu: 'Меню',
+		completeTasks: 'Выполняйте задания',
+		earnMorePoints: 'зарабатывайте больше очков',
+		pulseMarket: 'Pulse Market',
+		partners: 'Партнеры',
+		noAvailableTasks: 'Нет доступных задач',
+		connectYourTON: 'Подключите свой кошелек TON, чтобы сделать ставку',
+		theRoundHasAlready: 'Раунд уже начался, ждите нового раунда',
+		daysInTheGame: 'заходили дней подряд',
+		multiplierToday: 'ваш множитель сегодня',
+		logInToTheGame: 'Заходите в игру каждый день и увеличивайте свой множитель',
+		totalBets: 'Общая сумма ставок',
+		daysInARow: 'Дни подряд',
+		yourMultiplier: 'Завтра ваш множитель будет еще больше. Но если вы не зайдете, прогресс будет потерян',
+		continue: 'Продолжить',
+		inviteFriends: 'Пригласить друзей',
+		invitedFriends: 'Приглашено друзей',
+		instruction: 'Инструкция',
+		testMode: 'Тестовый режим',
+		realMode: 'Реальный режим',
+		nowYouWillHave: 'Теперь у вас будет тестовая игра, чтобы вы могли ознакомиться с игрой',
+		greatYouveTried: "Отлично, вы попробовали сделать тест, давайте попробуем это на практике\". режим сейчас",
+		letSGo: 'Поехали',
+		inviteYourFriends: 'Приглашайте своих друзей',
+		visitGameEveryDay: 'Посещайте игру каждый день',
+		subscribeToOurChannel: 'Подписывайтесь на наш канал',
 	},
 }
 export const arLanguagesSite: ILang[] = [
@@ -496,4 +676,5 @@ export const sourceAltinbit: string = 'http://altinbit.com/'
 export const sourceBitobmen: string = 'http://bitobmen.net/'
 export const sourcePaybis: string = 'https://t.me/paybis_crypto_exchange_bot'
 
-export const maxCountTransactionForShowModalSwithcMode = 10
+export const maxCountTransactionForShowModalSwitchMode = 5
+export const msInDay = 1000 * 60 * 60 * 24 // ms * s * m * h

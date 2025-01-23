@@ -15,7 +15,7 @@ const defaultOptions = {
 }
 
 const styles = {
-  zIndex: 90,
+  zIndex: 1,
   position: 'absolute',
   top: '50%',
   left: '50%',
@@ -42,8 +42,10 @@ const listAnimates = {
   consolidate: {
     styles: {
       ...styles,
-      top: '65%',
+      top: '35%',
       left: '62%',
+      height: '350px',
+      width: '270px',
     },
     animation: consolidatingBetsData,
     settings: {
@@ -54,8 +56,8 @@ const listAnimates = {
     styles: {
       ...styles,
       top: '40%',
-      width: '55%',
-      height: '45%',
+      width: '270px',
+      height: '420px',
     },
     animation: youAreInData,
     settings: {
@@ -66,6 +68,7 @@ const listAnimates = {
       ...styles,
       width: '100%',
       height: '100%',
+      zIndex: 2
     },
     animation: loadPerson,
     settings: {

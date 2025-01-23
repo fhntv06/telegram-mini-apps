@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
 import classNames from 'classnames/bind'
 import { getGameBetsResult } from '../../app/api/'
 import { ButtonPlaceBet } from '../../feature'
-import { useGetPhrases } from '../../hooks'
+import { useGetPhrases, useSelector } from '../../hooks'
 import { IDataPanel } from './types'
 import { Counter, Icon, Person, formatIntTonNumber } from '../../shared'
 
@@ -17,20 +16,20 @@ interface Props {
 }
 
 export const BetPanel = ({ data, type='up' }: Props) => {
-	const { gamePhase } = useSelector((state: any) => state.gameStatus)
+	const { gamePhase } = useSelector((state) => state.gameStatus)
 	const [groupWins, setGroupWins] = useState<'up' | 'down'>('up')
 	const { bets, betPool } = data
 	const count = bets.length - 5
 	const [completedRound, setCompletedRound] = useState<boolean>(false)
 	const [betsWiningPool, setWiningPool] = useState<number>(0)
-	const { ticker, gameMode } = useSelector((state: any) => state.modeSettings)
+	const { ticker, gameMode } = useSelector((state) => state.modeSettings)
 	const { up, down, winners, losers } = useGetPhrases(['up', 'down', 'winners', 'losers'])
 
 	useEffect(() => {
 		if (gamePhase === 4) {
 			getGameBetsResult(`ticker=${ticker}&gameMode=${gameMode}`)
 				.then((res) => {
-					setWiningPool(res.data.winingPoolEnd)
+					setWiningPool(res.data.winingPoolEnd / 1000000000)
 					setGroupWins(res.data.gameResult > 0 ? 'up' : 'down')
 					setCompletedRound(true)
 				})
@@ -44,21 +43,25 @@ export const BetPanel = ({ data, type='up' }: Props) => {
 			{
 				completedRound ? (
 					<>
-						<p className={cx('p-small')}>{`${type === 'up' ? up : down} ${type === groupWins ? winners : losers}`}</p>
+						<p className={cx('p-medium')}>{`${type === 'up' ? up : down} ${type === groupWins ? winners : losers}`}</p>
 						<div className={cx('panel__result__text')}>
 							<Icon name='ton' size='big'/>
-							<Counter value={betsWiningPool} className='h1' direction={type === groupWins ? 'up' : 'down'} />
+							<Counter
+								to={betsWiningPool}
+								fixedNumber={2}
+								className={cx('h1', { 'up': type === groupWins })}
+								direction={type === groupWins ? 'up' : 'down'} />
 						</div>
 					</>
 				) : (
 					<>
 						<div className={cx('panel__data')}>
 							<div className={cx('panel__data__players')}>
-								<p className={cx('players__total', 'p p-small')}>
+								<p className={cx('players__total', 'p p-medium')}>
 									<Icon name='persons-medium'/>
 									{bets.length}
 								</p>
-								<p className={cx('players__total', 'p-small', type)}>
+								<p className={cx('players__total', 'p-medium', type)}>
 									<Icon name='ton-medium' size='medium' />
 									{formatIntTonNumber(betPool)}
 								</p>

@@ -1,0 +1,92 @@
+@import '../../shared/assets/styles/components/Onboarding.module.scss';
+
+.onboarding-stats__wrapper {
+  width: 100%;
+}
+.onboarding-stats__slider {
+  width: 100%;
+  height: 100%;
+}
+.onboarding-stats__slider__wrapper {
+  z-index: 1;
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+.onboarding-stats__screen__slide {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-shrink: 0;
+  padding: calc($offset16 * 5) $offset16 $offset24;
+  background-color: $black;
+
+  @for $i from 1 through 10 { // fix bug z-index in swiper
+    &:nth-child(#{$i}) {
+      z-index: $i !important;
+      width: calc(100% + $offset16);
+    }
+  }
+
+  header {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: calc(100% - 58px);
+    padding-bottom: $offset24;
+  }
+}
+// ceil params component
+.ceil-params {
+  display: flex;
+  column-gap: $offset8;
+}
+.ceil-params__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  flex-grow: 1;
+  flex-basis: 30%;
+}
+.ceil-params__ceil {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 96px;
+  padding: $offset12;
+  background-color: $dark-gray;
+  @include border('medium');
+
+}
+.onboarding-stats__screen__counter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: $offset12;
+  text-align: center;
+  margin-bottom: calc($offset16 * 4);
+
+  h1 {
+    transition: color .3s;
+  }
+}
+.onboarding-stats__screen__text {
+  margin-top: auto;
+}
+
+// button continue
+.onboarding-stats-screen__button-continue {
+  height: 58px;
+
+  &.hide {
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .3s ease;
+  }
+}

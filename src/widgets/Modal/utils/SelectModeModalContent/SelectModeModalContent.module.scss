@@ -1,52 +1,55 @@
 @import '../../../../shared/assets/styles/basics';
 
-.wrapper {
-  display: flex;
-  flex-direction: column;
-  padding: $offset12;
-  @include border('large');
-  background-color: $dark-light-gray;
-  backdrop-filter: blur(16px)
-}
-.container {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: $offset24;
+.modal-select-mode {
+  &.wrapper {
+    display: flex;
+    flex-direction: column;
+    padding: $offset12;
+    @include border('large');
+    background-color: $dark-light-gray;
+    backdrop-filter: blur(16px)
+  }
+  .container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: $offset24;
 
-  header {
-    margin-bottom: $offset12;
+    header {
+      margin-bottom: $offset12;
 
-    p {
-      text-transform: uppercase;
+      p {
+        text-transform: uppercase;
+      }
     }
   }
-}
-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 2px;
-}
-.coins {
-  display: flex;
-  flex-wrap: wrap;
-  gap: $offset8;
-}
-.coin {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  row-gap: $offset4;
-  flex-basis: calc((100% - $offset8 * 3) / 4);
-  overflow: hidden;
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2px;
+  }
+  .coins {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $offset8;
+  }
+  .coin {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    row-gap: $offset4;
+    flex-basis: calc((100% - $offset8 * 3) / 4);
+    overflow: hidden;
 
-  p {
-    color: $light-gray;
+    p {
+      color: $light-gray;
+    }
+    &.active {
+      background-color: $black;
+    }
+    &.mask--disabled {
+      filter: brightness(.8);
+    }
   }
-  &.active {
-    background-color: $black;
-  }
-  &.mask--disabled {
-    filter: brightness(.8);
-  }
+
 }

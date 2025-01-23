@@ -15,23 +15,19 @@
 .panel__bet-type {
   display: flex;
   flex-direction: column;
+  row-gap: $offset4;
 
   h2 {
+    color: $light-gray;
     text-transform: uppercase;
   }
 
-  &.down {
-    align-items: flex-end;
+  p {
+    display: flex;
+    column-gap: 4px;
   }
+
   &.time {
     text-align: center;
-  }
-}
-.panel__bet-percent {
-  &.up {
-    color: $green100;
-  }
-  &.down {
-    color: $red100;
   }
 }

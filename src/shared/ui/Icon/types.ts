@@ -18,6 +18,7 @@ export type IconNames =
     | 'arrow-left-black'
     | 'persons'
     | 'persons-medium'
+    | 'persons-large'
     | 'wallet'
     | 'refund'
     | 'refund-medium'
@@ -39,12 +40,17 @@ export type IconNames =
     | 'sp500-coin'
     | 'logo-pulse'
     | 'switch'
+    | 'candles'
+    | 'check'
+    | 'disconnect'
+    | 'book'
     | '' // For skip icon if you need
 
     export type IconType =
     | 'small'
     | 'medium'
     | 'big'
+    | 'large'
     | 'custom'
     | 'logo'
 

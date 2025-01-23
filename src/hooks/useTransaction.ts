@@ -1,14 +1,13 @@
 import WebApp from '@twa-dev/sdk'
 import { ActionConfiguration, SendTransactionRequest, useTonConnectUI, CHAIN, useTonAddress } from '@tonconnect/ui-react'
 import { useContext, useState } from 'react'
-import { useSelector } from 'react-redux'
 import { AnimationContext, NotificationContext } from '../app/contexts'
 import { IAnimationContextTypes, INotificationContextTypes } from '../app/providers/types'
 import { postDataBetDetailsPlayers } from '../app/api/'
 import { useGetPhrases, useUserData } from './'
 import { isDemoMode } from '../shared/'
 import { useFadeOut } from './useFadeOut'
-import { useCountStorageTransaction } from '../hooks'
+import { useCountStorageTransaction, useSelector } from '../hooks'
 
 export const useTransaction = (amount: number) => {
   const tonAddress = useTonAddress()
@@ -16,8 +15,8 @@ export const useTransaction = (amount: number) => {
   const [txInProcess, setTxInProcess] = useState<boolean>(false)
   const { openHandler: openHandlerAnimation } = useContext<IAnimationContextTypes>(AnimationContext)
 	const { openHandler: openHandlerNotification } = useContext<INotificationContextTypes>(NotificationContext)
-  const { ticker, gameMode } = useSelector((state: any) => state.modeSettings)
-  const { address, mainnet } = useSelector((state: any) => state.bets)
+  const { ticker, gameMode } = useSelector((state) => state.modeSettings)
+  const { address, mainnet } = useSelector((state) => state.bets)
   const userData = useUserData()
   const {
     notEnoughDemoBalance,

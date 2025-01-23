@@ -1,0 +1,51 @@
+@import '../../shared/assets/styles/basics.scss';
+
+.panel {
+  z-index: 1;
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  display: flex;
+  column-gap: $offset8;
+  justify-content: space-between;
+  width: 100%;
+  min-width: 320px;
+  max-width: 576px;
+  height: calc(58px + $offset24);
+  padding: 0 $offset16 $offset24;
+  background-color: $black;
+  border-top: 1px solid $dark-gray;
+  transform: translateX(-50%);
+}
+.item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  row-gap: 2px;
+  padding: $offset8;
+
+  p {
+    color: $gray;
+    transition: color .3s ease-out;
+
+    &:first-letter {
+      text-transform: uppercase;
+    }
+  }
+  svg path {
+    fill: $gray;
+    transition: fill .3s ease-out;
+  }
+
+  &.active {
+    p {
+      color: $coins-ton;
+      transition: color .5s ease-in;
+    }
+    svg path {
+      fill: $coins-ton;
+      transition: fill .3s ease-in;
+    }
+  }
+}
