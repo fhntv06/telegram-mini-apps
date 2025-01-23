@@ -54,7 +54,7 @@ export const initialDataGameStatus: IGameStatus = {
 	},
 	// priceHistory: initialDataPriceHistory
 }
-export const arBets: number[] = [0.5, 1, 2, 5, 10]
+export const arBets: number[] = [50, 100, 200, 500, 1000]
 
 export interface ILangPhrase {
 	gameInProcess: string[]
