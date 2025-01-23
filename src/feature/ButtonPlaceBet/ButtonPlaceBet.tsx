@@ -1,11 +1,12 @@
-import { useContext } from 'react'
+import WebApp from '@twa-dev/sdk'
+import {useContext, useState} from 'react'
 import { useTonWallet, useTonConnectUI } from '@tonconnect/ui-react'
 import classNames from 'classnames/bind'
-import { useTransaction, useGetPhrases, useSelector } from '../../hooks'
+import { postDataBetDetailsPlayers } from '../../app/api'
+import { IAnimationContextTypes, INotificationContextTypes } from '../../app/providers/types'
+import { AnimationContext, NotificationContext } from '../../app/contexts'
+import { useGetPhrases, useSelector, useSetBalance, useOpenInvoice } from '../../hooks'
 import { Button, minBet } from '../../shared'
-
-import { INotificationContextTypes } from '../../app/providers/types'
-import { NotificationContext } from '../../app/contexts'
 
 import styles from './ButtonPlaceBet.module.scss'
 
@@ -24,7 +25,8 @@ export const ButtonPlaceBet = ({
 	const [tonConnectUI] = useTonConnectUI()
 	const { bet } = useSelector((state) => state.bets)
 	const { gamePhase } = useSelector((state) => state.gameStatus)
-	const { txInProcess, sendTransaction } = useTransaction(bet)
+	const [txInProcess, setTxInProcess] = useState<boolean>(false)
+	const { openInvoice } = useOpenInvoice()
 	const { balance } = useSelector((state) => state.userDataWallet)
 	const {
 		goUp, goDown, topUpYourWallet, connectYourTON, theRoundHasAlready
@@ -32,18 +34,39 @@ export const ButtonPlaceBet = ({
 		'goUp', 'goDown', 'topUpYourWallet', 'connectYourTON', 'theRoundHasAlready'
 	])
 	const { openHandler: openHandlerNotification } = useContext<INotificationContextTypes>(NotificationContext)
+	const { openHandler: openHandlerAnimation } = useContext<IAnimationContextTypes>(AnimationContext)
+	const { updateBalance } = useSetBalance()
 
 	const handlerPlaceBet = () => {
 		if (!wallet) {
 			tonConnectUI.openModal()
 					.then(() => openHandlerNotification('warning', { text: connectYourTON }))
 		}
-		else if (!(Number(balance) >= minBet)) openHandlerNotification('warning', { text: topUpYourWallet })
+		else if (!(Number(balance) >= minBet)) {
+			openHandlerNotification('warning', { text: topUpYourWallet })
+			openInvoice(bet)
+		}
 		else if ((gamePhase !== 1 && gamePhase !== 0)) openHandlerNotification('warning', { text: theRoundHasAlready })
 		else {
-			sendTransaction(type)
-				.then(() => console.log('Success sendTransaction!'))
-				.catch((e) => console.log(new Error('Error in sendTransaction: ' + e)))
+			setTxInProcess(true)
+
+			const data = {
+				ticker: 'BTC-30',
+				gameMode: 'STARS_GAME',
+				betAmount: bet,
+				variantBet: type,
+				initData: WebApp.initData
+			}
+
+			postDataBetDetailsPlayers(data)
+				.then(() => {
+					openHandlerAnimation('youAreIn')
+					updateBalance()
+				})
+				.catch(() => {
+					new Error("Error in postDataBetDetailsPlayers for ButtonPlaceBet")
+				})
+				.finally(() => setTxInProcess(false))
 
 			if (onClick) onClick()
 
