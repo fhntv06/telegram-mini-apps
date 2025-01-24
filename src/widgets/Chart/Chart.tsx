@@ -70,9 +70,13 @@ export const Chart = () => {
   const chartData = useChartData()
 
 	return (
-    <div className={cx('chart')}>
-      <ChartPanel/>
-      <LineChart data={chartData} />
-    </div>
-  )
+		chartData.labels?.length ? (
+			<div className={cx('chart')}>
+				<ChartPanel/>
+				<LineChart data={chartData}/>
+			</div>
+		) : (
+			<h2>Don't have data for chart!</h2>
+		)
+	)
 }

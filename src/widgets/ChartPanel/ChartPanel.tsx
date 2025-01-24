@@ -35,7 +35,7 @@ export const ChartPanel = () => {
       <div className={cx('panel__bet-type')}>
         <h2 className='right-text'>{allTimeWins}</h2>
         <p className='p-medium'>
-          <Icon name='stars-1' />
+          <Icon name='stars-1-medium' />
           {allTimeWinsCount}
         </p>
       </div>
