@@ -3,6 +3,8 @@ export * from './blocks/types'
 
 export type typeOnChainMode = 'ON_CHAIN'
 export type typeDemoMode = 'DEMO'
+export type typeStarsGame = 'STARS_GAME'
+
 
 export interface ILang {
 	name: 'english' | 'spanish' | 'chinese' | 'russian' | string,

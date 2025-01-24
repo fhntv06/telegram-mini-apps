@@ -9,7 +9,7 @@ const initialState: IModeSettings = {
         unit: 's'
     },
     ticker: 'BTC-30',
-    gameMode: 'ON_CHAIN'
+    gameMode: 'STARS_GAME'
 }
 
 const index = createSlice({
