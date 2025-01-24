@@ -1,14 +1,14 @@
 import { setModeSettings } from '../app/store/slices'
 import { useDispatch, useSelector } from '../hooks'
-import { typeDemoMode, typeOnChainMode } from '../shared/types'
-import { isOnChainMode } from '../shared'
+import {typeDemoMode, typeOnChainMode, typeStarsGame} from '../shared/types'
+import { isStarsMode } from '../shared'
 
 export const useChangeGameMode = () => {
   const dispatch = useDispatch()
   const { socket } = useSelector((state) => state.socket)
 
   return (
-    gameMode: typeOnChainMode | typeDemoMode = isOnChainMode,
+    gameMode: typeOnChainMode | typeDemoMode | typeStarsGame = isStarsMode,
     ticker: 'BTC-30' = 'BTC-30'
   ): void => {
     if (socket && socket.readyState === WebSocket.OPEN) {

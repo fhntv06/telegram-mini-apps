@@ -1,5 +1,5 @@
 import { IGameStatus } from '../app/providers/types'
-import { ILang, typeOnChainMode, typeDemoMode } from './types'
+import {ILang, typeOnChainMode, typeDemoMode, typeStarsGame} from './types'
 export const urlSocket = `${import.meta.env.VITE_SOCKET_PROTOCOL}://${import.meta.env.VITE_DOMAIN}:${import.meta.env.VITE_PORT}`
 export const minBet = 50
 export const countPointsChart = 25
@@ -664,6 +664,7 @@ export const arLanguagesSite: ILang[] = [
 ]
 export const isOnChainMode: typeOnChainMode = 'ON_CHAIN'
 export const isDemoMode: typeDemoMode = 'DEMO'
+export const isStarsMode: typeStarsGame = 'STARS_GAME'
 
 // sources
 export const sourcePulseReferralBot: string = 'https://t.me/PulseReferralBot'
