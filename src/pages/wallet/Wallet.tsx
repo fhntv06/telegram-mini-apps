@@ -111,7 +111,7 @@ export const Wallet = () => {
       <header className={cx('page-wallet__header')}>
         <h2 className='h2-big'>{balance}</h2>
         <div className={cx('page-wallet__balance', { 'not-balance': !address })}>
-          {address && <Icon name='ton' size='big' />}
+          {address && <Icon name='stars-1' size='big' />}
           <h1>{address ? balanceUser : '- -'}</h1>
         </div>
       </header>

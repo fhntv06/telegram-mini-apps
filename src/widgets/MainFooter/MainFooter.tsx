@@ -111,7 +111,7 @@ export const MainFooter = () => {
 				<div className={cx('footer__header__items')}>
 					<h2>{balance}</h2>
 					<p className='p-medium'>
-						<Icon name='ton-medium' size='medium'/>
+						<Icon name='stars-1' size='medium'/>
 						{address ? userBalance : '- -'}
 					</p>
 				</div>
