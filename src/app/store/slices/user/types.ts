@@ -8,7 +8,7 @@ export interface IUser {
     appVersion: string
     maxProtocolVersion: string
     platform: string
-    balance: string
+    balance: number
 }
 
 export interface IUserRetrievesMultiplierData {

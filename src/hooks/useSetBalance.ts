@@ -1,33 +1,23 @@
 import WebApp from '@twa-dev/sdk'
-import { useTonAddress } from '@tonconnect/ui-react'
-import { getBalance, getDemoBalance } from '../app/api'
+import { useEffect, useState } from 'react'
 import { setUserDataWallet } from '../app/store/slices'
+import { getStarsBalance } from '../app/api/stars'
 import { useDispatch, useSelector } from './'
-import { isDemoMode } from '../shared'
-import {useEffect, useState} from "react";
 
 export const useSetBalance = () => {
 	const dispatch = useDispatch()
   const userDataWallet = useSelector((state) => state.userDataWallet)
-  const { gameMode } = useSelector((state) => state.modeSettings)
-  const address = useTonAddress()
   const [balance, setBalance] = useState<number>(Number(userDataWallet.balance))
 
-    // TODO: Это убрать в кнопку подключения и перенести в отдельный хук
-    const method = gameMode === isDemoMode ? getDemoBalance : getBalance
-    const param = gameMode === isDemoMode ? WebApp.initData : address
+  const updateBalance = () => {
+    getStarsBalance(WebApp.initData)
+      .then(res => setBalance(res.data.balance))
+      .catch((error) => {
+        if (!WebApp.initData) new Error(`Error in getStarsBalance: param WebApp.initData is undefined !`)
 
-    const updateBalance = () => {
-      method(param)
-        .then(res => setBalance(res.data.balance))
-        .catch((error) => {
-          if (!param) new Error(`Error in ${method}: param ${param} is undefined !`)
-
-          new Error(error)
-
-          return 0
-        })
-    }
+        new Error(error)
+      })
+  }
 
   useEffect(() => {
     dispatch(

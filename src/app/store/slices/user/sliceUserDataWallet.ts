@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { IUser } from './types'
-import { getCorrectBalance } from "../../../../shared";
 
 const initialState: IUser = {
   isConnected: false,
@@ -12,7 +11,7 @@ const initialState: IUser = {
   appVersion: '',
   maxProtocolVersion: '',
   platform: '',
-  balance: '0.3',
+  balance: 50,
 }
 
 const sliceUserDataWallet = createSlice({
@@ -29,7 +28,7 @@ const sliceUserDataWallet = createSlice({
       state.appVersion = action.payload.appVersion
       state.maxProtocolVersion = action.payload.maxProtocolVersion
       state.platform = action.payload.platform
-      state.balance = getCorrectBalance(action.payload.balance)
+      state.balance = action.payload.balance
     },
     removeUserDataWallet: () => initialState
   }
