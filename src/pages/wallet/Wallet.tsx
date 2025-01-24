@@ -6,7 +6,7 @@ import classNames from 'classnames/bind'
 import { useDisconnect, useGetPhrases, useSetBalance } from '../../hooks'
 import { ButtonConnectWallet } from '../../feature'
 import {
-  Button, getCorrectBalance, Icon, Select,
+  Button, Icon, Select,
   sourceAltinbit, sourceBitobmen, sourceCryptoBot,
   sourceKotleta, sourceOnemoment, sourcePaybis, sourceWallet
 } from '../../shared'
@@ -77,26 +77,6 @@ const TopUpByCard = [
     blockSelect: true,
     onClick: () => window.location.href = sourcePaybis,
   },
-  {
-    name: 'TopUpByCard',
-    icon: 'card',
-  },
-  {
-    name: 'paybis',
-    icon: 'paybis',
-    blockSelect: true,
-    onClick: () => window.location.href = sourcePaybis,
-  },
-  {
-    name: 'TopUpByCard',
-    icon: 'card',
-  },
-  {
-    name: 'paybis',
-    icon: 'paybis',
-    blockSelect: true,
-    onClick: () => window.location.href = sourcePaybis,
-  },
 ]
 
 export const Wallet = () => {
@@ -132,7 +112,7 @@ export const Wallet = () => {
         <h2 className='h2-big'>{balance}</h2>
         <div className={cx('page-wallet__balance', { 'not-balance': !address })}>
           {address && <Icon name='ton' size='big' />}
-          <h1>{address ? getCorrectBalance(balanceUser) : '- -'}</h1>
+          <h1>{address ? balanceUser : '- -'}</h1>
         </div>
       </header>
       <main className={cx('page__main')}>
