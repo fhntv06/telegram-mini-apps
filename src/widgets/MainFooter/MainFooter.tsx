@@ -1,5 +1,5 @@
 // import WebApp from '@twa-dev/sdk'
-import { useContext, useEffect } from 'react'
+import { useEffect } from 'react'
 import { useTonWallet, useTonAddress } from '@tonconnect/ui-react'
 import classNames from 'classnames/bind'
 import { BetPanel, PanelButtonsBet } from '../../widgets'
@@ -9,16 +9,10 @@ import { ButtonConnectWallet, ButtonTopUp } from '../../feature'
 import {
 	Icon, Rounds, formatNumber,
 	minBet,
-	// setStorage,
-	getStorage,
-	// removeStorage,
-	maxCountTransactionForShowModalSwitchMode
 } from '../../shared'
 import { IRoundsType } from '../../shared/types'
 
 import styles from './MainFooter.module.scss'
-import { ModalContextTypes } from '../../app/providers/ModalProvider/types'
-import { ModalContext } from '../../app/contexts'
 import { roundToFixed } from '../../shared/utils/formatNumber'
 
 const cx = classNames.bind(styles)
@@ -34,22 +28,9 @@ export const MainFooter = () => {
 	const address = useTonAddress()
 	const { gamePhase } = useSelector((state) => state.gameStatus)
 	const { gameMode } = useSelector((state) => state.modeSettings)
-	const { multiplierData: { totalMultiplier }, isNewPlayer } = useSelector((state) => state.retrievesData)
-	const { openHandler: openHandlerModal } = useContext<ModalContextTypes>(ModalContext)
+	const { multiplierData: { totalMultiplier } } = useSelector((state) => state.retrievesData)
   const { players, multiplier, balance, lastGames } = useGetPhrases(['players', 'multiplier', 'balance', 'lastGames'])
 	const { balance: userBalance, updateBalance } = useSetBalance()
-
-	useEffect(() => {
-		if (wallet) {
-			if (
-				(isNewPlayer && !getStorage('visibleTestModeModalSelectGameMode')) // для Test mode
-				|| (gamePhase === 0 && Number(getStorage('count')) == maxCountTransactionForShowModalSwitchMode && !getStorage('visibleRealModeModalSelectGameMode')) // для Real mode
-			) {
-				console.log('openHandlerModal switchMode')
-				openHandlerModal('switchMode')
-			}
-		}
-	}, [gamePhase, wallet])
 
 	// TODO: вынести код выше!
 	// не должно быть тут!
@@ -123,7 +104,7 @@ export const MainFooter = () => {
 			<footer className={cx('footer__bets')}>
 				{(
 					wallet
-						? Number(userBalance / 1000000000) < minBet
+						? userBalance < minBet
 							? <ButtonTopUp sizeIcons='big' />
 							: <PanelButtonsBet />
 					: null
