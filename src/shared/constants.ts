@@ -111,7 +111,7 @@ export interface ILangPhrase {
 	alias: string
 	notEnoughDemoBalance: string
 	yourAnOutOfTime: string
-	topUpYourWallet: string
+	topUpYourStars: string
 	startGame: string
 	beforeStartingTheGame: string
 	switchToRealMode: string
@@ -159,6 +159,8 @@ export interface ILangPhrase {
 	inviteYourFriends: string
 	visitGameEveryDay: string
 	subscribeToOurChannel: string
+	enterTheDepositAmount: string
+	withDraw: string
 }
 export interface ILanguage {
 	'english': ILangPhrase
@@ -236,7 +238,7 @@ export const arLanguagesPhraseSite: ILanguage = {
 		alias: 'en',
 		notEnoughDemoBalance: 'Not enough demo balance',
 		yourAnOutOfTime: 'You did not have enough time to bid in this round, please wait for the next round',
-		topUpYourWallet: 'Top up your wallet',
+		topUpYourStars: 'Top up your stars',
 		startGame: 'Start game',
 		beforeStartingTheGame: 'Before starting the game, select the mode. You can change your selection in the assets menu',
 		switchToRealMode: 'Switch to Real mode',
@@ -284,6 +286,8 @@ export const arLanguagesPhraseSite: ILanguage = {
 		inviteYourFriends: 'Invite your friends',
 		visitGameEveryDay: 'Visit game every day',
 		subscribeToOurChannel: 'Subscribe to our channel',
+		enterTheDepositAmount: 'Enter the deposit amount',
+		withDraw: 'Withdraw'
 	},
 	spanish: {
 		gameInProcess: [
@@ -354,7 +358,7 @@ export const arLanguagesPhraseSite: ILanguage = {
 		alias: 'es',
 		notEnoughDemoBalance: 'No hay suficiente saldo de demostración',
 		yourAnOutOfTime: 'Te quedaste sin tiempo para apostar en esta ronda, espera a la próxima ronda',
-		topUpYourWallet: 'Recarga tu billetera',
+		topUpYourStars: 'Recarga tu billetera',
 		startGame: 'Iniciar juego',
 		beforeStartingTheGame: 'Antes de comenzar el juego, selecciona el modo. Puede cambiar su selección en el menú activos',
 		switchToRealMode: 'Cambiar al modo real',
@@ -402,6 +406,8 @@ export const arLanguagesPhraseSite: ILanguage = {
 		inviteYourFriends: 'Invita a tus amigos',
 		visitGameEveryDay: 'Visita el juego todos los días',
 		subscribeToOurChannel: 'Suscríbete a nuestro canal',
+		enterTheDepositAmount: 'Ingrese el monto del depósito',
+		withDraw: 'Retirar'
 	},
 	chinese: {
 		gameInProcess: [
@@ -472,7 +478,7 @@ export const arLanguagesPhraseSite: ILanguage = {
 		alias: 'zh',
 		notEnoughDemoBalance:'没有足够的演示平衡',
 		yourAnOutOfTime: '你在这轮投注的时间已经用完了，请等待下一轮',
-		topUpYourWallet: '把你的钱包装满',
+		topUpYourStars: '把你的钱包装满',
 		startGame: '开始游戏',
 		beforeStartingTheGame: '在开始游戏之前，选择模式。 您可以在资产菜单中更改选择',
 		switchToRealMode: '切换到真实模式',
@@ -520,6 +526,8 @@ export const arLanguagesPhraseSite: ILanguage = {
 		inviteYourFriends: '邀请你的朋友',
 		visitGameEveryDay: '每天访问游戏',
 		subscribeToOurChannel: '订阅我们的频道',
+		enterTheDepositAmount: '输入存款金额',
+		withDraw: '撤回'
 	},
 	russian: {
 		gameInProcess: [
@@ -590,7 +598,7 @@ export const arLanguagesPhraseSite: ILanguage = {
 		alias: 'ru',
 		notEnoughDemoBalance: 'Недостаточно демо-баланса',
 		yourAnOutOfTime: 'У вас не хватило времени сделать ставку в этом раунде, пожалуйста, дождитесь следующего раунда',
-		topUpYourWallet: 'Пополните свой кошелек',
+		topUpYourStars: 'Пополните Stars',
 		startGame: 'Начать игру',
 		beforeStartingTheGame: 'Перед началом игры выберите режим. Вы можете изменить свой выбор в меню "Ресурсы".',
 		switchToRealMode: 'Переключиться в реальный режим',
@@ -638,6 +646,8 @@ export const arLanguagesPhraseSite: ILanguage = {
 		inviteYourFriends: 'Приглашайте своих друзей',
 		visitGameEveryDay: 'Посещайте игру каждый день',
 		subscribeToOurChannel: 'Подписывайтесь на наш канал',
+		enterTheDepositAmount: 'Введите сумму пополнения',
+		withDraw: 'Вывести'
 	},
 }
 export const arLanguagesSite: ILang[] = [
