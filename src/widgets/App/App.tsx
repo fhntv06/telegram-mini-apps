@@ -55,6 +55,8 @@ export const App: FC = () => {
     // запись данных от сокета
     // TODO: Вынести в Main
     if (data && 'btcPrice' in data && data.btcPrice && priceHistory.length) {
+      setIsLoading(false)
+
       dispatch(setGameStatus({ ...data, priceHistory}))
     }
   }, [data, priceHistory, wallet])
@@ -101,11 +103,9 @@ export const App: FC = () => {
         .then(() => getRetrievesData(WebApp.initData))
         .then((retrievesData) => {
           dispatch(setUserRetrievesData(retrievesData.data))
-          setIsLoading(false)
         })
         .catch((error) => new Error('Error in getRetrievesData: ' + error))
     }
-    setIsLoading(false)
 
     getAddressContract()
       .then(({ data: { address, mainnet } }) => dispatch(setDataTransaction({ address, mainnet })))
