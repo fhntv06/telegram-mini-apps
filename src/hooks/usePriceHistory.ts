@@ -13,7 +13,7 @@ export const usePriceHistory = () => {
         .then(async (res) => setPriceHistory(res.data))
         .catch((error) => console.log('Error in getPriceHistory: ', error))
     }
-  }, [priceHistory.length])
+  }, [priceHistory])
 
 
   return priceHistory

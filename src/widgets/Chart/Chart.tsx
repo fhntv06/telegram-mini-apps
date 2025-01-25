@@ -70,7 +70,7 @@ export const Chart = () => {
   const chartData = useChartData()
 
 	return (
-		chartData.labels?.length ? (
+		chartData.datasets[0].data.length > 0 ? (
 			<div className={cx('chart')}>
 				<ChartPanel/>
 				<LineChart data={chartData}/>

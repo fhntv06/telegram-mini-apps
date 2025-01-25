@@ -52,7 +52,7 @@ export const ButtonWithDraw = ({
 			iconRightName={iconRightName}
 			onClick={withDrawHandler}
 		>
-			{withDraw}
+			{withDraw} (minimum 500)
 		</Button>
 	)
 }
