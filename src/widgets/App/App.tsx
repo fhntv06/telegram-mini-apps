@@ -33,6 +33,7 @@ import {
   usePostReferral
 } from '../../hooks'
 import { LoaderSpinner, removeStorage } from '../../shared'
+import {ModalProvider} from "../../app/providers";
 
 export const App: FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true)
@@ -104,6 +105,7 @@ export const App: FC = () => {
         })
         .catch((error) => new Error('Error in getRetrievesData: ' + error))
     }
+    setIsLoading(false)
 
     getAddressContract()
       .then(({ data: { address, mainnet } }) => dispatch(setDataTransaction({ address, mainnet })))
@@ -132,13 +134,15 @@ export const App: FC = () => {
     isLoading
       ? <LoaderSpinner />
       : (
-        <BrowserRouter>
-          <Routes>
-            {routes.map((route) => <Route key={route.path} {...route} />)}
-            <Route path='*' element={<Navigate to='/'/>}/>
-          </Routes>
-          <PanelMenu />
-        </BrowserRouter>
+        <ModalProvider>
+          <BrowserRouter>
+            <Routes>
+              {routes.map((route) => <Route key={route.path} {...route} />)}
+              <Route path='*' element={<Navigate to='/'/>}/>
+            </Routes>
+            <PanelMenu />
+          </BrowserRouter>
+        </ModalProvider>
       )
   )
 }
