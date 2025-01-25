@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import classNames from 'classnames/bind'
-import { AnimationProvider, ModalProvider } from '../../app/providers'
+import { AnimationProvider } from '../../app/providers'
 import { MainFooter, Chart, OnboardingStats } from '../../widgets'
 import { AnimationWrapper, getStorage,
   // msInDay,
@@ -33,22 +33,20 @@ export const Main = () => {
   }, [])
 
   return (
-    <ModalProvider>
-      <AnimationProvider>
-        <main className={cx('main')}>
-          <Chart/>
-          <MainFooter/>
-        </main>
-        <AnimationWrapper
-          isOpen={!skipOnBoarding && visibleOnboarding}
-          style={{ zIndex: 100, position: 'absolute', top: 0, left: 0, height: '100%', width: '100%' }}
-          initial={{ translateX: 0 }}
-          animate={{}}
-          exit={{ translateX: '-100%' }}
-        >
-          <OnboardingStats handlerSkip={skipOnboardingHandler} />
-        </AnimationWrapper>
-      </AnimationProvider>
-    </ModalProvider>
+    <AnimationProvider>
+      <main className={cx('main')}>
+        <Chart/>
+        <MainFooter/>
+      </main>
+      <AnimationWrapper
+        isOpen={!skipOnBoarding && visibleOnboarding}
+        style={{ zIndex: 100, position: 'absolute', top: 0, left: 0, height: '100%', width: '100%' }}
+        initial={{ translateX: 0 }}
+        animate={{}}
+        exit={{ translateX: '-100%' }}
+      >
+        <OnboardingStats handlerSkip={skipOnboardingHandler} />
+      </AnimationWrapper>
+    </AnimationProvider>
   )
 }
