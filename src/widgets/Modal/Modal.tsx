@@ -1,5 +1,5 @@
 import React from 'react'
-import { useWillChange } from 'framer-motion'
+import { motion, useWillChange } from 'framer-motion'
 import classNames from 'classnames/bind'
 
 import styles from './Modal.module.scss'
@@ -59,19 +59,19 @@ export const Modal = ({
         />
       </header>
       {children}
-    {/*<motion.div*/}
-    {/*  className={cx('blur')}*/}
-    {/*  initial={{opacity: 0}}*/}
-    {/*  animate={{opacity: 1}}*/}
-    {/*  exit={{opacity: 0}}*/}
-    {/*  transition={{*/}
-    {/*   delay: .1,*/}
-    {/*   duration: .3,*/}
-    {/*   ease: 'easeInOut',*/}
-    {/*  }}*/}
-    {/*  style={{willChange}}*/}
-    {/*  onClick={closeHandler}*/}
-    {/*/>*/}
+      <motion.div
+        className={cx('blur')}
+        initial={{opacity: 0}}
+        animate={{opacity: 1}}
+        exit={{opacity: 0}}
+        transition={{
+         delay: .1,
+         duration: .3,
+         ease: 'easeInOut',
+        }}
+        style={{willChange}}
+        onClick={closeHandler}
+      />
     </AnimationWrapper>
   )
 }

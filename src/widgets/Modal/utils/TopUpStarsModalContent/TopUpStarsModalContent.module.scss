@@ -1,0 +1,36 @@
+@import '../../../../shared/assets/styles/basics';
+
+.modal {
+  z-index: 3;
+  position: relative;
+  padding: calc($offset24 * 3) $offset16 0;
+}
+.modal__wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: $offset24;
+  padding: $offset24 $offset12 $offset12;
+  margin-top: $offset24;
+  background-color: $dark-gray;
+  @include border('large');
+
+  .description {
+    text-align: center;
+  }
+}
+.modal__close {
+  position: absolute;
+  right: 32px;
+}
+.modal__input-container {
+  display: flex;
+  column-gap: $offset12;
+}
+.input-stars {
+  text-align: right;
+  background-color: transparent;
+  font-size: 32px;
+  outline: none;
+  border: none;
+}

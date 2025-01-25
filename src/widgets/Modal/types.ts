@@ -3,3 +3,5 @@ export type IModalTypes =
 	| 'select__mode'
 	| 'wallet'
 	| 'switchMode'
+	| 'topUpStars'
+	| 'withDraw'
