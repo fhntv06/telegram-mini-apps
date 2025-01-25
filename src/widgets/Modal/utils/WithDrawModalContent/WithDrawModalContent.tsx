@@ -41,6 +41,9 @@ export const WithDrawModalContent = ({ closeModalHandler }: IProps) => {
         if (error.response.status === 400) {
           openHandlerNotification('warning', { text: theMinimumNumberOfStars })
         }
+        if (error.response.status === 401) {
+          openHandlerNotification('warning', { text: error.response.data.error })
+        }
         throw new Error('Error in withdrawRequest: ' + error.response.data.error)
       })
     // closeModalHandler()
