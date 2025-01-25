@@ -161,6 +161,7 @@ export interface ILangPhrase {
 	subscribeToOurChannel: string
 	enterTheDepositAmount: string
 	withDraw: string
+	theMinimumNumberOfStars: string
 }
 export interface ILanguage {
 	'english': ILangPhrase
@@ -287,7 +288,8 @@ export const arLanguagesPhraseSite: ILanguage = {
 		visitGameEveryDay: 'Visit game every day',
 		subscribeToOurChannel: 'Subscribe to our channel',
 		enterTheDepositAmount: 'Enter the deposit amount',
-		withDraw: 'Withdraw'
+		withDraw: 'Withdraw',
+		theMinimumNumberOfStars: 'The minimum number of stars for output is 500',
 	},
 	spanish: {
 		gameInProcess: [
@@ -407,7 +409,8 @@ export const arLanguagesPhraseSite: ILanguage = {
 		visitGameEveryDay: 'Visita el juego todos los días',
 		subscribeToOurChannel: 'Suscríbete a nuestro canal',
 		enterTheDepositAmount: 'Ingrese el monto del depósito',
-		withDraw: 'Retirar'
+		withDraw: 'Retirar',
+		theMinimumNumberOfStars: 'El número mínimo de estrellas para la salida es de 500',
 	},
 	chinese: {
 		gameInProcess: [
@@ -527,7 +530,9 @@ export const arLanguagesPhraseSite: ILanguage = {
 		visitGameEveryDay: '每天访问游戏',
 		subscribeToOurChannel: '订阅我们的频道',
 		enterTheDepositAmount: '输入存款金额',
-		withDraw: '撤回'
+		withDraw: '撤回',
+		theMinimumNumberOfStars: '输出的最小星星数为500',
+
 	},
 	russian: {
 		gameInProcess: [
@@ -647,7 +652,8 @@ export const arLanguagesPhraseSite: ILanguage = {
 		visitGameEveryDay: 'Посещайте игру каждый день',
 		subscribeToOurChannel: 'Подписывайтесь на наш канал',
 		enterTheDepositAmount: 'Введите сумму пополнения',
-		withDraw: 'Вывести'
+		withDraw: 'Вывести',
+		theMinimumNumberOfStars: 'Минимальное количество выводимых звезд - 500'
 	},
 }
 export const arLanguagesSite: ILang[] = [

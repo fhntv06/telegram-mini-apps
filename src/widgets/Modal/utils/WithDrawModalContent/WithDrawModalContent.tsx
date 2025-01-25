@@ -21,7 +21,7 @@ const defaultWidthInput = 32
 export const WithDrawModalContent = ({ closeModalHandler }: IProps) => {
   const [stars, setStars] = useState<number>(0)
   const [widthInput, setWidthInput] = useState(defaultWidthInput)
-  const { withDraw } = useGetPhrases(['withDraw'])
+  const { withDraw, theMinimumNumberOfStars } = useGetPhrases(['withDraw', 'theMinimumNumberOfStars'])
   const { openHandler: openHandlerNotification, setTonsHandler, setPointsHandler } = useContext<INotificationContextTypes>(NotificationContext)
 
   const withDrawHandler = () => {
@@ -38,7 +38,10 @@ export const WithDrawModalContent = ({ closeModalHandler }: IProps) => {
         setPointsHandler(0) // не показываем счетчик поинтов
       })
       .catch((error) => {
-        new Error('Error in withdrawRequest: ' + error)
+        if (error.response.status === 400) {
+          openHandlerNotification('warning', { text: theMinimumNumberOfStars })
+        }
+        throw new Error('Error in withdrawRequest: ' + error.response.data.error)
       })
     // closeModalHandler()
   }
@@ -74,7 +77,7 @@ export const WithDrawModalContent = ({ closeModalHandler }: IProps) => {
           sizeIcons='big'
           disabled={!stars}
         >
-          {withDraw}
+          {withDraw} (minimum 500)
         </Button>
       </div>
     </div>
