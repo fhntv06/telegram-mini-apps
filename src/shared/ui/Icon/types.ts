@@ -44,6 +44,8 @@ export type IconNames =
     | 'check'
     | 'disconnect'
     | 'book'
+    | 'stars-1'
+    | 'stars-2'
     | '' // For skip icon if you need
 
     export type IconType =
