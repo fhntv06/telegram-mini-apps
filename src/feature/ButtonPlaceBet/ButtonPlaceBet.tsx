@@ -29,7 +29,7 @@ export const ButtonPlaceBet = ({
 	const { openInvoice } = useOpenInvoice()
 	const { balance } = useSelector((state) => state.userDataWallet)
 	const {
-		goUp, goDown, topUpYourWallet, connectYourTON, theRoundHasAlready
+		goUp, goDown, topUpYourStars, connectYourTON, theRoundHasAlready
 	} = useGetPhrases([
 		'goUp', 'goDown', 'topUpYourWallet', 'connectYourTON', 'theRoundHasAlready'
 	])
@@ -43,7 +43,7 @@ export const ButtonPlaceBet = ({
 					.then(() => openHandlerNotification('warning', { text: connectYourTON }))
 		}
 		else if (!(Number(balance) >= minBet)) {
-			openHandlerNotification('warning', { text: topUpYourWallet })
+			openHandlerNotification('warning', { text: topUpYourStars })
 			openInvoice(bet)
 		}
 		else if ((gamePhase !== 1 && gamePhase !== 0)) openHandlerNotification('warning', { text: theRoundHasAlready })

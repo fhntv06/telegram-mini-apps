@@ -1,11 +1,13 @@
+import { useContext } from 'react'
 import classNames from 'classnames/bind'
 import { IconNames, IconType } from '../../shared/types'
 import { useGetPhrases } from '../../hooks'
 import { Button } from '../../shared'
 
+import { ModalContextTypes } from '../../app/providers/ModalProvider/types'
+import { ModalContext } from '../../app/contexts'
+
 import styles from './ButtonTopUp.module.scss'
-import { NavLink } from "react-router-dom";
-import { pathsRoutes } from "../../app/routes";
 
 const cx = classNames.bind(styles)
 
@@ -22,24 +24,25 @@ export const ButtonTopUp = ({
 	className,
 	onClick,
 }: Props) => {
-  const { topUpYourWallet } = useGetPhrases(['topUpYourWallet'])
+  const { topUpYourStars } = useGetPhrases(['topUpYourStars'])
+	const { openHandler: openHandlerModal } = useContext<ModalContextTypes>(ModalContext)
 
 	const handlerConnectWallet = () => {
 		if (onClick) onClick()
+		openHandlerModal('topUpStars')
+		// открывать модалку для пополнения старс
 	}
 
   return (
-	  <NavLink className={cx('button', className)} to={pathsRoutes.wallet}>
-			<Button
-				className='p font-w-semibold'
-				iconLeftName='plus'
-				iconRightName={iconRightName}
-				sizeIcons={sizeIcons}
-				type='blue'
-				onClick={handlerConnectWallet}
-			>
-				{topUpYourWallet}
-			</Button>
-		</NavLink>
+		<Button
+			className={cx('button', 'p font-w-semibold', className)}
+			iconLeftName='plus'
+			iconRightName={iconRightName}
+			sizeIcons={sizeIcons}
+			type='blue'
+			onClick={handlerConnectWallet}
+		>
+			{topUpYourStars}
+		</Button>
 	)
 }
