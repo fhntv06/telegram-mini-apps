@@ -6,10 +6,12 @@ import { useSetBalance } from './useSetBalance'
 export const useOpenInvoice = () => {
   const { updateBalance } = useSetBalance()
 
-  const openInvoice = (amount: number, callback = () => {}) => {
+  const openInvoice = (amount: number | string, callback = () => {}) => {
     createInvoice(amount)
       .then((res: { data: { invoiceLink: string } }) => {
+        console.log('res.data.invoiceLink', res.data.invoiceLink)
         WebApp.openInvoice(res.data.invoiceLink, (status) => {
+          console.log(status)
           if (status === "paid") {
             // Обновляем баланс звезд после пополнения счета
             console.log('status is paid!')
