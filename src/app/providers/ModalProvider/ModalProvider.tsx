@@ -3,7 +3,12 @@ import { ModalContext } from '../../contexts'
 import { Modal } from '../../../widgets'
 import React from 'react'
 
-import { BurgerModalContent, SelectModeModalContent, SwitchModeModalContent } from '../../../widgets/Modal/utils'
+import {
+  BurgerModalContent,
+  SelectModeModalContent,
+  SwitchModeModalContent,
+  TopUpStarsModalContent, WithDrawModalContent
+} from '../../../widgets/Modal/utils'
 
 interface IProps {
   children: React.ReactNode
@@ -19,6 +24,8 @@ export const ModalProvider = ({ children }: IProps) => {
         {typeModal === 'select__mode' && <SelectModeModalContent closeModalHandler={closeHandler} />}
         {typeModal === 'burger' && <BurgerModalContent />}
         {typeModal === 'switchMode' && <SwitchModeModalContent closeModalHandler={closeHandler} />}
+        {typeModal === 'topUpStars' && <TopUpStarsModalContent closeModalHandler={closeHandler} />}
+        {typeModal === 'withDraw' && <WithDrawModalContent closeModalHandler={closeHandler} />}
       </Modal>
     </ModalContext.Provider>
   )
