@@ -4,80 +4,12 @@ import { motion } from 'framer-motion'
 import classNames from 'classnames/bind'
 
 import { useDisconnect, useGetPhrases, useSetBalance } from '../../hooks'
-import { ButtonConnectWallet } from '../../feature'
-import {
-  Button, Icon, Select,
-  sourceAltinbit, sourceBitobmen, sourceCryptoBot,
-  sourceKotleta, sourceOnemoment, sourcePaybis, sourceWallet
-} from '../../shared'
+import { ButtonConnectWallet, ButtonTopUp, ButtonWithDraw } from '../../feature'
+import { Button, Icon } from '../../shared'
 
 import styles from './Wallet.module.scss'
 
-import sendIcon from '../../shared/assets/send.png'
-import walletIcon from '../../shared/assets/wallet.png'
-
 const cx = classNames.bind(styles)
-
-const marketData = [
-  {
-    name: 'P2PMarket',
-    icon: 'market',
-  },
-  {
-    name: 'send',
-    icon: sendIcon,
-    blockSelect: true,
-    onClick: () => window.location.href = sourceCryptoBot,
-  },
-  {
-    name: 'wallet',
-    icon: walletIcon,
-    blockSelect: true,
-    onClick: () => window.location.href = sourceWallet,
-  }
-]
-const TopUpByCardCIS = [
-  {
-    name: 'TopUpByCardCIS',
-    icon: 'card',
-  },
-  {
-    name: 'kotleta',
-    icon: 'kotleta',
-    blockSelect: true,
-    onClick: () => window.location.href = sourceKotleta,
-  },
-  {
-    name: 'oneMoment',
-    icon: 'oneMoment',
-    blockSelect: true,
-    onClick: () => window.location.href = sourceOnemoment,
-  },
-  {
-    name: 'altinBit',
-    icon: 'altinBit',
-    blockSelect: true,
-    onClick: () => window.location.href = sourceAltinbit,
-  },
-  {
-    name: 'bitObmen',
-    icon: 'bitObmen',
-    blockSelect: true,
-    onClick: () => window.location.href = sourceBitobmen,
-  }
-]
-const TopUpByCard = [
-  {
-    name: 'TopUpByCard',
-    icon: 'card',
-  },
-  {
-    name: 'paybis',
-    icon: 'paybis',
-    blockSelect: true,
-    onClick: () => window.location.href = sourcePaybis,
-  },
-]
 
 export const Wallet = () => {
   const [isCopied, setIsCopied] = useState<boolean>(false)
@@ -147,9 +79,8 @@ export const Wallet = () => {
             <p>{topUp}</p>
           </header>
           <div className={cx('content')}>
-            <Select data={marketData} typeStyle='light'/>
-            <Select data={TopUpByCardCIS} typeStyle='light'/>
-            <Select data={TopUpByCard} typeStyle='light'/>
+            <ButtonTopUp sizeIcons='big' />
+            <ButtonWithDraw />
           </div>
         </div>
       </main>
