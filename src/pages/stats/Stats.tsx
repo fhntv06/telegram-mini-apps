@@ -1,12 +1,14 @@
+import WebApp from '@twa-dev/sdk'
+import { useEffect } from 'react'
 import classNames from 'classnames/bind'
 
-import { useGetPhrases, useSelector } from '../../hooks'
-import { Button } from '../../shared'
-
-import { formatNumber } from '../../shared'
+import {setLeaderboards, setUserRetrievesData} from '../../app/store/slices'
+import { getLeaderboard, getRetrievesData } from '../../app/api'
+import { useDispatch, useGetPhrases, useSelector } from '../../hooks'
+import { formatNumber, Button } from '../../shared'
+import { roundToFixed } from '../../shared/utils/formatNumber'
 
 import styles from './Stats.module.scss'
-import {roundToFixed} from "../../shared/utils/formatNumber.ts";
 
 const cx = classNames.bind(styles)
 
@@ -17,6 +19,19 @@ export const Stats = () => {
   } = useGetPhrases(['pulsePoints', 'placeInLeaderboard', 'leaderboard', 'multiplier'])
   const { totalBets, daysInRow, invitedFriends, placeInLeaderboard, points, multiplierData } = useSelector((state) => state.retrievesData)
   const { leaderBord } = useSelector((state) => state.leaderboards)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    getRetrievesData(WebApp.initData)
+      .then((retrievesData) => {
+        dispatch(setUserRetrievesData(retrievesData.data))
+      })
+      .catch((error) => new Error('Error in getRetrievesData: ' + error))
+
+    getLeaderboard()
+      .then((res) => dispatch(setLeaderboards(res.data)))
+      .catch((error) => new Error('Error in getTasks: ' + error))
+  }, [])
 
   return (
     <div className={cx('page', 'page-stats')}>
