@@ -3,7 +3,7 @@ import classNames from 'classnames/bind'
 import { useGetPhrases } from '../../../../hooks'
 import { Button, Icon } from '../../../../shared'
 
-import { useContext, useState } from 'react'
+import {useContext, useEffect, useRef, useState} from 'react'
 import { withdrawRequest } from '../../../../app/api/stars'
 import { INotificationContextTypes } from '../../../../app/providers/NotificationProvider/types'
 import { NotificationContext } from '../../../../app/contexts'
@@ -19,6 +19,7 @@ interface IProps {
 const defaultWidthInput = 32
 
 export const WithDrawModalContent = ({ closeModalHandler }: IProps) => {
+  const inputRef = useRef<HTMLInputElement>(null)
   const [stars, setStars] = useState<number>(0)
   const [widthInput, setWidthInput] = useState(defaultWidthInput)
   const { withDraw, theMinimumNumberOfStars } = useGetPhrases(['withDraw', 'theMinimumNumberOfStars'])
@@ -55,6 +56,12 @@ export const WithDrawModalContent = ({ closeModalHandler }: IProps) => {
     setWidthInput(defaultWidthInput * stars.toString().length)
   }
 
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus()
+    }
+  }, [])
+
   return (
     <div className={cx('modal')}>
       <div className={cx('modal__wrapper')}>
@@ -62,6 +69,7 @@ export const WithDrawModalContent = ({ closeModalHandler }: IProps) => {
         <h1 className={cx('title')}>{withDraw}</h1>
         <div className={cx('modal__input-container')}>
           <input
+            ref={inputRef}
             className={cx('input-stars')}
             style={{ width: widthInput }}
             value={stars}
