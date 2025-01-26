@@ -1,5 +1,4 @@
 import classNames from 'classnames/bind'
-import { useTonAddress } from '@tonconnect/ui-react'
 import { Counter } from '../../../../shared'
 
 import styles from './WinsOrLoseContent.module.scss'
@@ -16,7 +15,6 @@ interface IProps {
 }
 
 export const WinsOrLoseContent = ({ type, data: { tons, points = 10 } }: IProps) => {
-  const address = useTonAddress()
   const isWins = type === 'wins'
 
   const { pointsForWinning } = useGetPhrases(['pointsForWinning'])
@@ -25,8 +23,7 @@ export const WinsOrLoseContent = ({ type, data: { tons, points = 10 } }: IProps)
     <div className={cx('wrapper')}>
       <div className={cx('container')}>
         <div className={cx('container__text')}>
-          <h2>Wallet</h2>
-          <p>{`${address.slice(0, 4)}...${address.slice(address.length - 4)}`}</p>
+          <h2>Stars</h2>
         </div>
         <div className={cx('container__text', 'right-text', type)}>
           <h2 className={cx(type)}>{isWins ? 'received' : 'spent'}</h2>
