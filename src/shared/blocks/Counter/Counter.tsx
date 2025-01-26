@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 import classNames from 'classnames/bind'
-import { useMotionValue, useInView, useSpring } from 'framer-motion'
+import { useMotionValue, useInView, useSpring, motion } from 'framer-motion'
 
 import { ICounter } from './types'
 
@@ -20,8 +20,8 @@ export function Counter({
   const ref = useRef<HTMLHeadingElement>(null);
   const motionValue = useMotionValue(direction === "down" ? to : from)
   const springValue = useSpring(motionValue, {
-    damping: 100,
-    stiffness: 190, // примерно длительность в 4 секунды
+    damping: 200,
+    stiffness: 350, // примерно длительность в 4 секунды
   })
   const isInView = useInView(ref, { once: true })
 
@@ -46,7 +46,17 @@ export function Counter({
   return (
     <div className={cx('counter', {'animation': animation})}>
       {prefix && <h1 className={className}>{prefix}</h1>}
-      {(from === 0 && to === 0) ? <h1 className={className}>0</h1> : <h1 className={className} ref={ref} />}
+      {(from === 0 && to === 0)
+        ? <h1 className={className}>0</h1>
+        : <motion.h1
+          className={className} ref={ref}
+          transition={{
+            type: "spring",
+            visualDuration: 50,
+            bounce: 0.5
+          }}
+        />
+      }
     </div>
   )
 }
