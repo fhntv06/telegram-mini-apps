@@ -13,7 +13,7 @@ export const NotificationProvider = ({ children }: IProps) => {
   const { points, tons, type, settings, isOpen, openHandler, closeHandler, setTonsHandler, setPointsHandler } = useNotification()
 
   useEffect(() => {
-    const timer = setTimeout(closeHandler, 5000)
+    const timer = setTimeout(closeHandler, 6000)
 
     return () => clearTimeout(timer)
   // eslint-disable-next-line react-hooks/exhaustive-deps
