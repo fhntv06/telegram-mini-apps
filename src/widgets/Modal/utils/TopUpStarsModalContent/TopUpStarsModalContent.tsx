@@ -3,7 +3,7 @@ import { useGetPhrases, useOpenInvoice } from '../../../../hooks'
 import { Button, Icon } from '../../../../shared'
 
 import styles from './TopUpStarsModalContent.module.scss'
-import {useState} from "react";
+import {useEffect, useRef, useState} from "react";
 
 const cx = classNames.bind(styles)
 
@@ -14,6 +14,7 @@ interface IProps {
 const defaultWidthInput = 32
 
 export const TopUpStarsModalContent = ({ closeModalHandler }: IProps) => {
+  const inputRef = useRef<HTMLInputElement>(null)
   const [stars, setStars] = useState<number>(0)
   const [widthInput, setWidthInput] = useState(defaultWidthInput)
   const { openInvoice } = useOpenInvoice()
@@ -31,6 +32,12 @@ export const TopUpStarsModalContent = ({ closeModalHandler }: IProps) => {
     setWidthInput(defaultWidthInput * stars.toString().length)
   }
 
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus()
+    }
+  }, [])
+
   return (
     <div className={cx('modal')}>
       <div className={cx('modal__wrapper')}>
@@ -38,6 +45,7 @@ export const TopUpStarsModalContent = ({ closeModalHandler }: IProps) => {
         <h1 className={cx('title')}>{enterTheDepositAmount}</h1>
         <div className={cx('modal__input-container')}>
           <input
+            ref={inputRef}
             className={cx('input-stars')}
             style={{ width: widthInput }}
             value={stars}

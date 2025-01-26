@@ -1,6 +1,5 @@
 import WebApp from '@twa-dev/sdk'
 import {useContext, useState} from 'react'
-import { useTonWallet, useTonConnectUI } from '@tonconnect/ui-react'
 import classNames from 'classnames/bind'
 import { postDataBetDetailsPlayers } from '../../app/api'
 import { IAnimationContextTypes, INotificationContextTypes } from '../../app/providers/types'
@@ -21,15 +20,13 @@ export const ButtonPlaceBet = ({
 	onClick,
 	type = 'up',
 }: Props) => {
-	const wallet = useTonWallet()
-	const [tonConnectUI] = useTonConnectUI()
 	const { bet } = useSelector((state) => state.bets)
 	const { gamePhase } = useSelector((state) => state.gameStatus)
 	const [txInProcess, setTxInProcess] = useState<boolean>(false)
 	const { openInvoice } = useOpenInvoice()
 	const { balance } = useSelector((state) => state.userDataWallet)
 	const {
-		goUp, goDown, topUpYourStars, connectYourTON, theRoundHasAlready
+		goUp, goDown, topUpYourStars, theRoundHasAlready
 	} = useGetPhrases([
 		'goUp', 'goDown', 'topUpYourWallet', 'connectYourTON', 'theRoundHasAlready'
 	])
@@ -37,16 +34,14 @@ export const ButtonPlaceBet = ({
 	const { openHandler: openHandlerAnimation } = useContext<IAnimationContextTypes>(AnimationContext)
 	const { updateBalance } = useSetBalance()
 
+	const disabled = (gamePhase !== 1 && gamePhase !== 0)
+
 	const handlerPlaceBet = () => {
-		if (!wallet) {
-			tonConnectUI.openModal()
-					.then(() => openHandlerNotification('warning', { text: connectYourTON }))
-		}
-		else if (!(Number(balance) >= minBet)) {
+		if (!(Number(balance) >= minBet)) {
 			openHandlerNotification('warning', { text: topUpYourStars })
 			openInvoice(bet)
 		}
-		else if ((gamePhase !== 1 && gamePhase !== 0)) openHandlerNotification('warning', { text: theRoundHasAlready })
+		else if (disabled) openHandlerNotification('warning', { text: theRoundHasAlready })
 		else {
 			setTxInProcess(true)
 
@@ -81,7 +76,7 @@ export const ButtonPlaceBet = ({
 	return (
 		<Button
 			type='bet'
-			className={cx('button-placebet', type, 'p', { 'disabled': (gamePhase !== 1 && gamePhase !== 0) })}
+			className={cx('button-placebet', type, 'p', { 'disabled': disabled || !bet })}
 			onClick={handlerPlaceBet}
 		>
 			{textButton}

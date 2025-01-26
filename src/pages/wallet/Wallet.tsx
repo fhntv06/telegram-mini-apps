@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react'
-import {useTonAddress, useTonWallet} from '@tonconnect/ui-react'
+import {useTonAddress } from '@tonconnect/ui-react'
 import { motion } from 'framer-motion'
 import classNames from 'classnames/bind'
 
@@ -15,7 +15,6 @@ export const Wallet = () => {
   const [isCopied, setIsCopied] = useState<boolean>(false)
   const { topUp, copied, balance } = useGetPhrases(['topUp', 'copied', 'balance'])
   const address = useTonAddress()
-  const wallet = useTonWallet()
   const handlerDisconnect = useDisconnect()
   const { balance: balanceUser, updateBalance } = useSetBalance()
 
@@ -36,15 +35,15 @@ export const Wallet = () => {
 
   useEffect(() => {
     updateBalance()
-  }, [wallet])
+  }, [])
 
   return (
     <div className={cx('page', 'page-wallet')}>
       <header className={cx('page-wallet__header')}>
         <h2 className='h2-big'>{balance}</h2>
-        <div className={cx('page-wallet__balance', { 'not-balance': !address })}>
-          {address && <Icon name='stars-1' size='big' />}
-          <h1>{address ? balanceUser : '- -'}</h1>
+        <div className={cx('page-wallet__balance')}>
+          {<Icon name='stars-1' size='big' />}
+          <h1>{balanceUser}</h1>
         </div>
       </header>
       <main className={cx('page__main')}>

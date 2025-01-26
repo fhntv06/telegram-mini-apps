@@ -3,7 +3,9 @@
 .modal {
   z-index: 3;
   position: relative;
-  padding: calc($offset24 * 3) $offset16 0;
+  top: 50%;
+  padding: 0 16px 0;
+  transform: translateY(calc(-50% - 24px));
 }
 .modal__wrapper {
   display: flex;
@@ -11,7 +13,6 @@
   align-items: center;
   row-gap: $offset24;
   padding: $offset24 $offset12 $offset12;
-  margin-top: $offset24;
   background-color: $dark-gray;
   @include border('large');
 

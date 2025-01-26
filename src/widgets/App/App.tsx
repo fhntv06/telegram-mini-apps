@@ -1,4 +1,4 @@
-import { useTonAddress, useTonWallet } from '@tonconnect/ui-react'
+import { useTonWallet } from '@tonconnect/ui-react'
 import WebApp from '@twa-dev/sdk'
 import { type FC, useContext, useEffect, useState } from 'react'
 import {
@@ -40,7 +40,6 @@ export const App: FC = () => {
   const dispatch = useDispatch()
   const data = useGameSocket()
   const priceHistory = usePriceHistory()
-  const address = useTonAddress()
   const wallet = useTonWallet()
   const { openHandler: openHandlerNotification, setTonsHandler, setPointsHandler } = useContext<INotificationContextTypes>(NotificationContext)
   const { openHandler: openHandlerAnimation } = useContext<IAnimationContextTypes>(AnimationContext)
@@ -62,8 +61,8 @@ export const App: FC = () => {
   }, [data, priceHistory, wallet])
 
   useEffect(() => {
-    if (gamePhase === 4 && address && userData?.id) {
-      getWalletBet({ address, ticker, gameMode, demoTgId: userData.id })
+    if (gamePhase === 4 && userData?.id) {
+      getWalletBet({ ticker, gameMode, telegramId: userData.id })
         .then((res) => {
           console.log('res getWalletBet', res)
           if (res.data.error) {

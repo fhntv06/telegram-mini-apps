@@ -1,11 +1,10 @@
 // import WebApp from '@twa-dev/sdk'
 import { useEffect } from 'react'
-import { useTonWallet, useTonAddress } from '@tonconnect/ui-react'
 import classNames from 'classnames/bind'
 import { BetPanel, PanelButtonsBet } from '../../widgets'
 import {useGetPhrases,
 	useSelector, useSetBalance} from '../../hooks'
-import { ButtonConnectWallet, ButtonTopUp } from '../../feature'
+import { ButtonTopUp } from '../../feature'
 import {
 	Icon, Rounds, formatNumber,
 	minBet,
@@ -24,10 +23,7 @@ export const MainFooter = () => {
 		last3GamesRes,
 		livePlayers: livePlayersCount,
 	} = useSelector((state) => state.gameStatus)
-	const wallet = useTonWallet()
-	const address = useTonAddress()
 	const { gamePhase } = useSelector((state) => state.gameStatus)
-	const { gameMode } = useSelector((state) => state.modeSettings)
 	const { multiplierData: { totalMultiplier } } = useSelector((state) => state.retrievesData)
   const { players, multiplier, balance, lastGames } = useGetPhrases(['players', 'multiplier', 'balance', 'lastGames'])
 	const { balance: userBalance, updateBalance } = useSetBalance()
@@ -35,16 +31,14 @@ export const MainFooter = () => {
 	// TODO: вынести код выше!
 	// не должно быть тут!
 	useEffect(() => {
-		if ((gamePhase === 3 || gamePhase === 4) && wallet) {
+		if ((gamePhase === 3 || gamePhase === 4)) {
 			updateBalance()
 		}
-	}, [wallet, gameMode, gamePhase])
+	}, [gamePhase])
 
 	useEffect(() => {
-		if (wallet) {
-			updateBalance()
-		}
-	}, [gameMode, wallet])
+		updateBalance()
+	}, [])
 
 	// // Когда уже в игре
 	// useEffect(() => {
@@ -93,7 +87,7 @@ export const MainFooter = () => {
 					<h2>{balance}</h2>
 					<p className='p-medium'>
 						<Icon name='stars-1-medium'/>
-						{address ? userBalance : '- -'}
+						{userBalance}
 					</p>
 				</div>
 			</header>
@@ -102,14 +96,7 @@ export const MainFooter = () => {
 				<BetPanel data={downPoolData} type='down'/>
 			</main>
 			<footer className={cx('footer__bets')}>
-				{(
-					wallet
-						? userBalance < minBet
-							? <ButtonTopUp sizeIcons='big' />
-							: <PanelButtonsBet />
-					: null
-				)}
-				<ButtonConnectWallet className={cx({ 'hide': wallet })} sizeIcons='big' />
+				{(userBalance < minBet ? <ButtonTopUp sizeIcons='big' /> : <PanelButtonsBet />)}
 			</footer>
 		</footer>
 	)

@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import { IBets } from './types'
 
 const initialState: IBets = {
-    bet: .5,
+    bet: 0,
     address: '',
     mainnet: true,
 }
