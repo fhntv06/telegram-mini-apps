@@ -23,7 +23,7 @@ export const Main = () => {
     const timeStampLastVisibleOnboarding = Number(getStorage('visibleOnboarding'))
 
     if (timeStampLastVisibleOnboarding) {
-      if ((new Date().getTime() - timeStampLastVisibleOnboarding) > 1000 * 30) {
+      if ((new Date().getTime() - timeStampLastVisibleOnboarding) > 1000 * 3600) {
         // setCheckConditionToVisibleOnboarding((new Date().getTime() - timeStampLastVisibleOnboarding) > msInDay)
         setCheckConditionToVisibleOnboarding(true)
       }
