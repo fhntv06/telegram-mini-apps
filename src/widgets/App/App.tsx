@@ -54,7 +54,7 @@ export const App: FC = () => {
     // запись данных от сокета
     // TODO: Вынести в Main
     if (data && 'btcPrice' in data && data.btcPrice && priceHistory.length) {
-      // setIsLoading(false)
+      setIsLoading(false)
 
       dispatch(setGameStatus({ ...data, priceHistory}))
     }

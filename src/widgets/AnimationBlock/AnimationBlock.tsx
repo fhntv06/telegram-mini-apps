@@ -91,7 +91,7 @@ export const AnimationBlock = ({ animation } :IProps) => {
           exit={{ opacity: 0 }}
           transition={{
             delay: .1,
-            duration: .3,
+            duration: .1,
             ease: 'easeIn',
           }}
           // @ts-ignore

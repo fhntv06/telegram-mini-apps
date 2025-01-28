@@ -28,7 +28,7 @@ export const ChartPanel = () => {
           animate={(gamePhase === 2 || gamePhase === 4) ? { opacity: [1, 0.5, 1] } : { opacity: 1 }}
           transition={(gamePhase === 2 || gamePhase === 4) ? { duration: 1, repeat: Infinity } : {}}
         >
-          {gameInProcess[gamePhase]}
+          {gameInProcess[gamePhase]} ({gamePhase})
         </motion.h2>
         {(gamePhase !== 2 && gamePhase !== 4) && <h1>{differenceInSeconds(phaseTimeUntil)}</h1>}
       </div>

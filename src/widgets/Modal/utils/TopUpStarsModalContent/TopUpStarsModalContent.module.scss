@@ -3,9 +3,7 @@
 .modal {
   z-index: 3;
   position: relative;
-  top: 50%;
-  padding: 0 16px 0;
-  transform: translateY(calc(-50% - 24px));
+  padding: 72px 16px 0;
 }
 .modal__wrapper {
   display: flex;
@@ -22,7 +20,7 @@
 }
 .modal__close {
   position: absolute;
-  right: 32px;
+  right: $offset24;
 }
 .modal__input-container {
   display: flex;
@@ -37,4 +35,5 @@
 }
 .title {
   width: calc(100% - $offset16);
+  text-align: center;
 }

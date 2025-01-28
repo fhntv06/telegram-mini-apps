@@ -14,9 +14,9 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.7",
-    "@telegram-apps/sdk": "^2.5.0",
-    "@telegram-apps/sdk-react": "^2.0.9",
-    "@telegram-apps/telegram-ui": "^2.1.8",
+    "@telegram-apps/sdk": "3.0.0",
+    "@telegram-apps/sdk-react": "latest",
+    "@telegram-apps/telegram-ui": "latest",
     "@ton/core": "^0.58.1",
     "@ton/crypto": "^3.3.0",
     "@ton/ton": "^15.0.0",
