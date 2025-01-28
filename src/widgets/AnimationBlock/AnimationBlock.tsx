@@ -42,9 +42,9 @@ const listAnimates = {
   consolidate: {
     styles: {
       ...styles,
-      top: '29%',
+      top: '25%',
       left: '50%',
-      height: '350px',
+      height: '300px',
       width: '270px',
     },
     animation: consolidatingBetsData,
