@@ -1,6 +1,6 @@
 import { type FC, useEffect } from 'react'
 import WebApp from '@twa-dev/sdk'
-import { viewport } from '@telegram-apps/sdk'
+import { init, viewport } from '@telegram-apps/sdk'
 
 import { App } from '../'
 import { ErrorBoundary } from '../'
@@ -23,25 +23,22 @@ const ErrorBoundaryError: FC<{ error: unknown }> = ({ error }) => (
 )
 
 const setFullscreen = async () => {
-  console.log({
-    action: 'setFullscreen',
-    isAvailable: viewport.requestFullscreen.isAvailable(),
-    fullscreen: viewport.isFullscreen
-  })
+  // два требования
+  init() // инициализация
+  await viewport.mount() // монтирование
+
   if (viewport.requestFullscreen.isAvailable()) {
     // переход режим requestFullscreen
     await viewport.requestFullscreen()
-      .then(() => {
-        console.log({isFullscreen: viewport.isFullscreen})
-      })
   }
 }
 
 export const Root: FC = () => {
   useEffect(() => {
-    import('eruda').then((lib) => lib.default.init())
-
-    new Promise((resolve) => resolve(null))
+    import('eruda')
+      .then((lib) => {
+        lib.default.init()
+      })
       .then(() => {
         WebApp.setHeaderColor('#1C1C1E')
         setFullscreen()
