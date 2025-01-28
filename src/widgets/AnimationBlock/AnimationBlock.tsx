@@ -1,7 +1,7 @@
 import Lottie from 'react-lottie'
 import { AnimatePresence, motion } from 'framer-motion'
 import winAnimationData from '../../shared/assets/animation/win.json'
-import consolidatingBetsData from '../../shared/assets/animation/consolidatingBets.json'
+import consolidatingBetsData from '../../shared/assets/animation/consolidatingBets_2.json'
 import youAreInData from '../../shared/assets/animation/youAreIn.json'
 import loadPerson from '../../shared/assets/animation/loadPerson.json'
 
@@ -42,8 +42,8 @@ const listAnimates = {
   consolidate: {
     styles: {
       ...styles,
-      top: '35%',
-      left: '62%',
+      top: '29%',
+      left: '50%',
       height: '350px',
       width: '270px',
     },
