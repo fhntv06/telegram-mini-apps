@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind'
 import { useGetPhrases, useOpenInvoice } from '../../../../hooks'
-import { Button, Icon } from '../../../../shared'
+import {Button, Icon, minBet} from '../../../../shared'
 
 import styles from './TopUpStarsModalContent.module.scss'
 import {useEffect, useRef, useState} from "react";
@@ -15,7 +15,7 @@ const defaultWidthInput = 32
 
 export const TopUpStarsModalContent = ({ closeModalHandler }: IProps) => {
   const inputRef = useRef<HTMLInputElement>(null)
-  const [stars, setStars] = useState<number>(0)
+  const [stars, setStars] = useState<number>(minBet)
   const [widthInput, setWidthInput] = useState(defaultWidthInput)
   const { openInvoice } = useOpenInvoice()
 

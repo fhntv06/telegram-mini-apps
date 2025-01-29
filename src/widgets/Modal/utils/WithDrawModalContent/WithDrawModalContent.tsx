@@ -1,7 +1,7 @@
 import WebApp from '@twa-dev/sdk'
 import classNames from 'classnames/bind'
 import { useGetPhrases } from '../../../../hooks'
-import { Button, Icon } from '../../../../shared'
+import {Button, Icon, minWithdraw} from '../../../../shared'
 
 import {useContext, useEffect, useRef, useState} from 'react'
 import { withdrawRequest } from '../../../../app/api/stars'
@@ -20,7 +20,7 @@ const defaultWidthInput = 32
 
 export const WithDrawModalContent = ({ closeModalHandler }: IProps) => {
   const inputRef = useRef<HTMLInputElement>(null)
-  const [stars, setStars] = useState<number>(0)
+  const [stars, setStars] = useState<number>(minWithdraw)
   const [widthInput, setWidthInput] = useState(defaultWidthInput)
   const { withDraw, theMinimumNumberOfStars } = useGetPhrases(['withDraw', 'theMinimumNumberOfStars'])
   const { openHandler: openHandlerNotification, setTonsHandler, setPointsHandler } = useContext<INotificationContextTypes>(NotificationContext)
@@ -88,7 +88,7 @@ export const WithDrawModalContent = ({ closeModalHandler }: IProps) => {
           sizeIcons='big'
           disabled={!stars}
         >
-          {withDraw} (minimum 500)
+          {withDraw} (minimum {minWithdraw})
         </Button>
       </div>
     </div>
