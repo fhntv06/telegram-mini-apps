@@ -4,6 +4,7 @@ import { useGetPhrases, useSelector } from '../../hooks'
 import { differenceInSeconds, Icon } from '../../shared'
 
 import styles from './ChartPanel.module.scss'
+import { viewport } from "@telegram-apps/sdk";
 
 const cx = classNames.bind(styles)
 
@@ -14,7 +15,7 @@ export const ChartPanel = () => {
   const { gameMode, allTimeWins, gameInProcess } = useGetPhrases(['gameMode', 'allTimeWins', 'gameInProcess'])
 
   return (
-    <div className={cx('panel')}>
+    <div className={cx('panel', { 'isFullscreen': viewport.isFullscreen() })}>
       <div className={cx('panel__bet-type')}>
         <h2>{gameMode}</h2>
         <p className='p-medium'>

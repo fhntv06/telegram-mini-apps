@@ -11,6 +11,10 @@
   height: 70px;
   padding: $offset12 $offset16;
   background: linear-gradient(0deg, rgba(46, 46, 48, 0) 0%, #2E2E30 100%);
+
+  &.isFullscreen {
+    padding-top: calc($offset16*6);
+  }
 }
 .panel__bet-type {
   display: flex;

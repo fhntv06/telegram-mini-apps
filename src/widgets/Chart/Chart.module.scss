@@ -6,6 +6,10 @@
   background: linear-gradient(180deg, #2E2E30 0%, rgba(46, 46, 48, 0) 100%);
   @include border('large');
   overflow: hidden;
+
+  &.isFullscreen {
+    padding-top: calc($offset16*6);
+  }
 }
 .chart__line {
   position: relative;

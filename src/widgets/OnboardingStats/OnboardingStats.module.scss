@@ -1,7 +1,9 @@
 @import '../../shared/assets/styles/components/Onboarding.module.scss';
 
 .onboarding-stats__wrapper {
-  width: 100%;
+  min-width: 320px;
+  max-width: 576px;
+  margin: 0 auto;
 }
 .onboarding-stats__slider {
   width: 100%;

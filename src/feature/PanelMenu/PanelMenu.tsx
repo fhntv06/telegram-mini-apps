@@ -1,3 +1,4 @@
+import { viewport } from '@telegram-apps/sdk'
 import { NavLink, Outlet  } from 'react-router-dom'
 import classNames from 'classnames/bind'
 import { pathsRoutes } from '../../app/routes'
@@ -19,7 +20,7 @@ export const PanelMenu = ({
 	const { wallet, tasks, game, menu } = useGetPhrases(['wallet', 'tasks', 'game', 'menu'])
 
 	return (
-		<div className={cx('panel', className)}>
+		<div className={cx('panel', className, { 'isFullscreen': viewport.isFullscreen() })}>
 			<NavLink
 				to={pathsRoutes.wallet}
 				className={({ isActive }) => isActive ? cx('item', 'active') : cx('item')}

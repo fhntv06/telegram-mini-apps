@@ -25,6 +25,7 @@ import { ChartPanel } from '../'
 
 import classNames from 'classnames/bind'
 import styles from './Chart.module.scss'
+import { viewport } from "@telegram-apps/sdk";
 
 const cx = classNames.bind(styles)
 
@@ -71,7 +72,7 @@ export const Chart = () => {
 
 	return (
 		chartData.datasets[0].data.length > 0 ? (
-			<div className={cx('chart')}>
+			<div className={cx('chart', { 'isFullscreen': viewport.isFullscreen() })}>
 				<ChartPanel/>
 				<LineChart data={chartData}/>
 			</div>
