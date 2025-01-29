@@ -54,8 +54,6 @@ export const Root: FC = () => {
   useEffect(() => {
     const closeApp = () => WebApp.close()
 
-    // WebApp.expand() // открываем на весь экран
-
     WebApp.BackButton.onClick(closeApp)
 
     return () => WebApp.BackButton.offClick(closeApp)
