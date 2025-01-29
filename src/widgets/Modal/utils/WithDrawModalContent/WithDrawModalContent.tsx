@@ -21,7 +21,7 @@ const defaultWidthInput = 32
 export const WithDrawModalContent = ({ closeModalHandler }: IProps) => {
   const inputRef = useRef<HTMLInputElement>(null)
   const [stars, setStars] = useState<number>(minWithdraw)
-  const [widthInput, setWidthInput] = useState(defaultWidthInput)
+  const [widthInput, setWidthInput] = useState(defaultWidthInput * 3)
   const { withDraw, theMinimumNumberOfStars } = useGetPhrases(['withDraw', 'theMinimumNumberOfStars'])
   const { openHandler: openHandlerNotification, setTonsHandler, setPointsHandler } = useContext<INotificationContextTypes>(NotificationContext)
 

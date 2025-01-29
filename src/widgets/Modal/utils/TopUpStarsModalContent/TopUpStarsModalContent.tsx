@@ -16,7 +16,7 @@ const defaultWidthInput = 32
 export const TopUpStarsModalContent = ({ closeModalHandler }: IProps) => {
   const inputRef = useRef<HTMLInputElement>(null)
   const [stars, setStars] = useState<number>(minBet)
-  const [widthInput, setWidthInput] = useState(defaultWidthInput)
+  const [widthInput, setWidthInput] = useState(defaultWidthInput * 2)
   const { openInvoice } = useOpenInvoice()
 
   const { topUp, enterTheDepositAmount } = useGetPhrases(['topUp', 'enterTheDepositAmount'])
@@ -33,6 +33,7 @@ export const TopUpStarsModalContent = ({ closeModalHandler }: IProps) => {
   }
 
   useEffect(() => {
+    console.log(widthInput)
     if (inputRef.current) {
       inputRef.current.focus()
     }
