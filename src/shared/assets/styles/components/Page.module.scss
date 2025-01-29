@@ -9,11 +9,18 @@
   // 18px - volume for offset bottom from PanelMenu
   height: calc(100vh - 58px - 24px);
   width: 100%;
+  min-width: 320px;
+  max-width: 576px;
+  margin: 0 auto;
   // 24px - volume for offset bottom component PanelMenu for iOS
   padding: calc($offset20 * 2) $offset16 24px;
   background-color: $black;
   overflow-y: scroll;
   overflow-x: hidden;
+
+  &.isFullscreen {
+    padding-top: calc($offset16 * 6);
+  }
 
   header {
     display: flex;

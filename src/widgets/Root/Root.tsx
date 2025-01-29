@@ -33,16 +33,6 @@ const setFullscreen = async () => {
   }
 }
 
-console.log({
-  navigator: navigator.userAgent,
-  userAgent: /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent),
-  matchMedia: window.matchMedia("(max-width: 768px)"),
-  widthWindow: window.innerWidth,
-  isMobile: /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent)
-    || window.matchMedia("(max-width: 768px)").matches
-    || window.innerWidth <= 391
-})
-
 export const Root: FC = () => {
   useEffect(() => {
     import('eruda')
@@ -52,21 +42,8 @@ export const Root: FC = () => {
       .then(() => {
         WebApp.setHeaderColor('#1C1C1E')
 
-        const isMobile =
-          /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent)
-          || window.matchMedia("(max-width: 768px)").matches
-          || window.innerWidth <= 391
-
-        console.log({
-          navigator: navigator.userAgent,
-          userAgent: /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent),
-          matchMedia: window.matchMedia("(max-width: 768px)"),
-          widthWindow: window.innerWidth,
-          isMobile
-        })
-
         // проверка на мобилку
-        if (isMobile) {
+        if (/Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
           setFullscreen()
             .catch((err) => {
               console.log(`Error attempting to enable fullscreen mode: ${err.message} (${err.name})`)

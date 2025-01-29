@@ -15,6 +15,7 @@
   display: flex;
   width: 100%;
   height: 100%;
+  overflow: hidden;
 }
 .onboarding-stats__screen__slide {
   position: relative;
@@ -22,7 +23,7 @@
   flex-direction: column;
   justify-content: space-between;
   flex-shrink: 0;
-  padding: calc($offset16 * 5) $offset16 $offset24;
+  padding: calc($offset16 * 6) $offset16 $offset24;
   background-color: $black;
 
   @for $i from 1 through 10 { // fix bug z-index in swiper

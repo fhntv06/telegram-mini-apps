@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import WebApp from '@twa-dev/sdk'
+import { viewport } from '@telegram-apps/sdk'
 import classNames from 'classnames/bind'
 import { claimTask,
   getTasks
@@ -93,7 +94,7 @@ export const Tasks = () => {
   }, [])
 
   return (
-    <div className={cx('page', 'page-tasks')}>
+    <div className={cx('page', 'page-tasks', { 'isFullscreen': viewport.isFullscreen() })}>
       <div className={cx('page-tasks__header')}>
         <h1 className='font-w-semibold'><span>{completeTasks},</span><span className='color-ton-coin'>{earnMorePoints}</span></h1>
       </div>

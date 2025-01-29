@@ -1,5 +1,6 @@
 import { useMemo } from 'react'
 import classNames from 'classnames/bind'
+import { viewport } from '@telegram-apps/sdk'
 
 import { useGetPhrases, useSelector } from '../../hooks'
 
@@ -18,7 +19,7 @@ export const Menu = () => {
   const { affiliate, technicalSupport, instruction } = useGetPhrases(['affiliate', 'technicalSupport', 'instruction'])
 
   return (
-    <div className={cx('page', 'page-menu')}>
+    <div className={cx('page', 'page-menu', { 'isFullscreen': viewport.isFullscreen() })}>
       <Button
         className={cx('button__menu')}
         iconLeftName='handshake'

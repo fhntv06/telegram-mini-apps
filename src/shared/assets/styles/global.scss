@@ -19,6 +19,9 @@
     display: none; /* for Chrome, Safari, and Opera */
   }
 }
+html {
+  overflow: hidden;
+}
 body {
   width: 100vw;
   width: 100dvw;
@@ -29,6 +32,7 @@ body {
   position: relative;
   margin: 0 auto;
   height: 100%;
+  background-color: $black;
 }
 h1, .h1 {
   font-size: $h1-size;

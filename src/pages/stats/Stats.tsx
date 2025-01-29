@@ -1,6 +1,7 @@
 import WebApp from '@twa-dev/sdk'
 import { useEffect } from 'react'
 import classNames from 'classnames/bind'
+import { viewport } from '@telegram-apps/sdk'
 
 import {setLeaderboards, setUserRetrievesData} from '../../app/store/slices'
 import { getLeaderboard, getRetrievesData } from '../../app/api'
@@ -34,7 +35,7 @@ export const Stats = () => {
   }, [])
 
   return (
-    <div className={cx('page', 'page-stats')}>
+    <div className={cx('page', 'page-stats', { 'isFullscreen': viewport.isFullscreen() })}>
       <div className={cx('page-stats__header')}>
         <h1 className='font-w-semibold'>{pulsePoints}</h1>
         <div className={cx('page-stats__points')}>
