@@ -1,10 +1,9 @@
-import {useEffect, useState} from 'react'
-import {useTonAddress } from '@tonconnect/ui-react'
+import { useEffect, useState } from 'react'
+import { useTonAddress } from '@tonconnect/ui-react'
 import { motion } from 'framer-motion'
 import classNames from 'classnames/bind'
-import { viewport } from '@telegram-apps/sdk'
 
-import { useDisconnect, useGetPhrases, useSetBalance } from '../../hooks'
+import { useDisconnect, useGetPhrases, useSelector, useSetBalance } from '../../hooks'
 import { ButtonConnectWallet, ButtonTopUp, ButtonWithDraw } from '../../feature'
 import { Button, Icon } from '../../shared'
 
@@ -18,6 +17,7 @@ export const Wallet = () => {
   const address = useTonAddress()
   const handlerDisconnect = useDisconnect()
   const { balance: balanceUser, updateBalance } = useSetBalance()
+  const { settings: { isFullscreen } } = useSelector((state) => state.settings)
 
   const handlerCopyAddress = () => {
     navigator.clipboard
@@ -39,7 +39,7 @@ export const Wallet = () => {
   }, [])
 
   return (
-    <div className={cx('page', 'page-wallet', { 'isFullscreen': viewport.isFullscreen() })}>
+    <div className={cx('page', 'page-wallet', { 'isFullscreen': isFullscreen })}>
       <header className={cx('page-wallet__header')}>
         <h2 className='h2-big'>{balance}</h2>
         <div className={cx('page-wallet__balance')}>

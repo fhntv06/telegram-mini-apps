@@ -33,7 +33,6 @@ export const TopUpStarsModalContent = ({ closeModalHandler }: IProps) => {
   }
 
   useEffect(() => {
-    console.log(widthInput)
     if (inputRef.current) {
       inputRef.current.focus()
     }

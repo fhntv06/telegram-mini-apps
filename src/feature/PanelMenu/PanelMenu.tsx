@@ -1,10 +1,7 @@
-import { viewport } from '@telegram-apps/sdk'
 import { NavLink, Outlet  } from 'react-router-dom'
 import classNames from 'classnames/bind'
 import { pathsRoutes } from '../../app/routes'
-import { useGetPhrases } from '../../hooks'
-
-// import { Icon } from '../../shared'
+import { useGetPhrases, useSelector } from '../../hooks'
 
 import styles from './PanelMenu.module.scss'
 
@@ -18,9 +15,10 @@ export const PanelMenu = ({
 	className,
 }: Props) => {
 	const { wallet, tasks, game, menu } = useGetPhrases(['wallet', 'tasks', 'game', 'menu'])
+	const { settings: { isFullscreen } } = useSelector((state) => state.settings)
 
 	return (
-		<div className={cx('panel', className, { 'isFullscreen': viewport.isFullscreen() })}>
+		<div className={cx('panel', className, { 'isFullscreen': isFullscreen })}>
 			<NavLink
 				to={pathsRoutes.wallet}
 				className={({ isActive }) => isActive ? cx('item', 'active') : cx('item')}

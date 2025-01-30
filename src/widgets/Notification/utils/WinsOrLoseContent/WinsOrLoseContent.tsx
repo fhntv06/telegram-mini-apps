@@ -1,8 +1,8 @@
 import classNames from 'classnames/bind'
 import { Counter } from '../../../../shared'
+import { useGetPhrases } from '../../../../hooks'
 
 import styles from './WinsOrLoseContent.module.scss'
-import { useGetPhrases } from "../../../../hooks";
 
 const cx = classNames.bind(styles)
 

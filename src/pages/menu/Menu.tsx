@@ -1,6 +1,5 @@
 import { useMemo } from 'react'
 import classNames from 'classnames/bind'
-import { viewport } from '@telegram-apps/sdk'
 
 import { useGetPhrases, useSelector } from '../../hooks'
 
@@ -15,11 +14,12 @@ const cx = classNames.bind(styles)
 
 export const Menu = () => {
   const language= useSelector((state) => state.language)
+  const { settings: { isFullscreen } } = useSelector((state) => state.settings)
   const languages = useMemo(() => [language].concat(arLanguagesSite.filter((item) => item.name != language.name)), [language])
   const { affiliate, technicalSupport, instruction } = useGetPhrases(['affiliate', 'technicalSupport', 'instruction'])
 
   return (
-    <div className={cx('page', 'page-menu', { 'isFullscreen': viewport.isFullscreen() })}>
+    <div className={cx('page', 'page-menu', { 'isFullscreen': isFullscreen })}>
       <Button
         className={cx('button__menu')}
         iconLeftName='handshake'

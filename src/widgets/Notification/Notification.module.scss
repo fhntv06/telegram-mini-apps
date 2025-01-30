@@ -9,10 +9,16 @@
   align-items: start;
   column-gap: $offset16;
   width: 100%;
+  min-width: 320px;
+  max-width: 576px;
   padding: $offset12 $offset16;
   background-color: $light-black;
   @include border('large');
   transform: translateX(-50%);
+
+  &.isFullscreen {
+    padding-top: calc($offset16 * 6);
+  }
 
   p {
     font-weight: $font-w-regular;

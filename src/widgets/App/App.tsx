@@ -1,5 +1,6 @@
 import { useTonWallet } from '@tonconnect/ui-react'
 import WebApp from '@twa-dev/sdk'
+import { init, viewport } from '@telegram-apps/sdk'
 import { type FC, useContext, useEffect, useState } from 'react'
 import {
   Navigate,
@@ -15,7 +16,7 @@ import {
 import { routes } from '../../app/routes'
 import {
   setDataTransaction, setDefaultTasks, setGameStatus,
-  setHintTasks, setLeaderboards, setPartnersTasks
+  setHintTasks, setLeaderboards, setPartnersTasks, setSettings
 } from '../../app/store/slices'
 import { AnimationContext, NotificationContext } from '../../app/contexts'
 import { setUserRetrievesData } from '../../app/store/slices'
@@ -33,7 +34,7 @@ import {
   usePostReferral
 } from '../../hooks'
 import { LoaderSpinner, removeStorage } from '../../shared'
-import {ModalProvider} from "../../app/providers";
+import { ModalProvider } from '../../app/providers'
 
 export const App: FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true)
@@ -45,6 +46,7 @@ export const App: FC = () => {
   const { openHandler: openHandlerAnimation } = useContext<IAnimationContextTypes>(AnimationContext)
   const { gamePhase } = useSelector((state) => state.gameStatus)
   const { ticker, gameMode } = useSelector((state) => state.modeSettings)
+  const { settings: settingsStore } = useSelector((state) => state.settings)
   const userData = useUserData()
   const { updateBalance } = useSetBalance()
   const { handlerPostReferral } = usePostReferral()
@@ -54,9 +56,8 @@ export const App: FC = () => {
     // запись данных от сокета
     // TODO: Вынести в Main
     if (data && 'btcPrice' in data && data.btcPrice && priceHistory.length) {
-      setIsLoading(false)
-
       dispatch(setGameStatus({ ...data, priceHistory}))
+      setIsLoading(false)
     }
   }, [data, priceHistory, wallet])
 
@@ -90,19 +91,52 @@ export const App: FC = () => {
     if (isLoading && WebApp.initData) {
       console.log('handlerPostReferral App!')
       handlerPostReferral()
-        .then(() => getTasks(WebApp.initData))
-        .then((res) => {
-          const { hints, partners, tasks } = res.data
+        .then(() => {
+          getTasks(WebApp.initData)
+            .then((res) => {
+              const { hints, partners, tasks } = res.data
 
-          dispatch(setHintTasks({ hints }))
-          dispatch(setPartnersTasks({ partners }))
-          dispatch(setDefaultTasks({ tasks }))
+              dispatch(setHintTasks({ hints }))
+              dispatch(setPartnersTasks({ partners }))
+              dispatch(setDefaultTasks({ tasks }))
+
+            })
+            .catch((error) => new Error('Error in getTasks: ' + error))
+
+          getRetrievesData(WebApp.initData)
+            .then((retrievesData) => {
+              dispatch(setUserRetrievesData(retrievesData.data))
+            })
+            .catch((error) => new Error('Error in getRetrievesData: ' + error))
+
+          // TODO переписать на универсальный хук где можно задавать {} настроек
+          const setFullscreen = async () => {
+            // проверка на мобилку
+            if (/Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+              // два требования для работы с компонентами телеграмма
+              init() // инициализация
+              await viewport.mount() // монтирование
+
+              if (viewport.requestFullscreen.isAvailable()) {
+                // переход режим requestFullscreen
+                await viewport.requestFullscreen()
+
+                const settings = {
+                  ...settingsStore,
+                  isFullscreen: viewport.isFullscreen()
+                }
+                dispatch(setSettings({settings}))
+              }
+            }
+          }
+          setFullscreen()
+            .then(() => {
+              setIsLoading(false)
+            })
+            .catch((error) => new Error('Error in setFullscreen: ' + error))
         })
-        .catch((error) => new Error('Error in getTasks: ' + error))
-        .then(() => getRetrievesData(WebApp.initData))
-        .then((retrievesData) => {
-          dispatch(setUserRetrievesData(retrievesData.data))
-          setIsLoading(false)
+        .catch((err) => {
+          console.log(`Error attempting to enable fullscreen mode: ${err.message} (${err.name})`)
         })
         .catch((error) => new Error('Error in getRetrievesData: ' + error))
     }

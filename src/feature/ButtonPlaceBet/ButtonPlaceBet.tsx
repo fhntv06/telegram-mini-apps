@@ -43,6 +43,10 @@ export const ButtonPlaceBet = ({
 		}
 		else if (disabled) openHandlerNotification('warning', { text: theRoundHasAlready })
 		else {
+			if (navigator.vibrate) {
+				navigator.vibrate(500)
+			}
+
 			setTxInProcess(true)
 
 			const data = {
@@ -64,10 +68,6 @@ export const ButtonPlaceBet = ({
 				.finally(() => setTxInProcess(false))
 
 			if (onClick) onClick()
-
-			if (navigator.vibrate !== undefined) {
-				navigator.vibrate(500)
-			}
 		}
 	}
 

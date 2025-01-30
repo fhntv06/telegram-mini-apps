@@ -1,9 +1,8 @@
 import WebApp from '@twa-dev/sdk'
 import { useEffect } from 'react'
 import classNames from 'classnames/bind'
-import { viewport } from '@telegram-apps/sdk'
 
-import {setLeaderboards, setUserRetrievesData} from '../../app/store/slices'
+import { setLeaderboards, setUserRetrievesData } from '../../app/store/slices'
 import { getLeaderboard, getRetrievesData } from '../../app/api'
 import { useDispatch, useGetPhrases, useSelector } from '../../hooks'
 import { formatNumber, Button } from '../../shared'
@@ -20,6 +19,7 @@ export const Stats = () => {
   } = useGetPhrases(['pulsePoints', 'placeInLeaderboard', 'leaderboard', 'multiplier'])
   const { totalBets, daysInRow, invitedFriends, placeInLeaderboard, points, multiplierData } = useSelector((state) => state.retrievesData)
   const { leaderBord } = useSelector((state) => state.leaderboards)
+  const { settings: { isFullscreen } } = useSelector((state) => state.settings)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -35,7 +35,7 @@ export const Stats = () => {
   }, [])
 
   return (
-    <div className={cx('page', 'page-stats', { 'isFullscreen': viewport.isFullscreen() })}>
+    <div className={cx('page', 'page-stats', { 'isFullscreen': isFullscreen })}>
       <div className={cx('page-stats__header')}>
         <h1 className='font-w-semibold'>{pulsePoints}</h1>
         <div className={cx('page-stats__points')}>

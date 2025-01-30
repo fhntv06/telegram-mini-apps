@@ -4,6 +4,7 @@ import {
   gameStatusReducer, langReducer, modeReducer,
   socketReducer, userRetrievesDataReducer, leaderboardsReducer, tasksReducer
 } from './slices'
+import { settingsReducer } from "./slices/game/sliceSettings.ts";
 
 const store = configureStore({
     reducer: {
@@ -17,6 +18,7 @@ const store = configureStore({
         retrievesData: userRetrievesDataReducer,
         leaderboards: leaderboardsReducer,
         tasks: tasksReducer,
+        settings: settingsReducer
     }
 })
 

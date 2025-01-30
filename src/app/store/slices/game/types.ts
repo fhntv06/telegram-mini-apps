@@ -28,3 +28,9 @@ export interface ITasks {
 	hints: ITask[]
 	partners: ITask[]
 }
+
+export interface ISettings {
+	settings: {
+		isFullscreen: false
+	}
+}
