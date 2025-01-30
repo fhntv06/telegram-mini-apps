@@ -28,7 +28,7 @@ export const ButtonPlaceBet = ({
 	const {
 		goUp, goDown, topUpYourStars, theRoundHasAlready
 	} = useGetPhrases([
-		'goUp', 'goDown', 'topUpYourWallet', 'connectYourTON', 'theRoundHasAlready'
+		'goUp', 'goDown', 'topUpYourStars', 'connectYourTON', 'theRoundHasAlready'
 	])
 	const { openHandler: openHandlerNotification } = useContext<INotificationContextTypes>(NotificationContext)
 	const { openHandler: openHandlerAnimation } = useContext<IAnimationContextTypes>(AnimationContext)
